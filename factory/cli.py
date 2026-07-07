@@ -118,6 +118,8 @@ def verify_run(run_dir: Path) -> dict[str, Any]:
         "traceability-validation.json",
         "assumptions-register.md",
         "executive-summary.md",
+        "factory-metrics.json",
+        "factory-metrics.md",
     ]
     missing = [name for name in required if not (run_dir / name).exists()]
     agents_json = run_dir / "registries" / "agents.json"

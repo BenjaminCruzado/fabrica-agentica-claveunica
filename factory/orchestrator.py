@@ -6,7 +6,7 @@ from typing import Any
 
 from .constants import FACTORY_VERSION, MEMORY_VERSION, POLICY_VERSION, ROOT, TOOL_REGISTRY_VERSION, WORKFLOW_VERSION
 from .context import ContextManager
-from .governance import ensure_run_dirs, validate_factory_docs, validate_traceability, write_assumptions_register, write_executive_summary
+from .governance import ensure_run_dirs, validate_factory_docs, validate_traceability, write_assumptions_register, write_executive_summary, write_factory_metrics
 from .harness import HarnessRunner
 from .registry import agent_registry, skill_registry, tool_registry
 from .schemas import WORK_ORDER_SCHEMA, validate_strict
@@ -240,6 +240,7 @@ class OrchestratorGraph:
         }
         write_json(run_dir / "final-report.json", final)
         write_executive_summary(run_dir, state, results)
+        write_factory_metrics(run_dir, state, results)
         checklist = self._checklist_status(run_dir)
         (run_dir / "CHECKLIST_APLICADO.md").write_text(checklist, encoding="utf-8")
 
@@ -251,6 +252,7 @@ class OrchestratorGraph:
             "RUN_STATE.md", "DECISIONS.md", "ERRORS.md", "billing-ledger.json",
             "scope-inventory.json", "scope-validation.json", "docs-validation.json",
             "traceability-validation.json", "assumptions-register.md", "executive-summary.md",
+            "factory-metrics.json", "factory-metrics.md",
         ]
         lines = ["# CHECKLIST Aplicado", "", "| item | estado | evidencia |", "|---|---|---|"]
         for name in required:
