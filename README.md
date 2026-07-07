@@ -62,6 +62,15 @@ Si `scope-validation.json` no esta en estado `complete`, la fabrica no deberia p
 
 ## Configuracion Local Para Un Paso Completo
 
+Estructura principal:
+
+```text
+factory/       # codigo de la fabrica
+app-generada/  # app desplegable producida por la fabrica
+docs/          # documentacion
+project/       # entrada/contexto y estado local
+```
+
 Crear este archivo solo en tu PC:
 
 ```text

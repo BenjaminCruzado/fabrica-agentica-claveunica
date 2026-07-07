@@ -49,4 +49,4 @@ Lee configuracion local desde:
 
 Ese archivo no debe subirse a GitHub.
 
-Si existe y `allow_execute` es `true`, la fabrica puede entrar por SSH, clonar/pullar el repo, ejecutar Docker Compose y validar la URL publica.
+Si existe y `allow_execute` es `true`, la fabrica puede entrar por SSH, clonar/pullar el repo, entrar a `app-generada/`, ejecutar Docker Compose y validar la URL publica.

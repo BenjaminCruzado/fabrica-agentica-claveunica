@@ -324,6 +324,18 @@ components:
 
 def implementacion_doc_code(agent: AgentSpec, state: dict[str, Any], run_dir: Path, context_pack: dict[str, Any]) -> dict[str, Any]:
     output = _base_output(agent, state, context_pack)
+    repo_root = run_dir.parents[2]
+    app_dir = repo_root / "app-generada"
+    app_dir.mkdir(parents=True, exist_ok=True)
+    app_readme = """# App Generada
+
+Aplicacion web generada por la fabrica.
+
+Estado actual: placeholder operativo de destino. En la fase de construccion real, aqui se escribira el frontend/backend desplegable.
+
+Regla: EC2 debe ejecutar esta carpeta, no la carpeta de la fabrica.
+"""
+    (app_dir / "README.md").write_text(app_readme, encoding="utf-8")
     implementation = """# Implementation Report
 
 La fabrica base fue materializada en codigo local Python estandar:
@@ -335,10 +347,12 @@ La fabrica base fue materializada en codigo local Python estandar:
 - `factory/memory.py`: memoria aislada.
 - `factory/validators.py`: gates.
 - `tests/test_factory.py`: pruebas positivas y negativas.
+- `app-generada/`: destino obligatorio de la aplicacion desplegable.
 
 No se instalaron dependencias externas; las herramientas se registran y se detecta disponibilidad local.
 """
     output["artifacts"].append(_write(run_dir, "implementation-report.md", implementation))
+    output["artifacts"].append("app-generada/README.md")
     output["coverage"] = "traceable"
     return output
 
@@ -599,6 +613,7 @@ Cuando la app exista, estos archivos se copian o adaptan a la raiz de `app-gener
 def github_publication(agent: AgentSpec, state: dict[str, Any], run_dir: Path, context_pack: dict[str, Any]) -> dict[str, Any]:
     output = _base_output(agent, state, context_pack)
     repo_root = run_dir.parents[2]
+    app_dir = repo_root / "app-generada"
     status = "needs_user_input"
     commands: list[dict[str, Any]] = []
     remote = _run_command(["git", "remote", "get-url", "origin"], repo_root, timeout=20)
@@ -623,11 +638,12 @@ def github_publication(agent: AgentSpec, state: dict[str, Any], run_dir: Path, c
     report = {
         "status": status,
         "repo_root": str(repo_root),
+        "app_dir": str(app_dir),
         "remote": remote,
         "branch": branch,
         "allow_execute": allow_execute,
         "commands": commands,
-        "note": "No guardar tokens ni llaves en el repositorio. Si no hay remoto, configurar GitHub antes de publicar.",
+        "note": "No guardar tokens ni llaves en el repositorio. El repo contiene fabrica y app-generada; EC2 ejecuta app-generada.",
     }
     write_json(run_dir / "git-publication.json", report)
     doc = """# Publicacion GitHub
@@ -649,6 +665,7 @@ Si falta alguno, deja `git-publication.json` en `needs_user_input`.
 def deploy_ec2(agent: AgentSpec, state: dict[str, Any], run_dir: Path, context_pack: dict[str, Any]) -> dict[str, Any]:
     output = _base_output(agent, state, context_pack)
     repo_root = run_dir.parents[2]
+    app_dir = repo_root / "app-generada"
     secrets_dir = repo_root / "project" / "secrets"
     config_path = secrets_dir / "deploy-target.local.json"
     example = {
@@ -685,7 +702,7 @@ def deploy_ec2(agent: AgentSpec, state: dict[str, Any], run_dir: Path, context_p
                 "command -v docker >/dev/null || curl -fsSL https://get.docker.com | sh; "
                 f"if [ ! -d {remote_dir}/.git ]; then git clone -b {config['github_branch']} {config['github_repo']} {remote_dir}; fi; "
                 f"cd {remote_dir}; git pull; "
-                "docker compose up -d --build"
+                "cd app-generada; docker compose up -d --build"
             )
             if allow_execute:
                 commands.append(_run_command(["ssh", "-i", str(key_path), "-o", "StrictHostKeyChecking=no", ssh_target, remote_cmd], repo_root, timeout=600))
@@ -698,6 +715,7 @@ def deploy_ec2(agent: AgentSpec, state: dict[str, Any], run_dir: Path, context_p
         "status": status,
         "config_path": str(config_path),
         "example_path": str(secrets_dir / "deploy-target.example.json"),
+        "local_app_dir": str(app_dir),
         "config_loaded": bool(config),
         "public_url": config.get("public_url"),
         "allow_execute": bool(config.get("allow_execute", False)),
