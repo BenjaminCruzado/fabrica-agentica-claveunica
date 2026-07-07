@@ -1,0 +1,12 @@
+project/secrets/
+project/runs/
+project/cache/
+project/latest-run.json
+project/tool-availability.json
+*.pem
+*.key
+*.ppk
+.env
+node_modules/
+__pycache__/
+.pytest_cache/

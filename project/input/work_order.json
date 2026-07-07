@@ -1,0 +1,70 @@
+{
+  "work_order_id": "WO-CLAVEUNICA-RUBRICA-FINAL",
+  "objective": "Crear mediante fabrica agentica una aplicacion web ficticia basada en el archivo de especificacion funcional del profesor, formalizando primero todos los minimos de rubrica y validando cantidades antes de codificar.",
+  "work_type": "feature",
+  "scope": {
+    "include": [
+      "fabrica_agentica",
+      "formalizacion_requisitos",
+      "validacion_cantidades_rubrica",
+      "documentacion_generada",
+      "implementacion_app_web",
+      "pruebas",
+      "trazabilidad",
+      "evidencia",
+      "despliegue_ec2"
+    ],
+    "exclude": [
+      "integraciones_reales_estado",
+      "datos_productivos",
+      "credenciales_reales",
+      "video_generado_por_la_fabrica"
+    ]
+  },
+  "inputs": [
+    {
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "doc",
+      "path": "../../proyecto licitacion 3/proyecto licitación 3/especificacion_requerimientos_funcionales-2.md",
+      "authorized": true,
+      "trust": "trusted"
+    },
+    {
+      "source_id": "SRC-PAUTA-EVALUACION",
+      "type": "doc",
+      "path": "../../PLAN_GENERAL_PROYECTO.md",
+      "authorized": true,
+      "trust": "trusted"
+    }
+  ],
+  "constraints": {
+    "no_web": true,
+    "dry_run": true,
+    "sandbox_required": true,
+    "max_retries": 1,
+    "risk": "high",
+    "max_cost_usd": 0,
+    "max_latency_ms": 300000
+  },
+  "expected_outputs": [
+    "scope-inventory.json",
+    "scope-validation.json",
+    "documentos_generados",
+    "codigo_fuente",
+    "pruebas",
+    "trazabilidad",
+    "final-report.json"
+  ],
+  "approval_required_for": [
+    "write",
+    "deploy",
+    "merge",
+    "external_api",
+    "secrets",
+    "infra",
+    "cost_increase",
+    "data_access",
+    "production_data",
+    "db_write"
+  ]
+}

@@ -1,0 +1,44 @@
+# Resumen funcionalidades
+
+IDs detectados para uso compacto de agentes.
+
+- FUN_001
+- FUN_002
+- FUN_003
+- FUN_004
+- FUN_005
+- FUN_006
+- FUN_007
+- FUN_008
+- FUN_009
+- FUN_010
+- FUN_011
+- FUN_012
+- FUN_013
+- FUN_014
+- FUN_015
+- FUN_016
+- FUN_017
+- FUN_018
+- FUN_019
+- FUN_020
+- FUN_021
+- FUN_022
+- FUN_023
+- FUN_024
+- FUN_025
+- FUN_026
+- FUN_027
+- FUN_028
+- FUN_029
+- FUN_030
+- FUN_031
+- FUN_032
+- FUN_033
+- FUN_034
+- FUN_035
+- FUN_036
+- FUN_037
+- FUN_038
+- FUN_039
+- FUN_040
