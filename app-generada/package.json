@@ -1,0 +1,15 @@
+{
+  "dependencies": {},
+  "devDependencies": {},
+  "engines": {
+    "node": ">=18"
+  },
+  "name": "portal-ciudadano-claveunica",
+  "private": true,
+  "scripts": {
+    "start": "node server.mjs",
+    "test": "node tests/smoke.mjs"
+  },
+  "type": "module",
+  "version": "1.0.0"
+}

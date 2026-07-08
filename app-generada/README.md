@@ -1,7 +1,25 @@
-# App Generada
+# App Generada - Portal Ciudadano ClaveUnica
 
-Aplicacion web generada por la fabrica.
+Aplicacion web funcional generada por la fabrica.
 
-Estado actual: placeholder operativo de destino. En la fase de construccion real, aqui se escribira el frontend/backend desplegable.
+## Ejecutar local
 
-Regla: EC2 debe ejecutar esta carpeta, no la carpeta de la fabrica.
+```bash
+npm start
+```
+
+Abrir `http://localhost:3000`.
+
+## Probar
+
+```bash
+npm test
+```
+
+## Desplegar con Docker
+
+```bash
+docker compose up -d --build
+```
+
+La app contiene 30 pantallas navegables, API mock `/api/v1/*`, datos simulados, Dockerfile y evidencia trazable al alcance validado.

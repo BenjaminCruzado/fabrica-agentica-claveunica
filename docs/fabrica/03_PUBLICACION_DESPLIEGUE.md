@@ -37,7 +37,12 @@ Genera:
 - `deploy/Dockerfile`;
 - `deploy/docker-compose.yml`;
 - `deploy/.dockerignore`;
+- `app-generada/Dockerfile`;
+- `app-generada/docker-compose.yml`;
+- `app-generada/.dockerignore`;
 - `docker-validation.json`.
+
+La carpeta que se ejecuta en EC2 es `app-generada/`.
 
 ## EC2
 
@@ -50,3 +55,5 @@ Lee configuracion local desde:
 Ese archivo no debe subirse a GitHub.
 
 Si existe y `allow_execute` es `true`, la fabrica puede entrar por SSH, clonar/pullar el repo, entrar a `app-generada/`, ejecutar Docker Compose y validar la URL publica.
+
+Recomendacion practica: en `deploy-target.local.json` usa una URL HTTPS del repositorio para `github_repo`, asi EC2 no necesita una llave SSH de GitHub propia.

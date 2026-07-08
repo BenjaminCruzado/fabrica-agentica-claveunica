@@ -97,6 +97,28 @@ def test_rubric_scope_agent_generates_inventory(tmp_path: Path) -> None:
     assert (run_dir / "scope-validation.json").exists()
 
 
+def test_implementation_agent_generates_executable_app(tmp_path: Path) -> None:
+    run_dir = tmp_path / "project" / "runs" / "RUN-TEST"
+    run_dir.mkdir(parents=True)
+    harness = HarnessRunner(factory_root=Path.cwd(), project_dir=tmp_path / "project", run_dir=run_dir)
+    state = _state()
+    state["phase"] = "implement"
+    result = harness.run_agent("agent.implementacion_doc_code", state)
+    app_dir = tmp_path / "app-generada"
+    assert result["status"] == "complete"
+    for rel in {
+        "package.json",
+        "server.mjs",
+        "public/index.html",
+        "public/app.js",
+        "data/scope.json",
+        "tests/smoke.mjs",
+        "Dockerfile",
+        "docker-compose.yml",
+    }:
+        assert (app_dir / rel).exists(), rel
+
+
 def test_policy_blocks_tool_not_allowlisted() -> None:
     agents = agent_registry()
     decision = PolicyEngine(tool_registry()).check_tool(agents["agent.spec_detallada"], "tool.security.gitleaks", {"approved": False})
