@@ -77,7 +77,7 @@
   ],
   "name": "Portal Ciudadano ClaveUnica",
   "objective": "Aplicacion web ficticia basada en ClaveUnica, DDU, notificaciones y autorizaciones.",
-  "runId": "RUN-d9f4ed753ade",
+  "runId": "RUN-3d0d083cacbe",
   "screens": [
     {
       "accent": "#0f766e",
