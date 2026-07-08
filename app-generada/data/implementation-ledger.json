@@ -247,10 +247,10 @@
   "counts": {
     "api_endpoints": 40,
     "business_rules": 60,
-    "features_or_flows": 30,
+    "features_or_flows": 40,
     "screens": 30,
     "tables": 40,
-    "use_cases": 10,
+    "use_cases": 21,
     "validations_checks": 100
   },
   "modules": [
@@ -1263,7 +1263,7 @@
       "title": "Control, Cobertura, Riesgo"
     }
   ],
-  "run_id": "RUN-c50babcb3938",
+  "run_id": "RUN-63278bc084ef",
   "screens": [
     {
       "accent": "#1d4ed8",
