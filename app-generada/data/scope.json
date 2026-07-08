@@ -9,10 +9,10 @@
   "counts": {
     "api_endpoints": 40,
     "business_rules": 60,
-    "features_or_flows": 30,
+    "features_or_flows": 40,
     "screens": 30,
     "tables": 40,
-    "use_cases": 10,
+    "use_cases": 21,
     "validations_checks": 100
   },
   "generatedBy": "fabrica-agentica",
@@ -327,7 +327,7 @@
   ],
   "name": "Portal Ciudadano ClaveUnica",
   "objective": "Aplicacion web ficticia basada en ClaveUnica, DDU, notificaciones y autorizaciones.",
-  "runId": "RUN-6d8215707a56",
+  "runId": "RUN-25f453c293e4",
   "screens": [
     {
       "accent": "#0f766e",
