@@ -9,9 +9,24 @@ function setRoute(next) {
   location.hash = next;
 }
 
-function navItem(screen) {
-  const active = route() === screen.route ? "active" : "";
-  return `<a class="${active}" href="#${screen.route}"><strong>${screen.title}</strong><small>${screen.id} - ${screen.moduleName}</small></a>`;
+function groupedScreens() {
+  return data.modules.map((module) => ({
+    ...module,
+    screens: data.screens.filter((screen) => screen.module === module.id)
+  }));
+}
+
+function navGroup(module) {
+  const current = route();
+  return `
+    <section class="nav-group">
+      <strong>${module.name}</strong>
+      ${module.screens.map((screen) => {
+        const active = current === screen.route ? "active" : "";
+        return `<a class="${active}" href="#${screen.route}"><span>${screen.title.replace(module.name + " - ", "")}</span><small>${screen.id}</small></a>`;
+      }).join("")}
+    </section>
+  `;
 }
 
 function dashboard() {
@@ -32,61 +47,114 @@ function dashboard() {
         <p>${data.objective}</p>
       </div>
       <div class="actions">
-        <button onclick="setRoute('${data.screens[0].route}')">Abrir primera vista</button>
-        <a class="button secondary" href="/api/v1/scope" target="_blank">Ver API mock</a>
+        <button onclick="setRoute('${data.screens[0].route}')">Entrar al portal</button>
+        <a class="button secondary" href="/api/v1/scope" target="_blank">Ver contrato API</a>
       </div>
     </section>
     <section class="grid">
       ${metrics.map(([label, value]) => `<div class="card metric"><span class="muted">${label}</span><strong>${value ?? 0}</strong></div>`).join("")}
     </section>
-    <section class="card">
-      <h2>Modulos principales</h2>
-      <table>
-        <thead><tr><th>Modulo</th><th>Estado</th><th>Uso en demo</th></tr></thead>
-        <tbody>
-          ${data.modules.map((mod) => `<tr><td>${mod.name}</td><td>simulado</td><td>Portal, formularios, tablas y estados de usuario</td></tr>`).join("")}
-        </tbody>
-      </table>
+    <section class="module-grid">
+      ${data.modules.map((mod) => `
+        <article class="card module-card" style="--accent:${mod.accent}">
+          <span class="muted">${mod.component}</span>
+          <h2>${mod.name}</h2>
+          <p>${mod.purpose}</p>
+          <button onclick="setRoute('${data.screens.find((screen) => screen.module === mod.id).route}')">${mod.primaryAction}</button>
+        </article>
+      `).join("")}
     </section>
   `;
+}
+
+function recordTable(screen) {
+  return `
+    <table>
+      <thead><tr><th>${screen.fields[0]}</th><th>${screen.fields[1]}</th><th>${screen.fields[2]}</th></tr></thead>
+      <tbody>
+        ${screen.records.map((row) => `<tr><td>${row[0]}</td><td>${row[1]}</td><td>${row[2]}</td></tr>`).join("")}
+      </tbody>
+    </table>
+  `;
+}
+
+function overviewPanel(screen) {
+  return `
+    <section class="grid three">
+      ${screen.records.map((row, index) => `
+        <div class="card metric">
+          <span class="muted">${row[0]}</span>
+          <strong>${index === 0 ? "98%" : index === 1 ? "12" : "3"}</strong>
+          <small>${row[1]} - ${row[2]}</small>
+        </div>
+      `).join("")}
+    </section>
+    <section class="card">${recordTable(screen)}</section>
+  `;
+}
+
+function formPanel(screen) {
+  return `
+    <section class="form-grid">
+      <div class="card">
+        <h2>${screen.primaryAction}</h2>
+        ${screen.fields.map((field, index) => `<label>${field}<input value="${screen.records[index % screen.records.length][0]}" /></label>`).join("")}
+        <label>Estado<select><option>Recibido</option><option>En revision</option><option>Aprobado</option><option>Observado</option></select></label>
+        <button onclick="alert('Flujo simulado por la fabrica: ${screen.component}')">Guardar</button>
+      </div>
+      <div class="card">
+        <h2>Validaciones de la vista</h2>
+        <ul class="check-list">
+          <li>Formato de RUN y correo</li>
+          <li>Permisos por modulo ${screen.moduleName}</li>
+          <li>Consistencia de estado y auditoria</li>
+          <li>Mensaje de error y recuperacion</li>
+        </ul>
+      </div>
+    </section>
+  `;
+}
+
+function reviewPanel(screen) {
+  return `
+    <section class="card">
+      <div class="toolbar">
+        <input placeholder="Buscar en ${screen.moduleName}" />
+        <select><option>Todos</option><option>Pendientes</option><option>Criticos</option></select>
+        <button>${screen.primaryAction}</button>
+      </div>
+      ${recordTable(screen)}
+    </section>
+    <section class="timeline">
+      <div><strong>Recepcion</strong><span>Evento creado y clasificado</span></div>
+      <div><strong>Revision</strong><span>Reglas de negocio aplicadas</span></div>
+      <div><strong>Cierre</strong><span>Respuesta disponible para el ciudadano</span></div>
+    </section>
+  `;
+}
+
+function moduleBody(screen) {
+  if (screen.variant === "overview") return overviewPanel(screen);
+  if (screen.variant === "form") return formPanel(screen);
+  return reviewPanel(screen);
 }
 
 function screenView(screen) {
   return `
     <section class="card screen-header" style="--accent:${screen.accent}">
-      <span class="muted">${screen.id} - ${screen.route}</span>
+      <span class="muted">${screen.id} - ${screen.component} - ${screen.route}</span>
       <h1>${screen.title}</h1>
       <p>${screen.summary}</p>
       <div class="status">${screen.states.map((item) => `<span class="pill">${item}</span>`).join("")}</div>
     </section>
-    <section class="form-grid">
-      <div class="card">
-        <h2>Operacion ciudadana</h2>
-        <label>RUN ciudadano<input value="${data.mockUser.run}" /></label>
-        <label>Correo<input value="${data.mockUser.email}" /></label>
-        <label>Estado<select><option>Solicitud recibida</option><option>En revision</option><option>Resuelta</option></select></label>
-        <button onclick="alert('Accion simulada por la fabrica')">Guardar simulacion</button>
-      </div>
-      <div class="card">
-        <h2>Resumen seguro</h2>
-        <p class="notice">Autenticacion ClaveUnica simulada con MFA ${data.mockUser.mfa}. No se usan datos reales ni integraciones estatales.</p>
-        <table>
-          <tbody>
-            <tr><th>Modulo</th><td>${screen.moduleName}</td></tr>
-            <tr><th>Endpoint</th><td>/api/v1/${screen.module}/recurso-${screen.id.slice(-2)}</td></tr>
-            <tr><th>Validacion</th><td>Entrada, permisos, estado y consistencia</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
+    ${moduleBody(screen)}
     <section class="card">
-      <h2>Bitacora mock</h2>
+      <h2>Contrato y trazabilidad</h2>
       <table>
-        <thead><tr><th>Fecha</th><th>Evento</th><th>Resultado</th></tr></thead>
         <tbody>
-          <tr><td>2026-07-07</td><td>Ingreso a ${screen.title}</td><td>Permitido</td></tr>
-          <tr><td>2026-07-07</td><td>Validacion de datos</td><td>Completa</td></tr>
-          <tr><td>2026-07-07</td><td>Auditoria</td><td>Registrada</td></tr>
+          <tr><th>Endpoint mock</th><td>/api/v1/${screen.module}/recurso-${screen.id.slice(-2)}</td></tr>
+          <tr><th>Fingerprint UI</th><td>${screen.fingerprint}</td></tr>
+          <tr><th>Regla cubierta</th><td>Validacion, permisos, auditoria y estado</td></tr>
         </tbody>
       </table>
     </section>
@@ -105,8 +173,8 @@ function render() {
           <span>Run ${data.runId}</span>
         </div>
         <nav class="nav">
-          <a class="${current === "/dashboard" ? "active" : ""}" href="#/dashboard"><strong>Dashboard</strong><small>Resumen de rubrica</small></a>
-          ${data.screens.map(navItem).join("")}
+          <a class="${current === "/dashboard" ? "active" : ""}" href="#/dashboard"><span>Dashboard</span><small>Resumen ejecutivo</small></a>
+          ${groupedScreens().map(navGroup).join("")}
         </nav>
       </aside>
       <main class="main">

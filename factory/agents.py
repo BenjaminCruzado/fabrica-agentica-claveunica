@@ -353,31 +353,133 @@ def implementacion_doc_code(agent: AgentSpec, state: dict[str, Any], run_dir: Pa
         }
 
     modules = [
-        {"id": "portal_publico", "name": "Portal publico", "accent": "#0f766e"},
-        {"id": "autenticacion", "name": "Autenticacion ClaveUnica", "accent": "#1d4ed8"},
-        {"id": "perfil", "name": "Datos personales", "accent": "#7c3aed"},
-        {"id": "seguridad", "name": "Segundo factor y sesiones", "accent": "#be123c"},
-        {"id": "ddu", "name": "Domicilio Digital Unico", "accent": "#b45309"},
-        {"id": "notificaciones", "name": "Notificaciones", "accent": "#0369a1"},
-        {"id": "autorizaciones", "name": "Autorizaciones de datos", "accent": "#15803d"},
-        {"id": "expedientes", "name": "Expedientes", "accent": "#4338ca"},
-        {"id": "ayuda", "name": "Ayuda institucional", "accent": "#525252"},
-        {"id": "auditoria", "name": "Auditoria", "accent": "#334155"},
+        {
+            "id": "portal_publico",
+            "name": "Portal publico",
+            "accent": "#0f766e",
+            "component": "publicCatalog",
+            "purpose": "Explorar tramites disponibles y su estado operacional.",
+            "primaryAction": "Iniciar tramite",
+            "fields": ["Categoria", "Institucion", "Canal de atencion"],
+            "records": [["ClaveUnica", "Disponible", "24/7"], ["Domicilio digital", "Activo", "Web"], ["Certificados", "Revision", "Mesa ayuda"]],
+        },
+        {
+            "id": "autenticacion",
+            "name": "Autenticacion ClaveUnica",
+            "accent": "#1d4ed8",
+            "component": "loginFlow",
+            "purpose": "Simular ingreso, segundo factor y emision de sesion.",
+            "primaryAction": "Validar identidad",
+            "fields": ["RUN", "Clave", "Segundo factor"],
+            "records": [["Credencial", "Validada", "Bajo"], ["MFA", "Pendiente", "Medio"], ["Sesion", "Emitida", "Bajo"]],
+        },
+        {
+            "id": "perfil",
+            "name": "Datos personales",
+            "accent": "#7c3aed",
+            "component": "citizenProfile",
+            "purpose": "Administrar datos de contacto y preferencias del ciudadano.",
+            "primaryAction": "Actualizar datos",
+            "fields": ["Correo", "Telefono", "Preferencia"],
+            "records": [["Correo", "Verificado", "benjamin@example.local"], ["Telefono", "No verificado", "+56 9 0000 0000"], ["Preferencia", "Digital", "Email"]],
+        },
+        {
+            "id": "seguridad",
+            "name": "Segundo factor y sesiones",
+            "accent": "#be123c",
+            "component": "securityCenter",
+            "purpose": "Gestionar dispositivos, sesiones activas y alertas de seguridad.",
+            "primaryAction": "Cerrar otras sesiones",
+            "fields": ["Dispositivo", "Ubicacion", "Riesgo"],
+            "records": [["Notebook", "Santiago", "Bajo"], ["Movil", "Valparaiso", "Medio"], ["Sesion antigua", "Desconocida", "Alto"]],
+        },
+        {
+            "id": "ddu",
+            "name": "Domicilio Digital Unico",
+            "accent": "#b45309",
+            "component": "addressWizard",
+            "purpose": "Declarar, verificar y mantener el domicilio digital unico.",
+            "primaryAction": "Verificar domicilio",
+            "fields": ["Comuna", "Direccion", "Evidencia"],
+            "records": [["Santiago", "Avenida Demo 123", "Declarado"], ["Providencia", "Calle Simulada 456", "Historico"], ["Las Condes", "Pendiente", "Observado"]],
+        },
+        {
+            "id": "notificaciones",
+            "name": "Notificaciones",
+            "accent": "#0369a1",
+            "component": "notificationInbox",
+            "purpose": "Revisar comunicaciones oficiales, filtros y acuses de recibo.",
+            "primaryAction": "Marcar como leida",
+            "fields": ["Canal", "Prioridad", "Acuse"],
+            "records": [["Email", "Alta", "Pendiente"], ["SMS", "Media", "Recibido"], ["Bandeja", "Baja", "Archivado"]],
+        },
+        {
+            "id": "autorizaciones",
+            "name": "Autorizaciones de datos",
+            "accent": "#15803d",
+            "component": "consentManager",
+            "purpose": "Otorgar, revocar y auditar permisos de uso de datos.",
+            "primaryAction": "Revocar permiso",
+            "fields": ["Institucion", "Dato", "Vigencia"],
+            "records": [["Registro Civil", "Identidad", "Activa"], ["Municipalidad", "Domicilio", "Por vencer"], ["Salud", "Contacto", "Revocada"]],
+        },
+        {
+            "id": "expedientes",
+            "name": "Expedientes",
+            "accent": "#4338ca",
+            "component": "caseBoard",
+            "purpose": "Seguir solicitudes, hitos, responsables y documentos adjuntos.",
+            "primaryAction": "Ver expediente",
+            "fields": ["Folio", "Estado", "Responsable"],
+            "records": [["EXP-1001", "En revision", "Mesa ciudadana"], ["EXP-1002", "Observado", "Analista DDU"], ["EXP-1003", "Cerrado", "Sistema"]],
+        },
+        {
+            "id": "ayuda",
+            "name": "Ayuda institucional",
+            "accent": "#525252",
+            "component": "supportDesk",
+            "purpose": "Crear tickets, revisar preguntas frecuentes y escalar casos.",
+            "primaryAction": "Crear ticket",
+            "fields": ["Tema", "Canal", "SLA"],
+            "records": [["Clave bloqueada", "Chat", "4h"], ["Domicilio", "Formulario", "24h"], ["Notificacion", "Email", "48h"]],
+        },
+        {
+            "id": "auditoria",
+            "name": "Auditoria",
+            "accent": "#334155",
+            "component": "auditTrail",
+            "purpose": "Trazar accesos, cambios de datos y eventos de seguridad.",
+            "primaryAction": "Exportar bitacora",
+            "fields": ["Evento", "Actor", "Resultado"],
+            "records": [["LOGIN_OK", "Ciudadano", "Permitido"], ["CONSENT_REVOKE", "Ciudadano", "Registrado"], ["DATA_VIEW", "Servicio", "Auditado"]],
+        },
+    ]
+    screen_variants = [
+        ("overview", "Resumen operativo", "indicadores, cola priorizada y estado del modulo"),
+        ("form", "Gestion", "formulario contextual con validaciones del flujo"),
+        ("review", "Revision", "tabla de casos, filtros y acciones disponibles"),
     ]
     screen_ids = scope.get("ids", {}).get("screens") or [f"SCR_{index:03d}" for index in range(1, 31)]
     screens = []
     for index, screen_id in enumerate(screen_ids[:30], start=1):
         module = modules[(index - 1) % len(modules)]
+        variant_key, variant_name, variant_detail = screen_variants[(index - 1) // len(modules)]
         screens.append(
             {
                 "id": screen_id,
-                "title": f"{module['name']} {index:02d}",
+                "title": f"{module['name']} - {variant_name}",
                 "route": f"/{module['id']}/vista-{index:02d}",
                 "module": module["id"],
                 "moduleName": module["name"],
                 "accent": module["accent"],
-                "summary": "Vista generada desde el alcance validado de la fabrica para el portal ciudadano.",
-                "states": ["cargando", "con datos", "sin permisos", "error", "exito"],
+                "component": module["component"],
+                "variant": variant_key,
+                "summary": f"{module['purpose']} Esta vista cubre {variant_detail}.",
+                "primaryAction": module["primaryAction"],
+                "fields": module["fields"],
+                "records": module["records"],
+                "states": ["cargando", "listo", "requiere revision", "bloqueado", "completado"],
+                "fingerprint": f"{module['component']}:{variant_key}:{'|'.join(module['fields'])}",
             }
         )
 
@@ -541,14 +643,27 @@ input, select, textarea { width: 100%; border: 1px solid var(--line); border-rad
 .form-grid { display: grid; grid-template-columns: repeat(2, minmax(220px, 1fr)); gap: 14px; }
 .screen-header { border-left: 6px solid var(--accent, var(--primary)); }
 .notice { border-left: 4px solid var(--primary); background: #ecfdf5; padding: 12px; border-radius: 6px; }
+.module-grid { display: grid; grid-template-columns: repeat(2, minmax(260px, 1fr)); gap: 14px; }
+.module-card { border-left: 6px solid var(--accent, var(--primary)); display: grid; gap: 10px; align-content: start; }
+.module-card p { color: var(--muted); line-height: 1.5; margin: 0; }
+.nav-group { display: grid; gap: 6px; border-top: 1px solid var(--line); padding-top: 10px; }
+.nav-group > strong { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+.nav a span { font-weight: 700; }
+.three { grid-template-columns: repeat(3, minmax(170px, 1fr)); }
+.toolbar { display: grid; grid-template-columns: 1fr 180px auto; gap: 10px; margin-bottom: 14px; }
+.timeline { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.timeline div { background: #fff; border: 1px solid var(--line); border-radius: 8px; padding: 14px; display: grid; gap: 4px; }
+.timeline span, .check-list { color: var(--muted); }
+.check-list { margin: 0; padding-left: 18px; line-height: 1.8; }
 @media (max-width: 900px) {
   .shell { grid-template-columns: 1fr; }
   .sidebar { position: relative; height: auto; }
-  .grid { grid-template-columns: repeat(2, minmax(140px, 1fr)); }
+  .grid, .module-grid, .timeline { grid-template-columns: repeat(2, minmax(140px, 1fr)); }
+  .toolbar { grid-template-columns: 1fr; }
 }
 @media (max-width: 560px) {
   .main { padding: 18px; }
-  .grid, .form-grid { grid-template-columns: 1fr; }
+  .grid, .form-grid, .module-grid, .timeline { grid-template-columns: 1fr; }
 }
 """
     (public_dir / "styles.css").write_text(styles, encoding="utf-8")
@@ -564,9 +679,24 @@ function setRoute(next) {
   location.hash = next;
 }
 
-function navItem(screen) {
-  const active = route() === screen.route ? "active" : "";
-  return `<a class="${active}" href="#${screen.route}"><strong>${screen.title}</strong><small>${screen.id} - ${screen.moduleName}</small></a>`;
+function groupedScreens() {
+  return data.modules.map((module) => ({
+    ...module,
+    screens: data.screens.filter((screen) => screen.module === module.id)
+  }));
+}
+
+function navGroup(module) {
+  const current = route();
+  return `
+    <section class="nav-group">
+      <strong>${module.name}</strong>
+      ${module.screens.map((screen) => {
+        const active = current === screen.route ? "active" : "";
+        return `<a class="${active}" href="#${screen.route}"><span>${screen.title.replace(module.name + " - ", "")}</span><small>${screen.id}</small></a>`;
+      }).join("")}
+    </section>
+  `;
 }
 
 function dashboard() {
@@ -587,61 +717,114 @@ function dashboard() {
         <p>${data.objective}</p>
       </div>
       <div class="actions">
-        <button onclick="setRoute('${data.screens[0].route}')">Abrir primera vista</button>
-        <a class="button secondary" href="/api/v1/scope" target="_blank">Ver API mock</a>
+        <button onclick="setRoute('${data.screens[0].route}')">Entrar al portal</button>
+        <a class="button secondary" href="/api/v1/scope" target="_blank">Ver contrato API</a>
       </div>
     </section>
     <section class="grid">
       ${metrics.map(([label, value]) => `<div class="card metric"><span class="muted">${label}</span><strong>${value ?? 0}</strong></div>`).join("")}
     </section>
-    <section class="card">
-      <h2>Modulos principales</h2>
-      <table>
-        <thead><tr><th>Modulo</th><th>Estado</th><th>Uso en demo</th></tr></thead>
-        <tbody>
-          ${data.modules.map((mod) => `<tr><td>${mod.name}</td><td>simulado</td><td>Portal, formularios, tablas y estados de usuario</td></tr>`).join("")}
-        </tbody>
-      </table>
+    <section class="module-grid">
+      ${data.modules.map((mod) => `
+        <article class="card module-card" style="--accent:${mod.accent}">
+          <span class="muted">${mod.component}</span>
+          <h2>${mod.name}</h2>
+          <p>${mod.purpose}</p>
+          <button onclick="setRoute('${data.screens.find((screen) => screen.module === mod.id).route}')">${mod.primaryAction}</button>
+        </article>
+      `).join("")}
     </section>
   `;
+}
+
+function recordTable(screen) {
+  return `
+    <table>
+      <thead><tr><th>${screen.fields[0]}</th><th>${screen.fields[1]}</th><th>${screen.fields[2]}</th></tr></thead>
+      <tbody>
+        ${screen.records.map((row) => `<tr><td>${row[0]}</td><td>${row[1]}</td><td>${row[2]}</td></tr>`).join("")}
+      </tbody>
+    </table>
+  `;
+}
+
+function overviewPanel(screen) {
+  return `
+    <section class="grid three">
+      ${screen.records.map((row, index) => `
+        <div class="card metric">
+          <span class="muted">${row[0]}</span>
+          <strong>${index === 0 ? "98%" : index === 1 ? "12" : "3"}</strong>
+          <small>${row[1]} - ${row[2]}</small>
+        </div>
+      `).join("")}
+    </section>
+    <section class="card">${recordTable(screen)}</section>
+  `;
+}
+
+function formPanel(screen) {
+  return `
+    <section class="form-grid">
+      <div class="card">
+        <h2>${screen.primaryAction}</h2>
+        ${screen.fields.map((field, index) => `<label>${field}<input value="${screen.records[index % screen.records.length][0]}" /></label>`).join("")}
+        <label>Estado<select><option>Recibido</option><option>En revision</option><option>Aprobado</option><option>Observado</option></select></label>
+        <button onclick="alert('Flujo simulado por la fabrica: ${screen.component}')">Guardar</button>
+      </div>
+      <div class="card">
+        <h2>Validaciones de la vista</h2>
+        <ul class="check-list">
+          <li>Formato de RUN y correo</li>
+          <li>Permisos por modulo ${screen.moduleName}</li>
+          <li>Consistencia de estado y auditoria</li>
+          <li>Mensaje de error y recuperacion</li>
+        </ul>
+      </div>
+    </section>
+  `;
+}
+
+function reviewPanel(screen) {
+  return `
+    <section class="card">
+      <div class="toolbar">
+        <input placeholder="Buscar en ${screen.moduleName}" />
+        <select><option>Todos</option><option>Pendientes</option><option>Criticos</option></select>
+        <button>${screen.primaryAction}</button>
+      </div>
+      ${recordTable(screen)}
+    </section>
+    <section class="timeline">
+      <div><strong>Recepcion</strong><span>Evento creado y clasificado</span></div>
+      <div><strong>Revision</strong><span>Reglas de negocio aplicadas</span></div>
+      <div><strong>Cierre</strong><span>Respuesta disponible para el ciudadano</span></div>
+    </section>
+  `;
+}
+
+function moduleBody(screen) {
+  if (screen.variant === "overview") return overviewPanel(screen);
+  if (screen.variant === "form") return formPanel(screen);
+  return reviewPanel(screen);
 }
 
 function screenView(screen) {
   return `
     <section class="card screen-header" style="--accent:${screen.accent}">
-      <span class="muted">${screen.id} - ${screen.route}</span>
+      <span class="muted">${screen.id} - ${screen.component} - ${screen.route}</span>
       <h1>${screen.title}</h1>
       <p>${screen.summary}</p>
       <div class="status">${screen.states.map((item) => `<span class="pill">${item}</span>`).join("")}</div>
     </section>
-    <section class="form-grid">
-      <div class="card">
-        <h2>Operacion ciudadana</h2>
-        <label>RUN ciudadano<input value="${data.mockUser.run}" /></label>
-        <label>Correo<input value="${data.mockUser.email}" /></label>
-        <label>Estado<select><option>Solicitud recibida</option><option>En revision</option><option>Resuelta</option></select></label>
-        <button onclick="alert('Accion simulada por la fabrica')">Guardar simulacion</button>
-      </div>
-      <div class="card">
-        <h2>Resumen seguro</h2>
-        <p class="notice">Autenticacion ClaveUnica simulada con MFA ${data.mockUser.mfa}. No se usan datos reales ni integraciones estatales.</p>
-        <table>
-          <tbody>
-            <tr><th>Modulo</th><td>${screen.moduleName}</td></tr>
-            <tr><th>Endpoint</th><td>/api/v1/${screen.module}/recurso-${screen.id.slice(-2)}</td></tr>
-            <tr><th>Validacion</th><td>Entrada, permisos, estado y consistencia</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
+    ${moduleBody(screen)}
     <section class="card">
-      <h2>Bitacora mock</h2>
+      <h2>Contrato y trazabilidad</h2>
       <table>
-        <thead><tr><th>Fecha</th><th>Evento</th><th>Resultado</th></tr></thead>
         <tbody>
-          <tr><td>2026-07-07</td><td>Ingreso a ${screen.title}</td><td>Permitido</td></tr>
-          <tr><td>2026-07-07</td><td>Validacion de datos</td><td>Completa</td></tr>
-          <tr><td>2026-07-07</td><td>Auditoria</td><td>Registrada</td></tr>
+          <tr><th>Endpoint mock</th><td>/api/v1/${screen.module}/recurso-${screen.id.slice(-2)}</td></tr>
+          <tr><th>Fingerprint UI</th><td>${screen.fingerprint}</td></tr>
+          <tr><th>Regla cubierta</th><td>Validacion, permisos, auditoria y estado</td></tr>
         </tbody>
       </table>
     </section>
@@ -660,8 +843,8 @@ function render() {
           <span>Run ${data.runId}</span>
         </div>
         <nav class="nav">
-          <a class="${current === "/dashboard" ? "active" : ""}" href="#/dashboard"><strong>Dashboard</strong><small>Resumen de rubrica</small></a>
-          ${data.screens.map(navItem).join("")}
+          <a class="${current === "/dashboard" ? "active" : ""}" href="#/dashboard"><span>Dashboard</span><small>Resumen ejecutivo</small></a>
+          ${groupedScreens().map(navGroup).join("")}
         </nav>
       </aside>
       <main class="main">
@@ -685,13 +868,28 @@ import { readFile } from "node:fs/promises";
 
 const scope = JSON.parse(await readFile(new URL("../data/scope.json", import.meta.url), "utf8"));
 const html = await readFile(new URL("../public/index.html", import.meta.url), "utf8");
+const app = await readFile(new URL("../public/app.js", import.meta.url), "utf8");
 
 assert.equal(scope.screens.length, 30, "debe generar 30 pantallas navegables");
 assert.ok(scope.counts.api_endpoints >= 40, "debe conservar 40 endpoints documentados");
 assert.ok(scope.counts.tables >= 40, "debe conservar 40 tablas documentadas");
 assert.match(html, /Portal Ciudadano ClaveUnica/);
 
-console.log("smoke ok: app generada cumple conteos minimos y tiene shell web");
+const uniqueSummaries = new Set(scope.screens.map((screen) => screen.summary));
+const uniqueComponents = new Set(scope.screens.map((screen) => screen.component));
+const uniqueFingerprints = new Set(scope.screens.map((screen) => screen.fingerprint));
+const variants = new Set(scope.screens.map((screen) => screen.variant));
+
+assert.ok(uniqueSummaries.size >= 10, "las pantallas no deben compartir el mismo resumen generico");
+assert.ok(uniqueComponents.size >= 8, "debe haber componentes por modulo, no una sola plantilla");
+assert.ok(uniqueFingerprints.size >= 24, "debe haber variedad estructural entre pantallas");
+assert.deepEqual([...variants].sort(), ["form", "overview", "review"], "debe cubrir resumen, gestion y revision");
+assert.match(app, /function overviewPanel/);
+assert.match(app, /function formPanel/);
+assert.match(app, /function reviewPanel/);
+assert.doesNotMatch(app, /data\\.screens\\.map\\(navItem\\)/, "no debe renderizar 30 pestañas planas con una sola plantilla");
+
+console.log("smoke ok: app generada cumple conteos, variedad visual y pantallas no clonadas");
 """
     (tests_dir / "smoke.mjs").write_text(smoke, encoding="utf-8")
 
@@ -767,6 +965,8 @@ La fabrica genero una aplicacion web ejecutable dentro de `app-generada/`.
 ## Alcance implementado
 
 - Pantallas navegables: {len(screens)}.
+- Componentes UI diferenciados: {len({screen['component'] for screen in screens})}.
+- Fingerprints estructurales unicos: {len({screen['fingerprint'] for screen in screens})}.
 - Endpoints documentados conservados: {scope.get('counts', {}).get('api_endpoints', 0)}.
 - Tablas documentadas conservadas: {scope.get('counts', {}).get('tables', 0)}.
 - Reglas documentadas conservadas: {scope.get('counts', {}).get('business_rules', 0)}.

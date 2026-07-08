@@ -9,10 +9,10 @@
   "counts": {
     "api_endpoints": 40,
     "business_rules": 60,
-    "features_or_flows": 40,
+    "features_or_flows": 30,
     "screens": 30,
     "tables": 40,
-    "use_cases": 21,
+    "use_cases": 10,
     "validations_checks": 100
   },
   "generatedBy": "fabrica-agentica",
@@ -26,538 +26,1568 @@
   "modules": [
     {
       "accent": "#0f766e",
+      "component": "publicCatalog",
+      "fields": [
+        "Categoria",
+        "Institucion",
+        "Canal de atencion"
+      ],
       "id": "portal_publico",
-      "name": "Portal publico"
+      "name": "Portal publico",
+      "primaryAction": "Iniciar tramite",
+      "purpose": "Explorar tramites disponibles y su estado operacional.",
+      "records": [
+        [
+          "ClaveUnica",
+          "Disponible",
+          "24/7"
+        ],
+        [
+          "Domicilio digital",
+          "Activo",
+          "Web"
+        ],
+        [
+          "Certificados",
+          "Revision",
+          "Mesa ayuda"
+        ]
+      ]
     },
     {
       "accent": "#1d4ed8",
+      "component": "loginFlow",
+      "fields": [
+        "RUN",
+        "Clave",
+        "Segundo factor"
+      ],
       "id": "autenticacion",
-      "name": "Autenticacion ClaveUnica"
+      "name": "Autenticacion ClaveUnica",
+      "primaryAction": "Validar identidad",
+      "purpose": "Simular ingreso, segundo factor y emision de sesion.",
+      "records": [
+        [
+          "Credencial",
+          "Validada",
+          "Bajo"
+        ],
+        [
+          "MFA",
+          "Pendiente",
+          "Medio"
+        ],
+        [
+          "Sesion",
+          "Emitida",
+          "Bajo"
+        ]
+      ]
     },
     {
       "accent": "#7c3aed",
+      "component": "citizenProfile",
+      "fields": [
+        "Correo",
+        "Telefono",
+        "Preferencia"
+      ],
       "id": "perfil",
-      "name": "Datos personales"
+      "name": "Datos personales",
+      "primaryAction": "Actualizar datos",
+      "purpose": "Administrar datos de contacto y preferencias del ciudadano.",
+      "records": [
+        [
+          "Correo",
+          "Verificado",
+          "benjamin@example.local"
+        ],
+        [
+          "Telefono",
+          "No verificado",
+          "+56 9 0000 0000"
+        ],
+        [
+          "Preferencia",
+          "Digital",
+          "Email"
+        ]
+      ]
     },
     {
       "accent": "#be123c",
+      "component": "securityCenter",
+      "fields": [
+        "Dispositivo",
+        "Ubicacion",
+        "Riesgo"
+      ],
       "id": "seguridad",
-      "name": "Segundo factor y sesiones"
+      "name": "Segundo factor y sesiones",
+      "primaryAction": "Cerrar otras sesiones",
+      "purpose": "Gestionar dispositivos, sesiones activas y alertas de seguridad.",
+      "records": [
+        [
+          "Notebook",
+          "Santiago",
+          "Bajo"
+        ],
+        [
+          "Movil",
+          "Valparaiso",
+          "Medio"
+        ],
+        [
+          "Sesion antigua",
+          "Desconocida",
+          "Alto"
+        ]
+      ]
     },
     {
       "accent": "#b45309",
+      "component": "addressWizard",
+      "fields": [
+        "Comuna",
+        "Direccion",
+        "Evidencia"
+      ],
       "id": "ddu",
-      "name": "Domicilio Digital Unico"
+      "name": "Domicilio Digital Unico",
+      "primaryAction": "Verificar domicilio",
+      "purpose": "Declarar, verificar y mantener el domicilio digital unico.",
+      "records": [
+        [
+          "Santiago",
+          "Avenida Demo 123",
+          "Declarado"
+        ],
+        [
+          "Providencia",
+          "Calle Simulada 456",
+          "Historico"
+        ],
+        [
+          "Las Condes",
+          "Pendiente",
+          "Observado"
+        ]
+      ]
     },
     {
       "accent": "#0369a1",
+      "component": "notificationInbox",
+      "fields": [
+        "Canal",
+        "Prioridad",
+        "Acuse"
+      ],
       "id": "notificaciones",
-      "name": "Notificaciones"
+      "name": "Notificaciones",
+      "primaryAction": "Marcar como leida",
+      "purpose": "Revisar comunicaciones oficiales, filtros y acuses de recibo.",
+      "records": [
+        [
+          "Email",
+          "Alta",
+          "Pendiente"
+        ],
+        [
+          "SMS",
+          "Media",
+          "Recibido"
+        ],
+        [
+          "Bandeja",
+          "Baja",
+          "Archivado"
+        ]
+      ]
     },
     {
       "accent": "#15803d",
+      "component": "consentManager",
+      "fields": [
+        "Institucion",
+        "Dato",
+        "Vigencia"
+      ],
       "id": "autorizaciones",
-      "name": "Autorizaciones de datos"
+      "name": "Autorizaciones de datos",
+      "primaryAction": "Revocar permiso",
+      "purpose": "Otorgar, revocar y auditar permisos de uso de datos.",
+      "records": [
+        [
+          "Registro Civil",
+          "Identidad",
+          "Activa"
+        ],
+        [
+          "Municipalidad",
+          "Domicilio",
+          "Por vencer"
+        ],
+        [
+          "Salud",
+          "Contacto",
+          "Revocada"
+        ]
+      ]
     },
     {
       "accent": "#4338ca",
+      "component": "caseBoard",
+      "fields": [
+        "Folio",
+        "Estado",
+        "Responsable"
+      ],
       "id": "expedientes",
-      "name": "Expedientes"
+      "name": "Expedientes",
+      "primaryAction": "Ver expediente",
+      "purpose": "Seguir solicitudes, hitos, responsables y documentos adjuntos.",
+      "records": [
+        [
+          "EXP-1001",
+          "En revision",
+          "Mesa ciudadana"
+        ],
+        [
+          "EXP-1002",
+          "Observado",
+          "Analista DDU"
+        ],
+        [
+          "EXP-1003",
+          "Cerrado",
+          "Sistema"
+        ]
+      ]
     },
     {
       "accent": "#525252",
+      "component": "supportDesk",
+      "fields": [
+        "Tema",
+        "Canal",
+        "SLA"
+      ],
       "id": "ayuda",
-      "name": "Ayuda institucional"
+      "name": "Ayuda institucional",
+      "primaryAction": "Crear ticket",
+      "purpose": "Crear tickets, revisar preguntas frecuentes y escalar casos.",
+      "records": [
+        [
+          "Clave bloqueada",
+          "Chat",
+          "4h"
+        ],
+        [
+          "Domicilio",
+          "Formulario",
+          "24h"
+        ],
+        [
+          "Notificacion",
+          "Email",
+          "48h"
+        ]
+      ]
     },
     {
       "accent": "#334155",
+      "component": "auditTrail",
+      "fields": [
+        "Evento",
+        "Actor",
+        "Resultado"
+      ],
       "id": "auditoria",
-      "name": "Auditoria"
+      "name": "Auditoria",
+      "primaryAction": "Exportar bitacora",
+      "purpose": "Trazar accesos, cambios de datos y eventos de seguridad.",
+      "records": [
+        [
+          "LOGIN_OK",
+          "Ciudadano",
+          "Permitido"
+        ],
+        [
+          "CONSENT_REVOKE",
+          "Ciudadano",
+          "Registrado"
+        ],
+        [
+          "DATA_VIEW",
+          "Servicio",
+          "Auditado"
+        ]
+      ]
     }
   ],
   "name": "Portal Ciudadano ClaveUnica",
   "objective": "Aplicacion web ficticia basada en ClaveUnica, DDU, notificaciones y autorizaciones.",
-  "runId": "RUN-3d0d083cacbe",
+  "runId": "RUN-6d8215707a56",
   "screens": [
     {
       "accent": "#0f766e",
+      "component": "publicCatalog",
+      "fields": [
+        "Categoria",
+        "Institucion",
+        "Canal de atencion"
+      ],
+      "fingerprint": "publicCatalog:overview:Categoria|Institucion|Canal de atencion",
       "id": "SCR_001",
       "module": "portal_publico",
       "moduleName": "Portal publico",
+      "primaryAction": "Iniciar tramite",
+      "records": [
+        [
+          "ClaveUnica",
+          "Disponible",
+          "24/7"
+        ],
+        [
+          "Domicilio digital",
+          "Activo",
+          "Web"
+        ],
+        [
+          "Certificados",
+          "Revision",
+          "Mesa ayuda"
+        ]
+      ],
       "route": "/portal_publico/vista-01",
       "states": [
         "cargando",
-        "con datos",
-        "sin permisos",
-        "error",
-        "exito"
+        "listo",
+        "requiere revision",
+        "bloqueado",
+        "completado"
       ],
-      "summary": "Vista generada desde el alcance validado de la fabrica para el portal ciudadano.",
-      "title": "Portal publico 01"
+      "summary": "Explorar tramites disponibles y su estado operacional. Esta vista cubre indicadores, cola priorizada y estado del modulo.",
+      "title": "Portal publico - Resumen operativo",
+      "variant": "overview"
     },
     {
       "accent": "#1d4ed8",
+      "component": "loginFlow",
+      "fields": [
+        "RUN",
+        "Clave",
+        "Segundo factor"
+      ],
+      "fingerprint": "loginFlow:overview:RUN|Clave|Segundo factor",
       "id": "SCR_002",
       "module": "autenticacion",
       "moduleName": "Autenticacion ClaveUnica",
+      "primaryAction": "Validar identidad",
+      "records": [
+        [
+          "Credencial",
+          "Validada",
+          "Bajo"
+        ],
+        [
+          "MFA",
+          "Pendiente",
+          "Medio"
+        ],
+        [
+          "Sesion",
+          "Emitida",
+          "Bajo"
+        ]
+      ],
       "route": "/autenticacion/vista-02",
       "states": [
         "cargando",
-        "con datos",
-        "sin permisos",
-        "error",
-        "exito"
+        "listo",
+        "requiere revision",
+        "bloqueado",
+        "completado"
       ],
-      "summary": "Vista generada desde el alcance validado de la fabrica para el portal ciudadano.",
-      "title": "Autenticacion ClaveUnica 02"
+      "summary": "Simular ingreso, segundo factor y emision de sesion. Esta vista cubre indicadores, cola priorizada y estado del modulo.",
+      "title": "Autenticacion ClaveUnica - Resumen operativo",
+      "variant": "overview"
     },
     {
       "accent": "#7c3aed",
+      "component": "citizenProfile",
+      "fields": [
+        "Correo",
+        "Telefono",
+        "Preferencia"
+      ],
+      "fingerprint": "citizenProfile:overview:Correo|Telefono|Preferencia",
       "id": "SCR_003",
       "module": "perfil",
       "moduleName": "Datos personales",
+      "primaryAction": "Actualizar datos",
+      "records": [
+        [
+          "Correo",
+          "Verificado",
+          "benjamin@example.local"
+        ],
+        [
+          "Telefono",
+          "No verificado",
+          "+56 9 0000 0000"
+        ],
+        [
+          "Preferencia",
+          "Digital",
+          "Email"
+        ]
+      ],
       "route": "/perfil/vista-03",
       "states": [
         "cargando",
-        "con datos",
-        "sin permisos",
-        "error",
-        "exito"
+        "listo",
+        "requiere revision",
+        "bloqueado",
+        "completado"
       ],
-      "summary": "Vista generada desde el alcance validado de la fabrica para el portal ciudadano.",
-      "title": "Datos personales 03"
+      "summary": "Administrar datos de contacto y preferencias del ciudadano. Esta vista cubre indicadores, cola priorizada y estado del modulo.",
+      "title": "Datos personales - Resumen operativo",
+      "variant": "overview"
     },
     {
       "accent": "#be123c",
+      "component": "securityCenter",
+      "fields": [
+        "Dispositivo",
+        "Ubicacion",
+        "Riesgo"
+      ],
+      "fingerprint": "securityCenter:overview:Dispositivo|Ubicacion|Riesgo",
       "id": "SCR_004",
       "module": "seguridad",
       "moduleName": "Segundo factor y sesiones",
+      "primaryAction": "Cerrar otras sesiones",
+      "records": [
+        [
+          "Notebook",
+          "Santiago",
+          "Bajo"
+        ],
+        [
+          "Movil",
+          "Valparaiso",
+          "Medio"
+        ],
+        [
+          "Sesion antigua",
+          "Desconocida",
+          "Alto"
+        ]
+      ],
       "route": "/seguridad/vista-04",
       "states": [
         "cargando",
-        "con datos",
-        "sin permisos",
-        "error",
-        "exito"
+        "listo",
+        "requiere revision",
+        "bloqueado",
+        "completado"
       ],
-      "summary": "Vista generada desde el alcance validado de la fabrica para el portal ciudadano.",
-      "title": "Segundo factor y sesiones 04"
+      "summary": "Gestionar dispositivos, sesiones activas y alertas de seguridad. Esta vista cubre indicadores, cola priorizada y estado del modulo.",
+      "title": "Segundo factor y sesiones - Resumen operativo",
+      "variant": "overview"
     },
     {
       "accent": "#b45309",
+      "component": "addressWizard",
+      "fields": [
+        "Comuna",
+        "Direccion",
+        "Evidencia"
+      ],
+      "fingerprint": "addressWizard:overview:Comuna|Direccion|Evidencia",
       "id": "SCR_005",
       "module": "ddu",
       "moduleName": "Domicilio Digital Unico",
+      "primaryAction": "Verificar domicilio",
+      "records": [
+        [
+          "Santiago",
+          "Avenida Demo 123",
+          "Declarado"
+        ],
+        [
+          "Providencia",
+          "Calle Simulada 456",
+          "Historico"
+        ],
+        [
+          "Las Condes",
+          "Pendiente",
+          "Observado"
+        ]
+      ],
       "route": "/ddu/vista-05",
       "states": [
         "cargando",
-        "con datos",
-        "sin permisos",
-        "error",
-        "exito"
+        "listo",
+        "requiere revision",
+        "bloqueado",
+        "completado"
       ],
-      "summary": "Vista generada desde el alcance validado de la fabrica para el portal ciudadano.",
-      "title": "Domicilio Digital Unico 05"
+      "summary": "Declarar, verificar y mantener el domicilio digital unico. Esta vista cubre indicadores, cola priorizada y estado del modulo.",
+      "title": "Domicilio Digital Unico - Resumen operativo",
+      "variant": "overview"
     },
     {
       "accent": "#0369a1",
+      "component": "notificationInbox",
+      "fields": [
+        "Canal",
+        "Prioridad",
+        "Acuse"
+      ],
+      "fingerprint": "notificationInbox:overview:Canal|Prioridad|Acuse",
       "id": "SCR_006",
       "module": "notificaciones",
       "moduleName": "Notificaciones",
+      "primaryAction": "Marcar como leida",
+      "records": [
+        [
+          "Email",
+          "Alta",
+          "Pendiente"
+        ],
+        [
+          "SMS",
+          "Media",
+          "Recibido"
+        ],
+        [
+          "Bandeja",
+          "Baja",
+          "Archivado"
+        ]
+      ],
       "route": "/notificaciones/vista-06",
       "states": [
         "cargando",
-        "con datos",
-        "sin permisos",
-        "error",
-        "exito"
+        "listo",
+        "requiere revision",
+        "bloqueado",
+        "completado"
       ],
-      "summary": "Vista generada desde el alcance validado de la fabrica para el portal ciudadano.",
-      "title": "Notificaciones 06"
+      "summary": "Revisar comunicaciones oficiales, filtros y acuses de recibo. Esta vista cubre indicadores, cola priorizada y estado del modulo.",
+      "title": "Notificaciones - Resumen operativo",
+      "variant": "overview"
     },
     {
       "accent": "#15803d",
+      "component": "consentManager",
+      "fields": [
+        "Institucion",
+        "Dato",
+        "Vigencia"
+      ],
+      "fingerprint": "consentManager:overview:Institucion|Dato|Vigencia",
       "id": "SCR_007",
       "module": "autorizaciones",
       "moduleName": "Autorizaciones de datos",
+      "primaryAction": "Revocar permiso",
+      "records": [
+        [
+          "Registro Civil",
+          "Identidad",
+          "Activa"
+        ],
+        [
+          "Municipalidad",
+          "Domicilio",
+          "Por vencer"
+        ],
+        [
+          "Salud",
+          "Contacto",
+          "Revocada"
+        ]
+      ],
       "route": "/autorizaciones/vista-07",
       "states": [
         "cargando",
-        "con datos",
-        "sin permisos",
-        "error",
-        "exito"
+        "listo",
+        "requiere revision",
+        "bloqueado",
+        "completado"
       ],
-      "summary": "Vista generada desde el alcance validado de la fabrica para el portal ciudadano.",
-      "title": "Autorizaciones de datos 07"
+      "summary": "Otorgar, revocar y auditar permisos de uso de datos. Esta vista cubre indicadores, cola priorizada y estado del modulo.",
+      "title": "Autorizaciones de datos - Resumen operativo",
+      "variant": "overview"
     },
     {
       "accent": "#4338ca",
+      "component": "caseBoard",
+      "fields": [
+        "Folio",
+        "Estado",
+        "Responsable"
+      ],
+      "fingerprint": "caseBoard:overview:Folio|Estado|Responsable",
       "id": "SCR_008",
       "module": "expedientes",
       "moduleName": "Expedientes",
+      "primaryAction": "Ver expediente",
+      "records": [
+        [
+          "EXP-1001",
+          "En revision",
+          "Mesa ciudadana"
+        ],
+        [
+          "EXP-1002",
+          "Observado",
+          "Analista DDU"
+        ],
+        [
+          "EXP-1003",
+          "Cerrado",
+          "Sistema"
+        ]
+      ],
       "route": "/expedientes/vista-08",
       "states": [
         "cargando",
-        "con datos",
-        "sin permisos",
-        "error",
-        "exito"
+        "listo",
+        "requiere revision",
+        "bloqueado",
+        "completado"
       ],
-      "summary": "Vista generada desde el alcance validado de la fabrica para el portal ciudadano.",
-      "title": "Expedientes 08"
+      "summary": "Seguir solicitudes, hitos, responsables y documentos adjuntos. Esta vista cubre indicadores, cola priorizada y estado del modulo.",
+      "title": "Expedientes - Resumen operativo",
+      "variant": "overview"
     },
     {
       "accent": "#525252",
+      "component": "supportDesk",
+      "fields": [
+        "Tema",
+        "Canal",
+        "SLA"
+      ],
+      "fingerprint": "supportDesk:overview:Tema|Canal|SLA",
       "id": "SCR_009",
       "module": "ayuda",
       "moduleName": "Ayuda institucional",
+      "primaryAction": "Crear ticket",
+      "records": [
+        [
+          "Clave bloqueada",
+          "Chat",
+          "4h"
+        ],
+        [
+          "Domicilio",
+          "Formulario",
+          "24h"
+        ],
+        [
+          "Notificacion",
+          "Email",
+          "48h"
+        ]
+      ],
       "route": "/ayuda/vista-09",
       "states": [
         "cargando",
-        "con datos",
-        "sin permisos",
-        "error",
-        "exito"
+        "listo",
+        "requiere revision",
+        "bloqueado",
+        "completado"
       ],
-      "summary": "Vista generada desde el alcance validado de la fabrica para el portal ciudadano.",
-      "title": "Ayuda institucional 09"
+      "summary": "Crear tickets, revisar preguntas frecuentes y escalar casos. Esta vista cubre indicadores, cola priorizada y estado del modulo.",
+      "title": "Ayuda institucional - Resumen operativo",
+      "variant": "overview"
     },
     {
       "accent": "#334155",
+      "component": "auditTrail",
+      "fields": [
+        "Evento",
+        "Actor",
+        "Resultado"
+      ],
+      "fingerprint": "auditTrail:overview:Evento|Actor|Resultado",
       "id": "SCR_010",
       "module": "auditoria",
       "moduleName": "Auditoria",
+      "primaryAction": "Exportar bitacora",
+      "records": [
+        [
+          "LOGIN_OK",
+          "Ciudadano",
+          "Permitido"
+        ],
+        [
+          "CONSENT_REVOKE",
+          "Ciudadano",
+          "Registrado"
+        ],
+        [
+          "DATA_VIEW",
+          "Servicio",
+          "Auditado"
+        ]
+      ],
       "route": "/auditoria/vista-10",
       "states": [
         "cargando",
-        "con datos",
-        "sin permisos",
-        "error",
-        "exito"
+        "listo",
+        "requiere revision",
+        "bloqueado",
+        "completado"
       ],
-      "summary": "Vista generada desde el alcance validado de la fabrica para el portal ciudadano.",
-      "title": "Auditoria 10"
+      "summary": "Trazar accesos, cambios de datos y eventos de seguridad. Esta vista cubre indicadores, cola priorizada y estado del modulo.",
+      "title": "Auditoria - Resumen operativo",
+      "variant": "overview"
     },
     {
       "accent": "#0f766e",
+      "component": "publicCatalog",
+      "fields": [
+        "Categoria",
+        "Institucion",
+        "Canal de atencion"
+      ],
+      "fingerprint": "publicCatalog:form:Categoria|Institucion|Canal de atencion",
       "id": "SCR_011",
       "module": "portal_publico",
       "moduleName": "Portal publico",
+      "primaryAction": "Iniciar tramite",
+      "records": [
+        [
+          "ClaveUnica",
+          "Disponible",
+          "24/7"
+        ],
+        [
+          "Domicilio digital",
+          "Activo",
+          "Web"
+        ],
+        [
+          "Certificados",
+          "Revision",
+          "Mesa ayuda"
+        ]
+      ],
       "route": "/portal_publico/vista-11",
       "states": [
         "cargando",
-        "con datos",
-        "sin permisos",
-        "error",
-        "exito"
+        "listo",
+        "requiere revision",
+        "bloqueado",
+        "completado"
       ],
-      "summary": "Vista generada desde el alcance validado de la fabrica para el portal ciudadano.",
-      "title": "Portal publico 11"
+      "summary": "Explorar tramites disponibles y su estado operacional. Esta vista cubre formulario contextual con validaciones del flujo.",
+      "title": "Portal publico - Gestion",
+      "variant": "form"
     },
     {
       "accent": "#1d4ed8",
+      "component": "loginFlow",
+      "fields": [
+        "RUN",
+        "Clave",
+        "Segundo factor"
+      ],
+      "fingerprint": "loginFlow:form:RUN|Clave|Segundo factor",
       "id": "SCR_012",
       "module": "autenticacion",
       "moduleName": "Autenticacion ClaveUnica",
+      "primaryAction": "Validar identidad",
+      "records": [
+        [
+          "Credencial",
+          "Validada",
+          "Bajo"
+        ],
+        [
+          "MFA",
+          "Pendiente",
+          "Medio"
+        ],
+        [
+          "Sesion",
+          "Emitida",
+          "Bajo"
+        ]
+      ],
       "route": "/autenticacion/vista-12",
       "states": [
         "cargando",
-        "con datos",
-        "sin permisos",
-        "error",
-        "exito"
+        "listo",
+        "requiere revision",
+        "bloqueado",
+        "completado"
       ],
-      "summary": "Vista generada desde el alcance validado de la fabrica para el portal ciudadano.",
-      "title": "Autenticacion ClaveUnica 12"
+      "summary": "Simular ingreso, segundo factor y emision de sesion. Esta vista cubre formulario contextual con validaciones del flujo.",
+      "title": "Autenticacion ClaveUnica - Gestion",
+      "variant": "form"
     },
     {
       "accent": "#7c3aed",
+      "component": "citizenProfile",
+      "fields": [
+        "Correo",
+        "Telefono",
+        "Preferencia"
+      ],
+      "fingerprint": "citizenProfile:form:Correo|Telefono|Preferencia",
       "id": "SCR_013",
       "module": "perfil",
       "moduleName": "Datos personales",
+      "primaryAction": "Actualizar datos",
+      "records": [
+        [
+          "Correo",
+          "Verificado",
+          "benjamin@example.local"
+        ],
+        [
+          "Telefono",
+          "No verificado",
+          "+56 9 0000 0000"
+        ],
+        [
+          "Preferencia",
+          "Digital",
+          "Email"
+        ]
+      ],
       "route": "/perfil/vista-13",
       "states": [
         "cargando",
-        "con datos",
-        "sin permisos",
-        "error",
-        "exito"
+        "listo",
+        "requiere revision",
+        "bloqueado",
+        "completado"
       ],
-      "summary": "Vista generada desde el alcance validado de la fabrica para el portal ciudadano.",
-      "title": "Datos personales 13"
+      "summary": "Administrar datos de contacto y preferencias del ciudadano. Esta vista cubre formulario contextual con validaciones del flujo.",
+      "title": "Datos personales - Gestion",
+      "variant": "form"
     },
     {
       "accent": "#be123c",
+      "component": "securityCenter",
+      "fields": [
+        "Dispositivo",
+        "Ubicacion",
+        "Riesgo"
+      ],
+      "fingerprint": "securityCenter:form:Dispositivo|Ubicacion|Riesgo",
       "id": "SCR_014",
       "module": "seguridad",
       "moduleName": "Segundo factor y sesiones",
+      "primaryAction": "Cerrar otras sesiones",
+      "records": [
+        [
+          "Notebook",
+          "Santiago",
+          "Bajo"
+        ],
+        [
+          "Movil",
+          "Valparaiso",
+          "Medio"
+        ],
+        [
+          "Sesion antigua",
+          "Desconocida",
+          "Alto"
+        ]
+      ],
       "route": "/seguridad/vista-14",
       "states": [
         "cargando",
-        "con datos",
-        "sin permisos",
-        "error",
-        "exito"
+        "listo",
+        "requiere revision",
+        "bloqueado",
+        "completado"
       ],
-      "summary": "Vista generada desde el alcance validado de la fabrica para el portal ciudadano.",
-      "title": "Segundo factor y sesiones 14"
+      "summary": "Gestionar dispositivos, sesiones activas y alertas de seguridad. Esta vista cubre formulario contextual con validaciones del flujo.",
+      "title": "Segundo factor y sesiones - Gestion",
+      "variant": "form"
     },
     {
       "accent": "#b45309",
+      "component": "addressWizard",
+      "fields": [
+        "Comuna",
+        "Direccion",
+        "Evidencia"
+      ],
+      "fingerprint": "addressWizard:form:Comuna|Direccion|Evidencia",
       "id": "SCR_015",
       "module": "ddu",
       "moduleName": "Domicilio Digital Unico",
+      "primaryAction": "Verificar domicilio",
+      "records": [
+        [
+          "Santiago",
+          "Avenida Demo 123",
+          "Declarado"
+        ],
+        [
+          "Providencia",
+          "Calle Simulada 456",
+          "Historico"
+        ],
+        [
+          "Las Condes",
+          "Pendiente",
+          "Observado"
+        ]
+      ],
       "route": "/ddu/vista-15",
       "states": [
         "cargando",
-        "con datos",
-        "sin permisos",
-        "error",
-        "exito"
+        "listo",
+        "requiere revision",
+        "bloqueado",
+        "completado"
       ],
-      "summary": "Vista generada desde el alcance validado de la fabrica para el portal ciudadano.",
-      "title": "Domicilio Digital Unico 15"
+      "summary": "Declarar, verificar y mantener el domicilio digital unico. Esta vista cubre formulario contextual con validaciones del flujo.",
+      "title": "Domicilio Digital Unico - Gestion",
+      "variant": "form"
     },
     {
       "accent": "#0369a1",
+      "component": "notificationInbox",
+      "fields": [
+        "Canal",
+        "Prioridad",
+        "Acuse"
+      ],
+      "fingerprint": "notificationInbox:form:Canal|Prioridad|Acuse",
       "id": "SCR_016",
       "module": "notificaciones",
       "moduleName": "Notificaciones",
+      "primaryAction": "Marcar como leida",
+      "records": [
+        [
+          "Email",
+          "Alta",
+          "Pendiente"
+        ],
+        [
+          "SMS",
+          "Media",
+          "Recibido"
+        ],
+        [
+          "Bandeja",
+          "Baja",
+          "Archivado"
+        ]
+      ],
       "route": "/notificaciones/vista-16",
       "states": [
         "cargando",
-        "con datos",
-        "sin permisos",
-        "error",
-        "exito"
+        "listo",
+        "requiere revision",
+        "bloqueado",
+        "completado"
       ],
-      "summary": "Vista generada desde el alcance validado de la fabrica para el portal ciudadano.",
-      "title": "Notificaciones 16"
+      "summary": "Revisar comunicaciones oficiales, filtros y acuses de recibo. Esta vista cubre formulario contextual con validaciones del flujo.",
+      "title": "Notificaciones - Gestion",
+      "variant": "form"
     },
     {
       "accent": "#15803d",
+      "component": "consentManager",
+      "fields": [
+        "Institucion",
+        "Dato",
+        "Vigencia"
+      ],
+      "fingerprint": "consentManager:form:Institucion|Dato|Vigencia",
       "id": "SCR_017",
       "module": "autorizaciones",
       "moduleName": "Autorizaciones de datos",
+      "primaryAction": "Revocar permiso",
+      "records": [
+        [
+          "Registro Civil",
+          "Identidad",
+          "Activa"
+        ],
+        [
+          "Municipalidad",
+          "Domicilio",
+          "Por vencer"
+        ],
+        [
+          "Salud",
+          "Contacto",
+          "Revocada"
+        ]
+      ],
       "route": "/autorizaciones/vista-17",
       "states": [
         "cargando",
-        "con datos",
-        "sin permisos",
-        "error",
-        "exito"
+        "listo",
+        "requiere revision",
+        "bloqueado",
+        "completado"
       ],
-      "summary": "Vista generada desde el alcance validado de la fabrica para el portal ciudadano.",
-      "title": "Autorizaciones de datos 17"
+      "summary": "Otorgar, revocar y auditar permisos de uso de datos. Esta vista cubre formulario contextual con validaciones del flujo.",
+      "title": "Autorizaciones de datos - Gestion",
+      "variant": "form"
     },
     {
       "accent": "#4338ca",
+      "component": "caseBoard",
+      "fields": [
+        "Folio",
+        "Estado",
+        "Responsable"
+      ],
+      "fingerprint": "caseBoard:form:Folio|Estado|Responsable",
       "id": "SCR_018",
       "module": "expedientes",
       "moduleName": "Expedientes",
+      "primaryAction": "Ver expediente",
+      "records": [
+        [
+          "EXP-1001",
+          "En revision",
+          "Mesa ciudadana"
+        ],
+        [
+          "EXP-1002",
+          "Observado",
+          "Analista DDU"
+        ],
+        [
+          "EXP-1003",
+          "Cerrado",
+          "Sistema"
+        ]
+      ],
       "route": "/expedientes/vista-18",
       "states": [
         "cargando",
-        "con datos",
-        "sin permisos",
-        "error",
-        "exito"
+        "listo",
+        "requiere revision",
+        "bloqueado",
+        "completado"
       ],
-      "summary": "Vista generada desde el alcance validado de la fabrica para el portal ciudadano.",
-      "title": "Expedientes 18"
+      "summary": "Seguir solicitudes, hitos, responsables y documentos adjuntos. Esta vista cubre formulario contextual con validaciones del flujo.",
+      "title": "Expedientes - Gestion",
+      "variant": "form"
     },
     {
       "accent": "#525252",
+      "component": "supportDesk",
+      "fields": [
+        "Tema",
+        "Canal",
+        "SLA"
+      ],
+      "fingerprint": "supportDesk:form:Tema|Canal|SLA",
       "id": "SCR_019",
       "module": "ayuda",
       "moduleName": "Ayuda institucional",
+      "primaryAction": "Crear ticket",
+      "records": [
+        [
+          "Clave bloqueada",
+          "Chat",
+          "4h"
+        ],
+        [
+          "Domicilio",
+          "Formulario",
+          "24h"
+        ],
+        [
+          "Notificacion",
+          "Email",
+          "48h"
+        ]
+      ],
       "route": "/ayuda/vista-19",
       "states": [
         "cargando",
-        "con datos",
-        "sin permisos",
-        "error",
-        "exito"
+        "listo",
+        "requiere revision",
+        "bloqueado",
+        "completado"
       ],
-      "summary": "Vista generada desde el alcance validado de la fabrica para el portal ciudadano.",
-      "title": "Ayuda institucional 19"
+      "summary": "Crear tickets, revisar preguntas frecuentes y escalar casos. Esta vista cubre formulario contextual con validaciones del flujo.",
+      "title": "Ayuda institucional - Gestion",
+      "variant": "form"
     },
     {
       "accent": "#334155",
+      "component": "auditTrail",
+      "fields": [
+        "Evento",
+        "Actor",
+        "Resultado"
+      ],
+      "fingerprint": "auditTrail:form:Evento|Actor|Resultado",
       "id": "SCR_020",
       "module": "auditoria",
       "moduleName": "Auditoria",
+      "primaryAction": "Exportar bitacora",
+      "records": [
+        [
+          "LOGIN_OK",
+          "Ciudadano",
+          "Permitido"
+        ],
+        [
+          "CONSENT_REVOKE",
+          "Ciudadano",
+          "Registrado"
+        ],
+        [
+          "DATA_VIEW",
+          "Servicio",
+          "Auditado"
+        ]
+      ],
       "route": "/auditoria/vista-20",
       "states": [
         "cargando",
-        "con datos",
-        "sin permisos",
-        "error",
-        "exito"
+        "listo",
+        "requiere revision",
+        "bloqueado",
+        "completado"
       ],
-      "summary": "Vista generada desde el alcance validado de la fabrica para el portal ciudadano.",
-      "title": "Auditoria 20"
+      "summary": "Trazar accesos, cambios de datos y eventos de seguridad. Esta vista cubre formulario contextual con validaciones del flujo.",
+      "title": "Auditoria - Gestion",
+      "variant": "form"
     },
     {
       "accent": "#0f766e",
+      "component": "publicCatalog",
+      "fields": [
+        "Categoria",
+        "Institucion",
+        "Canal de atencion"
+      ],
+      "fingerprint": "publicCatalog:review:Categoria|Institucion|Canal de atencion",
       "id": "SCR_021",
       "module": "portal_publico",
       "moduleName": "Portal publico",
+      "primaryAction": "Iniciar tramite",
+      "records": [
+        [
+          "ClaveUnica",
+          "Disponible",
+          "24/7"
+        ],
+        [
+          "Domicilio digital",
+          "Activo",
+          "Web"
+        ],
+        [
+          "Certificados",
+          "Revision",
+          "Mesa ayuda"
+        ]
+      ],
       "route": "/portal_publico/vista-21",
       "states": [
         "cargando",
-        "con datos",
-        "sin permisos",
-        "error",
-        "exito"
+        "listo",
+        "requiere revision",
+        "bloqueado",
+        "completado"
       ],
-      "summary": "Vista generada desde el alcance validado de la fabrica para el portal ciudadano.",
-      "title": "Portal publico 21"
+      "summary": "Explorar tramites disponibles y su estado operacional. Esta vista cubre tabla de casos, filtros y acciones disponibles.",
+      "title": "Portal publico - Revision",
+      "variant": "review"
     },
     {
       "accent": "#1d4ed8",
+      "component": "loginFlow",
+      "fields": [
+        "RUN",
+        "Clave",
+        "Segundo factor"
+      ],
+      "fingerprint": "loginFlow:review:RUN|Clave|Segundo factor",
       "id": "SCR_022",
       "module": "autenticacion",
       "moduleName": "Autenticacion ClaveUnica",
+      "primaryAction": "Validar identidad",
+      "records": [
+        [
+          "Credencial",
+          "Validada",
+          "Bajo"
+        ],
+        [
+          "MFA",
+          "Pendiente",
+          "Medio"
+        ],
+        [
+          "Sesion",
+          "Emitida",
+          "Bajo"
+        ]
+      ],
       "route": "/autenticacion/vista-22",
       "states": [
         "cargando",
-        "con datos",
-        "sin permisos",
-        "error",
-        "exito"
+        "listo",
+        "requiere revision",
+        "bloqueado",
+        "completado"
       ],
-      "summary": "Vista generada desde el alcance validado de la fabrica para el portal ciudadano.",
-      "title": "Autenticacion ClaveUnica 22"
+      "summary": "Simular ingreso, segundo factor y emision de sesion. Esta vista cubre tabla de casos, filtros y acciones disponibles.",
+      "title": "Autenticacion ClaveUnica - Revision",
+      "variant": "review"
     },
     {
       "accent": "#7c3aed",
+      "component": "citizenProfile",
+      "fields": [
+        "Correo",
+        "Telefono",
+        "Preferencia"
+      ],
+      "fingerprint": "citizenProfile:review:Correo|Telefono|Preferencia",
       "id": "SCR_023",
       "module": "perfil",
       "moduleName": "Datos personales",
+      "primaryAction": "Actualizar datos",
+      "records": [
+        [
+          "Correo",
+          "Verificado",
+          "benjamin@example.local"
+        ],
+        [
+          "Telefono",
+          "No verificado",
+          "+56 9 0000 0000"
+        ],
+        [
+          "Preferencia",
+          "Digital",
+          "Email"
+        ]
+      ],
       "route": "/perfil/vista-23",
       "states": [
         "cargando",
-        "con datos",
-        "sin permisos",
-        "error",
-        "exito"
+        "listo",
+        "requiere revision",
+        "bloqueado",
+        "completado"
       ],
-      "summary": "Vista generada desde el alcance validado de la fabrica para el portal ciudadano.",
-      "title": "Datos personales 23"
+      "summary": "Administrar datos de contacto y preferencias del ciudadano. Esta vista cubre tabla de casos, filtros y acciones disponibles.",
+      "title": "Datos personales - Revision",
+      "variant": "review"
     },
     {
       "accent": "#be123c",
+      "component": "securityCenter",
+      "fields": [
+        "Dispositivo",
+        "Ubicacion",
+        "Riesgo"
+      ],
+      "fingerprint": "securityCenter:review:Dispositivo|Ubicacion|Riesgo",
       "id": "SCR_024",
       "module": "seguridad",
       "moduleName": "Segundo factor y sesiones",
+      "primaryAction": "Cerrar otras sesiones",
+      "records": [
+        [
+          "Notebook",
+          "Santiago",
+          "Bajo"
+        ],
+        [
+          "Movil",
+          "Valparaiso",
+          "Medio"
+        ],
+        [
+          "Sesion antigua",
+          "Desconocida",
+          "Alto"
+        ]
+      ],
       "route": "/seguridad/vista-24",
       "states": [
         "cargando",
-        "con datos",
-        "sin permisos",
-        "error",
-        "exito"
+        "listo",
+        "requiere revision",
+        "bloqueado",
+        "completado"
       ],
-      "summary": "Vista generada desde el alcance validado de la fabrica para el portal ciudadano.",
-      "title": "Segundo factor y sesiones 24"
+      "summary": "Gestionar dispositivos, sesiones activas y alertas de seguridad. Esta vista cubre tabla de casos, filtros y acciones disponibles.",
+      "title": "Segundo factor y sesiones - Revision",
+      "variant": "review"
     },
     {
       "accent": "#b45309",
+      "component": "addressWizard",
+      "fields": [
+        "Comuna",
+        "Direccion",
+        "Evidencia"
+      ],
+      "fingerprint": "addressWizard:review:Comuna|Direccion|Evidencia",
       "id": "SCR_025",
       "module": "ddu",
       "moduleName": "Domicilio Digital Unico",
+      "primaryAction": "Verificar domicilio",
+      "records": [
+        [
+          "Santiago",
+          "Avenida Demo 123",
+          "Declarado"
+        ],
+        [
+          "Providencia",
+          "Calle Simulada 456",
+          "Historico"
+        ],
+        [
+          "Las Condes",
+          "Pendiente",
+          "Observado"
+        ]
+      ],
       "route": "/ddu/vista-25",
       "states": [
         "cargando",
-        "con datos",
-        "sin permisos",
-        "error",
-        "exito"
+        "listo",
+        "requiere revision",
+        "bloqueado",
+        "completado"
       ],
-      "summary": "Vista generada desde el alcance validado de la fabrica para el portal ciudadano.",
-      "title": "Domicilio Digital Unico 25"
+      "summary": "Declarar, verificar y mantener el domicilio digital unico. Esta vista cubre tabla de casos, filtros y acciones disponibles.",
+      "title": "Domicilio Digital Unico - Revision",
+      "variant": "review"
     },
     {
       "accent": "#0369a1",
+      "component": "notificationInbox",
+      "fields": [
+        "Canal",
+        "Prioridad",
+        "Acuse"
+      ],
+      "fingerprint": "notificationInbox:review:Canal|Prioridad|Acuse",
       "id": "SCR_026",
       "module": "notificaciones",
       "moduleName": "Notificaciones",
+      "primaryAction": "Marcar como leida",
+      "records": [
+        [
+          "Email",
+          "Alta",
+          "Pendiente"
+        ],
+        [
+          "SMS",
+          "Media",
+          "Recibido"
+        ],
+        [
+          "Bandeja",
+          "Baja",
+          "Archivado"
+        ]
+      ],
       "route": "/notificaciones/vista-26",
       "states": [
         "cargando",
-        "con datos",
-        "sin permisos",
-        "error",
-        "exito"
+        "listo",
+        "requiere revision",
+        "bloqueado",
+        "completado"
       ],
-      "summary": "Vista generada desde el alcance validado de la fabrica para el portal ciudadano.",
-      "title": "Notificaciones 26"
+      "summary": "Revisar comunicaciones oficiales, filtros y acuses de recibo. Esta vista cubre tabla de casos, filtros y acciones disponibles.",
+      "title": "Notificaciones - Revision",
+      "variant": "review"
     },
     {
       "accent": "#15803d",
+      "component": "consentManager",
+      "fields": [
+        "Institucion",
+        "Dato",
+        "Vigencia"
+      ],
+      "fingerprint": "consentManager:review:Institucion|Dato|Vigencia",
       "id": "SCR_027",
       "module": "autorizaciones",
       "moduleName": "Autorizaciones de datos",
+      "primaryAction": "Revocar permiso",
+      "records": [
+        [
+          "Registro Civil",
+          "Identidad",
+          "Activa"
+        ],
+        [
+          "Municipalidad",
+          "Domicilio",
+          "Por vencer"
+        ],
+        [
+          "Salud",
+          "Contacto",
+          "Revocada"
+        ]
+      ],
       "route": "/autorizaciones/vista-27",
       "states": [
         "cargando",
-        "con datos",
-        "sin permisos",
-        "error",
-        "exito"
+        "listo",
+        "requiere revision",
+        "bloqueado",
+        "completado"
       ],
-      "summary": "Vista generada desde el alcance validado de la fabrica para el portal ciudadano.",
-      "title": "Autorizaciones de datos 27"
+      "summary": "Otorgar, revocar y auditar permisos de uso de datos. Esta vista cubre tabla de casos, filtros y acciones disponibles.",
+      "title": "Autorizaciones de datos - Revision",
+      "variant": "review"
     },
     {
       "accent": "#4338ca",
+      "component": "caseBoard",
+      "fields": [
+        "Folio",
+        "Estado",
+        "Responsable"
+      ],
+      "fingerprint": "caseBoard:review:Folio|Estado|Responsable",
       "id": "SCR_028",
       "module": "expedientes",
       "moduleName": "Expedientes",
+      "primaryAction": "Ver expediente",
+      "records": [
+        [
+          "EXP-1001",
+          "En revision",
+          "Mesa ciudadana"
+        ],
+        [
+          "EXP-1002",
+          "Observado",
+          "Analista DDU"
+        ],
+        [
+          "EXP-1003",
+          "Cerrado",
+          "Sistema"
+        ]
+      ],
       "route": "/expedientes/vista-28",
       "states": [
         "cargando",
-        "con datos",
-        "sin permisos",
-        "error",
-        "exito"
+        "listo",
+        "requiere revision",
+        "bloqueado",
+        "completado"
       ],
-      "summary": "Vista generada desde el alcance validado de la fabrica para el portal ciudadano.",
-      "title": "Expedientes 28"
+      "summary": "Seguir solicitudes, hitos, responsables y documentos adjuntos. Esta vista cubre tabla de casos, filtros y acciones disponibles.",
+      "title": "Expedientes - Revision",
+      "variant": "review"
     },
     {
       "accent": "#525252",
+      "component": "supportDesk",
+      "fields": [
+        "Tema",
+        "Canal",
+        "SLA"
+      ],
+      "fingerprint": "supportDesk:review:Tema|Canal|SLA",
       "id": "SCR_029",
       "module": "ayuda",
       "moduleName": "Ayuda institucional",
+      "primaryAction": "Crear ticket",
+      "records": [
+        [
+          "Clave bloqueada",
+          "Chat",
+          "4h"
+        ],
+        [
+          "Domicilio",
+          "Formulario",
+          "24h"
+        ],
+        [
+          "Notificacion",
+          "Email",
+          "48h"
+        ]
+      ],
       "route": "/ayuda/vista-29",
       "states": [
         "cargando",
-        "con datos",
-        "sin permisos",
-        "error",
-        "exito"
+        "listo",
+        "requiere revision",
+        "bloqueado",
+        "completado"
       ],
-      "summary": "Vista generada desde el alcance validado de la fabrica para el portal ciudadano.",
-      "title": "Ayuda institucional 29"
+      "summary": "Crear tickets, revisar preguntas frecuentes y escalar casos. Esta vista cubre tabla de casos, filtros y acciones disponibles.",
+      "title": "Ayuda institucional - Revision",
+      "variant": "review"
     },
     {
       "accent": "#334155",
+      "component": "auditTrail",
+      "fields": [
+        "Evento",
+        "Actor",
+        "Resultado"
+      ],
+      "fingerprint": "auditTrail:review:Evento|Actor|Resultado",
       "id": "SCR_030",
       "module": "auditoria",
       "moduleName": "Auditoria",
+      "primaryAction": "Exportar bitacora",
+      "records": [
+        [
+          "LOGIN_OK",
+          "Ciudadano",
+          "Permitido"
+        ],
+        [
+          "CONSENT_REVOKE",
+          "Ciudadano",
+          "Registrado"
+        ],
+        [
+          "DATA_VIEW",
+          "Servicio",
+          "Auditado"
+        ]
+      ],
       "route": "/auditoria/vista-30",
       "states": [
         "cargando",
-        "con datos",
-        "sin permisos",
-        "error",
-        "exito"
+        "listo",
+        "requiere revision",
+        "bloqueado",
+        "completado"
       ],
-      "summary": "Vista generada desde el alcance validado de la fabrica para el portal ciudadano.",
-      "title": "Auditoria 30"
+      "summary": "Trazar accesos, cambios de datos y eventos de seguridad. Esta vista cubre tabla de casos, filtros y acciones disponibles.",
+      "title": "Auditoria - Revision",
+      "variant": "review"
     }
   ]
 }

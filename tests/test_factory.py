@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from pathlib import Path
+import json
 
 import pytest
 
@@ -117,6 +118,11 @@ def test_implementation_agent_generates_executable_app(tmp_path: Path) -> None:
         "docker-compose.yml",
     }:
         assert (app_dir / rel).exists(), rel
+    scope = json.loads((app_dir / "data" / "scope.json").read_text(encoding="utf-8"))
+    assert len({screen["summary"] for screen in scope["screens"]}) >= 10
+    assert len({screen["component"] for screen in scope["screens"]}) >= 8
+    assert len({screen["fingerprint"] for screen in scope["screens"]}) >= 24
+    assert {screen["variant"] for screen in scope["screens"]} == {"overview", "form", "review"}
 
 
 def test_policy_blocks_tool_not_allowlisted() -> None:
