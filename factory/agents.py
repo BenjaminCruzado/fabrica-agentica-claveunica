@@ -2108,6 +2108,8 @@ def deploy_ec2(agent: AgentSpec, state: dict[str, Any], run_dir: Path, context_p
                 "if ! command -v docker >/dev/null 2>&1; then curl -fsSL https://get.docker.com | sudo sh; fi; "
                 "sudo systemctl enable --now docker >/dev/null 2>&1 || true; "
                 "if ! sudo docker compose version >/dev/null 2>&1; then sudo apt-get update && sudo apt-get install -y docker-compose-plugin; fi; "
+                "avail_kb=$(df -Pk / | awk 'NR==2 {print $4}'); "
+                "if [ \"$avail_kb\" -lt 5242880 ]; then echo \"DISK_PRECHECK_FAILED: se requieren al menos 5GB libres para build full-stack en EC2; disponibles ${avail_kb}KB\" >&2; exit 42; fi; "
                 "if [ ! -f /swapfile ]; then sudo fallocate -l 2G /swapfile && sudo chmod 600 /swapfile && sudo mkswap /swapfile && sudo swapon /swapfile; else sudo swapon /swapfile 2>/dev/null || true; fi; "
                 f"if [ ! -d {remote_dir}/.git ]; then git clone -b {config['github_branch']} {config['github_repo']} {remote_dir}; "
                 f"else cd {remote_dir} && git fetch origin {config['github_branch']} && git checkout {config['github_branch']} && git pull --ff-only; fi; "
