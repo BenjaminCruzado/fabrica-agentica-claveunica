@@ -622,7 +622,7 @@ public class PortalStateController {
     for path in (src_app / "pages", src_app / "services", frontend / "src" / "assets"):
         path.mkdir(parents=True, exist_ok=True)
     (frontend / "package.json").write_text('{"scripts":{"start":"ng serve --host 0.0.0.0","build":"ng build","test":"echo angular smoke"},"dependencies":{"@angular/animations":"^18.2.0","@angular/common":"^18.2.0","@angular/compiler":"^18.2.0","@angular/core":"^18.2.0","@angular/forms":"^18.2.0","@angular/platform-browser":"^18.2.0","@angular/router":"^18.2.0","rxjs":"^7.8.1","tslib":"^2.6.3","zone.js":"^0.14.10"},"devDependencies":{"@angular-devkit/build-angular":"^18.2.0","@angular/cli":"^18.2.0","@angular/compiler-cli":"^18.2.0","typescript":"^5.5.4"}}\n', encoding="utf-8")
-    (frontend / "angular.json").write_text('{"version":1,"projects":{"portal":{"projectType":"application","root":"","sourceRoot":"src","architect":{"build":{"builder":"@angular-devkit/build-angular:application","options":{"browser":"src/main.ts","index":"src/index.html","tsConfig":"tsconfig.app.json","styles":["src/styles.css"]}}}}},"defaultProject":"portal"}\n', encoding="utf-8")
+    (frontend / "angular.json").write_text('{"version":1,"projects":{"portal":{"projectType":"application","root":"","sourceRoot":"src","architect":{"build":{"builder":"@angular-devkit/build-angular:application","options":{"outputPath":"dist/portal","browser":"src/main.ts","index":"src/index.html","tsConfig":"tsconfig.app.json","styles":["src/styles.css"]}}}}}}\n', encoding="utf-8")
     (frontend / "tsconfig.json").write_text('{"compilerOptions":{"strict":true,"target":"ES2022","module":"ES2022","moduleResolution":"bundler","skipLibCheck":true}}\n', encoding="utf-8")
     (frontend / "tsconfig.app.json").write_text('{"extends":"./tsconfig.json","files":["src/main.ts"],"include":["src/**/*.ts"]}\n', encoding="utf-8")
     (frontend / "src" / "index.html").write_text('<app-root></app-root>\n', encoding="utf-8")
@@ -2110,12 +2110,14 @@ def deploy_ec2(agent: AgentSpec, state: dict[str, Any], run_dir: Path, context_p
                 "if ! sudo docker compose version >/dev/null 2>&1; then sudo apt-get update && sudo apt-get install -y docker-compose-plugin; fi; "
                 f"if [ ! -d {remote_dir}/.git ]; then git clone -b {config['github_branch']} {config['github_repo']} {remote_dir}; "
                 f"else cd {remote_dir} && git fetch origin {config['github_branch']} && git checkout {config['github_branch']} && git pull --ff-only; fi; "
-                f"cd {remote_dir}/app-generada; sudo docker compose up -d --build"
+                "sudo docker rm -f portal_claveunica_app fabrica_app claveunica_frontend claveunica_backend claveunica_postgres >/dev/null 2>&1 || true; "
+                f"cd {remote_dir}/app-generada; sudo docker compose down --remove-orphans || true; sudo docker compose up -d --build"
             )
             if allow_execute:
                 commands.append(_run_command([ssh_binary, "-i", str(key_path), "-o", "StrictHostKeyChecking=no", ssh_target, remote_cmd], repo_root, timeout=600))
-                commands.append(_run_command(["curl", "-I", str(config["public_url"])], repo_root, timeout=60))
-                status = "complete" if commands and commands[-1]["returncode"] == 0 else "needs_user_input"
+                health_url = str(config["public_url"]).rstrip("/") + "/api/v1/health"
+                commands.append(_run_command(["curl", "-fsS", health_url], repo_root, timeout=60))
+                status = "complete" if commands and all(command["returncode"] == 0 for command in commands) else "error"
         else:
             config["missing"] = missing
             config["ssh_key_exists"] = key_path.exists()
