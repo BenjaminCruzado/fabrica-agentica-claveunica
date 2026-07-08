@@ -1,0 +1,245 @@
+{
+  "endpoint_count": 40,
+  "endpoints": [
+    {
+      "description": "Ingreso ClaveUnica",
+      "method": "GET",
+      "path": "/api/v1/seguridad/p-01",
+      "screen": "P-01"
+    },
+    {
+      "description": "Ingreso ClaveUnica",
+      "method": "POST",
+      "path": "/api/v1/seguridad/p-01",
+      "screen": "P-01"
+    },
+    {
+      "description": "Recuperacion de acceso",
+      "method": "GET",
+      "path": "/api/v1/seguridad/p-02",
+      "screen": "P-02"
+    },
+    {
+      "description": "Recuperacion de acceso",
+      "method": "POST",
+      "path": "/api/v1/seguridad/p-02",
+      "screen": "P-02"
+    },
+    {
+      "description": "Dashboard ciudadano",
+      "method": "GET",
+      "path": "/api/v1/portal/p-03",
+      "screen": "P-03"
+    },
+    {
+      "description": "Dashboard ciudadano",
+      "method": "POST",
+      "path": "/api/v1/portal/p-03",
+      "screen": "P-03"
+    },
+    {
+      "description": "Catalogo de tramites",
+      "method": "GET",
+      "path": "/api/v1/portal/p-04",
+      "screen": "P-04"
+    },
+    {
+      "description": "Catalogo de tramites",
+      "method": "POST",
+      "path": "/api/v1/portal/p-04",
+      "screen": "P-04"
+    },
+    {
+      "description": "Detalle de tramite",
+      "method": "GET",
+      "path": "/api/v1/portal/p-05",
+      "screen": "P-05"
+    },
+    {
+      "description": "Detalle de tramite",
+      "method": "POST",
+      "path": "/api/v1/portal/p-05",
+      "screen": "P-05"
+    },
+    {
+      "description": "Datos personales",
+      "method": "GET",
+      "path": "/api/v1/perfil/p-06",
+      "screen": "P-06"
+    },
+    {
+      "description": "Datos personales",
+      "method": "POST",
+      "path": "/api/v1/perfil/p-06",
+      "screen": "P-06"
+    },
+    {
+      "description": "Datos de contacto",
+      "method": "GET",
+      "path": "/api/v1/perfil/p-07",
+      "screen": "P-07"
+    },
+    {
+      "description": "Datos de contacto",
+      "method": "POST",
+      "path": "/api/v1/perfil/p-07",
+      "screen": "P-07"
+    },
+    {
+      "description": "Preferencias de privacidad",
+      "method": "GET",
+      "path": "/api/v1/perfil/p-08",
+      "screen": "P-08"
+    },
+    {
+      "description": "Preferencias de privacidad",
+      "method": "POST",
+      "path": "/api/v1/perfil/p-08",
+      "screen": "P-08"
+    },
+    {
+      "description": "Sesiones activas",
+      "method": "GET",
+      "path": "/api/v1/seguridad/p-09",
+      "screen": "P-09"
+    },
+    {
+      "description": "Sesiones activas",
+      "method": "POST",
+      "path": "/api/v1/seguridad/p-09",
+      "screen": "P-09"
+    },
+    {
+      "description": "Dispositivos y MFA",
+      "method": "GET",
+      "path": "/api/v1/seguridad/p-10",
+      "screen": "P-10"
+    },
+    {
+      "description": "Dispositivos y MFA",
+      "method": "POST",
+      "path": "/api/v1/seguridad/p-10",
+      "screen": "P-10"
+    },
+    {
+      "description": "Domicilio digital vigente",
+      "method": "GET",
+      "path": "/api/v1/ddu/p-11",
+      "screen": "P-11"
+    },
+    {
+      "description": "Domicilio digital vigente",
+      "method": "POST",
+      "path": "/api/v1/ddu/p-11",
+      "screen": "P-11"
+    },
+    {
+      "description": "Verificacion de domicilio",
+      "method": "GET",
+      "path": "/api/v1/ddu/p-12",
+      "screen": "P-12"
+    },
+    {
+      "description": "Verificacion de domicilio",
+      "method": "POST",
+      "path": "/api/v1/ddu/p-12",
+      "screen": "P-12"
+    },
+    {
+      "description": "Historial de domicilio",
+      "method": "GET",
+      "path": "/api/v1/ddu/p-13",
+      "screen": "P-13"
+    },
+    {
+      "description": "Historial de domicilio",
+      "method": "POST",
+      "path": "/api/v1/ddu/p-13",
+      "screen": "P-13"
+    },
+    {
+      "description": "Bandeja de notificaciones",
+      "method": "GET",
+      "path": "/api/v1/notificaciones/p-14",
+      "screen": "P-14"
+    },
+    {
+      "description": "Bandeja de notificaciones",
+      "method": "POST",
+      "path": "/api/v1/notificaciones/p-14",
+      "screen": "P-14"
+    },
+    {
+      "description": "Detalle de mensaje",
+      "method": "GET",
+      "path": "/api/v1/notificaciones/p-15",
+      "screen": "P-15"
+    },
+    {
+      "description": "Detalle de mensaje",
+      "method": "POST",
+      "path": "/api/v1/notificaciones/p-15",
+      "screen": "P-15"
+    },
+    {
+      "description": "Preferencias de aviso",
+      "method": "GET",
+      "path": "/api/v1/notificaciones/p-16",
+      "screen": "P-16"
+    },
+    {
+      "description": "Preferencias de aviso",
+      "method": "POST",
+      "path": "/api/v1/notificaciones/p-16",
+      "screen": "P-16"
+    },
+    {
+      "description": "Permisos de datos",
+      "method": "GET",
+      "path": "/api/v1/autorizaciones/p-17",
+      "screen": "P-17"
+    },
+    {
+      "description": "Permisos de datos",
+      "method": "POST",
+      "path": "/api/v1/autorizaciones/p-17",
+      "screen": "P-17"
+    },
+    {
+      "description": "Solicitud de autorizacion",
+      "method": "GET",
+      "path": "/api/v1/autorizaciones/p-18",
+      "screen": "P-18"
+    },
+    {
+      "description": "Solicitud de autorizacion",
+      "method": "POST",
+      "path": "/api/v1/autorizaciones/p-18",
+      "screen": "P-18"
+    },
+    {
+      "description": "Historial de autorizaciones",
+      "method": "GET",
+      "path": "/api/v1/autorizaciones/p-19",
+      "screen": "P-19"
+    },
+    {
+      "description": "Historial de autorizaciones",
+      "method": "POST",
+      "path": "/api/v1/autorizaciones/p-19",
+      "screen": "P-19"
+    },
+    {
+      "description": "Mis expedientes",
+      "method": "GET",
+      "path": "/api/v1/expedientes/p-20",
+      "screen": "P-20"
+    },
+    {
+      "description": "Mis expedientes",
+      "method": "POST",
+      "path": "/api/v1/expedientes/p-20",
+      "screen": "P-20"
+    }
+  ]
+}

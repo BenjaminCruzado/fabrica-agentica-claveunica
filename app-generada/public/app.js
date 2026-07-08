@@ -57,10 +57,10 @@ function dashboard() {
     <section class="module-grid">
       ${data.modules.map((mod) => `
         <article class="card module-card" style="--accent:${mod.accent}">
-          <span class="muted">${mod.component}</span>
+          <span class="muted">${data.screens.filter((screen) => screen.module === mod.id).length} pantallas implementadas</span>
           <h2>${mod.name}</h2>
-          <p>${mod.purpose}</p>
-          <button onclick="setRoute('${data.screens.find((screen) => screen.module === mod.id).route}')">${mod.primaryAction}</button>
+          <p>${data.screens.find((screen) => screen.module === mod.id)?.summary || "Modulo trazado por requirements-ledger."}</p>
+          <button onclick="setRoute('${data.screens.find((screen) => screen.module === mod.id).route}')">${data.screens.find((screen) => screen.module === mod.id)?.actions?.[0] || "Abrir"}</button>
         </article>
       `).join("")}
     </section>
@@ -97,10 +97,10 @@ function formPanel(screen) {
   return `
     <section class="form-grid">
       <div class="card">
-        <h2>${screen.primaryAction}</h2>
+        <h2>${screen.actions[0] || "Gestionar"}</h2>
         ${screen.fields.map((field, index) => `<label>${field}<input value="${screen.records[index % screen.records.length][0]}" /></label>`).join("")}
         <label>Estado<select><option>Recibido</option><option>En revision</option><option>Aprobado</option><option>Observado</option></select></label>
-        <button onclick="alert('Flujo simulado por la fabrica: ${screen.component}')">Guardar</button>
+        <button onclick="alert('Flujo simulado por la fabrica: ${screen.layout}')">${screen.actions[0] || "Guardar"}</button>
       </div>
       <div class="card">
         <h2>Validaciones de la vista</h2>
@@ -134,15 +134,17 @@ function reviewPanel(screen) {
 }
 
 function moduleBody(screen) {
-  if (screen.variant === "overview") return overviewPanel(screen);
-  if (screen.variant === "form") return formPanel(screen);
+  const formLayouts = ["auth-login", "auth-recovery", "profile", "contact", "privacy", "mfa", "address-current", "address-verify", "notification-settings", "consent-request", "case-detail", "support-home", "ticket-detail", "audit-export"];
+  const overviewLayouts = ["dashboard", "catalog", "service-detail", "integration-status", "compliance"];
+  if (overviewLayouts.includes(screen.layout)) return overviewPanel(screen);
+  if (formLayouts.includes(screen.layout)) return formPanel(screen);
   return reviewPanel(screen);
 }
 
 function screenView(screen) {
   return `
     <section class="card screen-header" style="--accent:${screen.accent}">
-      <span class="muted">${screen.id} - ${screen.component} - ${screen.route}</span>
+      <span class="muted">${screen.id} - ${screen.layout} - ${screen.route}</span>
       <h1>${screen.title}</h1>
       <p>${screen.summary}</p>
       <div class="status">${screen.states.map((item) => `<span class="pill">${item}</span>`).join("")}</div>
@@ -154,6 +156,7 @@ function screenView(screen) {
         <tbody>
           <tr><th>Endpoint mock</th><td>/api/v1/${screen.module}/recurso-${screen.id.slice(-2)}</td></tr>
           <tr><th>Fingerprint UI</th><td>${screen.fingerprint}</td></tr>
+          <tr><th>Requisitos</th><td>${screen.requirements.join(", ")}</td></tr>
           <tr><th>Regla cubierta</th><td>Validacion, permisos, auditoria y estado</td></tr>
         </tbody>
       </table>

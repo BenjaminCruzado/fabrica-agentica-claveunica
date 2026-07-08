@@ -113,16 +113,22 @@ def test_implementation_agent_generates_executable_app(tmp_path: Path) -> None:
         "public/index.html",
         "public/app.js",
         "data/scope.json",
+        "data/implementation-ledger.json",
+        "data/api-catalog.json",
+        "data/seed.json",
         "tests/smoke.mjs",
         "Dockerfile",
         "docker-compose.yml",
     }:
         assert (app_dir / rel).exists(), rel
     scope = json.loads((app_dir / "data" / "scope.json").read_text(encoding="utf-8"))
-    assert len({screen["summary"] for screen in scope["screens"]}) >= 10
-    assert len({screen["component"] for screen in scope["screens"]}) >= 8
-    assert len({screen["fingerprint"] for screen in scope["screens"]}) >= 24
-    assert {screen["variant"] for screen in scope["screens"]} == {"overview", "form", "review"}
+    ledger = json.loads((app_dir / "data" / "implementation-ledger.json").read_text(encoding="utf-8"))
+    assert len({screen["summary"] for screen in scope["screens"]}) >= 28
+    assert len({screen["layout"] for screen in scope["screens"]}) >= 24
+    assert len({screen["fingerprint"] for screen in scope["screens"]}) == 30
+    assert len(scope["requirements"]) == 90
+    assert scope["apiCatalog"]["endpoint_count"] == 40
+    assert ledger["summary"]["implementation_status"] == "implemented_pending_web_validation"
 
 
 def test_policy_blocks_tool_not_allowlisted() -> None:

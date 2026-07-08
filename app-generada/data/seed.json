@@ -1,0 +1,388 @@
+{
+  "audit": [
+    {
+      "action": "login",
+      "id": "AUD-001",
+      "module": "Seguridad",
+      "status": "permitido"
+    }
+  ],
+  "citizen": {
+    "email": "benjamin@example.local",
+    "mfa": "activo",
+    "name": "Benjamin Cruzado",
+    "run": "12.345.678-9"
+  },
+  "records_by_screen": {
+    "P-01": [
+      [
+        "RUN demo",
+        "12.345.678-9",
+        "valido"
+      ],
+      [
+        "MFA",
+        "SMS",
+        "pendiente"
+      ]
+    ],
+    "P-02": [
+      [
+        "Correo",
+        "benjamin@example.local",
+        "verificado"
+      ],
+      [
+        "Canal",
+        "email",
+        "activo"
+      ]
+    ],
+    "P-03": [
+      [
+        "Tramites",
+        "6",
+        "en curso"
+      ],
+      [
+        "Alertas",
+        "2",
+        "criticas"
+      ],
+      [
+        "Mensajes",
+        "11",
+        "sin leer"
+      ]
+    ],
+    "P-04": [
+      [
+        "ClaveUnica",
+        "Registro Civil",
+        "24/7"
+      ],
+      [
+        "Domicilio",
+        "MINSEGPRES",
+        "web"
+      ],
+      [
+        "Certificados",
+        "Municipalidad",
+        "mixto"
+      ]
+    ],
+    "P-05": [
+      [
+        "Identidad",
+        "ClaveUnica",
+        "obligatorio"
+      ],
+      [
+        "Documento",
+        "Comprobante",
+        "opcional"
+      ]
+    ],
+    "P-06": [
+      [
+        "Nombre",
+        "Benjamin Cruzado",
+        "validado"
+      ],
+      [
+        "RUN",
+        "12.345.678-9",
+        "bloqueado"
+      ]
+    ],
+    "P-07": [
+      [
+        "Correo",
+        "benjamin@example.local",
+        "verificado"
+      ],
+      [
+        "Telefono",
+        "+56 9 0000 0000",
+        "pendiente"
+      ]
+    ],
+    "P-08": [
+      [
+        "Datos estadisticos",
+        "permitido",
+        "12 meses"
+      ],
+      [
+        "Marketing publico",
+        "rechazado",
+        "n/a"
+      ]
+    ],
+    "P-09": [
+      [
+        "Notebook",
+        "Santiago",
+        "hoy"
+      ],
+      [
+        "Movil",
+        "Valparaiso",
+        "ayer"
+      ]
+    ],
+    "P-10": [
+      [
+        "SMS",
+        "activo",
+        "si"
+      ],
+      [
+        "App autenticadora",
+        "pendiente",
+        "no"
+      ]
+    ],
+    "P-11": [
+      [
+        "Avenida Demo 123",
+        "Santiago",
+        "vigente"
+      ],
+      [
+        "Casilla digital",
+        "Web",
+        "activa"
+      ]
+    ],
+    "P-12": [
+      [
+        "Cuenta servicios",
+        "CGEDemo",
+        "aceptada"
+      ],
+      [
+        "Georreferencia",
+        "Sistema",
+        "pendiente"
+      ]
+    ],
+    "P-13": [
+      [
+        "2026-01-10",
+        "Avenida Demo 123",
+        "ciudadano"
+      ],
+      [
+        "2025-08-01",
+        "Calle Antigua 456",
+        "municipal"
+      ]
+    ],
+    "P-14": [
+      [
+        "Vencimiento tramite",
+        "alta",
+        "pendiente"
+      ],
+      [
+        "Actualizacion DDU",
+        "media",
+        "recibido"
+      ]
+    ],
+    "P-15": [
+      [
+        "Registro Civil",
+        "MSG-1001",
+        "1 archivo"
+      ],
+      [
+        "Municipalidad",
+        "MSG-1002",
+        "sin adjuntos"
+      ]
+    ],
+    "P-16": [
+      [
+        "Email",
+        "09:00-18:00",
+        "todas"
+      ],
+      [
+        "SMS",
+        "urgente",
+        "criticas"
+      ]
+    ],
+    "P-17": [
+      [
+        "Registro Civil",
+        "Identidad",
+        "vigente"
+      ],
+      [
+        "Municipalidad",
+        "Domicilio",
+        "por vencer"
+      ]
+    ],
+    "P-18": [
+      [
+        "Servicio demo",
+        "validar domicilio",
+        "30 dias"
+      ],
+      [
+        "Salud demo",
+        "contactabilidad",
+        "90 dias"
+      ]
+    ],
+    "P-19": [
+      [
+        "2026-07-01",
+        "revocar",
+        "ciudadano"
+      ],
+      [
+        "2026-06-20",
+        "autorizar",
+        "ciudadano"
+      ]
+    ],
+    "P-20": [
+      [
+        "EXP-1001",
+        "en revision",
+        "Mesa ciudadana"
+      ],
+      [
+        "EXP-1002",
+        "observado",
+        "Analista DDU"
+      ]
+    ],
+    "P-21": [
+      [
+        "EXP-1001",
+        "subsanacion",
+        "pendiente"
+      ],
+      [
+        "EXP-1001",
+        "recepcion",
+        "completa"
+      ]
+    ],
+    "P-22": [
+      [
+        "2026-07-01",
+        "creacion",
+        "ok"
+      ],
+      [
+        "2026-07-02",
+        "revision",
+        "observado"
+      ]
+    ],
+    "P-23": [
+      [
+        "Clave bloqueada",
+        "chat",
+        "4h"
+      ],
+      [
+        "Domicilio",
+        "formulario",
+        "24h"
+      ]
+    ],
+    "P-24": [
+      [
+        "Como cambiar domicilio",
+        "DDU",
+        "alta"
+      ],
+      [
+        "Como revocar permiso",
+        "Datos",
+        "media"
+      ]
+    ],
+    "P-25": [
+      [
+        "TK-1001",
+        "abierto",
+        "hoy"
+      ],
+      [
+        "TK-1002",
+        "cerrado",
+        "ayer"
+      ]
+    ],
+    "P-26": [
+      [
+        "2026-07-08",
+        "190.10.10.1",
+        "permitido"
+      ],
+      [
+        "2026-07-07",
+        "181.20.20.2",
+        "bloqueado"
+      ]
+    ],
+    "P-27": [
+      [
+        "Correo",
+        "old@example.local",
+        "benjamin@example.local"
+      ],
+      [
+        "Telefono",
+        "vacio",
+        "+56 9 0000 0000"
+      ]
+    ],
+    "P-28": [
+      [
+        "Ultimos 30 dias",
+        "CSV",
+        "listo"
+      ],
+      [
+        "Ultimos 90 dias",
+        "PDF",
+        "pendiente"
+      ]
+    ],
+    "P-29": [
+      [
+        "ClaveUnica",
+        "operativo",
+        "120ms"
+      ],
+      [
+        "DDU",
+        "degradado",
+        "650ms"
+      ]
+    ],
+    "P-30": [
+      [
+        "Trazabilidad",
+        "100%",
+        "bajo"
+      ],
+      [
+        "Permisos",
+        "96%",
+        "medio"
+      ]
+    ]
+  }
+}

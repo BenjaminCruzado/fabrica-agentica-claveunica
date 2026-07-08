@@ -1,5 +1,5 @@
 {
-  "apiCatalog": {
+  "api_catalog": {
     "endpoint_count": 40,
     "endpoints": [
       {
@@ -244,13 +244,6 @@
       }
     ]
   },
-  "apiExamples": [
-    "/api/v1/health",
-    "/api/v1/scope",
-    "/api/v1/screens",
-    "/api/v1/notificaciones/recurso-06",
-    "/api/v1/autorizaciones/recurso-07"
-  ],
   "counts": {
     "api_endpoints": 40,
     "business_rules": 60,
@@ -259,21 +252,6 @@
     "tables": 40,
     "use_cases": 10,
     "validations_checks": 100
-  },
-  "generatedBy": "fabrica-agentica",
-  "implementationSummary": {
-    "endpoints": 40,
-    "implementation_status": "implemented_pending_web_validation",
-    "layouts": 30,
-    "requirements": 90,
-    "screens": 30
-  },
-  "mockUser": {
-    "claveUnica": "simulada",
-    "email": "benjamin@example.local",
-    "mfa": "activo",
-    "name": "Benjamin Cruzado",
-    "run": "12.345.678-9"
   },
   "modules": [
     {
@@ -322,8 +300,7 @@
       "name": "Auditoria"
     }
   ],
-  "name": "Portal Ciudadano ClaveUnica",
-  "objective": "Aplicacion web ficticia basada en ClaveUnica, DDU, notificaciones y autorizaciones.",
+  "project_id": "claveunica-licitacion",
   "requirements": [
     {
       "id": "REQ_UI_001",
@@ -1286,7 +1263,7 @@
       "title": "Control, Cobertura, Riesgo"
     }
   ],
-  "runId": "RUN-c50babcb3938",
+  "run_id": "RUN-c50babcb3938",
   "screens": [
     {
       "accent": "#1d4ed8",
@@ -3068,5 +3045,13 @@
         ]
       ]
     }
-  }
+  },
+  "summary": {
+    "endpoints": 40,
+    "implementation_status": "implemented_pending_web_validation",
+    "layouts": 30,
+    "requirements": 90,
+    "screens": 30
+  },
+  "version": "v0001"
 }
