@@ -44,7 +44,7 @@ createServer(async (req, res) => {
       return json(res, 200, {
         status: "mock",
         path: url.pathname,
-        message: "Endpoint simulado por la fabrica para evidencia de API.",
+        message: "Endpoint de demostracion del portal ciudadano.",
         user: appData.mockUser.name
       });
     }

@@ -129,6 +129,21 @@ def test_implementation_agent_generates_executable_app(tmp_path: Path) -> None:
     assert len(scope["requirements"]) == 90
     assert scope["apiCatalog"]["endpoint_count"] == 40
     assert ledger["summary"]["implementation_status"] == "implemented_pending_web_validation"
+    public_app = (app_dir / "public" / "app.js").read_text(encoding="utf-8")
+    public_data = (app_dir / "public" / "data.js").read_text(encoding="utf-8")
+    for forbidden in {
+        "Contrato y trazabilidad",
+        "Endpoint mock",
+        "Fingerprint UI",
+        "Validaciones de la vista",
+        "REQ_UI_",
+        "REQ_FLOW_",
+        "REQ_VAL_",
+        "trazabilidad de fabrica",
+        "Flujo simulado por la fabrica",
+    }:
+        assert forbidden not in public_app
+        assert forbidden not in public_data
 
 
 def test_policy_blocks_tool_not_allowlisted() -> None:

@@ -23,23 +23,14 @@ function navGroup(module) {
       <strong>${module.name}</strong>
       ${module.screens.map((screen) => {
         const active = current === screen.route ? "active" : "";
-        return `<a class="${active}" href="#${screen.route}"><span>${screen.title.replace(module.name + " - ", "")}</span><small>${screen.id}</small></a>`;
+        return `<a class="${active}" href="#${screen.route}"><span>${screen.title.replace(module.name + " - ", "")}</span><small>${screen.moduleName}</small></a>`;
       }).join("")}
     </section>
   `;
 }
 
 function dashboard() {
-  const counts = data.counts;
-  const metrics = [
-    ["Casos de uso", counts.use_cases],
-    ["Flujos", counts.features_or_flows],
-    ["Tablas", counts.tables],
-    ["Endpoints", counts.api_endpoints],
-    ["Pantallas", counts.screens],
-    ["Reglas", counts.business_rules],
-    ["Checks", counts.validations_checks]
-  ];
+  const metrics = data.portalMetrics.map((item) => [item.label, item.value]);
   return `
     <section class="hero">
       <div>
@@ -48,7 +39,7 @@ function dashboard() {
       </div>
       <div class="actions">
         <button onclick="setRoute('${data.screens[0].route}')">Entrar al portal</button>
-        <a class="button secondary" href="/api/v1/scope" target="_blank">Ver contrato API</a>
+        <button class="secondary" onclick="setRoute('/portal/catalog')">Buscar tramite</button>
       </div>
     </section>
     <section class="grid">
@@ -57,9 +48,9 @@ function dashboard() {
     <section class="module-grid">
       ${data.modules.map((mod) => `
         <article class="card module-card" style="--accent:${mod.accent}">
-          <span class="muted">${data.screens.filter((screen) => screen.module === mod.id).length} pantallas implementadas</span>
+          <span class="muted">${data.screens.filter((screen) => screen.module === mod.id).length} servicios disponibles</span>
           <h2>${mod.name}</h2>
-          <p>${data.screens.find((screen) => screen.module === mod.id)?.summary || "Modulo trazado por requirements-ledger."}</p>
+          <p>${data.screens.find((screen) => screen.module === mod.id)?.summary || "Modulo disponible para gestion ciudadana."}</p>
           <button onclick="setRoute('${data.screens.find((screen) => screen.module === mod.id).route}')">${data.screens.find((screen) => screen.module === mod.id)?.actions?.[0] || "Abrir"}</button>
         </article>
       `).join("")}
@@ -100,15 +91,15 @@ function formPanel(screen) {
         <h2>${screen.actions[0] || "Gestionar"}</h2>
         ${screen.fields.map((field, index) => `<label>${field}<input value="${screen.records[index % screen.records.length][0]}" /></label>`).join("")}
         <label>Estado<select><option>Recibido</option><option>En revision</option><option>Aprobado</option><option>Observado</option></select></label>
-        <button onclick="alert('Flujo simulado por la fabrica: ${screen.layout}')">${screen.actions[0] || "Guardar"}</button>
+        <button onclick="alert('Solicitud registrada para ${screen.title}')">${screen.actions[0] || "Guardar"}</button>
       </div>
       <div class="card">
-        <h2>Validaciones de la vista</h2>
+        <h2>Guia de accion</h2>
+        <p class="notice">Completa la informacion solicitada y revisa el estado antes de enviar.</p>
         <ul class="check-list">
-          <li>Formato de RUN y correo</li>
-          <li>Permisos por modulo ${screen.moduleName}</li>
-          <li>Consistencia de estado y auditoria</li>
-          <li>Mensaje de error y recuperacion</li>
+          ${screen.actions.map((action) => `<li>${action}</li>`).join("")}
+          <li>Revisar datos antes de confirmar</li>
+          <li>Guardar comprobante de la operacion</li>
         </ul>
       </div>
     </section>
@@ -144,20 +135,18 @@ function moduleBody(screen) {
 function screenView(screen) {
   return `
     <section class="card screen-header" style="--accent:${screen.accent}">
-      <span class="muted">${screen.id} - ${screen.layout} - ${screen.route}</span>
+      <span class="muted">${screen.moduleName}</span>
       <h1>${screen.title}</h1>
       <p>${screen.summary}</p>
       <div class="status">${screen.states.map((item) => `<span class="pill">${item}</span>`).join("")}</div>
     </section>
     ${moduleBody(screen)}
     <section class="card">
-      <h2>Contrato y trazabilidad</h2>
+      <h2>Actividad reciente</h2>
       <table>
+        <thead><tr><th>Elemento</th><th>Detalle</th><th>Estado</th></tr></thead>
         <tbody>
-          <tr><th>Endpoint mock</th><td>/api/v1/${screen.module}/recurso-${screen.id.slice(-2)}</td></tr>
-          <tr><th>Fingerprint UI</th><td>${screen.fingerprint}</td></tr>
-          <tr><th>Requisitos</th><td>${screen.requirements.join(", ")}</td></tr>
-          <tr><th>Regla cubierta</th><td>Validacion, permisos, auditoria y estado</td></tr>
+          ${screen.records.map((row) => `<tr><td>${row[0]}</td><td>${row[1]}</td><td>${row[2]}</td></tr>`).join("")}
         </tbody>
       </table>
     </section>
@@ -172,8 +161,7 @@ function render() {
       <aside class="sidebar">
         <div class="brand">
           <strong>${data.name}</strong>
-          <span>Generada por ${data.generatedBy}</span>
-          <span>Run ${data.runId}</span>
+          <span>Portal ciudadano</span>
         </div>
         <nav class="nav">
           <a class="${current === "/dashboard" ? "active" : ""}" href="#/dashboard"><span>Dashboard</span><small>Resumen ejecutivo</small></a>
@@ -182,7 +170,7 @@ function render() {
       </aside>
       <main class="main">
         <div class="topbar">
-          <div><strong>Ambiente demo</strong><div class="muted">Datos mock, API local y trazabilidad de fabrica</div></div>
+          <div><strong>Portal ciudadano</strong><div class="muted">Gestion de identidad, domicilio digital y notificaciones</div></div>
           <div class="status"><span class="pill">ClaveUnica simulada</span><span class="pill">DDU</span><span class="pill">Auditoria</span></div>
         </div>
         ${screen ? screenView(screen) : dashboard()}

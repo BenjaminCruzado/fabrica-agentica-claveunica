@@ -254,10 +254,10 @@
   "counts": {
     "api_endpoints": 40,
     "business_rules": 60,
-    "features_or_flows": 40,
+    "features_or_flows": 30,
     "screens": 30,
     "tables": 40,
-    "use_cases": 21,
+    "use_cases": 10,
     "validations_checks": 100
   },
   "generatedBy": "fabrica-agentica",
@@ -1241,7 +1241,7 @@
       "implementation_status": "implemented",
       "kind": "flow",
       "selector": "#screen-p-29",
-      "title": "Reintentar, Ver contrato"
+      "title": "Reintentar, Ver detalle"
     },
     {
       "id": "REQ_VAL_029",
@@ -1262,7 +1262,7 @@
       "implementation_status": "implemented",
       "kind": "screen",
       "selector": "#screen-p-30",
-      "title": "Panel de cumplimiento"
+      "title": "Panel de seguridad"
     },
     {
       "id": "REQ_FLOW_030",
@@ -1273,7 +1273,7 @@
       "implementation_status": "implemented",
       "kind": "flow",
       "selector": "#screen-p-30",
-      "title": "Ver control, Descargar evidencia"
+      "title": "Ver control, Descargar reporte"
     },
     {
       "id": "REQ_VAL_030",
@@ -1286,7 +1286,7 @@
       "title": "Control, Cobertura, Riesgo"
     }
   ],
-  "runId": "RUN-63278bc084ef",
+  "runId": "RUN-ae148536174e",
   "screens": [
     {
       "accent": "#1d4ed8",
@@ -2592,7 +2592,7 @@
       "accent": "#0f766e",
       "actions": [
         "Reintentar",
-        "Ver contrato"
+        "Ver detalle"
       ],
       "code": "P-29",
       "fields": [
@@ -2600,7 +2600,7 @@
         "Estado",
         "Latencia"
       ],
-      "fingerprint": "integration-status:portal:Servicio|Estado|Latencia:Reintentar|Ver contrato",
+      "fingerprint": "integration-status:portal:Servicio|Estado|Latencia:Reintentar|Ver detalle",
       "id": "SCR_029",
       "layout": "integration-status",
       "module": "portal",
@@ -2631,14 +2631,14 @@
         "bloqueado",
         "completado"
       ],
-      "summary": "Estado de integraciones: implementa campos Servicio, Estado, Latencia y acciones Reintentar, Ver contrato.",
+      "summary": "Estado de integraciones: implementa campos Servicio, Estado, Latencia y acciones Reintentar, Ver detalle.",
       "title": "Estado de integraciones"
     },
     {
       "accent": "#334155",
       "actions": [
         "Ver control",
-        "Descargar evidencia"
+        "Descargar reporte"
       ],
       "code": "P-30",
       "fields": [
@@ -2646,19 +2646,19 @@
         "Cobertura",
         "Riesgo"
       ],
-      "fingerprint": "compliance:auditoria:Control|Cobertura|Riesgo:Ver control|Descargar evidencia",
+      "fingerprint": "compliance:auditoria:Control|Cobertura|Riesgo:Ver control|Descargar reporte",
       "id": "SCR_030",
       "layout": "compliance",
       "module": "auditoria",
       "moduleName": "Auditoria",
       "records": [
         [
-          "Trazabilidad",
+          "Proteccion de datos",
           "100%",
           "bajo"
         ],
         [
-          "Permisos",
+          "Permisos ciudadanos",
           "96%",
           "medio"
         ]
@@ -2677,8 +2677,8 @@
         "bloqueado",
         "completado"
       ],
-      "summary": "Panel de cumplimiento: implementa campos Control, Cobertura, Riesgo y acciones Ver control, Descargar evidencia.",
-      "title": "Panel de cumplimiento"
+      "summary": "Panel de seguridad: implementa campos Control, Cobertura, Riesgo y acciones Ver control, Descargar reporte.",
+      "title": "Panel de seguridad"
     }
   ],
   "seed": {
@@ -3057,12 +3057,12 @@
       ],
       "P-30": [
         [
-          "Trazabilidad",
+          "Proteccion de datos",
           "100%",
           "bajo"
         ],
         [
-          "Permisos",
+          "Permisos ciudadanos",
           "96%",
           "medio"
         ]
