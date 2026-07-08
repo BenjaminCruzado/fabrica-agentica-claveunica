@@ -1057,8 +1057,6 @@ CMD ["npm", "run", "start"]
     restart: unless-stopped
     ports:
       - "3000:3000"
-    env_file:
-      - .env
 """
     dockerignore = """node_modules
 .git
