@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/claveunica}
+    username: ${SPRING_DATASOURCE_USERNAME:claveunica}
+    password: ${SPRING_DATASOURCE_PASSWORD:claveunica}
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        format_sql: true
+server:
+  port: 8080

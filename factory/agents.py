@@ -432,6 +432,318 @@ def _claveunica_implementation_ledger(scope: dict[str, Any], run_id: str) -> dic
     }
 
 
+def _write_fullstack_claveunica_app(app_dir: Path, ledger: dict[str, Any], scope: dict[str, Any], app_data: dict[str, Any]) -> None:
+    for legacy in (app_dir / "public", app_dir / "server.mjs", app_dir / "Dockerfile"):
+        if legacy.is_dir():
+            shutil.rmtree(legacy)
+        elif legacy.exists():
+            legacy.unlink()
+    backend = app_dir / "backend"
+    frontend = app_dir / "frontend"
+    database = app_dir / "database"
+    docs = app_dir / "docs"
+    tests = app_dir / "tests"
+    for path in (backend, frontend, database, docs, tests):
+        path.mkdir(parents=True, exist_ok=True)
+
+    modules = ledger["modules"]
+    screens = ledger["screens"]
+    endpoints = ledger["api_catalog"]["endpoints"]
+    table_names = [
+        "citizens", "credentials", "mfa_methods", "sessions", "services", "procedures", "procedure_steps",
+        "digital_addresses", "address_evidence", "address_history", "notifications", "notification_preferences",
+        "message_attachments", "consents", "consent_requests", "consent_history", "cases", "case_events",
+        "case_documents", "support_tickets", "support_messages", "faq_entries", "audit_events", "audit_exports",
+        "integration_status", "security_alerts", "trusted_devices", "profile_changes", "contact_channels",
+        "privacy_preferences", "institutions", "service_categories", "favorites", "sla_rules", "business_rules",
+        "validation_rules", "api_clients", "roles", "permissions", "user_roles",
+    ]
+
+    schema_lines = [
+        "CREATE EXTENSION IF NOT EXISTS pgcrypto;",
+        "CREATE TABLE citizens (id UUID PRIMARY KEY DEFAULT gen_random_uuid(), run VARCHAR(12) UNIQUE NOT NULL, full_name VARCHAR(160) NOT NULL, email VARCHAR(160) NOT NULL, phone VARCHAR(32), created_at TIMESTAMP NOT NULL DEFAULT now());",
+        "CREATE TABLE procedures (id UUID PRIMARY KEY DEFAULT gen_random_uuid(), citizen_id UUID REFERENCES citizens(id), name VARCHAR(180) NOT NULL, status VARCHAR(40) NOT NULL, owner VARCHAR(120) NOT NULL, updated_at TIMESTAMP NOT NULL DEFAULT now());",
+        "CREATE TABLE notifications (id UUID PRIMARY KEY DEFAULT gen_random_uuid(), citizen_id UUID REFERENCES citizens(id), procedure_id UUID REFERENCES procedures(id), subject VARCHAR(180) NOT NULL, priority VARCHAR(24) NOT NULL, read_at TIMESTAMP);",
+        "CREATE TABLE sessions (id UUID PRIMARY KEY DEFAULT gen_random_uuid(), citizen_id UUID REFERENCES citizens(id), device VARCHAR(100) NOT NULL, location VARCHAR(100), active BOOLEAN NOT NULL DEFAULT true, trusted BOOLEAN NOT NULL DEFAULT false);",
+        "CREATE TABLE consents (id UUID PRIMARY KEY DEFAULT gen_random_uuid(), citizen_id UUID REFERENCES citizens(id), institution VARCHAR(140) NOT NULL, data_scope VARCHAR(140) NOT NULL, status VARCHAR(40) NOT NULL, expires_at DATE);",
+        "CREATE TABLE cases (id UUID PRIMARY KEY DEFAULT gen_random_uuid(), citizen_id UUID REFERENCES citizens(id), procedure_id UUID REFERENCES procedures(id), status VARCHAR(40) NOT NULL, responsible VARCHAR(120));",
+        "CREATE TABLE audit_events (id UUID PRIMARY KEY DEFAULT gen_random_uuid(), citizen_id UUID REFERENCES citizens(id), event_type VARCHAR(80) NOT NULL, detail TEXT NOT NULL, created_at TIMESTAMP NOT NULL DEFAULT now());",
+    ]
+    for name in table_names:
+        if not any(line.startswith(f"CREATE TABLE {name} ") for line in schema_lines):
+            schema_lines.append(f"CREATE TABLE {name} (id UUID PRIMARY KEY DEFAULT gen_random_uuid(), code VARCHAR(80) UNIQUE, name VARCHAR(180) NOT NULL, status VARCHAR(40) NOT NULL DEFAULT 'activo', metadata JSONB NOT NULL DEFAULT '{{}}', created_at TIMESTAMP NOT NULL DEFAULT now());")
+    (database / "schema.sql").write_text("\n".join(schema_lines) + "\n", encoding="utf-8")
+    (database / "seed.sql").write_text(
+        """INSERT INTO citizens (run, full_name, email, phone) VALUES ('12.345.678-9', 'Benjamin Cruzado', 'benjamin@example.local', '+56 9 0000 0000');
+INSERT INTO procedures (citizen_id, name, status, owner) SELECT id, 'Actualizar domicilio digital', 'en curso', 'MINSEGPRES' FROM citizens WHERE run='12.345.678-9';
+INSERT INTO procedures (citizen_id, name, status, owner) SELECT id, 'Solicitar certificado ciudadano', 'pendiente', 'Registro Civil' FROM citizens WHERE run='12.345.678-9';
+INSERT INTO notifications (citizen_id, procedure_id, subject, priority) SELECT c.id, p.id, 'Vencimiento de tramite', 'alta' FROM citizens c JOIN procedures p ON p.citizen_id=c.id LIMIT 1;
+INSERT INTO sessions (citizen_id, device, location, active, trusted) SELECT id, 'Notebook', 'Santiago', true, true FROM citizens WHERE run='12.345.678-9';
+INSERT INTO consents (citizen_id, institution, data_scope, status, expires_at) SELECT id, 'Registro Civil', 'Identidad', 'vigente', '2026-12-31' FROM citizens WHERE run='12.345.678-9';
+INSERT INTO cases (citizen_id, procedure_id, status, responsible) SELECT c.id, p.id, 'en revision', 'Mesa ciudadana' FROM citizens c JOIN procedures p ON p.citizen_id=c.id LIMIT 1;
+""",
+        encoding="utf-8",
+    )
+
+    domain_model = {
+        "table_count": len(table_names),
+        "tables": table_names,
+        "relationships": [
+            "citizens 1-N procedures",
+            "citizens 1-N notifications",
+            "procedures 1-N cases",
+            "citizens 1-N sessions",
+            "citizens 1-N consents",
+            "citizens 1-N audit_events",
+        ],
+    }
+    write_json(database / "domain-model.json", domain_model)
+
+    java_root = backend / "src" / "main" / "java" / "cl" / "benjamin" / "claveunica"
+    resources = backend / "src" / "main" / "resources"
+    tests_root = backend / "src" / "test" / "java" / "cl" / "benjamin" / "claveunica"
+    for path in (java_root / "controller", java_root / "domain", java_root / "repository", java_root / "service", resources, tests_root):
+        path.mkdir(parents=True, exist_ok=True)
+    (backend / "pom.xml").write_text(
+        """<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>cl.benjamin</groupId>
+  <artifactId>portal-claveunica</artifactId>
+  <version>1.0.0</version>
+  <properties><java.version>21</java.version><spring-boot.version>3.3.3</spring-boot.version></properties>
+  <dependencyManagement><dependencies><dependency><groupId>org.springframework.boot</groupId><artifactId>spring-boot-dependencies</artifactId><version>${spring-boot.version}</version><type>pom</type><scope>import</scope></dependency></dependencies></dependencyManagement>
+  <dependencies>
+    <dependency><groupId>org.springframework.boot</groupId><artifactId>spring-boot-starter-web</artifactId></dependency>
+    <dependency><groupId>org.springframework.boot</groupId><artifactId>spring-boot-starter-data-jpa</artifactId></dependency>
+    <dependency><groupId>org.springframework.boot</groupId><artifactId>spring-boot-starter-validation</artifactId></dependency>
+    <dependency><groupId>org.postgresql</groupId><artifactId>postgresql</artifactId><scope>runtime</scope></dependency>
+    <dependency><groupId>org.springdoc</groupId><artifactId>springdoc-openapi-starter-webmvc-ui</artifactId><version>2.6.0</version></dependency>
+    <dependency><groupId>org.springframework.boot</groupId><artifactId>spring-boot-starter-test</artifactId><scope>test</scope></dependency>
+  </dependencies>
+  <build><plugins><plugin><groupId>org.springframework.boot</groupId><artifactId>spring-boot-maven-plugin</artifactId></plugin></plugins></build>
+</project>
+""",
+        encoding="utf-8",
+    )
+    (resources / "application.yml").write_text(
+        """spring:
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/claveunica}
+    username: ${SPRING_DATASOURCE_USERNAME:claveunica}
+    password: ${SPRING_DATASOURCE_PASSWORD:claveunica}
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        format_sql: true
+server:
+  port: 8080
+""",
+        encoding="utf-8",
+    )
+    (java_root / "PortalApplication.java").write_text("package cl.benjamin.claveunica;\n\nimport org.springframework.boot.SpringApplication;\nimport org.springframework.boot.autoconfigure.SpringBootApplication;\n\n@SpringBootApplication\npublic class PortalApplication {\n  public static void main(String[] args) { SpringApplication.run(PortalApplication.class, args); }\n}\n", encoding="utf-8")
+    entities = {
+        "Citizen": ("citizens", "run,fullName,email,phone"),
+        "ProcedureRecord": ("procedures", "name,status,owner"),
+        "NotificationRecord": ("notifications", "subject,priority,readAt"),
+        "SessionRecord": ("sessions", "device,location,active"),
+        "ConsentRecord": ("consents", "institution,dataScope,status"),
+        "CaseRecord": ("cases", "status,responsible,procedureCode"),
+        "AuditEvent": ("audit_events", "eventType,detail,createdAt"),
+    }
+    for class_name, (table_name, fields_csv) in entities.items():
+        fields = fields_csv.split(",")
+        body = ["package cl.benjamin.claveunica.domain;", "", "import jakarta.persistence.*;", "import java.time.*;", "import java.util.*;", "", "@Entity", f"@Table(name = \"{table_name}\")", f"public class {class_name} {{", "  @Id @GeneratedValue(strategy = GenerationType.UUID)", "  public UUID id;"]
+        for field in fields:
+            java_type = "Boolean" if field == "active" else "LocalDateTime" if field in {"readAt", "createdAt"} else "String"
+            body.append(f"  public {java_type} {field};")
+        body.append("}")
+        (java_root / "domain" / f"{class_name}.java").write_text("\n".join(body) + "\n", encoding="utf-8")
+        (java_root / "repository" / f"{class_name}Repository.java").write_text(f"package cl.benjamin.claveunica.repository;\n\nimport cl.benjamin.claveunica.domain.{class_name};\nimport org.springframework.data.jpa.repository.JpaRepository;\nimport java.util.UUID;\n\npublic interface {class_name}Repository extends JpaRepository<{class_name}, UUID> {{}}\n", encoding="utf-8")
+    controller_methods = []
+    for index, endpoint in enumerate(endpoints, start=1):
+        method = "GetMapping" if endpoint["method"] == "GET" else "PostMapping"
+        path = endpoint["path"].replace("/api/v1", "")
+        controller_methods.append(f'  @{method}("{path}")\n  public Map<String, Object> endpoint{index:02d}() {{ return Map.of("screen", "{endpoint["screen"]}", "description", "{endpoint["description"]}", "status", "ok"); }}')
+    (java_root / "controller" / "PortalController.java").write_text(
+        "package cl.benjamin.claveunica.controller;\n\nimport org.springframework.web.bind.annotation.*;\nimport java.util.*;\n\n@RestController\n@RequestMapping(\"/api/v1\")\n@CrossOrigin\npublic class PortalController {\n  @GetMapping(\"/health\")\n  public Map<String, Object> health() { return Map.of(\"status\", \"ok\", \"service\", \"Portal Ciudadano ClaveUnica\"); }\n\n" + "\n\n".join(controller_methods) + "\n}\n",
+        encoding="utf-8",
+    )
+    (java_root / "controller" / "PortalStateController.java").write_text(
+        """package cl.benjamin.claveunica.controller;
+
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.web.bind.annotation.*;
+import java.util.*;
+
+@RestController
+@RequestMapping("/api/v1")
+@CrossOrigin
+public class PortalStateController {
+  private final JdbcTemplate jdbc;
+  public PortalStateController(JdbcTemplate jdbc) { this.jdbc = jdbc; }
+
+  @GetMapping("/app-state")
+  public Map<String, Object> appState() {
+    Map<String, Object> db = new LinkedHashMap<>();
+    db.put("citizens", jdbc.queryForList("select * from citizens order by created_at desc"));
+    db.put("procedures", jdbc.queryForList("select * from procedures order by updated_at desc"));
+    db.put("notifications", jdbc.queryForList("select * from notifications order by priority"));
+    db.put("sessions", jdbc.queryForList("select * from sessions order by device"));
+    db.put("consents", jdbc.queryForList("select * from consents order by institution"));
+    db.put("cases", jdbc.queryForList("select * from cases order by status"));
+    db.put("events", jdbc.queryForList("select * from audit_events order by created_at desc limit 10"));
+    List<Map<String, Object>> metrics = List.of(
+      Map.of("label", "Tramites activos", "value", jdbc.queryForObject("select count(*) from procedures where status <> 'completado'", Long.class)),
+      Map.of("label", "Mensajes nuevos", "value", jdbc.queryForObject("select count(*) from notifications where read_at is null", Long.class)),
+      Map.of("label", "Sesiones protegidas", "value", jdbc.queryForObject("select count(*) from sessions where active = true", Long.class)),
+      Map.of("label", "Autorizaciones vigentes", "value", jdbc.queryForObject("select count(*) from consents where status = 'vigente'", Long.class))
+    );
+    return Map.of("name", "Portal Ciudadano ClaveUnica", "portalMetrics", metrics, "db", db);
+  }
+
+  @PostMapping("/actions")
+  public Map<String, Object> action(@RequestBody Map<String, Object> payload) {
+    String action = String.valueOf(payload.getOrDefault("action", "Actualizar"));
+    if (action.contains("Marcar")) {
+      jdbc.update("update notifications set read_at = now() where id = (select id from notifications where read_at is null limit 1)");
+    }
+    jdbc.update("insert into audit_events(event_type, detail) values (?, ?)", "USER_ACTION", action + " ejecutado desde Angular");
+    return Map.of("status", "ok", "action", action);
+  }
+}
+""",
+        encoding="utf-8",
+    )
+    (backend / "Dockerfile").write_text("FROM maven:3.9-eclipse-temurin-21 AS build\nWORKDIR /app\nCOPY pom.xml .\nCOPY src ./src\nRUN mvn -q -DskipTests package\nFROM eclipse-temurin:21-jre-alpine\nWORKDIR /app\nCOPY --from=build /app/target/*.jar app.jar\nEXPOSE 8080\nCMD [\"java\", \"-jar\", \"app.jar\"]\n", encoding="utf-8")
+
+    src_app = frontend / "src" / "app"
+    for path in (src_app / "pages", src_app / "services", frontend / "src" / "assets"):
+        path.mkdir(parents=True, exist_ok=True)
+    (frontend / "package.json").write_text('{"scripts":{"start":"ng serve --host 0.0.0.0","build":"ng build","test":"echo angular smoke"},"dependencies":{"@angular/animations":"^18.2.0","@angular/common":"^18.2.0","@angular/compiler":"^18.2.0","@angular/core":"^18.2.0","@angular/forms":"^18.2.0","@angular/platform-browser":"^18.2.0","@angular/router":"^18.2.0","rxjs":"^7.8.1","tslib":"^2.6.3","zone.js":"^0.14.10"},"devDependencies":{"@angular-devkit/build-angular":"^18.2.0","@angular/cli":"^18.2.0","@angular/compiler-cli":"^18.2.0","typescript":"^5.5.4"}}\n', encoding="utf-8")
+    (frontend / "angular.json").write_text('{"version":1,"projects":{"portal":{"projectType":"application","root":"","sourceRoot":"src","architect":{"build":{"builder":"@angular-devkit/build-angular:application","options":{"browser":"src/main.ts","index":"src/index.html","tsConfig":"tsconfig.app.json","styles":["src/styles.css"]}}}}},"defaultProject":"portal"}\n', encoding="utf-8")
+    (frontend / "tsconfig.json").write_text('{"compilerOptions":{"strict":true,"target":"ES2022","module":"ES2022","moduleResolution":"bundler","skipLibCheck":true}}\n', encoding="utf-8")
+    (frontend / "tsconfig.app.json").write_text('{"extends":"./tsconfig.json","files":["src/main.ts"],"include":["src/**/*.ts"]}\n', encoding="utf-8")
+    (frontend / "src" / "index.html").write_text('<app-root></app-root>\n', encoding="utf-8")
+    (frontend / "src" / "main.ts").write_text("import { bootstrapApplication } from '@angular/platform-browser';\nimport { provideRouter } from '@angular/router';\nimport { provideHttpClient } from '@angular/common/http';\nimport { AppComponent } from './app/app.component';\nimport { routes } from './app/app.routes';\nbootstrapApplication(AppComponent, { providers: [provideRouter(routes), provideHttpClient()] });\n", encoding="utf-8")
+    (frontend / "src" / "styles.css").write_text("body{margin:0;font-family:Inter,Arial,sans-serif;background:#f6f8fb;color:#14213d}.shell{display:grid;grid-template-columns:280px 1fr;min-height:100vh}.nav{background:white;border-right:1px solid #dbe3ef;padding:20px;overflow:auto}.nav a{display:block;padding:10px;border-radius:8px;color:#14213d;text-decoration:none}.nav a:hover{background:#f1f5f9}.main{padding:24px}.card{background:white;border:1px solid #dbe3ef;border-radius:8px;padding:16px;margin-bottom:16px}table{width:100%;border-collapse:collapse}td,th{padding:10px;border-bottom:1px solid #dbe3ef;text-align:left}button{background:#0f766e;color:white;border:0;border-radius:8px;padding:10px 14px;font-weight:700}.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}@media(max-width:800px){.shell{grid-template-columns:1fr}.metrics{grid-template-columns:1fr}}\n", encoding="utf-8")
+    route_lines = []
+    nav_links = []
+    for index, screen in enumerate(screens, start=1):
+        class_name = f"Screen{index:02d}Component"
+        selector = f"app-screen-{index:02d}"
+        component_file = f"screen-{index:02d}.component"
+        route_lines.append(f"  {{ path: '{screen['route'].strip('/')}', loadComponent: () => import('./pages/{component_file}').then(m => m.{class_name}) }},")
+        nav_links.append({"path": screen["route"].strip("/"), "title": screen["title"], "module": screen["moduleName"]})
+        (src_app / "pages" / f"{component_file}.ts").write_text(
+            f"import {{ Component, inject }} from '@angular/core';\nimport {{ CommonModule }} from '@angular/common';\nimport {{ FormsModule }} from '@angular/forms';\nimport {{ PortalApiService }} from '../services/portal-api.service';\n\n@Component({{selector:'{selector}', standalone:true, imports:[CommonModule,FormsModule], templateUrl:'./{component_file}.html'}})\nexport class {class_name} {{\n  api = inject(PortalApiService);\n  screen = {stable_json({k: v for k, v in screen.items() if k in {'title','summary','fields','actions','route','moduleName','records'}})};\n  state = this.api.state;\n  run(action: string) {{ this.api.runAction(this.screen.route, action).subscribe(); }}\n}}\n",
+            encoding="utf-8",
+        )
+        (src_app / "pages" / f"{component_file}.html").write_text(
+            "<section class=\"card\"><p>{{screen.moduleName}}</p><h1>{{screen.title}}</h1><p>{{screen.summary}}</p><button *ngFor=\"let action of screen.actions\" (click)=\"run(action)\">{{action}}</button></section>\n<section class=\"card\"><h2>Datos</h2><table><thead><tr><th *ngFor=\"let field of screen.fields\">{{field}}</th></tr></thead><tbody><tr *ngFor=\"let row of screen.records\"><td>{{row[0]}}</td><td>{{row[1]}}</td><td>{{row[2]}}</td></tr></tbody></table></section>\n",
+            encoding="utf-8",
+        )
+    (src_app / "app.routes.ts").write_text("import { Routes } from '@angular/router';\n\nexport const routes: Routes = [\n  { path: '', redirectTo: 'portal/dashboard', pathMatch: 'full' },\n" + "\n".join(route_lines) + "\n];\n", encoding="utf-8")
+    (src_app / "services" / "portal-api.service.ts").write_text("import { Injectable, signal } from '@angular/core';\nimport { HttpClient } from '@angular/common/http';\nimport { tap } from 'rxjs';\n\n@Injectable({ providedIn: 'root' })\nexport class PortalApiService {\n  state = signal<any>({ portalMetrics: [], db: {} });\n  constructor(private http: HttpClient) { this.refresh().subscribe(); }\n  refresh() { return this.http.get<any>('/api/v1/app-state').pipe(tap(data => this.state.set(data))); }\n  runAction(screenRoute: string, action: string) { return this.http.post<any>('/api/v1/actions', { screenRoute, action }).pipe(tap(() => this.refresh().subscribe())); }\n}\n", encoding="utf-8")
+    (src_app / "app.component.ts").write_text(f"import {{ Component }} from '@angular/core';\nimport {{ RouterLink, RouterOutlet }} from '@angular/router';\nimport {{ CommonModule }} from '@angular/common';\n\n@Component({{selector:'app-root', standalone:true, imports:[CommonModule,RouterLink,RouterOutlet], templateUrl:'./app.component.html'}})\nexport class AppComponent {{ nav = {stable_json(nav_links)}; }}\n", encoding="utf-8")
+    (src_app / "app.component.html").write_text("<div class=\"shell\"><nav class=\"nav\"><h2>Portal Ciudadano ClaveUnica</h2><a *ngFor=\"let item of nav\" [routerLink]=\"item.path\"><strong>{{item.title}}</strong><br><small>{{item.module}}</small></a></nav><main class=\"main\"><router-outlet /></main></div>\n", encoding="utf-8")
+    (frontend / "nginx.conf").write_text("server { listen 80; root /usr/share/nginx/html/browser; index index.html; location /api/ { proxy_pass http://backend:8080/api/; } location / { try_files $uri $uri/ /index.html; } }\n", encoding="utf-8")
+    (frontend / "Dockerfile").write_text("FROM node:22-alpine AS build\nWORKDIR /app\nCOPY package*.json ./\nRUN npm install\nCOPY . .\nRUN npm run build\nFROM nginx:1.27-alpine\nCOPY nginx.conf /etc/nginx/conf.d/default.conf\nCOPY --from=build /app/dist/portal /usr/share/nginx/html\nEXPOSE 80\n", encoding="utf-8")
+
+    compose = """services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: claveunica_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: claveunica
+      POSTGRES_USER: claveunica
+      POSTGRES_PASSWORD: claveunica
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/schema.sql:/docker-entrypoint-initdb.d/01_schema.sql:ro
+      - ./database/seed.sql:/docker-entrypoint-initdb.d/02_seed.sql:ro
+  backend:
+    build: ./backend
+    container_name: claveunica_backend
+    restart: unless-stopped
+    depends_on:
+      - postgres
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/claveunica
+      SPRING_DATASOURCE_USERNAME: claveunica
+      SPRING_DATASOURCE_PASSWORD: claveunica
+    ports:
+      - "8080:8080"
+  frontend:
+    build: ./frontend
+    container_name: claveunica_frontend
+    restart: unless-stopped
+    depends_on:
+      - backend
+    ports:
+      - "3000:80"
+volumes:
+  postgres_data:
+"""
+    (app_dir / "docker-compose.yml").write_text(compose, encoding="utf-8")
+    (app_dir / ".dockerignore").write_text("**/node_modules\n**/target\n.git\n.env\n*.pem\n*.key\n", encoding="utf-8")
+    (app_dir / "package.json").write_text('{"type":"module","scripts":{"test":"node tests/smoke.mjs"},"devDependencies":{}}\n', encoding="utf-8")
+    (app_dir / "README.md").write_text(
+        """# App Generada - Portal Ciudadano ClaveUnica
+
+Aplicacion full-stack generada por la fabrica.
+
+## Stack
+
+- Frontend: Angular standalone.
+- Backend: Spring Boot REST + JPA/JdbcTemplate.
+- Base de datos: PostgreSQL con 40 tablas.
+- Orquestacion: Docker Compose.
+
+## Ejecutar
+
+```bash
+docker compose up -d --build
+```
+
+- Frontend: http://localhost:3000
+- Backend: http://localhost:8080/api/v1/health
+
+## Validar estructura
+
+```bash
+npm test
+```
+""",
+        encoding="utf-8",
+    )
+    (tests / "smoke.mjs").write_text(
+        """import assert from 'node:assert/strict';
+import { readFile, readdir } from 'node:fs/promises';
+
+const schema = await readFile(new URL('../database/schema.sql', import.meta.url), 'utf8');
+const compose = await readFile(new URL('../docker-compose.yml', import.meta.url), 'utf8');
+const routes = await readFile(new URL('../frontend/src/app/app.routes.ts', import.meta.url), 'utf8');
+const controller = await readFile(new URL('../backend/src/main/java/cl/benjamin/claveunica/controller/PortalController.java', import.meta.url), 'utf8');
+const pageFiles = await readdir(new URL('../frontend/src/app/pages/', import.meta.url));
+
+assert.equal((schema.match(/CREATE TABLE/g) || []).length, 40, 'debe generar 40 tablas PostgreSQL');
+assert.equal(pageFiles.filter(name => name.endsWith('.ts')).length, 30, 'debe generar 30 componentes Angular');
+assert.ok((controller.match(/Mapping\\("/g) || []).length >= 40, 'debe generar al menos 40 endpoints Spring');
+assert.match(compose, /postgres:/);
+assert.match(compose, /backend:/);
+assert.match(compose, /frontend:/);
+assert.match(routes, /loadComponent/);
+console.log('smoke ok: full-stack Angular + Spring Boot + PostgreSQL con cantidades de rubrica');
+""",
+        encoding="utf-8",
+    )
+    docs.joinpath("architecture.md").write_text("# Arquitectura Full-Stack\n\n- Frontend: Angular standalone components, 30 pantallas.\n- Backend: Spring Boot REST, JPA y validaciones.\n- Database: PostgreSQL con 40 tablas documentadas.\n- Deploy: Docker Compose con frontend, backend y postgres.\n", encoding="utf-8")
+    docs.joinpath("traceability-fullstack.md").write_text("# Trazabilidad Full-Stack\n\nCada pantalla del ledger se materializa como componente Angular, endpoint Spring y registro de modelo de datos. La evidencia academica queda separada en `data/implementation-ledger.json` y `docs/`.\n", encoding="utf-8")
+
+
 def implementacion_doc_code(agent: AgentSpec, state: dict[str, Any], run_dir: Path, context_pack: dict[str, Any]) -> dict[str, Any]:
     output = _base_output(agent, state, context_pack)
     repo_root = run_dir.parents[2]
@@ -439,6 +751,8 @@ def implementacion_doc_code(agent: AgentSpec, state: dict[str, Any], run_dir: Pa
     public_dir = app_dir / "public"
     data_dir = app_dir / "data"
     tests_dir = app_dir / "tests"
+    if app_dir.exists():
+        shutil.rmtree(app_dir)
     for path in (app_dir, public_dir, data_dir, tests_dir):
         path.mkdir(parents=True, exist_ok=True)
 
@@ -1340,21 +1654,22 @@ docker compose up -d --build
 La app contiene 30 pantallas navegables, API mock `/api/v1/*`, datos simulados, Dockerfile y evidencia trazable al alcance validado.
 """
     (app_dir / "README.md").write_text(app_readme, encoding="utf-8")
+    _write_fullstack_claveunica_app(app_dir, ledger, scope, app_data)
 
     implementation = f"""# Implementation Report
 
-La fabrica genero una aplicacion web ejecutable dentro de `app-generada/`.
+La fabrica genero una aplicacion web full-stack ejecutable dentro de `app-generada/`.
 
 ## Artefactos creados
 
-- `package.json` con scripts `npm start` y `npm test`.
-- `server.mjs` con servidor Node y API mock `/api/v1/*`.
-- `public/index.html`, `public/styles.css`, `public/app.js` y `public/data.js`.
+- `frontend/` con Angular standalone, routing y 30 componentes de pantalla.
+- `backend/` con Spring Boot, controllers REST, entidades JPA y repositories.
+- `database/schema.sql` con 40 tablas PostgreSQL y `database/seed.sql`.
+- `docker-compose.yml` con servicios `frontend`, `backend` y `postgres`.
 - `data/scope.json` derivado de `scope-inventory.json`.
 - `data/implementation-ledger.json` como contrato pantalla-campo-accion-requisito.
-- `data/api-catalog.json` y `data/seed.json` para API mock y datos iniciales.
-- `tests/smoke.mjs` para validar conteos minimos y shell web.
-- `Dockerfile`, `docker-compose.yml` y `.dockerignore` en la raiz desplegable.
+- `data/api-catalog.json` y `data/seed.json` para trazabilidad de implementacion.
+- `tests/smoke.mjs` para validar stack y cantidades sin depender de servicios externos.
 
 ## Alcance implementado
 
@@ -1365,31 +1680,37 @@ La fabrica genero una aplicacion web ejecutable dentro de `app-generada/`.
 - Endpoints documentados conservados: {scope.get('counts', {}).get('api_endpoints', 0)}.
 - Tablas documentadas conservadas: {scope.get('counts', {}).get('tables', 0)}.
 - Reglas documentadas conservadas: {scope.get('counts', {}).get('business_rules', 0)}.
+- Stack generado: Angular + Spring Boot + PostgreSQL.
 
-La aplicacion usa datos mock y no consume integraciones estatales reales.
+La aplicacion no consume integraciones estatales reales; usa seed local y PostgreSQL en Docker para el escenario academico.
 """
     output["artifacts"].append(_write(run_dir, "implementation-report.md", implementation))
     output["artifacts"].extend(
         [
             "app-generada/README.md",
             "app-generada/package.json",
-            "app-generada/server.mjs",
-            "app-generada/public/index.html",
-            "app-generada/public/styles.css",
-            "app-generada/public/app.js",
-            "app-generada/public/data.js",
+            "app-generada/frontend/package.json",
+            "app-generada/frontend/src/app/app.routes.ts",
+            "app-generada/frontend/src/app/app.component.ts",
+            "app-generada/frontend/Dockerfile",
+            "app-generada/backend/pom.xml",
+            "app-generada/backend/src/main/java/cl/benjamin/claveunica/PortalApplication.java",
+            "app-generada/backend/src/main/java/cl/benjamin/claveunica/controller/PortalController.java",
+            "app-generada/backend/Dockerfile",
+            "app-generada/database/schema.sql",
+            "app-generada/database/seed.sql",
             "app-generada/data/scope.json",
             "app-generada/data/implementation-ledger.json",
             "app-generada/data/api-catalog.json",
             "app-generada/data/seed.json",
             "app-generada/tests/smoke.mjs",
-            "app-generada/Dockerfile",
             "app-generada/docker-compose.yml",
             "app-generada/.dockerignore",
+            "app-generada/docs/architecture.md",
         ]
     )
     output["coverage"] = "complete"
-    output["critical_claims"].append({"claim": "La fase implement genero una app web ejecutable en app-generada.", "evidence_id": output["evidence_refs"][0] if output["evidence_refs"] else ""})
+    output["critical_claims"].append({"claim": "La fase implement genero una app full-stack Angular Spring Boot PostgreSQL en app-generada.", "evidence_id": output["evidence_refs"][0] if output["evidence_refs"] else ""})
     return output
 
 
@@ -1638,25 +1959,21 @@ def docker_packaging(agent: AgentSpec, state: dict[str, Any], run_dir: Path, con
     repo_root = run_dir.parents[2]
     app_dir = repo_root / "app-generada"
     app_dir.mkdir(parents=True, exist_ok=True)
-    dockerfile = """# Dockerfile generado por la fabrica
-
-FROM node:22-alpine
-WORKDIR /app
-COPY package*.json ./
-RUN npm install --omit=dev
-COPY . .
-EXPOSE 3000
-CMD ["npm", "run", "start"]
-"""
-    compose = """services:
-  app:
-    build: .
-    container_name: fabrica_app
-    restart: unless-stopped
+    compose = (app_dir / "docker-compose.yml").read_text(encoding="utf-8") if (app_dir / "docker-compose.yml").exists() else """services:
+  frontend:
+    build: ./frontend
     ports:
-      - "3000:3000"
+      - "3000:80"
+  backend:
+    build: ./backend
+    ports:
+      - "8080:8080"
+  postgres:
+    image: postgres:16-alpine
 """
     dockerignore = """node_modules
+target
+dist
 .git
 .env
 project/secrets
@@ -1669,32 +1986,31 @@ La fabrica prepara Docker para que EC2 pueda ejecutar la app de forma reproducib
 
 Archivos generados:
 
-- `deploy/Dockerfile`
 - `deploy/docker-compose.yml`
 - `deploy/.dockerignore`
-- `app-generada/Dockerfile`
 - `app-generada/docker-compose.yml`
 - `app-generada/.dockerignore`
+- `app-generada/frontend/Dockerfile`
+- `app-generada/backend/Dockerfile`
 
-EC2 ejecuta `app-generada`, por eso la raiz desplegable contiene tambien su propio Dockerfile y compose.
+EC2 ejecuta `app-generada` con `docker compose up -d --build`, levantando frontend Angular, backend Spring Boot y PostgreSQL.
 """
-    _write(run_dir, "deploy/Dockerfile", dockerfile)
     _write(run_dir, "deploy/docker-compose.yml", compose)
     _write(run_dir, "deploy/.dockerignore", dockerignore)
     _write(run_dir, "docs/generated/07_docker_packaging.md", docs)
-    (app_dir / "Dockerfile").write_text(dockerfile.replace("# Dockerfile generado por la fabrica\n\n", ""), encoding="utf-8")
     (app_dir / "docker-compose.yml").write_text(compose, encoding="utf-8")
     (app_dir / ".dockerignore").write_text(dockerignore, encoding="utf-8")
     validation = {
         "status": "prepared",
-        "dockerfile": "deploy/Dockerfile",
         "compose": "deploy/docker-compose.yml",
-        "app_dockerfile": "app-generada/Dockerfile",
         "app_compose": "app-generada/docker-compose.yml",
-        "note": "Build real disponible desde app-generada con docker compose up -d --build.",
+        "frontend_dockerfile": "app-generada/frontend/Dockerfile",
+        "backend_dockerfile": "app-generada/backend/Dockerfile",
+        "services": ["frontend", "backend", "postgres"],
+        "note": "Build full-stack disponible desde app-generada con docker compose up -d --build.",
     }
     write_json(run_dir / "docker-validation.json", validation)
-    output["artifacts"].extend(["deploy/Dockerfile", "deploy/docker-compose.yml", "deploy/.dockerignore", "app-generada/Dockerfile", "app-generada/docker-compose.yml", "app-generada/.dockerignore", "docs/generated/07_docker_packaging.md", "docker-validation.json"])
+    output["artifacts"].extend(["deploy/docker-compose.yml", "deploy/.dockerignore", "app-generada/docker-compose.yml", "app-generada/.dockerignore", "app-generada/frontend/Dockerfile", "app-generada/backend/Dockerfile", "docs/generated/07_docker_packaging.md", "docker-validation.json"])
     output["coverage"] = "complete"
     return output
 

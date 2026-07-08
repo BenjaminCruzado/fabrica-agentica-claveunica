@@ -1,7 +1,35 @@
 services:
-  app:
-    build: .
-    container_name: fabrica_app
+  postgres:
+    image: postgres:16-alpine
+    container_name: claveunica_postgres
     restart: unless-stopped
+    environment:
+      POSTGRES_DB: claveunica
+      POSTGRES_USER: claveunica
+      POSTGRES_PASSWORD: claveunica
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/schema.sql:/docker-entrypoint-initdb.d/01_schema.sql:ro
+      - ./database/seed.sql:/docker-entrypoint-initdb.d/02_seed.sql:ro
+  backend:
+    build: ./backend
+    container_name: claveunica_backend
+    restart: unless-stopped
+    depends_on:
+      - postgres
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/claveunica
+      SPRING_DATASOURCE_USERNAME: claveunica
+      SPRING_DATASOURCE_PASSWORD: claveunica
     ports:
-      - "3000:3000"
+      - "8080:8080"
+  frontend:
+    build: ./frontend
+    container_name: claveunica_frontend
+    restart: unless-stopped
+    depends_on:
+      - backend
+    ports:
+      - "3000:80"
+volumes:
+  postgres_data:

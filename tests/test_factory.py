@@ -109,40 +109,47 @@ def test_implementation_agent_generates_executable_app(tmp_path: Path) -> None:
     assert result["status"] == "complete"
     for rel in {
         "package.json",
-        "server.mjs",
-        "public/index.html",
-        "public/app.js",
+        "frontend/package.json",
+        "frontend/angular.json",
+        "frontend/src/app/app.routes.ts",
+        "frontend/src/app/app.component.ts",
+        "frontend/src/app/services/portal-api.service.ts",
+        "frontend/Dockerfile",
+        "backend/pom.xml",
+        "backend/src/main/java/cl/benjamin/claveunica/PortalApplication.java",
+        "backend/src/main/java/cl/benjamin/claveunica/controller/PortalController.java",
+        "backend/Dockerfile",
+        "database/schema.sql",
+        "database/seed.sql",
+        "database/domain-model.json",
         "data/scope.json",
         "data/implementation-ledger.json",
         "data/api-catalog.json",
         "data/seed.json",
-        "data/public-state.json",
-        "data/app-db.seed.json",
-        "data/app-db.json",
-        "data/schema.sql",
         "tests/smoke.mjs",
-        "Dockerfile",
         "docker-compose.yml",
     }:
         assert (app_dir / rel).exists(), rel
     scope = json.loads((app_dir / "data" / "scope.json").read_text(encoding="utf-8"))
     ledger = json.loads((app_dir / "data" / "implementation-ledger.json").read_text(encoding="utf-8"))
-    seed_db = json.loads((app_dir / "data" / "app-db.seed.json").read_text(encoding="utf-8"))
-    schema_sql = (app_dir / "data" / "schema.sql").read_text(encoding="utf-8")
+    domain_model = json.loads((app_dir / "database" / "domain-model.json").read_text(encoding="utf-8"))
+    schema_sql = (app_dir / "database" / "schema.sql").read_text(encoding="utf-8")
+    routes_ts = (app_dir / "frontend" / "src" / "app" / "app.routes.ts").read_text(encoding="utf-8")
+    controller_java = (app_dir / "backend" / "src" / "main" / "java" / "cl" / "benjamin" / "claveunica" / "controller" / "PortalController.java").read_text(encoding="utf-8")
     assert len({screen["summary"] for screen in scope["screens"]}) >= 28
     assert len({screen["layout"] for screen in scope["screens"]}) >= 24
     assert len({screen["fingerprint"] for screen in scope["screens"]}) == 30
     assert len(scope["requirements"]) == 90
     assert scope["apiCatalog"]["endpoint_count"] == 40
     assert ledger["summary"]["implementation_status"] == "implemented_pending_web_validation"
-    assert "CREATE TABLE citizens" in schema_sql
-    assert "CREATE TABLE procedures" in schema_sql
-    assert len(seed_db["procedures"]) >= 3
-    assert len(seed_db["notifications"]) >= 3
-    public_app = (app_dir / "public" / "app.js").read_text(encoding="utf-8")
-    public_data = (app_dir / "public" / "data.js").read_text(encoding="utf-8")
-    assert 'fetch("/api/v1/app-state")' in public_app
-    assert 'fetch("/api/v1/actions"' in public_app
+    assert schema_sql.count("CREATE TABLE") == 40
+    assert domain_model["table_count"] == 40
+    assert routes_ts.count("loadComponent") == 30
+    assert controller_java.count("Mapping(\"") >= 40
+    assert not (app_dir / "server.mjs").exists()
+    assert not (app_dir / "public").exists()
+    public_app = routes_ts + controller_java
+    public_data = (app_dir / "frontend" / "src" / "app" / "app.component.html").read_text(encoding="utf-8")
     for forbidden in {
         "Contrato y trazabilidad",
         "Endpoint mock",

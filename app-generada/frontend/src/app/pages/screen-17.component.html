@@ -1,0 +1,2 @@
+<section class="card"><p>{{screen.moduleName}}</p><h1>{{screen.title}}</h1><p>{{screen.summary}}</p><button *ngFor="let action of screen.actions" (click)="run(action)">{{action}}</button></section>
+<section class="card"><h2>Datos</h2><table><thead><tr><th *ngFor="let field of screen.fields">{{field}}</th></tr></thead><tbody><tr *ngFor="let row of screen.records"><td>{{row[0]}}</td><td>{{row[1]}}</td><td>{{row[2]}}</td></tr></tbody></table></section>

@@ -1,25 +1,25 @@
 # App Generada - Portal Ciudadano ClaveUnica
 
-Aplicacion web funcional generada por la fabrica.
+Aplicacion full-stack generada por la fabrica.
 
-## Ejecutar local
+## Stack
 
-```bash
-npm start
-```
+- Frontend: Angular standalone.
+- Backend: Spring Boot REST + JPA/JdbcTemplate.
+- Base de datos: PostgreSQL con 40 tablas.
+- Orquestacion: Docker Compose.
 
-Abrir `http://localhost:3000`.
-
-## Probar
-
-```bash
-npm test
-```
-
-## Desplegar con Docker
+## Ejecutar
 
 ```bash
 docker compose up -d --build
 ```
 
-La app contiene 30 pantallas navegables, API mock `/api/v1/*`, datos simulados, Dockerfile y evidencia trazable al alcance validado.
+- Frontend: http://localhost:3000
+- Backend: http://localhost:8080/api/v1/health
+
+## Validar estructura
+
+```bash
+npm test
+```
