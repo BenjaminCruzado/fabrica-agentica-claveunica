@@ -1,5 +1,6 @@
 project/secrets/
 project/runs/
+project/workspaces/
 project/cache/
 project/latest-run.json
 project/tool-availability.json

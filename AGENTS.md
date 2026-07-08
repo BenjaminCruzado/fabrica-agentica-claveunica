@@ -80,6 +80,22 @@ Produce documentacion tecnica, decisiones, estado de corrida, errores, trazabili
 
 Origen: Semana 10, adaptado.
 
+## Capa De Gobernanza WEBFORGE Adaptada
+
+No es un agente separado; es una capa automatica del cierre de corrida.
+
+Produce:
+
+- `principle-ledger.json` con P01-P12;
+- `phase-ledger.json` con fase, agente, status, gates y artefactos;
+- `claim-map.md` para claims criticos y evidencia;
+- `project-manifest.json`, `project-sandboxes.json` y `project-memory-policy.json`;
+- `frontend-template-manifest.json`;
+- `secrets-report.json`, `dependency-report.json`, `sbom.json`, `rollback-plan.md`;
+- `PRBundle.md`.
+
+Origen: nuevo, inspirado en la fabrica del profesor.
+
 ## Lo Que No Existe Como Agente
 
 No existe agente de video final. El video lo hace el estudiante. La fabrica solo puede generar evidencia, orden de demostracion o guion de apoyo.

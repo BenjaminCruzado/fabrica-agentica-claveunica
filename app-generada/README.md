@@ -1,7 +1,7 @@
 # App Generada
 
-Esta carpeta es el destino de la aplicacion web producida por la fabrica.
+Aplicacion web generada por la fabrica.
 
-La fabrica debe escribir aqui el codigo desplegable cuando se ejecute la fase de implementacion.
+Estado actual: placeholder operativo de destino. En la fase de construccion real, aqui se escribira el frontend/backend desplegable.
 
-El despliegue EC2 debe ejecutar esta app, no la fabrica.
+Regla: EC2 debe ejecutar esta carpeta, no la carpeta de la fabrica.

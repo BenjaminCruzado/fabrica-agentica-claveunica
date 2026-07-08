@@ -9,6 +9,7 @@ from factory.harness import HarnessRunner, UnknownAgentError
 from factory.memory import MemoryGate
 from factory.orchestrator import OrchestratorGraph
 from factory.policy import PolicyEngine
+from factory.principles import PRINCIPLES, validate_principles
 from factory.registry import agent_registry, skill_registry, tool_registry
 from factory.schemas import WORK_ORDER_SCHEMA, SchemaError, validate_strict
 from factory.utils import sha256_text, stable_json
@@ -160,3 +161,29 @@ def test_orchestrator_bootstrap_run(tmp_path: Path) -> None:
     assert (run_dir / "final-report.json").exists()
     assert (run_dir / "traceability-matrix.md").exists()
     assert (project / "Aprendizaje.md").exists()
+
+
+def test_principles_catalog_is_complete() -> None:
+    assert list(PRINCIPLES) == [f"P{i:02d}" for i in range(1, 13)]
+    assert validate_principles() == []
+
+
+def test_orchestrator_generates_governance_artifacts(tmp_path: Path) -> None:
+    project = tmp_path / "project"
+    run_dir = OrchestratorGraph(project_dir=project).run("Preparar fabrica con evidencia gobernada")
+    for name in {
+        "principle-ledger.json",
+        "phase-ledger.json",
+        "claim-map.md",
+        "project-manifest.json",
+        "project-sandboxes.json",
+        "frontend-template-manifest.json",
+        "secrets-report.json",
+        "dependency-report.json",
+        "sbom.json",
+        "rollback-plan.md",
+        "PRBundle.md",
+    }:
+        assert (run_dir / name).exists(), name
+    assert (project / "workspaces" / "claveunica-licitacion" / "sandboxes" / "DEV" / "sandbox-manifest.json").exists()
+    assert (project / "workspaces" / "claveunica-licitacion" / "sandboxes" / "QA" / "sandbox-manifest.json").exists()

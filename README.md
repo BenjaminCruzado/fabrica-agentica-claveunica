@@ -59,6 +59,13 @@ Si `scope-validation.json` no esta en estado `complete`, la fabrica no deberia p
 - plantillas estrictas para tablas, endpoints y pantallas;
 - reporte ejecutivo por corrida;
 - separacion de evidencia en carpetas `evidence`, `generated-docs`, `reports` y `logs`.
+- constitucion P01-P12 inspirada en la fabrica del profesor;
+- `principle-ledger.json`, `phase-ledger.json` y `claim-map.md`;
+- aislamiento de proyecto con `project/workspaces/<project_id>/versions/v0001`;
+- sandboxes independientes `DEV` y `QA`;
+- plantilla frontend obligatoria en `templates/frontend`;
+- reportes `secrets-report.json`, `dependency-report.json`, `sbom.json`, `rollback-plan.md`, `slo-policy.md`;
+- `PRBundle.md` como paquete final de entrega.
 
 ## Configuracion Local Para Un Paso Completo
 
@@ -68,7 +75,19 @@ Estructura principal:
 factory/       # codigo de la fabrica
 app-generada/  # app desplegable producida por la fabrica
 docs/          # documentacion
-project/       # entrada/contexto y estado local
+project/       # entrada/contexto, runs y workspaces aislados
+templates/     # plantillas obligatorias de generacion
+```
+
+Dentro de `project/`, la fabrica puede crear:
+
+```text
+project/workspaces/claveunica-licitacion/
+  versions/v0001/
+  sandboxes/DEV/
+  sandboxes/QA/
+  memory/
+  learning/
 ```
 
 Crear este archivo solo en tu PC:

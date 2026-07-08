@@ -6,7 +6,20 @@ from typing import Any
 
 from .constants import FACTORY_VERSION, MEMORY_VERSION, POLICY_VERSION, ROOT, TOOL_REGISTRY_VERSION, WORKFLOW_VERSION
 from .context import ContextManager
-from .governance import ensure_run_dirs, validate_factory_docs, validate_traceability, write_assumptions_register, write_executive_summary, write_factory_metrics
+from .governance import (
+    ensure_run_dirs,
+    validate_factory_docs,
+    validate_traceability,
+    write_assumptions_register,
+    write_claim_map,
+    write_executive_summary,
+    write_factory_metrics,
+    write_log_completeness_report,
+    write_phase_ledger,
+    write_principle_ledger,
+    write_project_isolation,
+    write_security_delivery_reports,
+)
 from .harness import HarnessRunner
 from .registry import agent_registry, skill_registry, tool_registry
 from .schemas import WORK_ORDER_SCHEMA, validate_strict
@@ -203,6 +216,11 @@ class OrchestratorGraph:
         return run_dir
 
     def _finalize(self, run_dir: Path, run_id: str, state: dict[str, Any], results: list[dict[str, Any]]) -> None:
+        write_principle_ledger(run_dir)
+        write_phase_ledger(run_dir, results)
+        write_claim_map(run_dir, results)
+        write_project_isolation(self.factory_root, self.project_dir, run_dir)
+        write_security_delivery_reports(self.factory_root, run_dir)
         trace_lines = ["# Traceability Matrix", "", "| requirement | task | test | evidence | gate | status |", "|---|---|---|---|---|---|"]
         rows = [
             ("REQ-001", "TASK-001", "TEST-001", "EV-001", "schema", "complete"),
@@ -237,10 +255,22 @@ class OrchestratorGraph:
             "agents_executed": [item["agent_id"] for item in results],
             "artifacts_dir": str(run_dir),
             "ready_for_first_project": state["status"] == "complete",
+            "governance": {
+                "principles": "principle-ledger.json",
+                "phase_ledger": "phase-ledger.json",
+                "claim_map": "claim-map.md",
+                "project_isolation": "project-isolation-policy.md",
+                "frontend_template": "frontend-template-manifest.json",
+                "security": "security-review.md",
+                "sbom": "sbom.json",
+                "rollback": "rollback-plan.md",
+                "pr_bundle": "PRBundle.md",
+            },
         }
         write_json(run_dir / "final-report.json", final)
         write_executive_summary(run_dir, state, results)
         write_factory_metrics(run_dir, state, results)
+        write_log_completeness_report(run_dir)
         checklist = self._checklist_status(run_dir)
         (run_dir / "CHECKLIST_APLICADO.md").write_text(checklist, encoding="utf-8")
 
@@ -253,6 +283,12 @@ class OrchestratorGraph:
             "scope-inventory.json", "scope-validation.json", "docs-validation.json",
             "traceability-validation.json", "assumptions-register.md", "executive-summary.md",
             "factory-metrics.json", "factory-metrics.md",
+            "principle-ledger.json", "phase-ledger.json", "claim-map.md",
+            "project-manifest.json", "project-sandboxes.json", "project-memory-policy.json",
+            "frontend-template-manifest.json", "project-isolation-policy.md",
+            "secrets-report.json", "dependency-report.json", "sbom.json",
+            "rollback-plan.md", "slo-policy.md", "approval-matrix.md", "PRBundle.md",
+            "log-completeness-report.json",
         ]
         lines = ["# CHECKLIST Aplicado", "", "| item | estado | evidencia |", "|---|---|---|"]
         for name in required:
