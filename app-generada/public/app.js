@@ -1,5 +1,13 @@
-const data = window.APP_DATA;
+let data = window.APP_DATA;
+let db = {};
 const app = document.querySelector("#app");
+
+async function loadState() {
+  const response = await fetch("/api/v1/app-state");
+  if (!response.ok) throw new Error("No se pudo cargar el estado del portal");
+  data = await response.json();
+  db = data.db || {};
+}
 
 function route() {
   return location.hash.replace("#", "") || "/dashboard";
@@ -7,6 +15,28 @@ function route() {
 
 function setRoute(next) {
   location.hash = next;
+}
+
+function rowsFor(screen) {
+  return (db.screenRecords?.[screen.route] || screen.records || []).map((row) => Array.isArray(row) ? row : [row.a, row.b, row.c]);
+}
+
+function recentEvents(screen) {
+  return (db.events || []).filter((event) => event.screen === screen.route || route() === "/dashboard").slice(0, 5);
+}
+
+async function runAction(screenRoute, action) {
+  const response = await fetch("/api/v1/actions", {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify({ screenRoute, action })
+  });
+  if (!response.ok) {
+    alert("No se pudo completar la accion");
+    return;
+  }
+  await loadState();
+  render();
 }
 
 function groupedScreens() {
@@ -59,20 +89,22 @@ function dashboard() {
 }
 
 function recordTable(screen) {
+  const rows = rowsFor(screen);
   return `
     <table>
       <thead><tr><th>${screen.fields[0]}</th><th>${screen.fields[1]}</th><th>${screen.fields[2]}</th></tr></thead>
       <tbody>
-        ${screen.records.map((row) => `<tr><td>${row[0]}</td><td>${row[1]}</td><td>${row[2]}</td></tr>`).join("")}
+        ${rows.map((row) => `<tr><td>${row[0]}</td><td>${row[1]}</td><td>${row[2]}</td></tr>`).join("")}
       </tbody>
     </table>
   `;
 }
 
 function overviewPanel(screen) {
+  const rows = rowsFor(screen);
   return `
     <section class="grid three">
-      ${screen.records.map((row, index) => `
+      ${rows.map((row, index) => `
         <div class="card metric">
           <span class="muted">${row[0]}</span>
           <strong>${index === 0 ? "98%" : index === 1 ? "12" : "3"}</strong>
@@ -85,13 +117,14 @@ function overviewPanel(screen) {
 }
 
 function formPanel(screen) {
+  const rows = rowsFor(screen);
   return `
     <section class="form-grid">
       <div class="card">
         <h2>${screen.actions[0] || "Gestionar"}</h2>
-        ${screen.fields.map((field, index) => `<label>${field}<input value="${screen.records[index % screen.records.length][0]}" /></label>`).join("")}
+        ${screen.fields.map((field, index) => `<label>${field}<input value="${rows[index % rows.length]?.[0] || ""}" /></label>`).join("")}
         <label>Estado<select><option>Recibido</option><option>En revision</option><option>Aprobado</option><option>Observado</option></select></label>
-        <button onclick="alert('Solicitud registrada para ${screen.title}')">${screen.actions[0] || "Guardar"}</button>
+        <button onclick="runAction('${screen.route}', '${screen.actions[0] || "Guardar"}')">${screen.actions[0] || "Guardar"}</button>
       </div>
       <div class="card">
         <h2>Guia de accion</h2>
@@ -112,7 +145,7 @@ function reviewPanel(screen) {
       <div class="toolbar">
         <input placeholder="Buscar en ${screen.moduleName}" />
         <select><option>Todos</option><option>Pendientes</option><option>Criticos</option></select>
-        <button>${screen.primaryAction}</button>
+        <button onclick="runAction('${screen.route}', '${screen.actions[0] || "Actualizar"}')">${screen.actions[0] || "Actualizar"}</button>
       </div>
       ${recordTable(screen)}
     </section>
@@ -133,6 +166,7 @@ function moduleBody(screen) {
 }
 
 function screenView(screen) {
+  const events = recentEvents(screen);
   return `
     <section class="card screen-header" style="--accent:${screen.accent}">
       <span class="muted">${screen.moduleName}</span>
@@ -144,9 +178,9 @@ function screenView(screen) {
     <section class="card">
       <h2>Actividad reciente</h2>
       <table>
-        <thead><tr><th>Elemento</th><th>Detalle</th><th>Estado</th></tr></thead>
+        <thead><tr><th>Evento</th><th>Detalle</th><th>Fecha</th></tr></thead>
         <tbody>
-          ${screen.records.map((row) => `<tr><td>${row[0]}</td><td>${row[1]}</td><td>${row[2]}</td></tr>`).join("")}
+          ${events.length ? events.map((event) => `<tr><td>${event.type}</td><td>${event.message}</td><td>${event.createdAt}</td></tr>`).join("") : `<tr><td>Sin actividad</td><td>Esta vista aun no registra acciones</td><td>-</td></tr>`}
         </tbody>
       </table>
     </section>
@@ -179,5 +213,15 @@ function render() {
   `;
 }
 
+async function init() {
+  app.innerHTML = `<main class="main"><section class="card"><h1>Cargando portal</h1><p>Conectando con la base local y la API.</p></section></main>`;
+  try {
+    await loadState();
+    render();
+  } catch (error) {
+    app.innerHTML = `<main class="main"><section class="card"><h1>No se pudo cargar el portal</h1><p>${error.message}</p></section></main>`;
+  }
+}
+
 window.addEventListener("hashchange", render);
-render();
+init();

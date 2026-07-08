@@ -116,6 +116,10 @@ def test_implementation_agent_generates_executable_app(tmp_path: Path) -> None:
         "data/implementation-ledger.json",
         "data/api-catalog.json",
         "data/seed.json",
+        "data/public-state.json",
+        "data/app-db.seed.json",
+        "data/app-db.json",
+        "data/schema.sql",
         "tests/smoke.mjs",
         "Dockerfile",
         "docker-compose.yml",
@@ -123,14 +127,22 @@ def test_implementation_agent_generates_executable_app(tmp_path: Path) -> None:
         assert (app_dir / rel).exists(), rel
     scope = json.loads((app_dir / "data" / "scope.json").read_text(encoding="utf-8"))
     ledger = json.loads((app_dir / "data" / "implementation-ledger.json").read_text(encoding="utf-8"))
+    seed_db = json.loads((app_dir / "data" / "app-db.seed.json").read_text(encoding="utf-8"))
+    schema_sql = (app_dir / "data" / "schema.sql").read_text(encoding="utf-8")
     assert len({screen["summary"] for screen in scope["screens"]}) >= 28
     assert len({screen["layout"] for screen in scope["screens"]}) >= 24
     assert len({screen["fingerprint"] for screen in scope["screens"]}) == 30
     assert len(scope["requirements"]) == 90
     assert scope["apiCatalog"]["endpoint_count"] == 40
     assert ledger["summary"]["implementation_status"] == "implemented_pending_web_validation"
+    assert "CREATE TABLE citizens" in schema_sql
+    assert "CREATE TABLE procedures" in schema_sql
+    assert len(seed_db["procedures"]) >= 3
+    assert len(seed_db["notifications"]) >= 3
     public_app = (app_dir / "public" / "app.js").read_text(encoding="utf-8")
     public_data = (app_dir / "public" / "data.js").read_text(encoding="utf-8")
+    assert 'fetch("/api/v1/app-state")' in public_app
+    assert 'fetch("/api/v1/actions"' in public_app
     for forbidden in {
         "Contrato y trazabilidad",
         "Endpoint mock",

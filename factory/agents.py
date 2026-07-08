@@ -650,10 +650,74 @@ def implementacion_doc_code(agent: AgentSpec, state: dict[str, Any], run_dir: Pa
         ],
         "mockUser": app_data["mockUser"],
     }
+    domain_db = {
+        "citizens": [
+            {
+                "id": "CIT-001",
+                "name": app_data["mockUser"]["name"],
+                "run": app_data["mockUser"]["run"],
+                "email": app_data["mockUser"]["email"],
+                "phone": "+56 9 0000 0000",
+                "digitalAddress": "Avenida Demo 123, Santiago",
+                "mfa": "activo",
+            }
+        ],
+        "procedures": [
+            {"id": "TRA-001", "name": "Actualizar domicilio digital", "status": "en curso", "owner": "MINSEGPRES", "updatedAt": "2026-07-08"},
+            {"id": "TRA-002", "name": "Solicitar certificado ciudadano", "status": "pendiente", "owner": "Registro Civil", "updatedAt": "2026-07-07"},
+            {"id": "TRA-003", "name": "Autorizar uso de datos", "status": "completado", "owner": "Portal ciudadano", "updatedAt": "2026-07-06"},
+        ],
+        "notifications": [
+            {"id": "NOT-001", "subject": "Vencimiento de tramite", "priority": "alta", "read": False, "procedureId": "TRA-001"},
+            {"id": "NOT-002", "subject": "Actualizacion de domicilio", "priority": "media", "read": False, "procedureId": "TRA-001"},
+            {"id": "NOT-003", "subject": "Autorizacion registrada", "priority": "baja", "read": True, "procedureId": "TRA-003"},
+        ],
+        "sessions": [
+            {"id": "SES-001", "device": "Notebook", "location": "Santiago", "active": True, "trusted": True},
+            {"id": "SES-002", "device": "Movil", "location": "Valparaiso", "active": True, "trusted": False},
+        ],
+        "consents": [
+            {"id": "CON-001", "institution": "Registro Civil", "data": "Identidad", "status": "vigente", "expiresAt": "2026-12-31"},
+            {"id": "CON-002", "institution": "Municipalidad", "data": "Domicilio", "status": "por vencer", "expiresAt": "2026-08-30"},
+        ],
+        "cases": [
+            {"id": "EXP-1001", "status": "en revision", "responsible": "Mesa ciudadana", "procedureId": "TRA-001"},
+            {"id": "EXP-1002", "status": "observado", "responsible": "Analista DDU", "procedureId": "TRA-002"},
+        ],
+        "tickets": [
+            {"id": "TK-1001", "topic": "Clave bloqueada", "status": "abierto", "updatedAt": "hoy"},
+            {"id": "TK-1002", "topic": "Domicilio", "status": "cerrado", "updatedAt": "ayer"},
+        ],
+        "screenRecords": {
+            screen["route"]: [
+                {"a": row[0], "b": row[1], "c": row[2], "source": "seed", "screen": screen["title"]}
+                for row in screen["records"]
+            ]
+            for screen in screens
+        },
+        "events": [
+            {"id": "EVT-001", "type": "login", "screen": "/seguridad/auth-login", "message": "Ingreso ciudadano permitido", "createdAt": "2026-07-08T10:00:00"},
+            {"id": "EVT-002", "type": "notification", "screen": "/notificaciones/inbox", "message": "Notificacion pendiente de lectura", "createdAt": "2026-07-08T10:05:00"},
+        ],
+    }
+    schema_sql = """CREATE TABLE citizens (id TEXT PRIMARY KEY, name TEXT, run TEXT, email TEXT, phone TEXT, digital_address TEXT, mfa TEXT);
+CREATE TABLE procedures (id TEXT PRIMARY KEY, name TEXT, status TEXT, owner TEXT, updated_at TEXT);
+CREATE TABLE notifications (id TEXT PRIMARY KEY, subject TEXT, priority TEXT, read INTEGER, procedure_id TEXT);
+CREATE TABLE sessions (id TEXT PRIMARY KEY, device TEXT, location TEXT, active INTEGER, trusted INTEGER);
+CREATE TABLE consents (id TEXT PRIMARY KEY, institution TEXT, data TEXT, status TEXT, expires_at TEXT);
+CREATE TABLE cases (id TEXT PRIMARY KEY, status TEXT, responsible TEXT, procedure_id TEXT);
+CREATE TABLE tickets (id TEXT PRIMARY KEY, topic TEXT, status TEXT, updated_at TEXT);
+CREATE TABLE screen_records (route TEXT, field_a TEXT, field_b TEXT, field_c TEXT, source TEXT);
+CREATE TABLE events (id TEXT PRIMARY KEY, type TEXT, screen TEXT, message TEXT, created_at TEXT);
+"""
     write_json(data_dir / "scope.json", app_data)
     write_json(data_dir / "implementation-ledger.json", ledger)
     write_json(data_dir / "api-catalog.json", ledger["api_catalog"])
     write_json(data_dir / "seed.json", ledger["seed"])
+    write_json(data_dir / "public-state.json", public_data)
+    write_json(data_dir / "app-db.seed.json", domain_db)
+    write_json(data_dir / "app-db.json", domain_db)
+    (data_dir / "schema.sql").write_text(schema_sql, encoding="utf-8")
 
     package_json = {
         "name": "portal-ciudadano-claveunica",
@@ -671,7 +735,7 @@ def implementacion_doc_code(agent: AgentSpec, state: dict[str, Any], run_dir: Pa
     write_json(app_dir / "package.json", package_json)
 
     server = """import { createServer } from "node:http";
-import { readFile } from "node:fs/promises";
+import { copyFile, readFile, writeFile } from "node:fs/promises";
 import { existsSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -679,7 +743,14 @@ import { fileURLToPath } from "node:url";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const publicDir = path.join(__dirname, "public");
 const appData = JSON.parse(await readFile(path.join(__dirname, "data", "scope.json"), "utf8"));
+const publicState = JSON.parse(await readFile(path.join(__dirname, "data", "public-state.json"), "utf8"));
+const dbPath = path.join(__dirname, "data", "app-db.json");
+const seedPath = path.join(__dirname, "data", "app-db.seed.json");
 const port = Number(process.env.PORT || 3000);
+
+if (!existsSync(dbPath)) {
+  await copyFile(seedPath, dbPath);
+}
 
 const types = {
   ".html": "text/html; charset=utf-8",
@@ -692,6 +763,70 @@ const types = {
 function json(res, status, payload) {
   res.writeHead(status, { "content-type": "application/json; charset=utf-8", "cache-control": "no-store" });
   res.end(JSON.stringify(payload, null, 2));
+}
+
+async function bodyJson(req) {
+  let raw = "";
+  for await (const chunk of req) raw += chunk;
+  if (!raw.trim()) return {};
+  return JSON.parse(raw);
+}
+
+async function loadDb() {
+  return JSON.parse(await readFile(dbPath, "utf8"));
+}
+
+async function saveDb(db) {
+  await writeFile(dbPath, JSON.stringify(db, null, 2) + "\\n", "utf8");
+}
+
+function metrics(db) {
+  return [
+    { label: "Tramites activos", value: db.procedures.filter((item) => item.status !== "completado").length },
+    { label: "Mensajes nuevos", value: db.notifications.filter((item) => !item.read).length },
+    { label: "Sesiones protegidas", value: db.sessions.filter((item) => item.active).length },
+    { label: "Autorizaciones vigentes", value: db.consents.filter((item) => item.status === "vigente").length },
+    { label: "Expedientes en curso", value: db.cases.filter((item) => item.status !== "cerrado").length },
+    { label: "Alertas pendientes", value: db.events.filter((item) => item.type !== "resolved").length }
+  ];
+}
+
+function screenRecords(db, route) {
+  return db.screenRecords[route] || [];
+}
+
+function nextId(prefix, collection) {
+  return `${prefix}-${String(collection.length + 1).padStart(3, "0")}`;
+}
+
+function applyAction(db, payload) {
+  const screenRoute = String(payload.screenRoute || "");
+  const action = String(payload.action || "Actualizar");
+  const event = {
+    id: nextId("EVT", db.events),
+    type: "user_action",
+    screen: screenRoute,
+    message: `${action} ejecutado`,
+    createdAt: new Date().toISOString()
+  };
+
+  if (action.includes("Marcar leida")) {
+    const item = db.notifications.find((notification) => !notification.read);
+    if (item) item.read = true;
+  } else if (action.includes("Cerrar sesion")) {
+    const item = db.sessions.find((session) => session.active && !session.trusted) || db.sessions.find((session) => session.active);
+    if (item) item.active = false;
+  } else if (action.includes("Revocar")) {
+    const item = db.consents.find((consent) => consent.status !== "revocada");
+    if (item) item.status = "revocada";
+  } else if (action.includes("Crear ticket")) {
+    db.tickets.push({ id: nextId("TK", db.tickets), topic: "Solicitud ciudadana", status: "abierto", updatedAt: "ahora" });
+  } else if (action.includes("Iniciar") || action.includes("Continuar") || action.includes("Abrir tramite")) {
+    db.procedures.push({ id: nextId("TRA", db.procedures), name: "Solicitud iniciada desde portal", status: "en curso", owner: "Portal ciudadano", updatedAt: "ahora" });
+  }
+
+  db.events.unshift(event);
+  return event;
 }
 
 async function staticFile(req, res) {
@@ -711,14 +846,24 @@ createServer(async (req, res) => {
     const url = new URL(req.url || "/", "http://localhost");
     if (url.pathname === "/api/v1/health") return json(res, 200, { status: "ok", service: appData.name });
     if (url.pathname === "/api/v1/scope") return json(res, 200, appData);
-    if (url.pathname === "/api/v1/screens") return json(res, 200, { screens: appData.screens });
-    if (url.pathname.startsWith("/api/v1/")) {
-      return json(res, 200, {
-        status: "mock",
-        path: url.pathname,
-        message: "Endpoint de demostracion del portal ciudadano.",
-        user: appData.mockUser.name
-      });
+    if (url.pathname === "/api/v1/app-state") {
+      const db = await loadDb();
+      return json(res, 200, { ...publicState, portalMetrics: metrics(db), db });
+    }
+    if (url.pathname === "/api/v1/screens") return json(res, 200, { screens: publicState.screens });
+    if (url.pathname.startsWith("/api/v1/screens/")) {
+      const db = await loadDb();
+      const route = "/" + decodeURIComponent(url.pathname.replace("/api/v1/screens/", ""));
+      const screen = publicState.screens.find((item) => item.route === route);
+      if (!screen) return json(res, 404, { error: "screen_not_found" });
+      return json(res, 200, { screen, records: screenRecords(db, route), events: db.events.filter((item) => item.screen === route).slice(0, 5) });
+    }
+    if (url.pathname === "/api/v1/actions" && req.method === "POST") {
+      const db = await loadDb();
+      const payload = await bodyJson(req);
+      const event = applyAction(db, payload);
+      await saveDb(db);
+      return json(res, 200, { status: "ok", event, portalMetrics: metrics(db), db });
     }
     return staticFile(req, res);
   } catch (error) {
@@ -815,8 +960,16 @@ input, select, textarea { width: 100%; border: 1px solid var(--line); border-rad
 """
     (public_dir / "styles.css").write_text(styles, encoding="utf-8")
 
-    app_js = """const data = window.APP_DATA;
+    app_js = """let data = window.APP_DATA;
+let db = {};
 const app = document.querySelector("#app");
+
+async function loadState() {
+  const response = await fetch("/api/v1/app-state");
+  if (!response.ok) throw new Error("No se pudo cargar el estado del portal");
+  data = await response.json();
+  db = data.db || {};
+}
 
 function route() {
   return location.hash.replace("#", "") || "/dashboard";
@@ -824,6 +977,28 @@ function route() {
 
 function setRoute(next) {
   location.hash = next;
+}
+
+function rowsFor(screen) {
+  return (db.screenRecords?.[screen.route] || screen.records || []).map((row) => Array.isArray(row) ? row : [row.a, row.b, row.c]);
+}
+
+function recentEvents(screen) {
+  return (db.events || []).filter((event) => event.screen === screen.route || route() === "/dashboard").slice(0, 5);
+}
+
+async function runAction(screenRoute, action) {
+  const response = await fetch("/api/v1/actions", {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify({ screenRoute, action })
+  });
+  if (!response.ok) {
+    alert("No se pudo completar la accion");
+    return;
+  }
+  await loadState();
+  render();
 }
 
 function groupedScreens() {
@@ -876,20 +1051,22 @@ function dashboard() {
 }
 
 function recordTable(screen) {
+  const rows = rowsFor(screen);
   return `
     <table>
       <thead><tr><th>${screen.fields[0]}</th><th>${screen.fields[1]}</th><th>${screen.fields[2]}</th></tr></thead>
       <tbody>
-        ${screen.records.map((row) => `<tr><td>${row[0]}</td><td>${row[1]}</td><td>${row[2]}</td></tr>`).join("")}
+        ${rows.map((row) => `<tr><td>${row[0]}</td><td>${row[1]}</td><td>${row[2]}</td></tr>`).join("")}
       </tbody>
     </table>
   `;
 }
 
 function overviewPanel(screen) {
+  const rows = rowsFor(screen);
   return `
     <section class="grid three">
-      ${screen.records.map((row, index) => `
+      ${rows.map((row, index) => `
         <div class="card metric">
           <span class="muted">${row[0]}</span>
           <strong>${index === 0 ? "98%" : index === 1 ? "12" : "3"}</strong>
@@ -902,13 +1079,14 @@ function overviewPanel(screen) {
 }
 
 function formPanel(screen) {
+  const rows = rowsFor(screen);
   return `
     <section class="form-grid">
       <div class="card">
         <h2>${screen.actions[0] || "Gestionar"}</h2>
-        ${screen.fields.map((field, index) => `<label>${field}<input value="${screen.records[index % screen.records.length][0]}" /></label>`).join("")}
+        ${screen.fields.map((field, index) => `<label>${field}<input value="${rows[index % rows.length]?.[0] || ""}" /></label>`).join("")}
         <label>Estado<select><option>Recibido</option><option>En revision</option><option>Aprobado</option><option>Observado</option></select></label>
-        <button onclick="alert('Solicitud registrada para ${screen.title}')">${screen.actions[0] || "Guardar"}</button>
+        <button onclick="runAction('${screen.route}', '${screen.actions[0] || "Guardar"}')">${screen.actions[0] || "Guardar"}</button>
       </div>
       <div class="card">
         <h2>Guia de accion</h2>
@@ -929,7 +1107,7 @@ function reviewPanel(screen) {
       <div class="toolbar">
         <input placeholder="Buscar en ${screen.moduleName}" />
         <select><option>Todos</option><option>Pendientes</option><option>Criticos</option></select>
-        <button>${screen.primaryAction}</button>
+        <button onclick="runAction('${screen.route}', '${screen.actions[0] || "Actualizar"}')">${screen.actions[0] || "Actualizar"}</button>
       </div>
       ${recordTable(screen)}
     </section>
@@ -950,6 +1128,7 @@ function moduleBody(screen) {
 }
 
 function screenView(screen) {
+  const events = recentEvents(screen);
   return `
     <section class="card screen-header" style="--accent:${screen.accent}">
       <span class="muted">${screen.moduleName}</span>
@@ -961,9 +1140,9 @@ function screenView(screen) {
     <section class="card">
       <h2>Actividad reciente</h2>
       <table>
-        <thead><tr><th>Elemento</th><th>Detalle</th><th>Estado</th></tr></thead>
+        <thead><tr><th>Evento</th><th>Detalle</th><th>Fecha</th></tr></thead>
         <tbody>
-          ${screen.records.map((row) => `<tr><td>${row[0]}</td><td>${row[1]}</td><td>${row[2]}</td></tr>`).join("")}
+          ${events.length ? events.map((event) => `<tr><td>${event.type}</td><td>${event.message}</td><td>${event.createdAt}</td></tr>`).join("") : `<tr><td>Sin actividad</td><td>Esta vista aun no registra acciones</td><td>-</td></tr>`}
         </tbody>
       </table>
     </section>
@@ -996,23 +1175,40 @@ function render() {
   `;
 }
 
+async function init() {
+  app.innerHTML = `<main class="main"><section class="card"><h1>Cargando portal</h1><p>Conectando con la base local y la API.</p></section></main>`;
+  try {
+    await loadState();
+    render();
+  } catch (error) {
+    app.innerHTML = `<main class="main"><section class="card"><h1>No se pudo cargar el portal</h1><p>${error.message}</p></section></main>`;
+  }
+}
+
 window.addEventListener("hashchange", render);
-render();
+init();
 """
     (public_dir / "app.js").write_text(app_js, encoding="utf-8")
 
     smoke = """import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
+import { copyFile, readFile } from "node:fs/promises";
+import { spawn } from "node:child_process";
 
 const scope = JSON.parse(await readFile(new URL("../data/scope.json", import.meta.url), "utf8"));
+const seedDb = JSON.parse(await readFile(new URL("../data/app-db.seed.json", import.meta.url), "utf8"));
 const html = await readFile(new URL("../public/index.html", import.meta.url), "utf8");
 const app = await readFile(new URL("../public/app.js", import.meta.url), "utf8");
 const publicDataJs = await readFile(new URL("../public/data.js", import.meta.url), "utf8");
+const schema = await readFile(new URL("../data/schema.sql", import.meta.url), "utf8");
 
 assert.equal(scope.screens.length, 30, "debe generar 30 pantallas navegables");
 assert.ok(scope.counts.api_endpoints >= 40, "debe conservar 40 endpoints documentados");
 assert.ok(scope.counts.tables >= 40, "debe conservar 40 tablas documentadas");
 assert.match(html, /Portal Ciudadano ClaveUnica/);
+assert.match(schema, /CREATE TABLE citizens/);
+assert.match(schema, /CREATE TABLE procedures/);
+assert.ok(seedDb.procedures.length >= 3, "la app debe tener datos de dominio iniciales");
+assert.ok(seedDb.notifications.length >= 3, "la app debe integrar notificaciones en la base local");
 
 const uniqueSummaries = new Set(scope.screens.map((screen) => screen.summary));
 const uniqueLayouts = new Set(scope.screens.map((screen) => screen.layout));
@@ -1028,6 +1224,8 @@ assert.equal(scope.apiCatalog.endpoint_count, 40, "el catalogo API debe conserva
 assert.match(app, /function overviewPanel/);
 assert.match(app, /function formPanel/);
 assert.match(app, /function reviewPanel/);
+assert.match(app, /fetch\\("\\/api\\/v1\\/app-state"\\)/);
+assert.match(app, /fetch\\("\\/api\\/v1\\/actions"/);
 for (const forbiddenLabel of [
   "Contrato y trazabilidad",
   "Endpoint mock",
@@ -1044,7 +1242,46 @@ for (const forbiddenLabel of [
 }
 assert.doesNotMatch(app, /data\\.screens\\.map\\(navItem\\)/, "no debe renderizar 30 pestañas planas con una sola plantilla");
 
-console.log("smoke ok: app generada desde implementation-ledger, con layouts y requisitos no clonados");
+const port = "3197";
+await copyFile(new URL("../data/app-db.seed.json", import.meta.url), new URL("../data/app-db.json", import.meta.url));
+const child = spawn(process.execPath, ["server.mjs"], {
+  cwd: new URL("..", import.meta.url),
+  env: { ...process.env, PORT: port },
+  stdio: "ignore"
+});
+
+async function waitForServer() {
+  for (let attempt = 0; attempt < 30; attempt += 1) {
+    try {
+      const response = await fetch(`http://127.0.0.1:${port}/api/v1/health`);
+      if (response.ok) return;
+    } catch {}
+    await new Promise((resolve) => setTimeout(resolve, 100));
+  }
+  throw new Error("servidor no inicio para smoke test");
+}
+
+try {
+  await waitForServer();
+  const before = await (await fetch(`http://127.0.0.1:${port}/api/v1/app-state`)).json();
+  const unreadBefore = before.db.notifications.filter((item) => !item.read).length;
+  const eventCountBefore = before.db.events.length;
+  const actionResponse = await fetch(`http://127.0.0.1:${port}/api/v1/actions`, {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify({ screenRoute: "/notificaciones/inbox", action: "Marcar leida" })
+  });
+  assert.equal(actionResponse.ok, true, "la API de acciones debe responder ok");
+  const after = await (await fetch(`http://127.0.0.1:${port}/api/v1/app-state`)).json();
+  const unreadAfter = after.db.notifications.filter((item) => !item.read).length;
+  assert.equal(after.db.events.length, eventCountBefore + 1, "la accion debe persistir evento");
+  assert.equal(unreadAfter, Math.max(0, unreadBefore - 1), "la accion debe cambiar estado de notificaciones");
+} finally {
+  child.kill();
+  await copyFile(new URL("../data/app-db.seed.json", import.meta.url), new URL("../data/app-db.json", import.meta.url));
+}
+
+console.log("smoke ok: app integrada con base local, API, acciones persistentes y evidencia separada");
 """
     (tests_dir / "smoke.mjs").write_text(smoke, encoding="utf-8")
 
