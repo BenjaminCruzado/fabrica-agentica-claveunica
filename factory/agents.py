@@ -1188,6 +1188,7 @@ def deploy_ec2(agent: AgentSpec, state: dict[str, Any], run_dir: Path, context_p
             status = "prepared"
             allow_execute = bool(config.get("allow_execute", False))
             ssh_target = f"{config['user']}@{config['host']}"
+            ssh_binary = str(config.get("ssh_binary") or "ssh")
             remote_dir = config["remote_app_dir"]
             remote_cmd = (
                 "set -e; "
@@ -1200,7 +1201,7 @@ def deploy_ec2(agent: AgentSpec, state: dict[str, Any], run_dir: Path, context_p
                 f"cd {remote_dir}/app-generada; sudo docker compose up -d --build"
             )
             if allow_execute:
-                commands.append(_run_command(["ssh", "-i", str(key_path), "-o", "StrictHostKeyChecking=no", ssh_target, remote_cmd], repo_root, timeout=600))
+                commands.append(_run_command([ssh_binary, "-i", str(key_path), "-o", "StrictHostKeyChecking=no", ssh_target, remote_cmd], repo_root, timeout=600))
                 commands.append(_run_command(["curl", "-I", str(config["public_url"])], repo_root, timeout=60))
                 status = "complete" if commands and commands[-1]["returncode"] == 0 else "needs_user_input"
         else:
