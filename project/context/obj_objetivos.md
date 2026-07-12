@@ -1,11 +1,11 @@
 # Resumen objetivos
 
-IDs detectados para uso compacto de agentes.
+IDs y fragmentos semanticos detectados para uso compacto de agentes.
 
-- OBJ_001
-- OBJ_002
-- OBJ_003
-- OBJ_004
-- OBJ_005
-- OBJ_006
-- OBJ_007
+- OBJ_001: p.2; E02/S01:p.35; E04/S01:p.37; E05/S01:p.39. ## 3. Objetivos específicos - **OBJ_001:** Enriquecer la experiencia de uso mediante una nueva versión del portal con interfaz más intuitiva y segura. Evidencia: E04/S01:p.37. - **OBJ_002:** Centralizar información de las personas para facilitar acceso y gestión de informa
+- OBJ_002: ón del portal con interfaz más intuitiva y segura. Evidencia: E04/S01:p.37. - **OBJ_002:** Centralizar información de las personas para facilitar acceso y gestión de información relacionada con el Estado. Evidencia: E02/S01:p.35; E04/S01:p.37. - **OBJ_003:** Agregar factores de seguridad en flujos críticos como login, 
+- OBJ_003: formación relacionada con el Estado. Evidencia: E02/S01:p.35; E04/S01:p.37. - **OBJ_003:** Agregar factores de seguridad en flujos críticos como login, recuperación y cambio de datos de contacto. Evidencia: E04/S01:p.37; E05/S01:p.39; E08/S06:p.1:HU02-HU03. - **OBJ_004:** Facilitar acceso a notificaciones electrónicas 
+- OBJ_004: de contacto. Evidencia: E04/S01:p.37; E05/S01:p.39; E08/S06:p.1:HU02-HU03. - **OBJ_004:** Facilitar acceso a notificaciones electrónicas de procedimientos administrativos mediante DDU y Plataforma de Notificaciones. Evidencia: E01/S01:p.2; E10-E11; E14/S07:p.1. - **OBJ_005:** Facilitar control y visibilidad de autoriza
+- OBJ_005: Plataforma de Notificaciones. Evidencia: E01/S01:p.2; E10-E11; E14/S07:p.1. - **OBJ_005:** Facilitar control y visibilidad de autorizaciones de uso de datos sensibles entre instituciones públicas. Evidencia: E03/S01:p.36; E12-E13. - **OBJ_006:** Fortalecer ayuda pública y ayuda a instituciones integradas, incluyendo cr
+- OBJ_006: s sensibles entre instituciones públicas. Evidencia: E03/S01:p.36; E12-E13. - **OBJ_006:** Fortalecer ayuda pública y ayuda a instituciones integradas, incluyendo credenciales y estado de integraciones. Evidencia: E03/S01:p.36; E05/S01:p.39. - **OBJ_007:** Definir flujos, prototipos, pruebas y prioridades de implementa
+- OBJ_007: denciales y estado de integraciones. Evidencia: E03/S01:p.36; E05/S01:p.39. - **OBJ_007:** Definir flujos, prototipos, pruebas y prioridades de implementación para las interfaces resultantes. Evidencia: E03/S01:p.36; E04/S01:p.37-p.38; E07/S05. ## 4. Perfiles de usuarios -> actores de casos de uso | actor_id | Perfil |

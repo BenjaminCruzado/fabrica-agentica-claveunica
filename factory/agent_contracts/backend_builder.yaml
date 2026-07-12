@@ -1,0 +1,25 @@
+agent_id: agent.backend_builder
+role: Construir backend Spring Boot con API, DTOs, servicios y persistencia real.
+phase: implement
+max_steps: 12
+allowed_tools:
+  - tool.files.read
+  - tool.files.write_dry_run
+  - tool.repo.ast.parse
+  - tool.test.pytest
+inputs:
+  - domain-blueprint.json
+  - data/api-catalog.json
+  - database/domain-model.json
+outputs:
+  - app-generada/backend/src/main/java
+gates:
+  - api_contract
+  - validation
+  - persistence
+  - backend_tests
+forbidden:
+  - secrets.read
+  - deploy.direct
+  - db.write
+escalation_policy: error si no puede generar endpoints trazables o DTOs validables.

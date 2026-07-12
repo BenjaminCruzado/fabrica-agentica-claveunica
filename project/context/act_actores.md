@@ -1,14 +1,14 @@
 # Resumen actores
 
-IDs detectados para uso compacto de agentes.
+IDs y fragmentos semanticos detectados para uso compacto de agentes.
 
-- ACT_001
-- ACT_002
-- ACT_003
-- ACT_004
-- ACT_005
-- ACT_006
-- ACT_007
-- ACT_008
-- ACT_009
-- ACT_010
+- ACT_001: il | Descripción | Casos de uso asociados | Evidencia | |---|---|---|---|---| | ACT_001 | Usuario público del portal ClaveÚnica | Persona que accede al portal público, con o sin ClaveÚnica activada. | CU_001, CU_003, CU_020 | E08/S06:p.1:HU01-HU03; E05/S01:p.39 | | ACT_002 | Usuario con ClaveÚnica activada | Persona au
+- ACT_002: ca activada. | CU_001, CU_003, CU_020 | E08/S06:p.1:HU01-HU03; E05/S01:p.39 | | ACT_002 | Usuario con ClaveÚnica activada | Persona autenticada que puede administrar datos, sesión, 2FA, notificaciones y autorizaciones. | CU_002-CU_016, CU_017-CU_019 | E08/S06:p.1:HU02-HU04; E09-E13 | | ACT_003 | Usuario sin DDU configu
+- ACT_003: rizaciones. | CU_002-CU_016, CU_017-CU_019 | E08/S06:p.1:HU02-HU04; E09-E13 | | ACT_003 | Usuario sin DDU configurado | Usuario autenticado cuyo Domicilio Digital Único aún no está configurado. | CU_005, CU_006, CU_008, CU_009, CU_012 | E09/S06:p.2:HU05-HU06; E10/S06:p.3:HU08-HU09; E11/S06:p.4:HU12; E14/S07:p.1 | | ACT
+- ACT_004: E09/S06:p.2:HU05-HU06; E10/S06:p.3:HU08-HU09; E11/S06:p.4:HU12; E14/S07:p.1 | | ACT_004 | Usuario con DDU configurado | Usuario autenticado que ya configuró DDU y puede visualizar notificaciones pendientes. | CU_007, CU_009-CU_011 | E09/S06:p.2:HU07; E10/S06:p.3:HU09-HU10; E11/S06:p.4:HU11; E14/S07:p.1 | | ACT_005 | Us
+- ACT_005: 11 | E09/S06:p.2:HU07; E10/S06:p.3:HU09-HU10; E11/S06:p.4:HU11; E14/S07:p.1 | | ACT_005 | Usuario con autorizaciones pendientes | Usuario que tiene solicitudes de autorización de uso de datos sensibles pendientes de decisión. | CU_013, CU_015 | E12/S06:p.5:HU13; E13/S06:p.6:HU15 | | ACT_006 | Usuario con autorizaciones
+- ACT_006: ndientes de decisión. | CU_013, CU_015 | E12/S06:p.5:HU13; E13/S06:p.6:HU15 | | ACT_006 | Usuario con autorizaciones vigentes | Usuario que tiene autorizaciones aprobadas/vigentes susceptibles de revocación. | CU_013, CU_016 | E12/S06:p.5:HU13; E13/S06:p.6-p.7:HU16 | | ACT_007 | Funcionario de institución integrada | U
+- ACT_007: es de revocación. | CU_013, CU_016 | E12/S06:p.5:HU13; E13/S06:p.6-p.7:HU16 | | ACT_007 | Funcionario de institución integrada | Usuario institucional que requiere ayuda, credenciales y estado de integración a ClaveÚnica. | CU_021 | E03/S01:p.36; E05/S01:p.39 | | ACT_008 | Plataforma de Notificaciones/CasillaÚnica | Si
+- ACT_008: y estado de integración a ClaveÚnica. | CU_021 | E03/S01:p.36; E05/S01:p.39 | | ACT_008 | Plataforma de Notificaciones/CasillaÚnica | Sistema externo funcional que configura DDU, mantiene notificaciones y muestra detalle al usuario. | CU_005-CU_012 | E09-E11; E14/S07:p.1 | | ACT_009 | Autorizador Ciudadano | Componente
+- ACT_009: ciones y muestra detalle al usuario. | CU_005-CU_012 | E09-E11; E14/S07:p.1 | | ACT_009 | Autorizador Ciudadano | Componente/servicio funcional asociado a solicitudes, historial, aprobación, rechazo y revocación de uso de datos sensibles. | CU_013-CU_016 | E05/S01:p.39; E12-E13 | | ACT_010 | Portal ClaveÚnica | Sistema
+- ACT_010: vocación de uso de datos sensibles. | CU_013-CU_016 | E05/S01:p.39; E12-E13 | | ACT_010 | Portal ClaveÚnica | Sistema invocador que autentica, consulta estados, muestra secciones y deriva/recibe retorno de plataformas relacionadas. | CU_001-CU_021 | E01-E05; E08-E14 | ## 5. Descripción de casos de uso con ID CU_X - **I

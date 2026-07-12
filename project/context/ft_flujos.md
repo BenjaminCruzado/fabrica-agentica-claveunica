@@ -1,30 +1,30 @@
 # Resumen flujos
 
-IDs detectados para uso compacto de agentes.
+IDs y fragmentos semanticos detectados para uso compacto de agentes.
 
-- FT_001
-- FT_002
-- FT_003
-- FT_004
-- FT_005
-- FT_006
-- FT_007
-- FT_008
-- FT_009
-- FT_010
-- FT_011
-- FT_012
-- FT_013
-- FT_014
-- FT_015
-- FT_016
-- FT_017
-- FT_018
-- FT_019
-- FT_020
-- FT_021
-- FT_022
-- FT_023
-- FT_024
-- FT_025
-- FT_026
+- FT_001: flujos de trabajo o procedimientos con ID FT_X, clasificado por FUN_X - **ID:** FT_001 - **Nombre:** Navegación pública de activación, autenticación, recuperación y ayuda - **Descripción:** El usuario entra al portal público, identifica las opciones principales, consulta ayuda/novedades y selecciona el flujo requerido.
+- FT_002: iones. - **Evidencia:** E08/S06:p.1:HU01; E05/S01:p.39; E04/S01:p.37. - **ID:** FT_002 - **Nombre:** Cambio de teléfono o correo con validación personal - **Descripción:** El usuario solicita cambiar teléfono/correo, el sistema presenta validación personal y sólo permite guardar el cambio tras superarla. - **Relación j
+- FT_003: pera se permite continuar/guardar. - **Evidencia:** E08/S06:p.1:HU02. - **ID:** FT_003 - **Nombre:** Configuración de segundo factor - **Descripción:** Durante configuración de ClaveÚnica o posteriormente, el usuario decide activar o no el segundo factor y el sistema registra la preferencia. - **Relación jerárquica:** 
+- FT_004: estado activo/inactivo persistido. - **Evidencia:** E08/S06:p.1:HU03. - **ID:** FT_004 - **Nombre:** Login con segundo factor activo - **Descripción:** Después de validar la credencial principal, el sistema solicita el segundo factor si el usuario lo activó y completa el acceso sólo si se supera. - **Relación jerárquic
+- FT_005: el flujo informa acción requerida. - **Evidencia:** E08/S06:p.1:HU03. - **ID:** FT_005 - **Nombre:** Definición y aplicación del manejo multisesión - **Descripción:** El proyecto evalúa alternativas de manejo de sesiones concurrentes, define política aprobada y el sistema aplica el control definido. - **Relación jerárq
+- FT_006: n la definición. - **Evidencia:** E08/S06:p.1-p.2:HU04; E05/S01:p.39. - **ID:** FT_006 - **Nombre:** Derivación a configuración DDU después de login - **Descripción:** Tras login, CU consulta estado DDU; si no está configurado muestra modal; si el usuario continúa lo deriva a la pasarela de configuración. - **Relación 
+- FT_007: retorno considerado. - **Evidencia:** E09/S06:p.2:HU05; E14/S07:p.1. - **ID:** FT_007 - **Nombre:** Cancelación de configuración DDU desde modal de login - **Descripción:** El usuario cancela el modal de configuración DDU; el sistema lo retorna/mantiene en CU y muestra alerta de configuración pendiente. - **Relación je
+- FT_008: omicilio Digital indica pendiente. - **Evidencia:** E09/S06:p.2:HU06. - **ID:** FT_008 - **Nombre:** Retorno a CU tras configuración exitosa de DDU - **Descripción:** La pasarela de notificaciones finaliza configuración DDU, muestra modal de retorno y devuelve el control a CU. - **Relación jerárquica:** FUN_015; CU_007
+- FT_009: ortamiento posterior. - **Evidencia:** E09/S06:p.2:HU07; E14/S07:p.1. - **ID:** FT_009 - **Nombre:** Cancelación de activación DDU durante la pasarela - **Descripción:** Durante activación de DDU, el usuario cancela; el sistema confirma cancelar o continuar; si cancela retorna a CU con DDU sin configurar. - **Relación 
+- FT_010: DDU no se configura. - **Evidencia:** E10/S06:p.3:HU08; E14/S07:p.1. - **ID:** FT_010 - **Nombre:** Resolución de sección de notificaciones según estado DDU - **Descripción:** Al abrir la sección de notificaciones, el sistema determina estado DDU y muestra alerta/activación o listado de pendientes. - **Relación jerárqu
+- FT_011: nsistente con estado. - **Evidencia:** E10/S06:p.3:HU09; E14/S07:p.1. - **ID:** FT_011 - **Nombre:** Consulta de listado de notificaciones pendientes - **Descripción:** El usuario con DDU configurado abre la sección y visualiza notificaciones pendientes de lectura con los campos requeridos. - **Relación jerárquica:** F
+- FT_012: o existen registros. - **Evidencia:** E10/S06:p.3:HU10; E04/S01:p.37. - **ID:** FT_012 - **Nombre:** Acceso al detalle de notificación en CasillaÚnica - **Descripción:** El usuario selecciona una notificación en el listado; CU deriva a CasillaÚnica para mostrar el detalle. - **Relación jerárquica:** FUN_022-FUN_023; CU
+- FT_013: icación seleccionada. - **Evidencia:** E11/S06:p.4:HU11; E14/S07:p.1. - **ID:** FT_013 - **Nombre:** Inicio de activación DDU desde sección del portal - **Descripción:** El usuario sin DDU accede a la sección con alerta pendiente y el sistema inicia la pasarela de configuración. - **Relación jerárquica:** FUN_014, FUN_
+- FT_014: sarela realizada. - **Evidencia:** E11/S06:p.4-p.5:HU12; E14/S07:p.1. - **ID:** FT_014 - **Nombre:** Consulta de historial de autorizaciones por estado - **Descripción:** El usuario abre gestión de autorizaciones; el sistema muestra autorizaciones en estados pendientes, aprobadas, rechazadas y revocadas con campos por 
+- FT_015: ndo aplique. - **Evidencia:** E12/S06:p.5:HU13; E13/S06:p.6-p.7:HU16. - **ID:** FT_015 - **Nombre:** Consulta de historial de datos compartidos - **Descripción:** El usuario consulta una tabla de intercambios de datos sensibles autorizados entre instituciones proveedoras y solicitantes. - **Relación jerárquica:** FUN_0
+- FT_016: son datos previamente autorizados. - **Evidencia:** E13/S06:p.6:HU14. - **ID:** FT_016 - **Nombre:** Decisión de autorización pendiente - **Descripción:** El usuario visualiza una solicitud pendiente y elige aprobar o rechazar mediante acciones disponibles. - **Relación jerárquica:** FUN_028-FUN_029; CU_015. - **Actor/
+- FT_017: entes; historial actualiza estado. - **Evidencia:** E13/S06:p.6:HU15. - **ID:** FT_017 - **Nombre:** Revocación de autorización vigente - **Descripción:** El usuario visualiza autorizaciones aprobadas/vigentes y revoca una o varias; el historial refleja la revocación. - **Relación jerárquica:** FUN_030; CU_016. - **Act
+- FT_018: de revocación cuando aplique. - **Evidencia:** E13/S06:p.6-p.7:HU16. - **ID:** FT_018 - **Nombre:** Consulta de secciones privadas personales - **Descripción:** El usuario autenticado accede a configuración, historial de acciones e información personal consolidada por categorías. - **Relación jerárquica:** FUN_031-FUN_
+- FT_019: acíos/alertas diseñados. - **Evidencia:** E05/S01:p.39; E04/S01:p.37. - **ID:** FT_019 - **Nombre:** Consulta de expedientes electrónicos - **Descripción:** El usuario ingresa a la vista de expedientes electrónicos y consulta información disponible o estado vacío. - **Relación jerárquica:** FUN_034; CU_018. - **Actor/d
+- FT_020: o si no hay expedientes. - **Evidencia:** E05/S01:p.39; E04/S01:p.37. - **ID:** FT_020 - **Nombre:** Gestión de poderes y representaciones - **Descripción:** El usuario ingresa a la sección de poderes/representaciones y ejecuta flujos definidos durante el alcance. - **Relación jerárquica:** FUN_035; CU_019. - **Actor/d
+- FT_021: s de borde considerados. - **Evidencia:** E05/S01:p.39; E04/S01:p.37. - **ID:** FT_021 - **Nombre:** Consulta de ayuda pública y contenidos informativos - **Descripción:** El usuario público accede a centros de ayuda, emergencias, preguntas frecuentes, contacto, transparencia, participación ciudadana e información de t
+- FT_022: o de portal público. - **Evidencia:** E05/S01:p.39; E08/S06:p.1:HU01. - **ID:** FT_022 - **Nombre:** Ayuda institucional y gestión de integración - **Descripción:** El funcionario de institución integrada accede a ayuda pública/privada, gestiona credenciales y consulta estado de integración. - **Relación jerárquica:** 
+- FT_023: de integración visible. - **Evidencia:** E03/S01:p.36; E05/S01:p.39. - **ID:** FT_023 - **Nombre:** Investigación de usuarios y necesidades - **Descripción:** Definir metodología de investigación para perfiles de usuario, métricas, necesidades, recopilación y análisis cualitativo/cuantitativo. - **Relación jerárquica:*
+- FT_024: ia cualitativa/cuantitativa analizada. - **Evidencia:** E03/S01:p.36. - **ID:** FT_024 - **Nombre:** Ideación, arquitectura de información y prototipos de baja fidelidad - **Descripción:** Estructurar flujos de usuario, mapas de navegación y prototipos de baja fidelidad basados en investigación. - **Relación jerárquica
+- FT_025: bles; sesiones tempranas consideradas. - **Evidencia:** E03/S01:p.36. - **ID:** FT_025 - **Nombre:** Prototipado de alta fidelidad y testeo con usuarios - **Descripción:** Crear prototipos de alta fidelidad con contenido real o cercano y ejecutar testeos para minimizar fricciones de usabilidad. - **Relación jerárquica:
+- FT_026: joras incorporadas. - **Evidencia:** E03/S01:p.36; E04/S01:p.37-p.38. - **ID:** FT_026 - **Nombre:** Implementación priorizada y pruebas de interfaces definidas - **Descripción:** Implementar prototipos de alta fidelidad priorizados, definiendo historias de usuario asociadas y pruebas de componentes/interfaz. - **Relac

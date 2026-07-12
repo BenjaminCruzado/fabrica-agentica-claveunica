@@ -1,0 +1,1537 @@
+{
+  "actors": [
+    "Ciudadano",
+    "Funcionario",
+    "Usuario",
+    "ciudadano",
+    "funcionario",
+    "servicio",
+    "usuario"
+  ],
+  "coverage_policy": {
+    "frontend_must_hide_internal_generation_artifacts": true,
+    "frontend_must_not_render_requirement_ids": true,
+    "product_generation_policy_required": true,
+    "product_generation_policy_source": "SRC-PRODUCT-GENERATION-BRIEF",
+    "required_chain": "requirement -> screen -> action -> endpoint -> table -> test",
+    "source_of_truth": "SRC-PROFESOR-MD",
+    "traceability_required": true
+  },
+  "domain_terms": {
+    "auditoria": false,
+    "autorizaciones": true,
+    "clave_unica": false,
+    "domicilio_digital": true,
+    "notificaciones": true
+  },
+  "generation_policy": {
+    "database_requirements": [
+      "tablas normalizadas",
+      "claves primarias",
+      "claves foraneas",
+      "estados de negocio",
+      "fechas de creacion y actualizacion",
+      "migraciones versionadas",
+      "datos semilla realistas",
+      "relaciones entre entidades",
+      "prohibido usar datos hardcodeados como fuente principal"
+    ],
+    "docker_requirements": {
+      "optional_services": [
+        "redis",
+        "pgadmin",
+        "migration-service"
+      ],
+      "required_services": [
+        "frontend",
+        "backend",
+        "postgres"
+      ],
+      "single_command_local_run": true
+    },
+    "forbidden_frontend_content": [
+      "validaciones internas de la fabrica",
+      "trazabilidad tecnica",
+      "IDs de rubrica",
+      "checks internos",
+      "logs de agentes",
+      "ejecutado desde Angular",
+      "paneles de debug",
+      "actividad reciente artificial",
+      "texto generico de plantilla",
+      "pantallas que solo listan requerimientos"
+    ],
+    "hash": "sha256:1f06058578656192b0b6da520c732e59f6d0442910fd8cf1afc867fb12ae22db",
+    "real_action_policy": [
+      "cada boton importante debe cambiar estado visible",
+      "cada boton importante debe llamar backend",
+      "cada accion relevante debe leer o escribir PostgreSQL",
+      "cada accion relevante debe mostrar feedback",
+      "cada accion relevante debe manejar errores",
+      "prohibido registrar solo actividad sin efecto de dominio"
+    ],
+    "rejection_criteria": [
+      "parece plantilla generica",
+      "muestra validaciones internas al usuario",
+      "muestra trazabilidad tecnica en la UI",
+      "botones solo registran actividad",
+      "no existe base de datos real",
+      "no hay migraciones",
+      "no hay datos semilla",
+      "backend sin logica de dominio",
+      "frontend usa datos hardcodeados como fuente principal",
+      "docker no levanta",
+      "playwright no prueba flujos reales",
+      "no representa la especificacion oficial"
+    ],
+    "relationship_to_functional_spec": "supplements SRC-PROFESOR-MD without replacing it",
+    "required_backend_behaviors": [
+      "login ciudadano simulado",
+      "dashboard ciudadano",
+      "listar y ver tramites",
+      "iniciar tramite",
+      "actualizar datos personales y de contacto",
+      "configurar domicilio digital",
+      "listar y marcar notificaciones",
+      "listar y revocar autorizaciones",
+      "listar y cerrar sesiones activas",
+      "listar y desactivar dispositivos MFA"
+    ],
+    "required_domain_entities": [
+      "ciudadanos",
+      "perfil ciudadano",
+      "autenticacion simulada ClaveUnica",
+      "recuperacion de acceso",
+      "MFA y dispositivos",
+      "tramites",
+      "solicitudes de tramite",
+      "notificaciones",
+      "mensajes",
+      "domicilio digital unico",
+      "datos personales",
+      "datos de contacto",
+      "autorizaciones de uso de datos",
+      "sesiones activas",
+      "auditoria interna"
+    ],
+    "required_review_agents": [
+      "UX/UI Product Reviewer",
+      "Arquitecto de Software",
+      "QA E2E",
+      "Runtime/Docker",
+      "Product Owner funcional",
+      "Revisor de cumplimiento de requerimientos"
+    ],
+    "required_screens": [
+      "Login ClaveUnica simulado",
+      "Recuperacion de acceso",
+      "Dashboard ciudadano",
+      "Catalogo de tramites",
+      "Detalle de tramite",
+      "Inicio de tramite",
+      "Datos personales",
+      "Datos de contacto",
+      "Domicilio digital",
+      "Notificaciones",
+      "Detalle de notificacion",
+      "Autorizaciones de datos",
+      "Solicitud de autorizacion",
+      "Sesiones activas",
+      "Dispositivos y MFA",
+      "Preferencias de privacidad"
+    ],
+    "required_stack": {
+      "api": "REST JSON",
+      "backend": "Spring Boot",
+      "backend_tests": [
+        "JUnit",
+        "equivalent"
+      ],
+      "containers": "Docker Compose",
+      "database": "PostgreSQL",
+      "e2e": "Playwright",
+      "frontend": "Angular",
+      "migrations": [
+        "Flyway",
+        "Liquibase"
+      ]
+    },
+    "required_tests": [
+      "docker build correcto",
+      "docker compose up correcto",
+      "healthcheck backend",
+      "frontend accesible",
+      "login funcional",
+      "navegacion principal",
+      "botones con efecto real",
+      "persistencia en DB",
+      "endpoints principales",
+      "flujos criticos con Playwright"
+    ],
+    "role": "generation_contract",
+    "source": "C:\\Users\\Benjamin Cruzado\\Desktop\\Ultimo Semestre\\IA\\PROYECTO\\fabrica-final\\project\\input\\product_generation_brief.md",
+    "source_excerpt_chars": 7087,
+    "source_id": "SRC-PRODUCT-GENERATION-BRIEF",
+    "status": "complete"
+  },
+  "ids_by_type": {
+    "ACT": 10,
+    "CH": 19,
+    "CU": 21,
+    "EX": 10,
+    "FT": 26,
+    "FUN": 40,
+    "OBJ": 7,
+    "RN": 27
+  },
+  "quality_bar": "requirements_structured_model",
+  "requirements": [
+    {
+      "criticality": "critical",
+      "id": "CU_001",
+      "snippet": "e\u00danica | Persona que accede al portal p\u00fablico, con o sin Clave\u00danica activada. | CU_001, CU_003, CU_020 | E08/S06:p.1:HU01-HU03; E05/S01:p.39 | | ACT_002 | Usuario con Clave\u00danica activada | Persona autenticada que puede administrar datos, sesi\u00f3n, 2FA, notificaciones y autorizaciones. | CU_002-CU_016, CU_017-CU_019 | E08",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "use_case",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "CU_002",
+      "snippet": "da que puede administrar datos, sesi\u00f3n, 2FA, notificaciones y autorizaciones. | CU_002-CU_016, CU_017-CU_019 | E08/S06:p.1:HU02-HU04; E09-E13 | | ACT_003 | Usuario sin DDU configurado | Usuario autenticado cuyo Domicilio Digital \u00danico a\u00fan no est\u00e1 configurado. | CU_005, CU_006, CU_008, CU_009, CU_012 | E09/S06:p.2:HU05-",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "use_case",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "CU_003",
+      "snippet": "Persona que accede al portal p\u00fablico, con o sin Clave\u00danica activada. | CU_001, CU_003, CU_020 | E08/S06:p.1:HU01-HU03; E05/S01:p.39 | | ACT_002 | Usuario con Clave\u00danica activada | Persona autenticada que puede administrar datos, sesi\u00f3n, 2FA, notificaciones y autorizaciones. | CU_002-CU_016, CU_017-CU_019 | E08/S06:p.1:",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "use_case",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "CU_004",
+      "snippet": "xige por esta regla. - **Evidencia:** E08/S06:p.1:HU03; E05/S01:p.39. - **ID:** CU_004 - **Nombre:** Gestionar sesi\u00f3n segura y multisesi\u00f3n - **Descripci\u00f3n:** Evaluar y definir el manejo de multisesiones para reducir el riesgo de secuestro o mal uso de sesi\u00f3n cuando existan dispositivos autenticados con la misma Clave\u00dan",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "use_case",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "CU_005",
+      "snippet": "o | Usuario autenticado cuyo Domicilio Digital \u00danico a\u00fan no est\u00e1 configurado. | CU_005, CU_006, CU_008, CU_009, CU_012 | E09/S06:p.2:HU05-HU06; E10/S06:p.3:HU08-HU09; E11/S06:p.4:HU12; E14/S07:p.1 | | ACT_004 | Usuario con DDU configurado | Usuario autenticado que ya configur\u00f3 DDU y puede visualizar notificaciones pend",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "use_case",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "CU_006",
+      "snippet": "rio autenticado cuyo Domicilio Digital \u00danico a\u00fan no est\u00e1 configurado. | CU_005, CU_006, CU_008, CU_009, CU_012 | E09/S06:p.2:HU05-HU06; E10/S06:p.3:HU08-HU09; E11/S06:p.4:HU12; E14/S07:p.1 | | ACT_004 | Usuario con DDU configurado | Usuario autenticado que ya configur\u00f3 DDU y puede visualizar notificaciones pendientes. ",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "use_case",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "CU_007",
+      "snippet": "utenticado que ya configur\u00f3 DDU y puede visualizar notificaciones pendientes. | CU_007, CU_009-CU_011 | E09/S06:p.2:HU07; E10/S06:p.3:HU09-HU10; E11/S06:p.4:HU11; E14/S07:p.1 | | ACT_005 | Usuario con autorizaciones pendientes | Usuario que tiene solicitudes de autorizaci\u00f3n de uso de datos sensibles pendientes de decis",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "use_case",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "CU_008",
+      "snippet": "nticado cuyo Domicilio Digital \u00danico a\u00fan no est\u00e1 configurado. | CU_005, CU_006, CU_008, CU_009, CU_012 | E09/S06:p.2:HU05-HU06; E10/S06:p.3:HU08-HU09; E11/S06:p.4:HU12; E14/S07:p.1 | | ACT_004 | Usuario con DDU configurado | Usuario autenticado que ya configur\u00f3 DDU y puede visualizar notificaciones pendientes. | CU_007",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "use_case",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "CU_009",
+      "snippet": "cuyo Domicilio Digital \u00danico a\u00fan no est\u00e1 configurado. | CU_005, CU_006, CU_008, CU_009, CU_012 | E09/S06:p.2:HU05-HU06; E10/S06:p.3:HU08-HU09; E11/S06:p.4:HU12; E14/S07:p.1 | | ACT_004 | Usuario con DDU configurado | Usuario autenticado que ya configur\u00f3 DDU y puede visualizar notificaciones pendientes. | CU_007, CU_009",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "use_case",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "CU_010",
+      "snippet": "endientes de lectura. - **Evidencia:** E10/S06:p.3:HU09; E14/S07:p.1. - **ID:** CU_010 - **Nombre:** Visualizar listado de notificaciones pendientes - **Descripci\u00f3n:** Mostrar al usuario con DDU configurado el listado de notificaciones pendientes de lectura dentro del portal Clave\u00danica. - **Relaci\u00f3n jer\u00e1rquica:** Ra\u00edz;",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "use_case",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "CU_011",
+      "snippet": "ya configur\u00f3 DDU y puede visualizar notificaciones pendientes. | CU_007, CU_009-CU_011 | E09/S06:p.2:HU07; E10/S06:p.3:HU09-HU10; E11/S06:p.4:HU11; E14/S07:p.1 | | ACT_005 | Usuario con autorizaciones pendientes | Usuario que tiene solicitudes de autorizaci\u00f3n de uso de datos sensibles pendientes de decisi\u00f3n. | CU_013, ",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "use_case",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "CU_012",
+      "snippet": "icilio Digital \u00danico a\u00fan no est\u00e1 configurado. | CU_005, CU_006, CU_008, CU_009, CU_012 | E09/S06:p.2:HU05-HU06; E10/S06:p.3:HU08-HU09; E11/S06:p.4:HU12; E14/S07:p.1 | | ACT_004 | Usuario con DDU configurado | Usuario autenticado que ya configur\u00f3 DDU y puede visualizar notificaciones pendientes. | CU_007, CU_009-CU_011 ",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "use_case",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "CU_013",
+      "snippet": "solicitudes de autorizaci\u00f3n de uso de datos sensibles pendientes de decisi\u00f3n. | CU_013, CU_015 | E12/S06:p.5:HU13; E13/S06:p.6:HU15 | | ACT_006 | Usuario con autorizaciones vigentes | Usuario que tiene autorizaciones aprobadas/vigentes susceptibles de revocaci\u00f3n. | CU_013, CU_016 | E12/S06:p.5:HU13; E13/S06:p.6-p.7:HU1",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "use_case",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "CU_014",
+      "snippet": "al en un solo lugar. - **Evidencia:** E12/S06:p.5:HU13; E05/S01:p.39. - **ID:** CU_014 - **Nombre:** Visualizar historial de datos sensibles compartidos - **Descripci\u00f3n:** Mostrar una tabla con el historial de datos sensibles compartidos entre instituciones proveedoras y solicitantes, verificando que correspondan a dat",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "use_case",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "CU_015",
+      "snippet": "des de autorizaci\u00f3n de uso de datos sensibles pendientes de decisi\u00f3n. | CU_013, CU_015 | E12/S06:p.5:HU13; E13/S06:p.6:HU15 | | ACT_006 | Usuario con autorizaciones vigentes | Usuario que tiene autorizaciones aprobadas/vigentes susceptibles de revocaci\u00f3n. | CU_013, CU_016 | E12/S06:p.5:HU13; E13/S06:p.6-p.7:HU16 | | AC",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "use_case",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "CU_016",
+      "snippet": "puede administrar datos, sesi\u00f3n, 2FA, notificaciones y autorizaciones. | CU_002-CU_016, CU_017-CU_019 | E08/S06:p.1:HU02-HU04; E09-E13 | | ACT_003 | Usuario sin DDU configurado | Usuario autenticado cuyo Domicilio Digital \u00danico a\u00fan no est\u00e1 configurado. | CU_005, CU_006, CU_008, CU_009, CU_012 | E09/S06:p.2:HU05-HU06; E",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "use_case",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "CU_017",
+      "snippet": "ministrar datos, sesi\u00f3n, 2FA, notificaciones y autorizaciones. | CU_002-CU_016, CU_017-CU_019 | E08/S06:p.1:HU02-HU04; E09-E13 | | ACT_003 | Usuario sin DDU configurado | Usuario autenticado cuyo Domicilio Digital \u00danico a\u00fan no est\u00e1 configurado. | CU_005, CU_006, CU_008, CU_009, CU_012 | E09/S06:p.2:HU05-HU06; E10/S06:p",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "use_case",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "CU_018",
+      "snippet": "efinidas por el alcance. - **Evidencia:** E05/S01:p.39; E02/S01:p.35. - **ID:** CU_018 - **Nombre:** Consultar vista de expedientes electr\u00f3nicos - **Descripci\u00f3n:** Soportar acceso a una vista de expedientes electr\u00f3nicos de la persona dentro de las secciones privadas del portal. - **Relaci\u00f3n jer\u00e1rquica:** Ra\u00edz; agrupa F",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "use_case",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "CU_019",
+      "snippet": "ar datos, sesi\u00f3n, 2FA, notificaciones y autorizaciones. | CU_002-CU_016, CU_017-CU_019 | E08/S06:p.1:HU02-HU04; E09-E13 | | ACT_003 | Usuario sin DDU configurado | Usuario autenticado cuyo Domicilio Digital \u00danico a\u00fan no est\u00e1 configurado. | CU_005, CU_006, CU_008, CU_009, CU_012 | E09/S06:p.2:HU05-HU06; E10/S06:p.3:HU08",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "use_case",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "CU_020",
+      "snippet": "que accede al portal p\u00fablico, con o sin Clave\u00danica activada. | CU_001, CU_003, CU_020 | E08/S06:p.1:HU01-HU03; E05/S01:p.39 | | ACT_002 | Usuario con Clave\u00danica activada | Persona autenticada que puede administrar datos, sesi\u00f3n, 2FA, notificaciones y autorizaciones. | CU_002-CU_016, CU_017-CU_019 | E08/S06:p.1:HU02-HU0",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "use_case",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "CU_021",
+      "snippet": "cional que requiere ayuda, credenciales y estado de integraci\u00f3n a Clave\u00danica. | CU_021 | E03/S01:p.36; E05/S01:p.39 | | ACT_008 | Plataforma de Notificaciones/Casilla\u00danica | Sistema externo funcional que configura DDU, mantiene notificaciones y muestra detalle al usuario. | CU_005-CU_012 | E09-E11; E14/S07:p.1 | | ACT_",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "use_case",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "FUN_001",
+      "snippet": ", m\u00e1s novedades e informaci\u00f3n de ayuda. - **Relaci\u00f3n jer\u00e1rquica:** Ra\u00edz; agrupa FUN_001-FUN_003. - **Actor/disparador:** ACT_001; disparador: ingreso al portal p\u00fablico. - **Precondiciones:** El portal p\u00fablico est\u00e1 disponible para consulta. - **Resultado esperado:** El usuario visualiza accesos y contenidos p\u00fablicos de ",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "feature",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "FUN_002",
+      "snippet": "conducen al flujo correspondiente. - **Evidencia:** E08/S06:p.1:HU01. - **ID:** FUN_002 - **Nombre:** Publicar novedades e informaci\u00f3n de ayuda - **Descripci\u00f3n:** Disponer contenidos de novedades e informaci\u00f3n de ayuda de manera oportuna en el portal p\u00fablico. - **Relaci\u00f3n jer\u00e1rquica:** CU_001, CU_020. - **Actor/dispara",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "feature",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "FUN_003",
+      "snippet": "vedades e informaci\u00f3n de ayuda. - **Relaci\u00f3n jer\u00e1rquica:** Ra\u00edz; agrupa FUN_001-FUN_003. - **Actor/disparador:** ACT_001; disparador: ingreso al portal p\u00fablico. - **Precondiciones:** El portal p\u00fablico est\u00e1 disponible para consulta. - **Resultado esperado:** El usuario visualiza accesos y contenidos p\u00fablicos de forma cl",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "feature",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "FUN_004",
+      "snippet": "una o m\u00e1s preguntas de \u00e1mbito personal. - **Relaci\u00f3n jer\u00e1rquica:** Ra\u00edz; agrupa FUN_004-FUN_005. - **Actor/disparador:** ACT_002; disparador: usuario intenta cambiar tel\u00e9fono o correo electr\u00f3nico en datos personales. - **Precondiciones:** Usuario autenticado con Clave\u00danica activada; secci\u00f3n de datos personales disponib",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "feature",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "FUN_005",
+      "snippet": "s preguntas de \u00e1mbito personal. - **Relaci\u00f3n jer\u00e1rquica:** Ra\u00edz; agrupa FUN_004-FUN_005. - **Actor/disparador:** ACT_002; disparador: usuario intenta cambiar tel\u00e9fono o correo electr\u00f3nico en datos personales. - **Precondiciones:** Usuario autenticado con Clave\u00danica activada; secci\u00f3n de datos personales disponible. - **",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "feature",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "FUN_006",
+      "snippet": "si\u00f3n y exigirlo cada vez que lo active. - **Relaci\u00f3n jer\u00e1rquica:** Ra\u00edz; agrupa FUN_006-FUN_007. - **Actor/disparador:** ACT_001, ACT_002; disparador: configuraci\u00f3n inicial de Clave\u00danica o administraci\u00f3n posterior de 2FA. - **Precondiciones:** Usuario en flujo de configuraci\u00f3n o administraci\u00f3n de Clave\u00danica; mecanismo ",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "feature",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "FUN_007",
+      "snippet": "xigirlo cada vez que lo active. - **Relaci\u00f3n jer\u00e1rquica:** Ra\u00edz; agrupa FUN_006-FUN_007. - **Actor/disparador:** ACT_001, ACT_002; disparador: configuraci\u00f3n inicial de Clave\u00danica o administraci\u00f3n posterior de 2FA. - **Precondiciones:** Usuario en flujo de configuraci\u00f3n o administraci\u00f3n de Clave\u00danica; mecanismo de 2FA d",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "feature",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "FUN_008",
+      "snippet": "s autenticados con la misma Clave\u00danica. - **Relaci\u00f3n jer\u00e1rquica:** Ra\u00edz; agrupa FUN_008-FUN_009. - **Actor/disparador:** ACT_002; disparador: usuario mantiene o inicia sesiones en uno o m\u00e1s dispositivos. - **Precondiciones:** Usuario autenticado con Clave\u00danica activada; existe pol\u00edtica de multisesi\u00f3n definida durante e",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "feature",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "FUN_009",
+      "snippet": "icados con la misma Clave\u00danica. - **Relaci\u00f3n jer\u00e1rquica:** Ra\u00edz; agrupa FUN_008-FUN_009. - **Actor/disparador:** ACT_002; disparador: usuario mantiene o inicia sesiones en uno o m\u00e1s dispositivos. - **Precondiciones:** Usuario autenticado con Clave\u00danica activada; existe pol\u00edtica de multisesi\u00f3n definida durante el proyec",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "feature",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "FUN_010",
+      "snippet": "caciones, previa confirmaci\u00f3n en modal. - **Relaci\u00f3n jer\u00e1rquica:** Ra\u00edz; agrupa FUN_010-FUN_012. - **Actor/disparador:** ACT_003, ACT_008; disparador: login exitoso en Clave\u00danica sin DDU configurado. - **Precondiciones:** Usuario autenticado; el sistema puede determinar estado de DDU; DDU no configurado. - **Resultado ",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "feature",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "FUN_011",
+      "snippet": "**Evidencia:** E09/S06:p.2:HU05-HU06; E10/S06:p.3:HU09; E14/S07:p.1. - **ID:** FUN_011 - **Nombre:** Desplegar modal de confirmaci\u00f3n para configuraci\u00f3n DDU - **Descripci\u00f3n:** Mostrar un modal antes de ingresar a la pasarela de configuraci\u00f3n, permitiendo continuar o cancelar. - **Relaci\u00f3n jer\u00e1rquica:** CU_005, CU_006. -",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "feature",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "FUN_012",
+      "snippet": ", previa confirmaci\u00f3n en modal. - **Relaci\u00f3n jer\u00e1rquica:** Ra\u00edz; agrupa FUN_010-FUN_012. - **Actor/disparador:** ACT_003, ACT_008; disparador: login exitoso en Clave\u00danica sin DDU configurado. - **Precondiciones:** Usuario autenticado; el sistema puede determinar estado de DDU; DDU no configurado. - **Resultado esperado",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "feature",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "FUN_013",
+      "snippet": "de Clave\u00danica con alerta de pendiente. - **Relaci\u00f3n jer\u00e1rquica:** Ra\u00edz; agrupa FUN_013-FUN_014. - **Actor/disparador:** ACT_003; disparador: usuario elige cancelar en modal de configuraci\u00f3n DDU posterior al login. - **Precondiciones:** Usuario autenticado; DDU no configurado; modal de confirmaci\u00f3n desplegado. - **Resul",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "feature",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "FUN_014",
+      "snippet": "e\u00danica con alerta de pendiente. - **Relaci\u00f3n jer\u00e1rquica:** Ra\u00edz; agrupa FUN_013-FUN_014. - **Actor/disparador:** ACT_003; disparador: usuario elige cancelar en modal de configuraci\u00f3n DDU posterior al login. - **Precondiciones:** Usuario autenticado; DDU no configurado; modal de confirmaci\u00f3n desplegado. - **Resultado es",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "feature",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "FUN_015",
+      "snippet": "etorne al portal inicial de Clave\u00danica. - **Relaci\u00f3n jer\u00e1rquica:** Ra\u00edz; agrupa FUN_015. - **Actor/disparador:** ACT_004, ACT_008; disparador: finalizaci\u00f3n de configuraci\u00f3n de DDU en pasarela. - **Precondiciones:** Usuario derivado desde CU complet\u00f3 activaci\u00f3n/configuraci\u00f3n de DDU. - **Resultado esperado:** La platafor",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "feature",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "FUN_016",
+      "snippet": "tornar a Clave\u00danica sin configurar DDU. - **Relaci\u00f3n jer\u00e1rquica:** Ra\u00edz; agrupa FUN_016-FUN_018. - **Actor/disparador:** ACT_003, ACT_008; disparador: usuario cancela durante la activaci\u00f3n de DDU. - **Precondiciones:** Usuario se encuentra en proceso de activaci\u00f3n/configuraci\u00f3n de DDU. - **Resultado esperado:** El usua",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "feature",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "FUN_017",
+      "snippet": "e ofrece continuar con el proceso. - **Evidencia:** E10/S06:p.3:HU08. - **ID:** FUN_017 - **Nombre:** Confirmar cancelaci\u00f3n de activaci\u00f3n DDU - **Descripci\u00f3n:** Desplegar modal para confirmar cancelaci\u00f3n o continuar con la configuraci\u00f3n DDU. - **Relaci\u00f3n jer\u00e1rquica:** CU_008. - **Actor/disparador:** ACT_003; disparador",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "feature",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "FUN_018",
+      "snippet": "Clave\u00danica sin configurar DDU. - **Relaci\u00f3n jer\u00e1rquica:** Ra\u00edz; agrupa FUN_016-FUN_018. - **Actor/disparador:** ACT_003, ACT_008; disparador: usuario cancela durante la activaci\u00f3n de DDU. - **Precondiciones:** Usuario se encuentra en proceso de activaci\u00f3n/configuraci\u00f3n de DDU. - **Resultado esperado:** El usuario retor",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "feature",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "FUN_019",
+      "snippet": "iento diferenciado seg\u00fan estado de DDU. - **Relaci\u00f3n jer\u00e1rquica:** Ra\u00edz; agrupa FUN_019-FUN_020. - **Actor/disparador:** ACT_003, ACT_004; disparador: usuario ingresa al portal privado/secci\u00f3n de notificaciones. - **Precondiciones:** Usuario autenticado; el sistema puede determinar estado de DDU. - **Resultado esperado",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "feature",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "FUN_020",
+      "snippet": "ferenciado seg\u00fan estado de DDU. - **Relaci\u00f3n jer\u00e1rquica:** Ra\u00edz; agrupa FUN_019-FUN_020. - **Actor/disparador:** ACT_003, ACT_004; disparador: usuario ingresa al portal privado/secci\u00f3n de notificaciones. - **Precondiciones:** Usuario autenticado; el sistema puede determinar estado de DDU. - **Resultado esperado:** El u",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "feature",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "FUN_021",
+      "snippet": "e lectura dentro del portal Clave\u00danica. - **Relaci\u00f3n jer\u00e1rquica:** Ra\u00edz; agrupa FUN_021. - **Actor/disparador:** ACT_004; disparador: usuario accede a secci\u00f3n de notificaciones con DDU configurado. - **Precondiciones:** Usuario autenticado; DDU configurado; existen o pueden consultarse notificaciones pendientes. - **Re",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "feature",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "FUN_022",
+      "snippet": "ado a Casilla\u00danica para ver el detalle. - **Relaci\u00f3n jer\u00e1rquica:** Ra\u00edz; agrupa FUN_022-FUN_023. - **Actor/disparador:** ACT_004, ACT_008; disparador: usuario selecciona una notificaci\u00f3n en el listado. - **Precondiciones:** Usuario autenticado; DDU configurado; listado de notificaciones pendientes visible. - **Resultad",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "feature",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "FUN_023",
+      "snippet": "silla\u00danica para ver el detalle. - **Relaci\u00f3n jer\u00e1rquica:** Ra\u00edz; agrupa FUN_022-FUN_023. - **Actor/disparador:** ACT_004, ACT_008; disparador: usuario selecciona una notificaci\u00f3n en el listado. - **Precondiciones:** Usuario autenticado; DDU configurado; listado de notificaciones pendientes visible. - **Resultado espera",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "feature",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "FUN_024",
+      "snippet": "stra alerta de configuraci\u00f3n pendiente. - **Relaci\u00f3n jer\u00e1rquica:** Ra\u00edz; agrupa FUN_024. - **Actor/disparador:** ACT_003, ACT_008; disparador: usuario accede a la secci\u00f3n de notificaciones/DDU pendiente desde el portal. - **Precondiciones:** Usuario autenticado; DDU no configurado; secci\u00f3n con alerta pendiente disponib",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "feature",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "FUN_025",
+      "snippet": "as, rechazadas, pendientes y revocadas. - **Relaci\u00f3n jer\u00e1rquica:** Ra\u00edz; agrupa FUN_025-FUN_026. - **Actor/disparador:** ACT_002, ACT_005, ACT_006, ACT_009; disparador: usuario abre secci\u00f3n de gesti\u00f3n e historial de autorizaciones. - **Precondiciones:** Usuario autenticado; existen o pueden consultarse solicitudes de a",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "feature",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "FUN_026",
+      "snippet": "azadas, pendientes y revocadas. - **Relaci\u00f3n jer\u00e1rquica:** Ra\u00edz; agrupa FUN_025-FUN_026. - **Actor/disparador:** ACT_002, ACT_005, ACT_006, ACT_009; disparador: usuario abre secci\u00f3n de gesti\u00f3n e historial de autorizaciones. - **Precondiciones:** Usuario autenticado; existen o pueden consultarse solicitudes de autorizac",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "feature",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "FUN_027",
+      "snippet": "pondan a datos previamente autorizados. - **Relaci\u00f3n jer\u00e1rquica:** Ra\u00edz; agrupa FUN_027. - **Actor/disparador:** ACT_002, ACT_009; disparador: usuario consulta historial de datos compartidos. - **Precondiciones:** Usuario autenticado; existen o pueden consultarse registros de datos compartidos. - **Resultado esperado:*",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "feature",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "FUN_028",
+      "snippet": "o desde el historial de autorizaciones. - **Relaci\u00f3n jer\u00e1rquica:** Ra\u00edz; agrupa FUN_028-FUN_029. - **Actor/disparador:** ACT_005, ACT_009; disparador: usuario revisa una autorizaci\u00f3n pendiente. - **Precondiciones:** Usuario autenticado; existe una autorizaci\u00f3n pendiente de aprobaci\u00f3n; la solicitud muestra los datos req",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "feature",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "FUN_029",
+      "snippet": "el historial de autorizaciones. - **Relaci\u00f3n jer\u00e1rquica:** Ra\u00edz; agrupa FUN_028-FUN_029. - **Actor/disparador:** ACT_005, ACT_009; disparador: usuario revisa una autorizaci\u00f3n pendiente. - **Precondiciones:** Usuario autenticado; existe una autorizaci\u00f3n pendiente de aprobaci\u00f3n; la solicitud muestra los datos requeridos.",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "feature",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "FUN_030",
+      "snippet": "y revoque una o varias autorizaciones. - **Relaci\u00f3n jer\u00e1rquica:** Ra\u00edz; agrupa FUN_030. - **Actor/disparador:** ACT_006, ACT_009; disparador: usuario decide revocar autorizaci\u00f3n vigente/aprobada. - **Precondiciones:** Usuario autenticado; existe una autorizaci\u00f3n aprobada/vigente susceptible de revocaci\u00f3n. - **Resultado",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "feature",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "FUN_031",
+      "snippet": "formaci\u00f3n personal en poder del Estado. - **Relaci\u00f3n jer\u00e1rquica:** Ra\u00edz; agrupa FUN_031-FUN_033. - **Actor/disparador:** ACT_002; disparador: usuario ingresa a portal privado o secci\u00f3n personal. - **Precondiciones:** Usuario autenticado; secciones privadas habilitadas seg\u00fan alcance definido. - **Resultado esperado:** E",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "feature",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "FUN_032",
+      "snippet": "idaciones definidas. - **Evidencia:** E05/S01:p.39; E08/S06:p.1:HU03. - **ID:** FUN_032 - **Nombre:** Mostrar historial de acciones - **Descripci\u00f3n:** Soportar una secci\u00f3n para que el usuario consulte historial de acciones asociado a Clave\u00danica. - **Relaci\u00f3n jer\u00e1rquica:** CU_017. - **Actor/disparador:** ACT_002; dispar",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "feature",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "FUN_033",
+      "snippet": "n personal en poder del Estado. - **Relaci\u00f3n jer\u00e1rquica:** Ra\u00edz; agrupa FUN_031-FUN_033. - **Actor/disparador:** ACT_002; disparador: usuario ingresa a portal privado o secci\u00f3n personal. - **Precondiciones:** Usuario autenticado; secciones privadas habilitadas seg\u00fan alcance definido. - **Resultado esperado:** El usuari",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "feature",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "FUN_034",
+      "snippet": "o de las secciones privadas del portal. - **Relaci\u00f3n jer\u00e1rquica:** Ra\u00edz; agrupa FUN_034. - **Actor/disparador:** ACT_002; disparador: usuario accede a secci\u00f3n de expedientes electr\u00f3nicos. - **Precondiciones:** Usuario autenticado; existen expedientes o una fuente definida para su visualizaci\u00f3n. - **Resultado esperado:*",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "feature",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "FUN_035",
+      "snippet": "deres y representaciones de la persona. - **Relaci\u00f3n jer\u00e1rquica:** Ra\u00edz; agrupa FUN_035. - **Actor/disparador:** ACT_002; disparador: usuario ingresa a secci\u00f3n de poderes y representaciones. - **Precondiciones:** Usuario autenticado; alcance funcional de poderes y representaciones definido durante el proyecto. - **Resu",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "feature",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "FUN_036",
+      "snippet": "\u00f3n ciudadana e informaci\u00f3n de tr\u00e1mites. - **Relaci\u00f3n jer\u00e1rquica:** Ra\u00edz; agrupa FUN_036-FUN_037. - **Actor/disparador:** ACT_001; disparador: usuario consulta ayuda o informaci\u00f3n p\u00fablica. - **Precondiciones:** Portal p\u00fablico disponible; contenidos definidos y publicados. - **Resultado esperado:** El usuario encuentra a",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "feature",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "FUN_037",
+      "snippet": "dana e informaci\u00f3n de tr\u00e1mites. - **Relaci\u00f3n jer\u00e1rquica:** Ra\u00edz; agrupa FUN_036-FUN_037. - **Actor/disparador:** ACT_001; disparador: usuario consulta ayuda o informaci\u00f3n p\u00fablica. - **Precondiciones:** Portal p\u00fablico disponible; contenidos definidos y publicados. - **Resultado esperado:** El usuario encuentra ayuda p\u00fab",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "feature",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "FUN_038",
+      "snippet": "y estado de solicitudes de integraci\u00f3n. - **Relaci\u00f3n jer\u00e1rquica:** Ra\u00edz; agrupa FUN_038-FUN_040. - **Actor/disparador:** ACT_007; disparador: funcionario de instituci\u00f3n integrada consulta ayuda o estado de integraci\u00f3n. - **Precondiciones:** Instituci\u00f3n integrada o en proceso de integraci\u00f3n; usuario institucional con ac",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "feature",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "FUN_039",
+      "snippet": "eva conforme al alcance. - **Evidencia:** E03/S01:p.36; E05/S01:p.39. - **ID:** FUN_039 - **Nombre:** Gestionar credenciales de acceso institucional - **Descripci\u00f3n:** Permitir a funcionarios de instituciones integradas gestionar credenciales de acceso asociadas a Clave\u00danica. - **Relaci\u00f3n jer\u00e1rquica:** CU_021. - **Acto",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "feature",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "FUN_040",
+      "snippet": "de solicitudes de integraci\u00f3n. - **Relaci\u00f3n jer\u00e1rquica:** Ra\u00edz; agrupa FUN_038-FUN_040. - **Actor/disparador:** ACT_007; disparador: funcionario de instituci\u00f3n integrada consulta ayuda o estado de integraci\u00f3n. - **Precondiciones:** Instituci\u00f3n integrada o en proceso de integraci\u00f3n; usuario institucional con acceso seg\u00fa",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "feature",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "FT_001",
+      "snippet": "flujos de trabajo o procedimientos con ID FT_X, clasificado por FUN_X - **ID:** FT_001 - **Nombre:** Navegaci\u00f3n p\u00fablica de activaci\u00f3n, autenticaci\u00f3n, recuperaci\u00f3n y ayuda - **Descripci\u00f3n:** El usuario entra al portal p\u00fablico, identifica las opciones principales, consulta ayuda/novedades y selecciona el flujo requerido.",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "flow",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "FT_002",
+      "snippet": "iones. - **Evidencia:** E08/S06:p.1:HU01; E05/S01:p.39; E04/S01:p.37. - **ID:** FT_002 - **Nombre:** Cambio de tel\u00e9fono o correo con validaci\u00f3n personal - **Descripci\u00f3n:** El usuario solicita cambiar tel\u00e9fono/correo, el sistema presenta validaci\u00f3n personal y s\u00f3lo permite guardar el cambio tras superarla. - **Relaci\u00f3n j",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "flow",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "FT_003",
+      "snippet": "pera se permite continuar/guardar. - **Evidencia:** E08/S06:p.1:HU02. - **ID:** FT_003 - **Nombre:** Configuraci\u00f3n de segundo factor - **Descripci\u00f3n:** Durante configuraci\u00f3n de Clave\u00danica o posteriormente, el usuario decide activar o no el segundo factor y el sistema registra la preferencia. - **Relaci\u00f3n jer\u00e1rquica:** ",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "flow",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "FT_004",
+      "snippet": "estado activo/inactivo persistido. - **Evidencia:** E08/S06:p.1:HU03. - **ID:** FT_004 - **Nombre:** Login con segundo factor activo - **Descripci\u00f3n:** Despu\u00e9s de validar la credencial principal, el sistema solicita el segundo factor si el usuario lo activ\u00f3 y completa el acceso s\u00f3lo si se supera. - **Relaci\u00f3n jer\u00e1rquic",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "flow",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "FT_005",
+      "snippet": "el flujo informa acci\u00f3n requerida. - **Evidencia:** E08/S06:p.1:HU03. - **ID:** FT_005 - **Nombre:** Definici\u00f3n y aplicaci\u00f3n del manejo multisesi\u00f3n - **Descripci\u00f3n:** El proyecto eval\u00faa alternativas de manejo de sesiones concurrentes, define pol\u00edtica aprobada y el sistema aplica el control definido. - **Relaci\u00f3n jer\u00e1rq",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "flow",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "FT_006",
+      "snippet": "n la definici\u00f3n. - **Evidencia:** E08/S06:p.1-p.2:HU04; E05/S01:p.39. - **ID:** FT_006 - **Nombre:** Derivaci\u00f3n a configuraci\u00f3n DDU despu\u00e9s de login - **Descripci\u00f3n:** Tras login, CU consulta estado DDU; si no est\u00e1 configurado muestra modal; si el usuario contin\u00faa lo deriva a la pasarela de configuraci\u00f3n. - **Relaci\u00f3n ",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "flow",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "FT_007",
+      "snippet": "retorno considerado. - **Evidencia:** E09/S06:p.2:HU05; E14/S07:p.1. - **ID:** FT_007 - **Nombre:** Cancelaci\u00f3n de configuraci\u00f3n DDU desde modal de login - **Descripci\u00f3n:** El usuario cancela el modal de configuraci\u00f3n DDU; el sistema lo retorna/mantiene en CU y muestra alerta de configuraci\u00f3n pendiente. - **Relaci\u00f3n je",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "flow",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "FT_008",
+      "snippet": "omicilio Digital indica pendiente. - **Evidencia:** E09/S06:p.2:HU06. - **ID:** FT_008 - **Nombre:** Retorno a CU tras configuraci\u00f3n exitosa de DDU - **Descripci\u00f3n:** La pasarela de notificaciones finaliza configuraci\u00f3n DDU, muestra modal de retorno y devuelve el control a CU. - **Relaci\u00f3n jer\u00e1rquica:** FUN_015; CU_007",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "flow",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "FT_009",
+      "snippet": "ortamiento posterior. - **Evidencia:** E09/S06:p.2:HU07; E14/S07:p.1. - **ID:** FT_009 - **Nombre:** Cancelaci\u00f3n de activaci\u00f3n DDU durante la pasarela - **Descripci\u00f3n:** Durante activaci\u00f3n de DDU, el usuario cancela; el sistema confirma cancelar o continuar; si cancela retorna a CU con DDU sin configurar. - **Relaci\u00f3n ",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "flow",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "FT_010",
+      "snippet": "DDU no se configura. - **Evidencia:** E10/S06:p.3:HU08; E14/S07:p.1. - **ID:** FT_010 - **Nombre:** Resoluci\u00f3n de secci\u00f3n de notificaciones seg\u00fan estado DDU - **Descripci\u00f3n:** Al abrir la secci\u00f3n de notificaciones, el sistema determina estado DDU y muestra alerta/activaci\u00f3n o listado de pendientes. - **Relaci\u00f3n jer\u00e1rqu",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "flow",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "FT_011",
+      "snippet": "nsistente con estado. - **Evidencia:** E10/S06:p.3:HU09; E14/S07:p.1. - **ID:** FT_011 - **Nombre:** Consulta de listado de notificaciones pendientes - **Descripci\u00f3n:** El usuario con DDU configurado abre la secci\u00f3n y visualiza notificaciones pendientes de lectura con los campos requeridos. - **Relaci\u00f3n jer\u00e1rquica:** F",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "flow",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "FT_012",
+      "snippet": "o existen registros. - **Evidencia:** E10/S06:p.3:HU10; E04/S01:p.37. - **ID:** FT_012 - **Nombre:** Acceso al detalle de notificaci\u00f3n en Casilla\u00danica - **Descripci\u00f3n:** El usuario selecciona una notificaci\u00f3n en el listado; CU deriva a Casilla\u00danica para mostrar el detalle. - **Relaci\u00f3n jer\u00e1rquica:** FUN_022-FUN_023; CU",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "flow",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "FT_013",
+      "snippet": "icaci\u00f3n seleccionada. - **Evidencia:** E11/S06:p.4:HU11; E14/S07:p.1. - **ID:** FT_013 - **Nombre:** Inicio de activaci\u00f3n DDU desde secci\u00f3n del portal - **Descripci\u00f3n:** El usuario sin DDU accede a la secci\u00f3n con alerta pendiente y el sistema inicia la pasarela de configuraci\u00f3n. - **Relaci\u00f3n jer\u00e1rquica:** FUN_014, FUN_",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "flow",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "FT_014",
+      "snippet": "sarela realizada. - **Evidencia:** E11/S06:p.4-p.5:HU12; E14/S07:p.1. - **ID:** FT_014 - **Nombre:** Consulta de historial de autorizaciones por estado - **Descripci\u00f3n:** El usuario abre gesti\u00f3n de autorizaciones; el sistema muestra autorizaciones en estados pendientes, aprobadas, rechazadas y revocadas con campos por ",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "flow",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "FT_015",
+      "snippet": "ndo aplique. - **Evidencia:** E12/S06:p.5:HU13; E13/S06:p.6-p.7:HU16. - **ID:** FT_015 - **Nombre:** Consulta de historial de datos compartidos - **Descripci\u00f3n:** El usuario consulta una tabla de intercambios de datos sensibles autorizados entre instituciones proveedoras y solicitantes. - **Relaci\u00f3n jer\u00e1rquica:** FUN_0",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "flow",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "FT_016",
+      "snippet": "son datos previamente autorizados. - **Evidencia:** E13/S06:p.6:HU14. - **ID:** FT_016 - **Nombre:** Decisi\u00f3n de autorizaci\u00f3n pendiente - **Descripci\u00f3n:** El usuario visualiza una solicitud pendiente y elige aprobar o rechazar mediante acciones disponibles. - **Relaci\u00f3n jer\u00e1rquica:** FUN_028-FUN_029; CU_015. - **Actor/",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "flow",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "FT_017",
+      "snippet": "entes; historial actualiza estado. - **Evidencia:** E13/S06:p.6:HU15. - **ID:** FT_017 - **Nombre:** Revocaci\u00f3n de autorizaci\u00f3n vigente - **Descripci\u00f3n:** El usuario visualiza autorizaciones aprobadas/vigentes y revoca una o varias; el historial refleja la revocaci\u00f3n. - **Relaci\u00f3n jer\u00e1rquica:** FUN_030; CU_016. - **Act",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "flow",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "FT_018",
+      "snippet": "de revocaci\u00f3n cuando aplique. - **Evidencia:** E13/S06:p.6-p.7:HU16. - **ID:** FT_018 - **Nombre:** Consulta de secciones privadas personales - **Descripci\u00f3n:** El usuario autenticado accede a configuraci\u00f3n, historial de acciones e informaci\u00f3n personal consolidada por categor\u00edas. - **Relaci\u00f3n jer\u00e1rquica:** FUN_031-FUN_",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "flow",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "FT_019",
+      "snippet": "ac\u00edos/alertas dise\u00f1ados. - **Evidencia:** E05/S01:p.39; E04/S01:p.37. - **ID:** FT_019 - **Nombre:** Consulta de expedientes electr\u00f3nicos - **Descripci\u00f3n:** El usuario ingresa a la vista de expedientes electr\u00f3nicos y consulta informaci\u00f3n disponible o estado vac\u00edo. - **Relaci\u00f3n jer\u00e1rquica:** FUN_034; CU_018. - **Actor/d",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "flow",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "FT_020",
+      "snippet": "o si no hay expedientes. - **Evidencia:** E05/S01:p.39; E04/S01:p.37. - **ID:** FT_020 - **Nombre:** Gesti\u00f3n de poderes y representaciones - **Descripci\u00f3n:** El usuario ingresa a la secci\u00f3n de poderes/representaciones y ejecuta flujos definidos durante el alcance. - **Relaci\u00f3n jer\u00e1rquica:** FUN_035; CU_019. - **Actor/d",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "flow",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "FT_021",
+      "snippet": "s de borde considerados. - **Evidencia:** E05/S01:p.39; E04/S01:p.37. - **ID:** FT_021 - **Nombre:** Consulta de ayuda p\u00fablica y contenidos informativos - **Descripci\u00f3n:** El usuario p\u00fablico accede a centros de ayuda, emergencias, preguntas frecuentes, contacto, transparencia, participaci\u00f3n ciudadana e informaci\u00f3n de t",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "flow",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "FT_022",
+      "snippet": "o de portal p\u00fablico. - **Evidencia:** E05/S01:p.39; E08/S06:p.1:HU01. - **ID:** FT_022 - **Nombre:** Ayuda institucional y gesti\u00f3n de integraci\u00f3n - **Descripci\u00f3n:** El funcionario de instituci\u00f3n integrada accede a ayuda p\u00fablica/privada, gestiona credenciales y consulta estado de integraci\u00f3n. - **Relaci\u00f3n jer\u00e1rquica:** ",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "flow",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "FT_023",
+      "snippet": "de integraci\u00f3n visible. - **Evidencia:** E03/S01:p.36; E05/S01:p.39. - **ID:** FT_023 - **Nombre:** Investigaci\u00f3n de usuarios y necesidades - **Descripci\u00f3n:** Definir metodolog\u00eda de investigaci\u00f3n para perfiles de usuario, m\u00e9tricas, necesidades, recopilaci\u00f3n y an\u00e1lisis cualitativo/cuantitativo. - **Relaci\u00f3n jer\u00e1rquica:*",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "flow",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "FT_024",
+      "snippet": "ia cualitativa/cuantitativa analizada. - **Evidencia:** E03/S01:p.36. - **ID:** FT_024 - **Nombre:** Ideaci\u00f3n, arquitectura de informaci\u00f3n y prototipos de baja fidelidad - **Descripci\u00f3n:** Estructurar flujos de usuario, mapas de navegaci\u00f3n y prototipos de baja fidelidad basados en investigaci\u00f3n. - **Relaci\u00f3n jer\u00e1rquica",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "flow",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "FT_025",
+      "snippet": "bles; sesiones tempranas consideradas. - **Evidencia:** E03/S01:p.36. - **ID:** FT_025 - **Nombre:** Prototipado de alta fidelidad y testeo con usuarios - **Descripci\u00f3n:** Crear prototipos de alta fidelidad con contenido real o cercano y ejecutar testeos para minimizar fricciones de usabilidad. - **Relaci\u00f3n jer\u00e1rquica:",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "flow",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "FT_026",
+      "snippet": "joras incorporadas. - **Evidencia:** E03/S01:p.36; E04/S01:p.37-p.38. - **ID:** FT_026 - **Nombre:** Implementaci\u00f3n priorizada y pruebas de interfaces definidas - **Descripci\u00f3n:** Implementar prototipos de alta fidelidad priorizados, definiendo historias de usuario asociadas y pruebas de componentes/interfaz. - **Relac",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "flow",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "RN_001",
+      "snippet": "8. Descripci\u00f3n de reglas de negocio con ID RN_X, clasificado por FT_X - **ID:** RN_001 - **Nombre:** Accesos obligatorios del portal p\u00fablico - **Descripci\u00f3n:** El portal p\u00fablico debe disponer claramente las opciones activar, autenticarse y recuperar. - **Relaci\u00f3n jer\u00e1rquica:** FT_001; FUN_001. - **Actor/disparador:** A",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "business_rule",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "RN_002",
+      "snippet": "son comprensibles para el usuario. - **Evidencia:** E08/S06:p.1:HU01. - **ID:** RN_002 - **Nombre:** Bloqueo de cambio de tel\u00e9fono/correo sin validaci\u00f3n personal - **Descripci\u00f3n:** No se debe permitir cambiar tel\u00e9fono y/o correo electr\u00f3nico sin antes responder una o m\u00e1s preguntas del \u00e1mbito personal. - **Relaci\u00f3n jer\u00e1r",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "business_rule",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "RN_003",
+      "snippet": "inuar; aplica a tel\u00e9fono y correo. - **Evidencia:** E08/S06:p.1:HU02. - **ID:** RN_003 - **Nombre:** Segundo factor opcional y obligatorio si est\u00e1 activo - **Descripci\u00f3n:** El 2FA es opcional para el usuario, pero si lo activa ser\u00e1 obligatorio cada vez que use el login de Clave\u00danica. - **Relaci\u00f3n jer\u00e1rquica:** FT_003-F",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "business_rule",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "RN_004",
+      "snippet": "egistro de estado activo/inactivo. - **Evidencia:** E08/S06:p.1:HU03. - **ID:** RN_004 - **Nombre:** Evaluaci\u00f3n obligatoria de multisesi\u00f3n - **Descripci\u00f3n:** Debe evaluarse la mejor forma de manejar multisesiones y sus pros/contras para evitar posible mal uso de Clave\u00danica. - **Relaci\u00f3n jer\u00e1rquica:** FT_005; FUN_008-FU",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "business_rule",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "RN_005",
+      "snippet": "obado antes de implementaci\u00f3n. - **Evidencia:** E08/S06:p.1-p.2:HU04. - **ID:** RN_005 - **Nombre:** Consulta de estado DDU despu\u00e9s de autenticaci\u00f3n - **Descripci\u00f3n:** El sistema Clave\u00danica debe identificar si el usuario autenticado tiene o no configurado su DDU. - **Relaci\u00f3n jer\u00e1rquica:** FT_006, FT_010; FUN_010. - **",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "business_rule",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "RN_006",
+      "snippet": "**Evidencia:** E09/S06:p.2:HU05-HU06; E10/S06:p.3:HU09; E14/S07:p.1. - **ID:** RN_006 - **Nombre:** Modal obligatorio antes de pasarela DDU desde login - **Descripci\u00f3n:** Antes de ingresar a la pasarela de configuraci\u00f3n DDU, el sistema debe desplegar un modal para confirmar continuar o cancelar. - **Relaci\u00f3n jer\u00e1rquica",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "business_rule",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "RN_007",
+      "snippet": "derivaci\u00f3n s\u00f3lo si contin\u00faa. - **Evidencia:** E09/S06:p.2:HU05-HU06. - **ID:** RN_007 - **Nombre:** Cancelaci\u00f3n desde modal mantiene DDU pendiente - **Descripci\u00f3n:** Si el usuario cancela desde el modal, se retorna al portal CU y la secci\u00f3n Domicilio Digital aparece con alerta de configuraci\u00f3n pendiente. - **Relaci\u00f3n j",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "business_rule",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "RN_008",
+      "snippet": "no a CU; alerta pendiente visible. - **Evidencia:** E09/S06:p.2:HU06. - **ID:** RN_008 - **Nombre:** Retorno al portal invocador tras completar DDU - **Descripci\u00f3n:** Al finalizar la configuraci\u00f3n DDU en la Plataforma de Notificaciones, el sistema informa mediante modal y retorna al portal inicial Clave\u00danica. - **Relac",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "business_rule",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "RN_009",
+      "snippet": "uede continuar en CU. - **Evidencia:** E09/S06:p.2:HU07; E14/S07:p.1. - **ID:** RN_009 - **Nombre:** Cancelaci\u00f3n durante activaci\u00f3n conserva DDU sin configurar - **Descripci\u00f3n:** Si el usuario confirma cancelaci\u00f3n durante la activaci\u00f3n DDU, el sistema retorna a Clave\u00danica y el usuario contin\u00faa con DDU sin configurar. -",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "business_rule",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "RN_010",
+      "snippet": "o a CU; estado DDU sin configurar. - **Evidencia:** E10/S06:p.3:HU08. - **ID:** RN_010 - **Nombre:** Comportamiento dual de secci\u00f3n notificaciones - **Descripci\u00f3n:** La secci\u00f3n de notificaciones debe mostrar alerta e iniciar activaci\u00f3n si DDU no est\u00e1 configurado, y permitir acceso a pendientes de lectura si DDU est\u00e1 co",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "business_rule",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "RN_011",
+      "snippet": "usuario no queda sin orientaci\u00f3n. - **Evidencia:** E10/S06:p.3:HU09. - **ID:** RN_011 - **Nombre:** Campos m\u00ednimos del listado de notificaciones - **Descripci\u00f3n:** El listado de notificaciones pendientes debe desplegar fecha de recepci\u00f3n, instituci\u00f3n remitente y t\u00edtulo de la notificaci\u00f3n. - **Relaci\u00f3n jer\u00e1rquica:** FT_",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "business_rule",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "RN_012",
+      "snippet": "t\u00edtulo visible. - **Evidencia:** E10/S06:p.3:HU10; E11/S06:p.4:HU11. - **ID:** RN_012 - **Nombre:** Detalle de notificaci\u00f3n en plataforma de notificaciones - **Descripci\u00f3n:** Para leer el detalle, el usuario selecciona una notificaci\u00f3n y CU lo deriva a la plataforma de notificaciones/Casilla\u00danica. - **Relaci\u00f3n jer\u00e1rqui",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "business_rule",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "RN_013",
+      "snippet": "Casilla\u00danica; detalle consultable. - **Evidencia:** E11/S06:p.4:HU11. - **ID:** RN_013 - **Nombre:** Estados del historial de autorizaciones - **Descripci\u00f3n:** El historial de autorizaciones de uso de datos sensibles debe contemplar solicitudes aprobadas, rechazadas, pendientes y revocadas. - **Relaci\u00f3n jer\u00e1rquica:** F",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "business_rule",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "RN_014",
+      "snippet": "el usuario. - **Evidencia:** E12/S06:p.5:HU13; E13/S06:p.6:HU15-HU16. - **ID:** RN_014 - **Nombre:** Datos de solicitudes pendientes - **Descripci\u00f3n:** Para solicitudes pendientes se debe mostrar fecha de solicitud, instituci\u00f3n solicitante, procedimiento administrativo, listado de datos involucrados e instituciones pro",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "business_rule",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "RN_015",
+      "snippet": "ndiente visible. - **Evidencia:** E12/S06:p.5:HU13; E13/S06:p.6:HU15. - **ID:** RN_015 - **Nombre:** Datos de solicitudes aprobadas - **Descripci\u00f3n:** Para solicitudes aprobadas se debe mostrar fecha de solicitud, fecha de aprobaci\u00f3n, instituci\u00f3n solicitante, procedimiento administrativo, listado de datos involucrados ",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "business_rule",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "RN_016",
+      "snippet": "as visibles. - **Evidencia:** E12/S06:p.5:HU13; E13/S06:p.6-p.7:HU16. - **ID:** RN_016 - **Nombre:** Datos de solicitudes rechazadas - **Descripci\u00f3n:** Para solicitudes rechazadas se debe mostrar fecha de solicitud, fecha de rechazo, instituci\u00f3n solicitante, procedimiento administrativo, listado de datos involucrados e",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "business_rule",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "RN_017",
+      "snippet": "isibles; estado rechazado visible. - **Evidencia:** E12/S06:p.5:HU13. - **ID:** RN_017 - **Nombre:** Datos de solicitudes revocadas - **Descripci\u00f3n:** Para solicitudes revocadas se debe mostrar fecha de solicitud, fecha de aprobaci\u00f3n, fecha de revocaci\u00f3n, instituci\u00f3n solicitante, procedimiento administrativo, listado d",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "business_rule",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "RN_018",
+      "snippet": "ciones visibles. - **Evidencia:** E12/S06:p.5:HU13; E13/S06:p.7:HU16. - **ID:** RN_018 - **Nombre:** Campos del historial de datos compartidos - **Descripci\u00f3n:** El historial de datos sensibles compartidos debe presentarse como tabla con instituci\u00f3n proveedora, instituci\u00f3n solicitante/consumidora, fecha y hora, y proce",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "business_rule",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "RN_019",
+      "snippet": "utorizados; fecha y hora visibles. - **Evidencia:** E13/S06:p.6:HU14. - **ID:** RN_019 - **Nombre:** Acciones de aprobaci\u00f3n y rechazo para pendientes - **Descripci\u00f3n:** Las solicitudes pendientes deben disponer acciones para aprobar y rechazar la autorizaci\u00f3n pendiente. - **Relaci\u00f3n jer\u00e1rquica:** FT_016; FUN_028-FUN_02",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "business_rule",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "RN_020",
+      "snippet": "ica s\u00f3lo a la solicitud pendiente. - **Evidencia:** E13/S06:p.6:HU15. - **ID:** RN_020 - **Nombre:** Acci\u00f3n de revocaci\u00f3n para autorizaciones vigentes - **Descripci\u00f3n:** Las autorizaciones vigentes/aprobadas deben disponer una acci\u00f3n para revocar una o varias autorizaciones. - **Relaci\u00f3n jer\u00e1rquica:** FT_017; FUN_030. ",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "business_rule",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "RN_021",
+      "snippet": "storial conserva trazabilidad. - **Evidencia:** E13/S06:p.6-p.7:HU16. - **ID:** RN_021 - **Nombre:** Datos compartidos deben ser previamente autorizados - **Descripci\u00f3n:** El historial de datos sensibles compartidos debe permitir verificar que los datos compartidos fueron previamente autorizados. - **Relaci\u00f3n jer\u00e1rquic",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "business_rule",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "RN_022",
+      "snippet": "ferencia funcional a autorizaci\u00f3n. - **Evidencia:** E13/S06:p.6:HU14. - **ID:** RN_022 - **Nombre:** Secciones privadas ampliadas del portal - **Descripci\u00f3n:** El portal debe soportar secciones privadas como configuraci\u00f3n, segundos factores, historial de acciones, expedientes, poderes/representaciones, autorizaciones, ",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "business_rule",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "RN_023",
+      "snippet": "stados vac\u00edos dise\u00f1ados. - **Evidencia:** E05/S01:p.39; E04/S01:p.37. - **ID:** RN_023 - **Nombre:** Secciones p\u00fablicas de ayuda e informaci\u00f3n - **Descripci\u00f3n:** El portal p\u00fablico debe contemplar centros de ayuda, emergencias con Clave\u00danica, preguntas frecuentes, contacto, transparencia, participaci\u00f3n ciudadana e infor",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "business_rule",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "RN_024",
+      "snippet": "idos publicados; navegaci\u00f3n coherente. - **Evidencia:** E05/S01:p.39. - **ID:** RN_024 - **Nombre:** Ayuda institucional p\u00fablica y privada - **Descripci\u00f3n:** La soluci\u00f3n debe soportar secciones p\u00fablicas y privadas de ayuda para instituciones integradas a Clave\u00danica. - **Relaci\u00f3n jer\u00e1rquica:** FT_022; FUN_038. - **Actor",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "business_rule",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "RN_025",
+      "snippet": "entro de ayuda renovado. - **Evidencia:** E03/S01:p.36; E05/S01:p.39. - **ID:** RN_025 - **Nombre:** Gesti\u00f3n institucional de credenciales e integraci\u00f3n - **Descripci\u00f3n:** Las instituciones integradas deben contar con funcionalidades para gestionar credenciales de acceso y consultar el estado de sus solicitudes de inte",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "business_rule",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "RN_026",
+      "snippet": "itucional controlado seg\u00fan definici\u00f3n. - **Evidencia:** E03/S01:p.36. - **ID:** RN_026 - **Nombre:** Requerimientos referenciales no exhaustivos - **Descripci\u00f3n:** Las historias del Anexo 7 son una primera versi\u00f3n y deben complementarse con el trabajo de la contrataci\u00f3n; nuevos requerimientos pueden surgir de investiga",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "business_rule",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "RN_027",
+      "snippet": "contraparte. - **Evidencia:** E08/S06:p.1:introducci\u00f3n; E05/S01:p.39. - **ID:** RN_027 - **Nombre:** Dise\u00f1o de casos de borde y alertas - **Descripci\u00f3n:** Adem\u00e1s del flujo exitoso, se deben considerar y dise\u00f1ar casos de borde y sistema de alertas para errores, estados vac\u00edos, falta de informaci\u00f3n y errores al ingresar ",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "business_rule",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "CH_001",
+      "snippet": "cripci\u00f3n de validaciones y chequeos con ID CH_X, clasificado por FT_X - **ID:** CH_001 - **Nombre:** Verificar disponibilidad de opciones p\u00fablicas - **Descripci\u00f3n:** Comprobar que activar, autenticarse y recuperar est\u00e9n visibles y accesibles en portal p\u00fablico. - **Relaci\u00f3n jer\u00e1rquica:** FT_001; RN_001. - **Actor/dispar",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "validation_check",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "CH_002",
+      "snippet": "a de prueba. - **Evidencia:** E08/S06:p.1:HU01; E07/S05:plan_pruebas. - **ID:** CH_002 - **Nombre:** Validar preguntas personales antes de cambio de contacto - **Descripci\u00f3n:** Comprobar que tel\u00e9fono/correo no cambien sin responder una o m\u00e1s preguntas personales definidas. - **Relaci\u00f3n jer\u00e1rquica:** FT_002; RN_002. - *",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "validation_check",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "CH_003",
+      "snippet": "respuesta v\u00e1lida permite cambio. - **Evidencia:** E08/S06:p.1:HU02. - **ID:** CH_003 - **Nombre:** Verificar persistencia de preferencia 2FA - **Descripci\u00f3n:** Comprobar que la activaci\u00f3n/desactivaci\u00f3n o preferencia definida de segundo factor quede registrada y sea consultable posteriormente. - **Relaci\u00f3n jer\u00e1rquica:**",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "validation_check",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "CH_004",
+      "snippet": "rtamiento de login usa ese estado. - **Evidencia:** E08/S06:p.1:HU03. - **ID:** CH_004 - **Nombre:** Validar exigencia de segundo factor en login - **Descripci\u00f3n:** Comprobar que el login solicite segundo factor cada vez que el usuario tenga 2FA activo. - **Relaci\u00f3n jer\u00e1rquica:** FT_004; RN_003. - **Actor/disparador:**",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "validation_check",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "CH_005",
+      "snippet": "se supera; se accede si se supera. - **Evidencia:** E08/S06:p.1:HU03. - **ID:** CH_005 - **Nombre:** Verificar consulta de estado DDU - **Descripci\u00f3n:** Comprobar que, despu\u00e9s del login o al entrar a notificaciones, el sistema identifique DDU configurado/no configurado. - **Relaci\u00f3n jer\u00e1rquica:** FT_006, FT_010; RN_005",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "validation_check",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "CH_006",
+      "snippet": "**Evidencia:** E09/S06:p.2:HU05-HU06; E10/S06:p.3:HU09; E14/S07:p.1. - **ID:** CH_006 - **Nombre:** Validar modal de DDU antes de pasarela - **Descripci\u00f3n:** Comprobar que el modal de continuar/cancelar aparezca antes de ingresar a la pasarela de configuraci\u00f3n DDU. - **Relaci\u00f3n jer\u00e1rquica:** FT_006-FT_007; RN_006. - **",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "validation_check",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "CH_007",
+      "snippet": "r deriva; cancelar no deriva. - **Evidencia:** E09/S06:p.2:HU05-HU06. - **ID:** CH_007 - **Nombre:** Validar alerta DDU pendiente tras cancelar - **Descripci\u00f3n:** Comprobar que, al cancelar desde modal o conservar DDU sin configurar, el portal muestre alerta de configuraci\u00f3n pendiente. - **Relaci\u00f3n jer\u00e1rquica:** FT_007",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "validation_check",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "CH_008",
+      "snippet": "videncia:** E09/S06:p.2:HU06; E10/S06:p.3:HU09; E11/S06:p.4-p.5:HU12. - **ID:** CH_008 - **Nombre:** Confirmar cancelaci\u00f3n durante activaci\u00f3n DDU - **Descripci\u00f3n:** Comprobar que al cancelar en la pasarela se solicite confirmaci\u00f3n y se respete cancelar o continuar. - **Relaci\u00f3n jer\u00e1rquica:** FT_009; RN_009. - **Actor/d",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "validation_check",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "CH_009",
+      "snippet": "torna a CU con DDU sin configurar. - **Evidencia:** E10/S06:p.3:HU08. - **ID:** CH_009 - **Nombre:** Validar retorno desde pasarela DDU - **Descripci\u00f3n:** Comprobar que al finalizar DDU la pasarela muestre aviso de retorno y devuelva control a Clave\u00danica. - **Relaci\u00f3n jer\u00e1rquica:** FT_008; RN_008. - **Actor/disparador:",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "validation_check",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "CH_010",
+      "snippet": "lizado a configurado. - **Evidencia:** E09/S06:p.2:HU07; E14/S07:p.1. - **ID:** CH_010 - **Nombre:** Validar listado de notificaciones pendientes - **Descripci\u00f3n:** Comprobar que el listado muestre s\u00f3lo pendientes de lectura con campos requeridos. - **Relaci\u00f3n jer\u00e1rquica:** FT_011; RN_011. - **Actor/disparador:** ACT_0",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "validation_check",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "CH_011",
+      "snippet": "visible; registros son pendientes. - **Evidencia:** E10/S06:p.3:HU10. - **ID:** CH_011 - **Nombre:** Validar derivaci\u00f3n a detalle de notificaci\u00f3n - **Descripci\u00f3n:** Comprobar que seleccionar una notificaci\u00f3n derive a Casilla\u00danica y muestre el detalle correspondiente. - **Relaci\u00f3n jer\u00e1rquica:** FT_012; RN_012. - **Actor",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "validation_check",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "CH_012",
+      "snippet": "llega a Casilla\u00danica. - **Evidencia:** E11/S06:p.4:HU11; E14/S07:p.1. - **ID:** CH_012 - **Nombre:** Validar campos del historial de autorizaciones - **Descripci\u00f3n:** Comprobar que los campos mostrados var\u00eden correctamente seg\u00fan estado pendiente, aprobada, rechazada o revocada. - **Relaci\u00f3n jer\u00e1rquica:** FT_014; RN_013",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "validation_check",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "CH_013",
+      "snippet": "cada RN_017. - **Evidencia:** E12/S06:p.5:HU13; E13/S06:p.6-p.7:HU16. - **ID:** CH_013 - **Nombre:** Validar acciones por estado de autorizaci\u00f3n - **Descripci\u00f3n:** Comprobar que aprobar/rechazar est\u00e9 disponible para pendientes y revocar para vigentes/aprobadas. - **Relaci\u00f3n jer\u00e1rquica:** FT_016-FT_017; RN_019-RN_020. -",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "validation_check",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "CH_014",
+      "snippet": "ci\u00f3n actualiza historial. - **Evidencia:** E13/S06:p.6-p.7:HU15-HU16. - **ID:** CH_014 - **Nombre:** Validar tabla de datos sensibles compartidos - **Descripci\u00f3n:** Comprobar que la tabla de datos compartidos incluya columnas requeridas y registros previamente autorizados. - **Relaci\u00f3n jer\u00e1rquica:** FT_015; RN_018, RN_",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "validation_check",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "CH_015",
+      "snippet": "mostrados corresponden al usuario. - **Evidencia:** E13/S06:p.6:HU14. - **ID:** CH_015 - **Nombre:** Validar dise\u00f1o de estados vac\u00edos y errores - **Descripci\u00f3n:** Comprobar que cada flujo contemple estados vac\u00edos, errores de sistema, falta de informaci\u00f3n y errores de ingreso/carga. - **Relaci\u00f3n jer\u00e1rquica:** FT_001-FT_",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "validation_check",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "CH_016",
+      "snippet": "nida; error de ingreso/carga definido. - **Evidencia:** E04/S01:p.37. - **ID:** CH_016 - **Nombre:** Validar accesibilidad de interfaces - **Descripci\u00f3n:** Comprobar consideraciones de accesibilidad como tama\u00f1o de tipograf\u00eda, alineaci\u00f3n de texto, texto alternativo, contraste, legibilidad y uso del sistema. - **Relaci\u00f3n",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "validation_check",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "CH_017",
+      "snippet": "tradas. - **Evidencia:** E05/S01:p.38; E07/S05:aseguramiento_calidad. - **ID:** CH_017 - **Nombre:** Validar usabilidad con usuarios - **Descripci\u00f3n:** Comprobar que los prototipos sean navegables y est\u00e9n preparados para testeos de usabilidad, generando informe de correcciones. - **Relaci\u00f3n jer\u00e1rquica:** FT_025; OT_004",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "validation_check",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "CH_018",
+      "snippet": "adas en prototipos. - **Evidencia:** E04/S01:p.37-p.38; E03/S01:p.36. - **ID:** CH_018 - **Nombre:** Validar pruebas y evidencia de aseguramiento de calidad - **Descripci\u00f3n:** Comprobar que exista plan de pruebas, evidencia de ejecuci\u00f3n y cantidad/tipo de testeos de prototipo y accesibilidad. - **Relaci\u00f3n jer\u00e1rquica:**",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "validation_check",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "critical",
+      "id": "CH_019",
+      "snippet": "esibilidad incluidas. - **Evidencia:** E07/S05:aseguramiento_calidad. - **ID:** CH_019 - **Nombre:** Validar implementaci\u00f3n priorizada - **Descripci\u00f3n:** Comprobar que las interfaces/prototipos definidos se implementen al menos en prioridades 1 y 2, con historias asociadas y pruebas. - **Relaci\u00f3n jer\u00e1rquica:** FT_026; ",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "validation_check",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "supporting",
+      "id": "EX_001",
+      "snippet": "ci\u00f3n de restricciones y excepciones con ID EX_X, clasificado por FT_X - **ID:** EX_001 - **Nombre:** Cancelaci\u00f3n del modal DDU posterior al login - **Descripci\u00f3n:** Si el usuario decide no configurar DDU desde el modal posterior al login, no se deriva a la pasarela y se muestra alerta de DDU pendiente en CU. - **Relaci",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "constraint",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "supporting",
+      "id": "EX_002",
+      "snippet": "ura DDU; alerta pendiente visible. - **Evidencia:** E09/S06:p.2:HU06. - **ID:** EX_002 - **Nombre:** Cancelaci\u00f3n durante activaci\u00f3n DDU - **Descripci\u00f3n:** Si el usuario cancela el proceso de activaci\u00f3n DDU durante la pasarela y confirma la cancelaci\u00f3n, retorna a CU sin configurar DDU. - **Relaci\u00f3n jer\u00e1rquica:** FT_009;",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "constraint",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "supporting",
+      "id": "EX_003",
+      "snippet": "DU conserva estado no configurado. - **Evidencia:** E10/S06:p.3:HU08. - **ID:** EX_003 - **Nombre:** Usuario con DDU no configurado no ve listado de notificaciones - **Descripci\u00f3n:** Cuando DDU no est\u00e1 configurado, la secci\u00f3n de notificaciones no muestra listado de pendientes; muestra alerta e inicio de activaci\u00f3n. - *",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "constraint",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "supporting",
+      "id": "EX_004",
+      "snippet": "activaci\u00f3n. - **Evidencia:** E10/S06:p.3:HU09; E11/S06:p.4-p.5:HU12. - **ID:** EX_004 - **Nombre:** Usuario con DDU configurado accede a listado en vez de pasarela - **Descripci\u00f3n:** Cuando DDU ya est\u00e1 configurado, la secci\u00f3n de notificaciones permite acceder al listado de pendientes de lectura en vez de iniciar activa",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "constraint",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "supporting",
+      "id": "EX_005",
+      "snippet": "eridos visibles. - **Evidencia:** E10/S06:p.3:HU09-HU10; E14/S07:p.1. - **ID:** EX_005 - **Nombre:** Segundo factor activo bloquea login si no se completa - **Descripci\u00f3n:** Si el usuario activ\u00f3 2FA, el login no debe completarse sin superar el segundo factor definido. - **Relaci\u00f3n jer\u00e1rquica:** FT_004; RN_003. - **Acto",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "constraint",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "supporting",
+      "id": "EX_006",
+      "snippet": "\u00f3n final s\u00f3lo con factor superado. - **Evidencia:** E08/S06:p.1:HU03. - **ID:** EX_006 - **Nombre:** Estados vac\u00edos en secciones y listados - **Descripci\u00f3n:** Cuando no exista informaci\u00f3n para mostrar, los flujos deben contemplar estado vac\u00edo en lugar de fallar o presentar informaci\u00f3n incompleta. - **Relaci\u00f3n jer\u00e1rquic",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "constraint",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "supporting",
+      "id": "EX_007",
+      "snippet": "se orienta al usuario seg\u00fan secci\u00f3n. - **Evidencia:** E04/S01:p.37. - **ID:** EX_007 - **Nombre:** Errores al ingresar o cargar informaci\u00f3n - **Descripci\u00f3n:** Cuando existan errores al ingresar o cargar informaci\u00f3n, el sistema debe considerar alertas o tratamiento de borde definido. - **Relaci\u00f3n jer\u00e1rquica:** FT_001-FT",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "constraint",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "supporting",
+      "id": "EX_008",
+      "snippet": "sistema evita estados inconsistentes. - **Evidencia:** E04/S01:p.37. - **ID:** EX_008 - **Nombre:** Falta de informaci\u00f3n disponible - **Descripci\u00f3n:** Cuando falte informaci\u00f3n en una secci\u00f3n, debe existir tratamiento de borde definido para comunicar o resolver la ausencia de datos. - **Relaci\u00f3n jer\u00e1rquica:** FT_001-FT_",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "constraint",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "supporting",
+      "id": "EX_009",
+      "snippet": "ido; no se inventan datos en pantalla. - **Evidencia:** E04/S01:p.37. - **ID:** EX_009 - **Nombre:** Mal uso o comportamiento an\u00f3malo de Clave\u00danica - **Descripci\u00f3n:** Los flujos deben estudiar y definir mecanismos de alerta de comportamiento de uso indebido o an\u00f3malo de Clave\u00danica. - **Relaci\u00f3n jer\u00e1rquica:** FT_005; RN",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "constraint",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "supporting",
+      "id": "EX_010",
+      "snippet": "\u00f3n considerados. - **Evidencia:** E05/S01:p.39; E08/S06:p.1-p.2:HU04. - **ID:** EX_010 - **Nombre:** Diferencia terminol\u00f3gica en revocaci\u00f3n - **Descripci\u00f3n:** El t\u00edtulo y cuerpo de la historia HU16 refieren autorizaciones vigentes/aprobadas, pero la \u00faltima frase menciona revocar una autorizaci\u00f3n pendiente; se registra ",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "constraint",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "supporting",
+      "id": "ACT_001",
+      "snippet": "il | Descripci\u00f3n | Casos de uso asociados | Evidencia | |---|---|---|---|---| | ACT_001 | Usuario p\u00fablico del portal Clave\u00danica | Persona que accede al portal p\u00fablico, con o sin Clave\u00danica activada. | CU_001, CU_003, CU_020 | E08/S06:p.1:HU01-HU03; E05/S01:p.39 | | ACT_002 | Usuario con Clave\u00danica activada | Persona au",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "actor",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "supporting",
+      "id": "ACT_002",
+      "snippet": "ca activada. | CU_001, CU_003, CU_020 | E08/S06:p.1:HU01-HU03; E05/S01:p.39 | | ACT_002 | Usuario con Clave\u00danica activada | Persona autenticada que puede administrar datos, sesi\u00f3n, 2FA, notificaciones y autorizaciones. | CU_002-CU_016, CU_017-CU_019 | E08/S06:p.1:HU02-HU04; E09-E13 | | ACT_003 | Usuario sin DDU configu",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "actor",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "supporting",
+      "id": "ACT_003",
+      "snippet": "rizaciones. | CU_002-CU_016, CU_017-CU_019 | E08/S06:p.1:HU02-HU04; E09-E13 | | ACT_003 | Usuario sin DDU configurado | Usuario autenticado cuyo Domicilio Digital \u00danico a\u00fan no est\u00e1 configurado. | CU_005, CU_006, CU_008, CU_009, CU_012 | E09/S06:p.2:HU05-HU06; E10/S06:p.3:HU08-HU09; E11/S06:p.4:HU12; E14/S07:p.1 | | ACT",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "actor",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "supporting",
+      "id": "ACT_004",
+      "snippet": "E09/S06:p.2:HU05-HU06; E10/S06:p.3:HU08-HU09; E11/S06:p.4:HU12; E14/S07:p.1 | | ACT_004 | Usuario con DDU configurado | Usuario autenticado que ya configur\u00f3 DDU y puede visualizar notificaciones pendientes. | CU_007, CU_009-CU_011 | E09/S06:p.2:HU07; E10/S06:p.3:HU09-HU10; E11/S06:p.4:HU11; E14/S07:p.1 | | ACT_005 | Us",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "actor",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "supporting",
+      "id": "ACT_005",
+      "snippet": "11 | E09/S06:p.2:HU07; E10/S06:p.3:HU09-HU10; E11/S06:p.4:HU11; E14/S07:p.1 | | ACT_005 | Usuario con autorizaciones pendientes | Usuario que tiene solicitudes de autorizaci\u00f3n de uso de datos sensibles pendientes de decisi\u00f3n. | CU_013, CU_015 | E12/S06:p.5:HU13; E13/S06:p.6:HU15 | | ACT_006 | Usuario con autorizaciones",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "actor",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "supporting",
+      "id": "ACT_006",
+      "snippet": "ndientes de decisi\u00f3n. | CU_013, CU_015 | E12/S06:p.5:HU13; E13/S06:p.6:HU15 | | ACT_006 | Usuario con autorizaciones vigentes | Usuario que tiene autorizaciones aprobadas/vigentes susceptibles de revocaci\u00f3n. | CU_013, CU_016 | E12/S06:p.5:HU13; E13/S06:p.6-p.7:HU16 | | ACT_007 | Funcionario de instituci\u00f3n integrada | U",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "actor",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "supporting",
+      "id": "ACT_007",
+      "snippet": "es de revocaci\u00f3n. | CU_013, CU_016 | E12/S06:p.5:HU13; E13/S06:p.6-p.7:HU16 | | ACT_007 | Funcionario de instituci\u00f3n integrada | Usuario institucional que requiere ayuda, credenciales y estado de integraci\u00f3n a Clave\u00danica. | CU_021 | E03/S01:p.36; E05/S01:p.39 | | ACT_008 | Plataforma de Notificaciones/Casilla\u00danica | Si",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "actor",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "supporting",
+      "id": "ACT_008",
+      "snippet": "y estado de integraci\u00f3n a Clave\u00danica. | CU_021 | E03/S01:p.36; E05/S01:p.39 | | ACT_008 | Plataforma de Notificaciones/Casilla\u00danica | Sistema externo funcional que configura DDU, mantiene notificaciones y muestra detalle al usuario. | CU_005-CU_012 | E09-E11; E14/S07:p.1 | | ACT_009 | Autorizador Ciudadano | Componente",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "actor",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "supporting",
+      "id": "ACT_009",
+      "snippet": "ciones y muestra detalle al usuario. | CU_005-CU_012 | E09-E11; E14/S07:p.1 | | ACT_009 | Autorizador Ciudadano | Componente/servicio funcional asociado a solicitudes, historial, aprobaci\u00f3n, rechazo y revocaci\u00f3n de uso de datos sensibles. | CU_013-CU_016 | E05/S01:p.39; E12-E13 | | ACT_010 | Portal Clave\u00danica | Sistema",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "actor",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "supporting",
+      "id": "ACT_010",
+      "snippet": "vocaci\u00f3n de uso de datos sensibles. | CU_013-CU_016 | E05/S01:p.39; E12-E13 | | ACT_010 | Portal Clave\u00danica | Sistema invocador que autentica, consulta estados, muestra secciones y deriva/recibe retorno de plataformas relacionadas. | CU_001-CU_021 | E01-E05; E08-E14 | ## 5. Descripci\u00f3n de casos de uso con ID CU_X - **I",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "actor",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "supporting",
+      "id": "OBJ_001",
+      "snippet": "p.2; E02/S01:p.35; E04/S01:p.37; E05/S01:p.39. ## 3. Objetivos espec\u00edficos - **OBJ_001:** Enriquecer la experiencia de uso mediante una nueva versi\u00f3n del portal con interfaz m\u00e1s intuitiva y segura. Evidencia: E04/S01:p.37. - **OBJ_002:** Centralizar informaci\u00f3n de las personas para facilitar acceso y gesti\u00f3n de informa",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "objective",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "supporting",
+      "id": "OBJ_002",
+      "snippet": "\u00f3n del portal con interfaz m\u00e1s intuitiva y segura. Evidencia: E04/S01:p.37. - **OBJ_002:** Centralizar informaci\u00f3n de las personas para facilitar acceso y gesti\u00f3n de informaci\u00f3n relacionada con el Estado. Evidencia: E02/S01:p.35; E04/S01:p.37. - **OBJ_003:** Agregar factores de seguridad en flujos cr\u00edticos como login, ",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "objective",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "supporting",
+      "id": "OBJ_003",
+      "snippet": "formaci\u00f3n relacionada con el Estado. Evidencia: E02/S01:p.35; E04/S01:p.37. - **OBJ_003:** Agregar factores de seguridad en flujos cr\u00edticos como login, recuperaci\u00f3n y cambio de datos de contacto. Evidencia: E04/S01:p.37; E05/S01:p.39; E08/S06:p.1:HU02-HU03. - **OBJ_004:** Facilitar acceso a notificaciones electr\u00f3nicas ",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "objective",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "supporting",
+      "id": "OBJ_004",
+      "snippet": "de contacto. Evidencia: E04/S01:p.37; E05/S01:p.39; E08/S06:p.1:HU02-HU03. - **OBJ_004:** Facilitar acceso a notificaciones electr\u00f3nicas de procedimientos administrativos mediante DDU y Plataforma de Notificaciones. Evidencia: E01/S01:p.2; E10-E11; E14/S07:p.1. - **OBJ_005:** Facilitar control y visibilidad de autoriza",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "objective",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "supporting",
+      "id": "OBJ_005",
+      "snippet": "Plataforma de Notificaciones. Evidencia: E01/S01:p.2; E10-E11; E14/S07:p.1. - **OBJ_005:** Facilitar control y visibilidad de autorizaciones de uso de datos sensibles entre instituciones p\u00fablicas. Evidencia: E03/S01:p.36; E12-E13. - **OBJ_006:** Fortalecer ayuda p\u00fablica y ayuda a instituciones integradas, incluyendo cr",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "objective",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "supporting",
+      "id": "OBJ_006",
+      "snippet": "s sensibles entre instituciones p\u00fablicas. Evidencia: E03/S01:p.36; E12-E13. - **OBJ_006:** Fortalecer ayuda p\u00fablica y ayuda a instituciones integradas, incluyendo credenciales y estado de integraciones. Evidencia: E03/S01:p.36; E05/S01:p.39. - **OBJ_007:** Definir flujos, prototipos, pruebas y prioridades de implementa",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "objective",
+      "ui_visibility": "internal_only"
+    },
+    {
+      "criticality": "supporting",
+      "id": "OBJ_007",
+      "snippet": "denciales y estado de integraciones. Evidencia: E03/S01:p.36; E05/S01:p.39. - **OBJ_007:** Definir flujos, prototipos, pruebas y prioridades de implementaci\u00f3n para las interfaces resultantes. Evidencia: E03/S01:p.36; E04/S01:p.37-p.38; E07/S05. ## 4. Perfiles de usuarios -> actores de casos de uso | actor_id | Perfil |",
+      "source_id": "SRC-PROFESOR-MD",
+      "type": "objective",
+      "ui_visibility": "internal_only"
+    }
+  ],
+  "section_count": 16,
+  "sections": [
+    {
+      "text": "",
+      "title": "Especificaci\u00f3n de Requerimientos Funcionales"
+    },
+    {
+      "text": "* status: complete\n* documentos_analizados: 7 documentos cargados por el usuario, inventariados como S01-S07.\n* ciclos_ejecutados: 4 ciclos de identificaci\u00f3n/especificaci\u00f3n; C1 inventario y extracci\u00f3n inicial; C2 clasificaci\u00f3n CU/FUN/FT/RN/CH/EX/OT y deduplicaci\u00f3n; C3 recuperaci\u00f3n complementaria desde bases t\u00e9cnicas, anexos e im\u00e1genes; C4 revisi\u00f3n final sin candidatos nuevos recuperables.\n* criterios_de_exclusion: stack tecnol\u00f3gico omitido\n* convenciones_id: CU_### caso de uso; FUN_### funcionalidad; FT_### flujo/procedimiento; RN_### regla de negocio; CH_### validaci\u00f3n/chequeo; EX_### restricci\u00f3n/excepci\u00f3n; OT_### otra especificaci\u00f3n \u00fatil; ACT_### actor; IMG_### imagen/anexo visual; source_id S##; chunk_id E##.\n\n| source_id | Documento | Tipo | P\u00e1ginas/secciones legibles | Uso en la especificaci\u00f3n |\n|---|---|---|---|---|\n| S01 | Rex._N\u00b0997-2023_aprueba_bases-mp.pdf | PDF escaneado/OCR | 64 p\u00e1ginas; legibilidad funcional alta en bases t\u00e9cnicas p.34-p.43 y anexos p.55-p.62; p\u00e1ginas administrativas no funcionales parcialmente OCR. | Contexto, objeto de contrataci\u00f3n, requerimientos espec\u00edficos, alcance, beneficios, lineamientos funcionales, garant\u00eda. |\n| S02 | ANEXO_N\u00b03.docx | DOCX | ",
+      "title": "Control de generaci\u00f3n"
+    },
+    {
+      "text": "El sistema especificado es el Portal Ciudadano de Clave\u00danica, compuesto por una experiencia p\u00fablica y una experiencia privada autenticada. Debe permitir acceso claro a activaci\u00f3n, autenticaci\u00f3n, recuperaci\u00f3n, ayuda y contenidos p\u00fablicos; ofrecer secciones privadas para configuraci\u00f3n de Clave\u00danica, datos personales, segundo factor, historial de acciones, informaci\u00f3n personal, expedientes electr\u00f3nicos, poderes/representaciones, notificaciones y autorizaciones de uso de datos sensibles; e integrarse funcionalmente con la Plataforma de Notificaciones/Casilla\u00danica para configuraci\u00f3n del Domicilio Digital \u00danico y consulta de notificaciones. Evidencia: E01/S01:p.1-p.2; E02/S01:p.34-p.35; E05/S01:p.38-p.39; E08-E14.\n\nEl portal debe centralizar informaci\u00f3n relacionada con la identidad digital de las personas, ofrecer un entorno digital centralizado, seguro y provisto por el Estado, y facilitar el acceso a servicios vinculados a notificaciones electr\u00f3nicas, autorizaci\u00f3n de uso de datos sensibles y ayuda para instituciones integradas. Evidencia: E02/S01:p.35; E03/S01:p.36; E05/S01:p.39.",
+      "title": "1. Descripci\u00f3n del sistema de software"
+    },
+    {
+      "text": "Definir y materializar una nueva versi\u00f3n del Portal Ciudadano de Clave\u00danica que mejore la experiencia de uso, centralice servicios e informaci\u00f3n de identidad digital, fortalezca flujos de seguridad, permita acceso a notificaciones electr\u00f3nicas mediante DDU/Casilla\u00danica, y entregue control y visibilidad sobre autorizaciones de uso de datos sensibles. Evidencia: E01/S01:p.1-p.2; E02/S01:p.35; E04/S01:p.37; E05/S01:p.39.",
+      "title": "2. Objetivo principal"
+    },
+    {
+      "text": "- **OBJ_001:** Enriquecer la experiencia de uso mediante una nueva versi\u00f3n del portal con interfaz m\u00e1s intuitiva y segura. Evidencia: E04/S01:p.37.\n- **OBJ_002:** Centralizar informaci\u00f3n de las personas para facilitar acceso y gesti\u00f3n de informaci\u00f3n relacionada con el Estado. Evidencia: E02/S01:p.35; E04/S01:p.37.\n- **OBJ_003:** Agregar factores de seguridad en flujos cr\u00edticos como login, recuperaci\u00f3n y cambio de datos de contacto. Evidencia: E04/S01:p.37; E05/S01:p.39; E08/S06:p.1:HU02-HU03.\n- **OBJ_004:** Facilitar acceso a notificaciones electr\u00f3nicas de procedimientos administrativos mediante DDU y Plataforma de Notificaciones. Evidencia: E01/S01:p.2; E10-E11; E14/S07:p.1.\n- **OBJ_005:** Facilitar control y visibilidad de autorizaciones de uso de datos sensibles entre instituciones p\u00fablicas. Evidencia: E03/S01:p.36; E12-E13.\n- **OBJ_006:** Fortalecer ayuda p\u00fablica y ayuda a instituciones integradas, incluyendo credenciales y estado de integraciones. Evidencia: E03/S01:p.36; E05/S01:p.39.\n- **OBJ_007:** Definir flujos, prototipos, pruebas y prioridades de implementaci\u00f3n para las interfaces resultantes. Evidencia: E03/S01:p.36; E04/S01:p.37-p.38; E07/S05.",
+      "title": "3. Objetivos espec\u00edficos"
+    },
+    {
+      "text": "| actor_id | Perfil | Descripci\u00f3n | Casos de uso asociados | Evidencia |\n|---|---|---|---|---|\n| ACT_001 | Usuario p\u00fablico del portal Clave\u00danica | Persona que accede al portal p\u00fablico, con o sin Clave\u00danica activada. | CU_001, CU_003, CU_020 | E08/S06:p.1:HU01-HU03; E05/S01:p.39 |\n| ACT_002 | Usuario con Clave\u00danica activada | Persona autenticada que puede administrar datos, sesi\u00f3n, 2FA, notificaciones y autorizaciones. | CU_002-CU_016, CU_017-CU_019 | E08/S06:p.1:HU02-HU04; E09-E13 |\n| ACT_003 | Usuario sin DDU configurado | Usuario autenticado cuyo Domicilio Digital \u00danico a\u00fan no est\u00e1 configurado. | CU_005, CU_006, CU_008, CU_009, CU_012 | E09/S06:p.2:HU05-HU06; E10/S06:p.3:HU08-HU09; E11/S06:p.4:HU12; E14/S07:p.1 |\n| ACT_004 | Usuario con DDU configurado | Usuario autenticado que ya configur\u00f3 DDU y puede visualizar notificaciones pendientes. | CU_007, CU_009-CU_011 | E09/S06:p.2:HU07; E10/S06:p.3:HU09-HU10; E11/S06:p.4:HU11; E14/S07:p.1 |\n| ACT_005 | Usuario con autorizaciones pendientes | Usuario que tiene solicitudes de autorizaci\u00f3n de uso de datos sensibles pendientes de decisi\u00f3n. | CU_013, CU_015 | E12/S06:p.5:HU13; E13/S06:p.6:HU15 |\n| ACT_006 | Usuario con autorizaciones vige",
+      "title": "4. Perfiles de usuarios -> actores de casos de uso"
+    },
+    {
+      "text": "- **ID:** CU_001\n  - **Nombre:** Consultar portal p\u00fablico de Clave\u00danica\n  - **Descripci\u00f3n:** Permitir que cualquier usuario acceda a un sitio p\u00fablico con opciones disponibles de activaci\u00f3n, autenticaci\u00f3n y recuperaci\u00f3n, m\u00e1s novedades e informaci\u00f3n de ayuda.\n  - **Relaci\u00f3n jer\u00e1rquica:** Ra\u00edz; agrupa FUN_001-FUN_003.\n  - **Actor/disparador:** ACT_001; disparador: ingreso al portal p\u00fablico.\n  - **Precondiciones:** El portal p\u00fablico est\u00e1 disponible para consulta.\n  - **Resultado esperado:** El usuario visualiza accesos y contenidos p\u00fablicos de forma clara y precisa.\n  - **Criterios de aceptaci\u00f3n:** Se muestran accesos a activar, autenticarse y recuperar; se muestra informaci\u00f3n de ayuda y novedades; la navegaci\u00f3n p\u00fablica es clara.\n  - **Evidencia:** E08/S06:p.1:HU01; E05/S01:p.39.\n- **ID:** CU_002\n  - **Nombre:** Cambiar datos personales con factor de seguridad\n  - **Descripci\u00f3n:** Permitir que un usuario con Clave\u00danica activada cambie datos personales de contacto s\u00f3lo despu\u00e9s de responder una o m\u00e1s preguntas de \u00e1mbito personal.\n  - **Relaci\u00f3n jer\u00e1rquica:** Ra\u00edz; agrupa FUN_004-FUN_005.\n  - **Actor/disparador:** ACT_002; disparador: usuario intenta cambiar tel\u00e9fono o correo electr\u00f3nico ",
+      "title": "5. Descripci\u00f3n de casos de uso con ID CU_X"
+    },
+    {
+      "text": "- **ID:** FUN_001\n  - **Nombre:** Mostrar accesos principales del portal p\u00fablico\n  - **Descripci\u00f3n:** Presentar opciones de activaci\u00f3n, autenticaci\u00f3n y recuperaci\u00f3n de Clave\u00danica en el portal p\u00fablico.\n  - **Relaci\u00f3n jer\u00e1rquica:** CU_001.\n  - **Actor/disparador:** ACT_001; disparador: carga del portal p\u00fablico.\n  - **Precondiciones:** Portal p\u00fablico disponible.\n  - **Resultado esperado:** El usuario identifica y accede a las opciones principales.\n  - **Criterios de aceptaci\u00f3n:** Se muestran activar, autenticarse y recuperar; las opciones son visibles y distinguibles; los enlaces/acciones conducen al flujo correspondiente.\n  - **Evidencia:** E08/S06:p.1:HU01.\n- **ID:** FUN_002\n  - **Nombre:** Publicar novedades e informaci\u00f3n de ayuda\n  - **Descripci\u00f3n:** Disponer contenidos de novedades e informaci\u00f3n de ayuda de manera oportuna en el portal p\u00fablico.\n  - **Relaci\u00f3n jer\u00e1rquica:** CU_001, CU_020.\n  - **Actor/disparador:** ACT_001; disparador: consulta de contenidos p\u00fablicos.\n  - **Precondiciones:** Contenidos definidos por la contraparte; portal p\u00fablico disponible.\n  - **Resultado esperado:** El usuario accede a informaci\u00f3n de ayuda y novedades vigentes.\n  - **Criterios de aceptaci\u00f3n:** ",
+      "title": "6. Descripci\u00f3n de funcionalidades con ID FUN_X, clasificada por CU_X"
+    },
+    {
+      "text": "- **ID:** FT_001\n  - **Nombre:** Navegaci\u00f3n p\u00fablica de activaci\u00f3n, autenticaci\u00f3n, recuperaci\u00f3n y ayuda\n  - **Descripci\u00f3n:** El usuario entra al portal p\u00fablico, identifica las opciones principales, consulta ayuda/novedades y selecciona el flujo requerido.\n  - **Relaci\u00f3n jer\u00e1rquica:** FUN_001-FUN_003; CU_001.\n  - **Actor/disparador:** ACT_001; disparador: ingreso al portal p\u00fablico.\n  - **Precondiciones:** Portal p\u00fablico disponible; contenidos publicados.\n  - **Resultado esperado:** El usuario accede al flujo o contenido p\u00fablico que necesita.\n  - **Criterios de aceptaci\u00f3n:** Opciones principales visibles; ayuda/novedades accesibles; navegaci\u00f3n consistente entre secciones; se contemplan pantallas de distintas dimensiones.\n  - **Evidencia:** E08/S06:p.1:HU01; E05/S01:p.39; E04/S01:p.37.\n- **ID:** FT_002\n  - **Nombre:** Cambio de tel\u00e9fono o correo con validaci\u00f3n personal\n  - **Descripci\u00f3n:** El usuario solicita cambiar tel\u00e9fono/correo, el sistema presenta validaci\u00f3n personal y s\u00f3lo permite guardar el cambio tras superarla.\n  - **Relaci\u00f3n jer\u00e1rquica:** FUN_004-FUN_005; CU_002.\n  - **Actor/disparador:** ACT_002; disparador: editar datos de contacto.\n  - **Precondiciones:** Usuario autentic",
+      "title": "7. Descripci\u00f3n de flujos de trabajo o procedimientos con ID FT_X, clasificado por FUN_X"
+    },
+    {
+      "text": "- **ID:** RN_001\n  - **Nombre:** Accesos obligatorios del portal p\u00fablico\n  - **Descripci\u00f3n:** El portal p\u00fablico debe disponer claramente las opciones activar, autenticarse y recuperar.\n  - **Relaci\u00f3n jer\u00e1rquica:** FT_001; FUN_001.\n  - **Actor/disparador:** ACT_001; disparador: ingreso al portal p\u00fablico.\n  - **Precondiciones:** Portal p\u00fablico disponible.\n  - **Resultado esperado:** Opciones principales visibles.\n  - **Criterios de aceptaci\u00f3n:** Las tres opciones est\u00e1n presentes; est\u00e1n ubicadas en el portal p\u00fablico; son comprensibles para el usuario.\n  - **Evidencia:** E08/S06:p.1:HU01.\n- **ID:** RN_002\n  - **Nombre:** Bloqueo de cambio de tel\u00e9fono/correo sin validaci\u00f3n personal\n  - **Descripci\u00f3n:** No se debe permitir cambiar tel\u00e9fono y/o correo electr\u00f3nico sin antes responder una o m\u00e1s preguntas del \u00e1mbito personal.\n  - **Relaci\u00f3n jer\u00e1rquica:** FT_002; FUN_005.\n  - **Actor/disparador:** ACT_002; disparador: intento de guardar tel\u00e9fono/correo.\n  - **Precondiciones:** Usuario autenticado; cambio de dato de contacto iniciado.\n  - **Resultado esperado:** El cambio queda condicionado a validaci\u00f3n personal previa.\n  - **Criterios de aceptaci\u00f3n:** Sin respuesta v\u00e1lida no hay cambio; con r",
+      "title": "8. Descripci\u00f3n de reglas de negocio con ID RN_X, clasificado por FT_X"
+    },
+    {
+      "text": "- **ID:** CH_001\n  - **Nombre:** Verificar disponibilidad de opciones p\u00fablicas\n  - **Descripci\u00f3n:** Comprobar que activar, autenticarse y recuperar est\u00e9n visibles y accesibles en portal p\u00fablico.\n  - **Relaci\u00f3n jer\u00e1rquica:** FT_001; RN_001.\n  - **Actor/disparador:** Equipo de QA/usuario p\u00fablico; disparador: prueba de portal p\u00fablico.\n  - **Precondiciones:** Portal p\u00fablico desplegado en ambiente de prueba.\n  - **Resultado esperado:** Opciones principales verificadas.\n  - **Criterios de aceptaci\u00f3n:** Las tres opciones est\u00e1n presentes; son accionables; se registra evidencia de prueba.\n  - **Evidencia:** E08/S06:p.1:HU01; E07/S05:plan_pruebas.\n- **ID:** CH_002\n  - **Nombre:** Validar preguntas personales antes de cambio de contacto\n  - **Descripci\u00f3n:** Comprobar que tel\u00e9fono/correo no cambien sin responder una o m\u00e1s preguntas personales definidas.\n  - **Relaci\u00f3n jer\u00e1rquica:** FT_002; RN_002.\n  - **Actor/disparador:** ACT_002/QA; disparador: prueba de cambio de contacto.\n  - **Precondiciones:** Usuario autenticado; flujo de datos personales disponible.\n  - **Resultado esperado:** Cambio permitido s\u00f3lo con validaci\u00f3n superada.\n  - **Criterios de aceptaci\u00f3n:** Sin respuesta no cambia; respu",
+      "title": "9. Descripci\u00f3n de validaciones y chequeos con ID CH_X, clasificado por FT_X"
+    },
+    {
+      "text": "- **ID:** EX_001\n  - **Nombre:** Cancelaci\u00f3n del modal DDU posterior al login\n  - **Descripci\u00f3n:** Si el usuario decide no configurar DDU desde el modal posterior al login, no se deriva a la pasarela y se muestra alerta de DDU pendiente en CU.\n  - **Relaci\u00f3n jer\u00e1rquica:** FT_007; RN_007.\n  - **Actor/disparador:** ACT_003; disparador: cancelar modal.\n  - **Precondiciones:** Usuario autenticado sin DDU; modal desplegado.\n  - **Resultado esperado:** Usuario permanece/retorna a CU con DDU pendiente.\n  - **Criterios de aceptaci\u00f3n:** Cancelaci\u00f3n disponible; no se configura DDU; alerta pendiente visible.\n  - **Evidencia:** E09/S06:p.2:HU06.\n- **ID:** EX_002\n  - **Nombre:** Cancelaci\u00f3n durante activaci\u00f3n DDU\n  - **Descripci\u00f3n:** Si el usuario cancela el proceso de activaci\u00f3n DDU durante la pasarela y confirma la cancelaci\u00f3n, retorna a CU sin configurar DDU.\n  - **Relaci\u00f3n jer\u00e1rquica:** FT_009; RN_009.\n  - **Actor/disparador:** ACT_003; disparador: cancelar activaci\u00f3n.\n  - **Precondiciones:** Proceso DDU iniciado y no finalizado.\n  - **Resultado esperado:** Usuario retorna a CU con DDU sin configurar.\n  - **Criterios de aceptaci\u00f3n:** Confirmaci\u00f3n solicitada; al confirmar retorna; DDU conser",
+      "title": "10. Descripci\u00f3n de restricciones y excepciones con ID EX_X, clasificado por FT_X"
+    },
+    {
+      "text": "- **ID:** OT_001\n  - **Nombre:** Metodolog\u00eda de investigaci\u00f3n de usuarios\n  - **Descripci\u00f3n:** Definir metodolog\u00eda para descubrir perfiles de usuario, m\u00e9tricas de negocio, necesidades alineadas a objetivos, y an\u00e1lisis cualitativo/cuantitativo.\n  - **Relaci\u00f3n jer\u00e1rquica:** FT_023; soporte transversal a CU_001-CU_021.\n  - **Actor/disparador:** Equipo del proyecto/contraparte; disparador: inicio de investigaci\u00f3n.\n  - **Precondiciones:** Alcance y objetivos del portal definidos.\n  - **Resultado esperado:** Insumos verificables para decisiones de experiencia y dise\u00f1o.\n  - **Criterios de aceptaci\u00f3n:** Perfiles identificados; m\u00e9tricas y necesidades documentadas; an\u00e1lisis cualitativo/cuantitativo registrado.\n  - **Evidencia:** E03/S01:p.36.\n- **ID:** OT_002\n  - **Nombre:** Estrategia de pruebas de usabilidad\n  - **Descripci\u00f3n:** Proponer y desarrollar estrategias de pruebas de usabilidad en etapas tempranas y finales para respaldar decisiones de experiencia.\n  - **Relaci\u00f3n jer\u00e1rquica:** FT_023, FT_025; soporte transversal.\n  - **Actor/disparador:** Equipo del proyecto/usuarios de prueba/contraparte; disparador: planificaci\u00f3n de validaci\u00f3n.\n  - **Precondiciones:** Prototipos o conceptos dis",
+      "title": "11. Otras especificaciones \u00fatiles para desarrollo del sistema, sin stack tecnol\u00f3gico"
+    },
+    {
+      "text": "Cat\u00e1logo de evidencias recuperadas:\n\n| chunk_id | Referencia | Contenido recuperado |\n|---|---|---|\n| E01 | S01:p.1-p.2 | Considerandos sobre Clave\u00danica como autenticaci\u00f3n digital del Estado, identidad digital, DDU y Plataforma de Notificaciones. |\n| E02 | S01:p.34-p.35 | Objeto y contexto t\u00e9cnico: portal ciudadano, identidad digital, DDU y necesidad de nueva versi\u00f3n del portal. |\n| E03 | S01:p.36 | Requerimientos espec\u00edficos: investigaci\u00f3n, ideaci\u00f3n, prototipado, testeo, implementaci\u00f3n de interfaces y alcance de autorizador/ayuda institucional. |\n| E04 | S01:p.37 | Beneficios, lineamientos de dise\u00f1o adaptable, navegaci\u00f3n consistente, casos de borde y pruebas de usabilidad. |\n| E05 | S01:p.38-p.39 | Accesibilidad, calidad y lineamientos funcionales: secciones, 2FA, DDU, notificaciones, autorizador, ayuda institucional. |\n| E06 | S01:p.42-p.43 | Garant\u00eda del software y apoyo t\u00e9cnico. |\n| E07 | S05:ANEXO6 | Contenido m\u00ednimo de oferta t\u00e9cnica, aseguramiento de calidad y garant\u00eda. |\n| E08 | S06:p.1 | Historias HU01-HU04. |\n| E09 | S06:p.2 | Historias HU05-HU07. |\n| E10 | S06:p.3 | Historias HU08-HU10. |\n| E11 | S06:p.4-p.5 | Historias HU11-HU12. |\n| E12 | S06:p.5 | Historia HU13. |\n| E",
+      "title": "12. Trazabilidad y evidencia"
+    },
+    {
+      "text": "- **ID:** VAC_001\n  - **Descripci\u00f3n:** El Anexo 7 menciona que la informaci\u00f3n de notificaciones se encuentra propuesta en un Anexo 9, pero el flujo cargado y descrito como integraci\u00f3n es el Anexo 8.\n  - **Evidencia:** E10/S06:p.3; E11/S06:p.4-p.5; E14/S07:p.1\n  - **Impacto:** Conflicto de numeraci\u00f3n de anexos.\n  - **Acci\u00f3n requerida:** Usar S07/Anexo 8 como evidencia cargada y solicitar confirmaci\u00f3n documental si se requiere trazabilidad formal.\n- **ID:** VAC_002\n  - **Descripci\u00f3n:** El manejo de multisesi\u00f3n exige evaluar alternativas, pros y contras, pero no define la pol\u00edtica final ni la conducta exacta del sistema.\n  - **Evidencia:** E08/S06:p.1-p.2:HU04; E05/S01:p.39\n  - **Impacto:** Ambig\u00fcedad funcional de seguridad.\n  - **Acci\u00f3n requerida:** Definir pol\u00edtica de multisesi\u00f3n con contraparte antes de implementaci\u00f3n.\n- **ID:** VAC_003\n  - **Descripci\u00f3n:** El segundo factor de autenticaci\u00f3n se declara opcional y obligatorio si se activa, pero no se especifica m\u00e9todo final, enrolamiento, recuperaci\u00f3n ni excepciones.\n  - **Evidencia:** E08/S06:p.1:HU03\n  - **Impacto:** Vac\u00edo de definici\u00f3n del 2FA.\n  - **Acci\u00f3n requerida:** Definir mecanismo, enrolamiento, desactivaci\u00f3n y recuperaci\u00f3",
+      "title": "13. Vac\u00edos, ambig\u00fcedades y conflictos de evidencia"
+    },
+    {
+      "text": "Los anexos visuales se generaron en PNG y se guardaron en la carpeta relativa `anexos_imagenes/`. El \u00edndice siguiente vincula cada imagen con fuente, p\u00e1gina y requisitos asociados.\n\n| imagen_id | archivo PNG | fuente/p\u00e1gina | clasificaci\u00f3n | trazabilidad |\n|---|---|---|---|---|\n| IMG_001 | `anexos_imagenes/IMG_001_ANEXO_N7_p1.png` | ANEXO_N\u00b07.pdf p.1 | Tabla de historias de usuario referenciales HU-01 a HU-04: portal p\u00fablico, datos personales, 2FA y multisesi\u00f3n. | CU_001-CU_004; FUN_001-FUN_009; RN_001-RN_004 |\n| IMG_002 | `anexos_imagenes/IMG_002_ANEXO_N7_p2.png` | ANEXO_N\u00b07.pdf p.2 | Tabla de historias HU-05 a HU-07: DDU desde login, cancelaci\u00f3n desde login y retorno tras configurar DDU. | CU_005-CU_007; FUN_010-FUN_015; RN_005-RN_008 |\n| IMG_003 | `anexos_imagenes/IMG_003_ANEXO_N7_p3.png` | ANEXO_N\u00b07.pdf p.3 | Tabla de historias HU-08 a HU-10: cancelaci\u00f3n de activaci\u00f3n, secci\u00f3n de notificaciones y listado. | CU_008-CU_010; FUN_016-FUN_021; RN_009-RN_011 |\n| IMG_004 | `anexos_imagenes/IMG_004_ANEXO_N7_p4.png` | ANEXO_N\u00b07.pdf p.4 | Tabla de historias HU-11 a HU-12: detalle de notificaci\u00f3n y activaci\u00f3n DDU desde portal. | CU_011-CU_012; FUN_022-FUN_024; RN_012 |\n| IMG_005 | `anexos",
+      "title": "14. indice con trazabilidad de las im\u00e1genes."
+    }
+  ]
+}

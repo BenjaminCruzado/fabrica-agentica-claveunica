@@ -1,0 +1,2254 @@
+{
+  "domain_terms": {
+    "auditoria": false,
+    "autorizaciones": true,
+    "clave_unica": false,
+    "domicilio_digital": true,
+    "notificaciones": true
+  },
+  "policy": "trusted inputs can enter planning and generation only through context packs and evidence records",
+  "records": [
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "CU_001",
+      "artifact_type": "CU",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "CU_002",
+      "artifact_type": "CU",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "CU_003",
+      "artifact_type": "CU",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "CU_004",
+      "artifact_type": "CU",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "CU_005",
+      "artifact_type": "CU",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "CU_006",
+      "artifact_type": "CU",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "CU_007",
+      "artifact_type": "CU",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "CU_008",
+      "artifact_type": "CU",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "CU_009",
+      "artifact_type": "CU",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "CU_010",
+      "artifact_type": "CU",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "CU_011",
+      "artifact_type": "CU",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "CU_012",
+      "artifact_type": "CU",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "CU_013",
+      "artifact_type": "CU",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "CU_014",
+      "artifact_type": "CU",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "CU_015",
+      "artifact_type": "CU",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "CU_016",
+      "artifact_type": "CU",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "CU_017",
+      "artifact_type": "CU",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "CU_018",
+      "artifact_type": "CU",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "CU_019",
+      "artifact_type": "CU",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "CU_020",
+      "artifact_type": "CU",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "CU_021",
+      "artifact_type": "CU",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "FUN_001",
+      "artifact_type": "FUN",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "FUN_002",
+      "artifact_type": "FUN",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "FUN_003",
+      "artifact_type": "FUN",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "FUN_004",
+      "artifact_type": "FUN",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "FUN_005",
+      "artifact_type": "FUN",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "FUN_006",
+      "artifact_type": "FUN",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "FUN_007",
+      "artifact_type": "FUN",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "FUN_008",
+      "artifact_type": "FUN",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "FUN_009",
+      "artifact_type": "FUN",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "FUN_010",
+      "artifact_type": "FUN",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "FUN_011",
+      "artifact_type": "FUN",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "FUN_012",
+      "artifact_type": "FUN",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "FUN_013",
+      "artifact_type": "FUN",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "FUN_014",
+      "artifact_type": "FUN",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "FUN_015",
+      "artifact_type": "FUN",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "FUN_016",
+      "artifact_type": "FUN",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "FUN_017",
+      "artifact_type": "FUN",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "FUN_018",
+      "artifact_type": "FUN",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "FUN_019",
+      "artifact_type": "FUN",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "FUN_020",
+      "artifact_type": "FUN",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "FUN_021",
+      "artifact_type": "FUN",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "FUN_022",
+      "artifact_type": "FUN",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "FUN_023",
+      "artifact_type": "FUN",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "FUN_024",
+      "artifact_type": "FUN",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "FUN_025",
+      "artifact_type": "FUN",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "FUN_026",
+      "artifact_type": "FUN",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "FUN_027",
+      "artifact_type": "FUN",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "FUN_028",
+      "artifact_type": "FUN",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "FUN_029",
+      "artifact_type": "FUN",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "FUN_030",
+      "artifact_type": "FUN",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "FUN_031",
+      "artifact_type": "FUN",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "FUN_032",
+      "artifact_type": "FUN",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "FUN_033",
+      "artifact_type": "FUN",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "FUN_034",
+      "artifact_type": "FUN",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "FUN_035",
+      "artifact_type": "FUN",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "FUN_036",
+      "artifact_type": "FUN",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "FUN_037",
+      "artifact_type": "FUN",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "FUN_038",
+      "artifact_type": "FUN",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "FUN_039",
+      "artifact_type": "FUN",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "FUN_040",
+      "artifact_type": "FUN",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "FT_001",
+      "artifact_type": "FT",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "FT_002",
+      "artifact_type": "FT",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "FT_003",
+      "artifact_type": "FT",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "FT_004",
+      "artifact_type": "FT",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "FT_005",
+      "artifact_type": "FT",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "FT_006",
+      "artifact_type": "FT",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "FT_007",
+      "artifact_type": "FT",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "FT_008",
+      "artifact_type": "FT",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "FT_009",
+      "artifact_type": "FT",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "FT_010",
+      "artifact_type": "FT",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "FT_011",
+      "artifact_type": "FT",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "FT_012",
+      "artifact_type": "FT",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "FT_013",
+      "artifact_type": "FT",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "FT_014",
+      "artifact_type": "FT",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "FT_015",
+      "artifact_type": "FT",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "FT_016",
+      "artifact_type": "FT",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "FT_017",
+      "artifact_type": "FT",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "FT_018",
+      "artifact_type": "FT",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "FT_019",
+      "artifact_type": "FT",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "FT_020",
+      "artifact_type": "FT",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "FT_021",
+      "artifact_type": "FT",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "FT_022",
+      "artifact_type": "FT",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "FT_023",
+      "artifact_type": "FT",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "FT_024",
+      "artifact_type": "FT",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "FT_025",
+      "artifact_type": "FT",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "FT_026",
+      "artifact_type": "FT",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "RN_001",
+      "artifact_type": "RN",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "RN_002",
+      "artifact_type": "RN",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "RN_003",
+      "artifact_type": "RN",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "RN_004",
+      "artifact_type": "RN",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "RN_005",
+      "artifact_type": "RN",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "RN_006",
+      "artifact_type": "RN",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "RN_007",
+      "artifact_type": "RN",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "RN_008",
+      "artifact_type": "RN",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "RN_009",
+      "artifact_type": "RN",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "RN_010",
+      "artifact_type": "RN",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "RN_011",
+      "artifact_type": "RN",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "RN_012",
+      "artifact_type": "RN",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "RN_013",
+      "artifact_type": "RN",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "RN_014",
+      "artifact_type": "RN",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "RN_015",
+      "artifact_type": "RN",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "RN_016",
+      "artifact_type": "RN",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "RN_017",
+      "artifact_type": "RN",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "RN_018",
+      "artifact_type": "RN",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "RN_019",
+      "artifact_type": "RN",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "RN_020",
+      "artifact_type": "RN",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "RN_021",
+      "artifact_type": "RN",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "RN_022",
+      "artifact_type": "RN",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "RN_023",
+      "artifact_type": "RN",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "RN_024",
+      "artifact_type": "RN",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "RN_025",
+      "artifact_type": "RN",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "RN_026",
+      "artifact_type": "RN",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "RN_027",
+      "artifact_type": "RN",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "CH_001",
+      "artifact_type": "CH",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "CH_002",
+      "artifact_type": "CH",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "CH_003",
+      "artifact_type": "CH",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "CH_004",
+      "artifact_type": "CH",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "CH_005",
+      "artifact_type": "CH",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "CH_006",
+      "artifact_type": "CH",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "CH_007",
+      "artifact_type": "CH",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "CH_008",
+      "artifact_type": "CH",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "CH_009",
+      "artifact_type": "CH",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "CH_010",
+      "artifact_type": "CH",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "CH_011",
+      "artifact_type": "CH",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "CH_012",
+      "artifact_type": "CH",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "CH_013",
+      "artifact_type": "CH",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "CH_014",
+      "artifact_type": "CH",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "CH_015",
+      "artifact_type": "CH",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "CH_016",
+      "artifact_type": "CH",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "CH_017",
+      "artifact_type": "CH",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "CH_018",
+      "artifact_type": "CH",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "CH_019",
+      "artifact_type": "CH",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "EX_001",
+      "artifact_type": "EX",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "EX_002",
+      "artifact_type": "EX",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "EX_003",
+      "artifact_type": "EX",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "EX_004",
+      "artifact_type": "EX",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "EX_005",
+      "artifact_type": "EX",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "EX_006",
+      "artifact_type": "EX",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "EX_007",
+      "artifact_type": "EX",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "EX_008",
+      "artifact_type": "EX",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "EX_009",
+      "artifact_type": "EX",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "EX_010",
+      "artifact_type": "EX",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "ACT_001",
+      "artifact_type": "ACT",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "ACT_002",
+      "artifact_type": "ACT",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "ACT_003",
+      "artifact_type": "ACT",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "ACT_004",
+      "artifact_type": "ACT",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "ACT_005",
+      "artifact_type": "ACT",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "ACT_006",
+      "artifact_type": "ACT",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "ACT_007",
+      "artifact_type": "ACT",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "ACT_008",
+      "artifact_type": "ACT",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "ACT_009",
+      "artifact_type": "ACT",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "ACT_010",
+      "artifact_type": "ACT",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "OBJ_001",
+      "artifact_type": "OBJ",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "OBJ_002",
+      "artifact_type": "OBJ",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "OBJ_003",
+      "artifact_type": "OBJ",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "OBJ_004",
+      "artifact_type": "OBJ",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "OBJ_005",
+      "artifact_type": "OBJ",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "OBJ_006",
+      "artifact_type": "OBJ",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    },
+    {
+      "allowed_uses": [
+        "scope_design",
+        "plan",
+        "implement",
+        "validate"
+      ],
+      "artifact_id": "OBJ_007",
+      "artifact_type": "OBJ",
+      "must_cite_source": true,
+      "source_id": "SRC-PROFESOR-MD",
+      "taint": "clean",
+      "trust": "trusted"
+    }
+  ],
+  "source": "C:\\Users\\Benjamin Cruzado\\Desktop\\Ultimo Semestre\\IA\\PROYECTO\\proyecto licitacio\u0301n 3\\proyecto licitacio\u2560\u00fcn 3\\especificacion_requerimientos_funcionales-2.md",
+  "status": "complete"
+}

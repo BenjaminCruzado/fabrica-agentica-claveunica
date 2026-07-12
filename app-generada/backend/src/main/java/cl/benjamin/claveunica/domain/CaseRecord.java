@@ -11,5 +11,5 @@ public class CaseRecord {
   public UUID id;
   public String status;
   public String responsible;
-  public String procedureCode;
+  public UUID procedureId;
 }

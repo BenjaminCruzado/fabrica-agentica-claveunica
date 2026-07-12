@@ -1,0 +1,544 @@
+openapi: 3.1.0
+info:
+  title: Portal Ciudadano ClaveUnica Local
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+paths:
+  /api/v1/health:
+    get:
+      summary: Salud del backend
+      x-screen: SYS
+      x-table: none
+      x-mutates: false
+      responses:
+        '200':
+          description: Respuesta funcional local
+  /api/v1/dashboard:
+    get:
+      summary: Metricas vivas del portal
+      x-screen: P-03
+      x-table: procedures,notifications,consents,sessions
+      x-mutates: false
+      responses:
+        '200':
+          description: Respuesta funcional local
+  /api/v1/citizens:
+    get:
+      summary: Listar ciudadanos demo
+      x-screen: P-06
+      x-table: citizens
+      x-mutates: false
+      responses:
+        '200':
+          description: Respuesta funcional local
+  /api/v1/citizens/contact:
+    patch:
+      summary: Actualizar contacto ciudadano
+      x-screen: P-07
+      x-table: citizens,contact_channels,audit_events
+      x-mutates: true
+      responses:
+        '200':
+          description: Respuesta funcional local
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+  /api/v1/services:
+    get:
+      summary: Catalogo de servicios
+      x-screen: P-04
+      x-table: services,service_categories
+      x-mutates: false
+      responses:
+        '200':
+          description: Respuesta funcional local
+  /api/v1/procedures:
+    post:
+      summary: Crear tramite
+      x-screen: P-05
+      x-table: procedures,procedure_steps,audit_events
+      x-mutates: true
+      responses:
+        '200':
+          description: Respuesta funcional local
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+  /api/v1/procedures:
+    get:
+      summary: Listar tramites
+      x-screen: P-20
+      x-table: procedures
+      x-mutates: false
+      responses:
+        '200':
+          description: Respuesta funcional local
+  /api/v1/procedures/{id}/status:
+    patch:
+      summary: Cambiar estado de tramite
+      x-screen: P-21
+      x-table: procedures,case_events,audit_events
+      x-mutates: true
+      responses:
+        '200':
+          description: Respuesta funcional local
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+  /api/v1/notifications:
+    get:
+      summary: Listar notificaciones
+      x-screen: P-14
+      x-table: notifications
+      x-mutates: false
+      responses:
+        '200':
+          description: Respuesta funcional local
+  /api/v1/notifications/{id}/read:
+    patch:
+      summary: Marcar notificacion leida
+      x-screen: P-15
+      x-table: notifications,audit_events
+      x-mutates: true
+      responses:
+        '200':
+          description: Respuesta funcional local
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+  /api/v1/notifications/read-next:
+    post:
+      summary: Marcar siguiente notificacion leida
+      x-screen: P-15
+      x-table: notifications,audit_events
+      x-mutates: true
+      responses:
+        '200':
+          description: Respuesta funcional local
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+  /api/v1/notifications/preferences:
+    post:
+      summary: Guardar preferencias de aviso
+      x-screen: P-16
+      x-table: notification_preferences,audit_events
+      x-mutates: true
+      responses:
+        '200':
+          description: Respuesta funcional local
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+  /api/v1/sessions:
+    get:
+      summary: Listar sesiones
+      x-screen: P-09
+      x-table: sessions,trusted_devices
+      x-mutates: false
+      responses:
+        '200':
+          description: Respuesta funcional local
+  /api/v1/sessions/{id}/close:
+    patch:
+      summary: Cerrar sesion
+      x-screen: P-09
+      x-table: sessions,audit_events
+      x-mutates: true
+      responses:
+        '200':
+          description: Respuesta funcional local
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+  /api/v1/security/close-session:
+    post:
+      summary: Cerrar sesion activa
+      x-screen: P-09
+      x-table: sessions,audit_events
+      x-mutates: true
+      responses:
+        '200':
+          description: Respuesta funcional local
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+  /api/v1/security/login-attempt:
+    post:
+      summary: Intento de ingreso local
+      x-screen: P-01
+      x-table: sessions,audit_events
+      x-mutates: true
+      responses:
+        '200':
+          description: Respuesta funcional local
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+  /api/v1/mfa-methods:
+    post:
+      summary: Activar MFA
+      x-screen: P-10
+      x-table: mfa_methods,audit_events
+      x-mutates: true
+      responses:
+        '200':
+          description: Respuesta funcional local
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+  /api/v1/digital-addresses/current:
+    get:
+      summary: Domicilio vigente
+      x-screen: P-11
+      x-table: digital_addresses
+      x-mutates: false
+      responses:
+        '200':
+          description: Respuesta funcional local
+  /api/v1/digital-addresses:
+    post:
+      summary: Actualizar domicilio
+      x-screen: P-12
+      x-table: digital_addresses,address_history,audit_events
+      x-mutates: true
+      responses:
+        '200':
+          description: Respuesta funcional local
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+  /api/v1/digital-addresses/history:
+    get:
+      summary: Historial domicilio
+      x-screen: P-13
+      x-table: address_history
+      x-mutates: false
+      responses:
+        '200':
+          description: Respuesta funcional local
+  /api/v1/consents:
+    get:
+      summary: Listar permisos
+      x-screen: P-17
+      x-table: consents
+      x-mutates: false
+      responses:
+        '200':
+          description: Respuesta funcional local
+  /api/v1/consent-requests:
+    post:
+      summary: Solicitar autorizacion
+      x-screen: P-18
+      x-table: consent_requests,consent_history,audit_events
+      x-mutates: true
+      responses:
+        '200':
+          description: Respuesta funcional local
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+  /api/v1/consents/{id}/revoke:
+    patch:
+      summary: Revocar permiso
+      x-screen: P-17
+      x-table: consents,consent_history,audit_events
+      x-mutates: true
+      responses:
+        '200':
+          description: Respuesta funcional local
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+  /api/v1/consents/revoke-next:
+    post:
+      summary: Revocar siguiente permiso vigente
+      x-screen: P-17
+      x-table: consents,consent_history,audit_events
+      x-mutates: true
+      responses:
+        '200':
+          description: Respuesta funcional local
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+  /api/v1/consents/history:
+    get:
+      summary: Historial permisos
+      x-screen: P-19
+      x-table: consent_history
+      x-mutates: false
+      responses:
+        '200':
+          description: Respuesta funcional local
+  /api/v1/cases:
+    get:
+      summary: Listar expedientes
+      x-screen: P-20
+      x-table: cases,case_events
+      x-mutates: false
+      responses:
+        '200':
+          description: Respuesta funcional local
+  /api/v1/cases/{id}/comments:
+    post:
+      summary: Comentar expediente
+      x-screen: P-21
+      x-table: case_events,audit_events
+      x-mutates: true
+      responses:
+        '200':
+          description: Respuesta funcional local
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+  /api/v1/cases/comment-next:
+    post:
+      summary: Comentar siguiente expediente
+      x-screen: P-21
+      x-table: case_events,audit_events
+      x-mutates: true
+      responses:
+        '200':
+          description: Respuesta funcional local
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+  /api/v1/case-documents:
+    post:
+      summary: Adjuntar documento
+      x-screen: P-21
+      x-table: case_documents,case_events,audit_events
+      x-mutates: true
+      responses:
+        '200':
+          description: Respuesta funcional local
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+  /api/v1/cases/{id}/timeline:
+    get:
+      summary: Linea de tiempo
+      x-screen: P-22
+      x-table: case_events
+      x-mutates: false
+      responses:
+        '200':
+          description: Respuesta funcional local
+  /api/v1/faq:
+    get:
+      summary: Preguntas frecuentes
+      x-screen: P-24
+      x-table: faq_entries
+      x-mutates: false
+      responses:
+        '200':
+          description: Respuesta funcional local
+  /api/v1/support-tickets:
+    post:
+      summary: Crear ticket
+      x-screen: P-23
+      x-table: support_tickets,support_messages,audit_events
+      x-mutates: true
+      responses:
+        '200':
+          description: Respuesta funcional local
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+  /api/v1/support-tickets/{id}/close:
+    patch:
+      summary: Cerrar ticket
+      x-screen: P-25
+      x-table: support_tickets,audit_events
+      x-mutates: true
+      responses:
+        '200':
+          description: Respuesta funcional local
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+  /api/v1/audit-events:
+    get:
+      summary: Bitacora
+      x-screen: P-26
+      x-table: audit_events
+      x-mutates: false
+      responses:
+        '200':
+          description: Respuesta funcional local
+  /api/v1/audit-exports:
+    post:
+      summary: Generar exportacion
+      x-screen: P-28
+      x-table: audit_exports,audit_events
+      x-mutates: true
+      responses:
+        '200':
+          description: Respuesta funcional local
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+  /api/v1/integration-status:
+    get:
+      summary: Estado integraciones simuladas
+      x-screen: P-29
+      x-table: integration_status
+      x-mutates: false
+      responses:
+        '200':
+          description: Respuesta funcional local
+  /api/v1/security-alerts:
+    get:
+      summary: Alertas seguridad
+      x-screen: P-30
+      x-table: security_alerts
+      x-mutates: false
+      responses:
+        '200':
+          description: Respuesta funcional local
+  /api/v1/business-rules:
+    get:
+      summary: Reglas activas
+      x-screen: SYS
+      x-table: business_rules
+      x-mutates: false
+      responses:
+        '200':
+          description: Respuesta funcional local
+  /api/v1/validation-rules:
+    get:
+      summary: Validaciones activas
+      x-screen: SYS
+      x-table: validation_rules
+      x-mutates: false
+      responses:
+        '200':
+          description: Respuesta funcional local
+  /api/v1/roles:
+    get:
+      summary: Roles demo
+      x-screen: SYS
+      x-table: roles,permissions,user_roles
+      x-mutates: false
+      responses:
+        '200':
+          description: Respuesta funcional local
+  /api/v1/favorites:
+    post:
+      summary: Guardar favorito
+      x-screen: P-04
+      x-table: favorites,audit_events
+      x-mutates: true
+      responses:
+        '200':
+          description: Respuesta funcional local
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+  /api/v1/scope:
+    get:
+      summary: Scope de la app
+      x-screen: SYS
+      x-table: none
+      x-mutates: false
+      responses:
+        '200':
+          description: Respuesta funcional local
+  /api/v1/screens:
+    get:
+      summary: Pantallas disponibles
+      x-screen: SYS
+      x-table: none
+      x-mutates: false
+      responses:
+        '200':
+          description: Respuesta funcional local
+  /api/v1/workflow-events:
+    post:
+      summary: Evento de workflow controlado
+      x-screen: SYS
+      x-table: audit_events
+      x-mutates: true
+      responses:
+        '200':
+          description: Respuesta funcional local
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+  /api/v1/app-state:
+    get:
+      summary: Estado agregado para Angular
+      x-screen: SYS
+      x-table: domain aggregates
+      x-mutates: false
+      responses:
+        '200':
+          description: Respuesta funcional local

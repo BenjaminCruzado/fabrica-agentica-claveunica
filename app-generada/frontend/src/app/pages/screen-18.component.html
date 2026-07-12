@@ -1,2 +1,13 @@
-<section class="card"><p>{{screen.moduleName}}</p><h1>{{screen.title}}</h1><p>{{screen.summary}}</p><button *ngFor="let action of screen.actions" (click)="run(action)">{{action}}</button></section>
-<section class="card"><h2>Datos</h2><table><thead><tr><th *ngFor="let field of screen.fields">{{field}}</th></tr></thead><tbody><tr *ngFor="let row of screen.records"><td>{{row[0]}}</td><td>{{row[1]}}</td><td>{{row[2]}}</td></tr></tbody></table></section>
+<section class="card screen-header layout-consent-request" data-screen="18" style="--accent:#15803d">
+  <p>Autorizaciones</p>
+  <h1>Solicitud de autorizacion</h1>
+  <p>Solicitud de autorizacion: informacion actualizada desde la base local y acciones del flujo ciudadano.</p>
+  <div class="action-row"><button *ngFor="let action of screen.actions" (click)="run(action)">{{action}}</button></div>
+</section>
+<section class="form-grid">
+  <form class="card" (ngSubmit)="run(screen.actions[0])">
+    <label *ngFor="let field of screen.fields">{{field}}<input name="{{field}}" [(ngModel)]="form[field]" required /></label>
+    <button type="submit">{{screen.actions[0]}}</button>
+  </form>
+  <aside class="card"><h2>Estado del flujo</h2><p>{{statusMessage()}}</p><ul><li *ngFor="let row of rows()">{{row[0]}}: {{row[2]}}</li></ul></aside>
+</section>

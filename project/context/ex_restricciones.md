@@ -1,14 +1,14 @@
 # Resumen restricciones
 
-IDs detectados para uso compacto de agentes.
+IDs y fragmentos semanticos detectados para uso compacto de agentes.
 
-- EX_001
-- EX_002
-- EX_003
-- EX_004
-- EX_005
-- EX_006
-- EX_007
-- EX_008
-- EX_009
-- EX_010
+- EX_001: ción de restricciones y excepciones con ID EX_X, clasificado por FT_X - **ID:** EX_001 - **Nombre:** Cancelación del modal DDU posterior al login - **Descripción:** Si el usuario decide no configurar DDU desde el modal posterior al login, no se deriva a la pasarela y se muestra alerta de DDU pendiente en CU. - **Relaci
+- EX_002: ura DDU; alerta pendiente visible. - **Evidencia:** E09/S06:p.2:HU06. - **ID:** EX_002 - **Nombre:** Cancelación durante activación DDU - **Descripción:** Si el usuario cancela el proceso de activación DDU durante la pasarela y confirma la cancelación, retorna a CU sin configurar DDU. - **Relación jerárquica:** FT_009;
+- EX_003: DU conserva estado no configurado. - **Evidencia:** E10/S06:p.3:HU08. - **ID:** EX_003 - **Nombre:** Usuario con DDU no configurado no ve listado de notificaciones - **Descripción:** Cuando DDU no está configurado, la sección de notificaciones no muestra listado de pendientes; muestra alerta e inicio de activación. - *
+- EX_004: activación. - **Evidencia:** E10/S06:p.3:HU09; E11/S06:p.4-p.5:HU12. - **ID:** EX_004 - **Nombre:** Usuario con DDU configurado accede a listado en vez de pasarela - **Descripción:** Cuando DDU ya está configurado, la sección de notificaciones permite acceder al listado de pendientes de lectura en vez de iniciar activa
+- EX_005: eridos visibles. - **Evidencia:** E10/S06:p.3:HU09-HU10; E14/S07:p.1. - **ID:** EX_005 - **Nombre:** Segundo factor activo bloquea login si no se completa - **Descripción:** Si el usuario activó 2FA, el login no debe completarse sin superar el segundo factor definido. - **Relación jerárquica:** FT_004; RN_003. - **Acto
+- EX_006: ón final sólo con factor superado. - **Evidencia:** E08/S06:p.1:HU03. - **ID:** EX_006 - **Nombre:** Estados vacíos en secciones y listados - **Descripción:** Cuando no exista información para mostrar, los flujos deben contemplar estado vacío en lugar de fallar o presentar información incompleta. - **Relación jerárquic
+- EX_007: se orienta al usuario según sección. - **Evidencia:** E04/S01:p.37. - **ID:** EX_007 - **Nombre:** Errores al ingresar o cargar información - **Descripción:** Cuando existan errores al ingresar o cargar información, el sistema debe considerar alertas o tratamiento de borde definido. - **Relación jerárquica:** FT_001-FT
+- EX_008: sistema evita estados inconsistentes. - **Evidencia:** E04/S01:p.37. - **ID:** EX_008 - **Nombre:** Falta de información disponible - **Descripción:** Cuando falte información en una sección, debe existir tratamiento de borde definido para comunicar o resolver la ausencia de datos. - **Relación jerárquica:** FT_001-FT_
+- EX_009: ido; no se inventan datos en pantalla. - **Evidencia:** E04/S01:p.37. - **ID:** EX_009 - **Nombre:** Mal uso o comportamiento anómalo de ClaveÚnica - **Descripción:** Los flujos deben estudiar y definir mecanismos de alerta de comportamiento de uso indebido o anómalo de ClaveÚnica. - **Relación jerárquica:** FT_005; RN
+- EX_010: ón considerados. - **Evidencia:** E05/S01:p.39; E08/S06:p.1-p.2:HU04. - **ID:** EX_010 - **Nombre:** Diferencia terminológica en revocación - **Descripción:** El título y cuerpo de la historia HU16 refieren autorizaciones vigentes/aprobadas, pero la última frase menciona revocar una autorización pendiente; se registra 

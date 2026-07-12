@@ -1,0 +1,25 @@
+agent_id: agent.frontend_builder
+role: Construir frontend Angular moderno usable y verificable.
+phase: implement
+max_steps: 12
+allowed_tools:
+  - tool.files.read
+  - tool.files.write_dry_run
+  - tool.typecheck.tsc
+  - tool.test.playwright
+inputs:
+  - scope-inventory.json
+  - domain-blueprint.json
+  - data/api-catalog.json
+outputs:
+  - app-generada/frontend/src/app
+gates:
+  - frontend_structure
+  - accessibility
+  - visual_nonblank
+  - build_ready
+forbidden:
+  - secrets.read
+  - deploy.direct
+  - external.write_unapproved
+escalation_policy: needs_user_input cuando falte autorizacion para build o runtime.

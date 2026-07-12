@@ -1,4 +1,5 @@
-project/secrets/
+project/secrets/*
+!project/secrets/*.example.json
 project/runs/
 project/workspaces/
 project/cache/
@@ -11,3 +12,11 @@ project/tool-availability.json
 node_modules/
 __pycache__/
 .pytest_cache/
+**/target/
+**/dist/
+**/.angular/
+**/playwright-report/
+**/test-results/
+app-generada-respaldo-*/
+entregas/docx_render/
+entregas/*.zip

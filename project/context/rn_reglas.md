@@ -1,31 +1,31 @@
 # Resumen reglas
 
-IDs detectados para uso compacto de agentes.
+IDs y fragmentos semanticos detectados para uso compacto de agentes.
 
-- RN_001
-- RN_002
-- RN_003
-- RN_004
-- RN_005
-- RN_006
-- RN_007
-- RN_008
-- RN_009
-- RN_010
-- RN_011
-- RN_012
-- RN_013
-- RN_014
-- RN_015
-- RN_016
-- RN_017
-- RN_018
-- RN_019
-- RN_020
-- RN_021
-- RN_022
-- RN_023
-- RN_024
-- RN_025
-- RN_026
-- RN_027
+- RN_001: 8. Descripción de reglas de negocio con ID RN_X, clasificado por FT_X - **ID:** RN_001 - **Nombre:** Accesos obligatorios del portal público - **Descripción:** El portal público debe disponer claramente las opciones activar, autenticarse y recuperar. - **Relación jerárquica:** FT_001; FUN_001. - **Actor/disparador:** A
+- RN_002: son comprensibles para el usuario. - **Evidencia:** E08/S06:p.1:HU01. - **ID:** RN_002 - **Nombre:** Bloqueo de cambio de teléfono/correo sin validación personal - **Descripción:** No se debe permitir cambiar teléfono y/o correo electrónico sin antes responder una o más preguntas del ámbito personal. - **Relación jerár
+- RN_003: inuar; aplica a teléfono y correo. - **Evidencia:** E08/S06:p.1:HU02. - **ID:** RN_003 - **Nombre:** Segundo factor opcional y obligatorio si está activo - **Descripción:** El 2FA es opcional para el usuario, pero si lo activa será obligatorio cada vez que use el login de ClaveÚnica. - **Relación jerárquica:** FT_003-F
+- RN_004: egistro de estado activo/inactivo. - **Evidencia:** E08/S06:p.1:HU03. - **ID:** RN_004 - **Nombre:** Evaluación obligatoria de multisesión - **Descripción:** Debe evaluarse la mejor forma de manejar multisesiones y sus pros/contras para evitar posible mal uso de ClaveÚnica. - **Relación jerárquica:** FT_005; FUN_008-FU
+- RN_005: obado antes de implementación. - **Evidencia:** E08/S06:p.1-p.2:HU04. - **ID:** RN_005 - **Nombre:** Consulta de estado DDU después de autenticación - **Descripción:** El sistema ClaveÚnica debe identificar si el usuario autenticado tiene o no configurado su DDU. - **Relación jerárquica:** FT_006, FT_010; FUN_010. - **
+- RN_006: **Evidencia:** E09/S06:p.2:HU05-HU06; E10/S06:p.3:HU09; E14/S07:p.1. - **ID:** RN_006 - **Nombre:** Modal obligatorio antes de pasarela DDU desde login - **Descripción:** Antes de ingresar a la pasarela de configuración DDU, el sistema debe desplegar un modal para confirmar continuar o cancelar. - **Relación jerárquica
+- RN_007: derivación sólo si continúa. - **Evidencia:** E09/S06:p.2:HU05-HU06. - **ID:** RN_007 - **Nombre:** Cancelación desde modal mantiene DDU pendiente - **Descripción:** Si el usuario cancela desde el modal, se retorna al portal CU y la sección Domicilio Digital aparece con alerta de configuración pendiente. - **Relación j
+- RN_008: no a CU; alerta pendiente visible. - **Evidencia:** E09/S06:p.2:HU06. - **ID:** RN_008 - **Nombre:** Retorno al portal invocador tras completar DDU - **Descripción:** Al finalizar la configuración DDU en la Plataforma de Notificaciones, el sistema informa mediante modal y retorna al portal inicial ClaveÚnica. - **Relac
+- RN_009: uede continuar en CU. - **Evidencia:** E09/S06:p.2:HU07; E14/S07:p.1. - **ID:** RN_009 - **Nombre:** Cancelación durante activación conserva DDU sin configurar - **Descripción:** Si el usuario confirma cancelación durante la activación DDU, el sistema retorna a ClaveÚnica y el usuario continúa con DDU sin configurar. -
+- RN_010: o a CU; estado DDU sin configurar. - **Evidencia:** E10/S06:p.3:HU08. - **ID:** RN_010 - **Nombre:** Comportamiento dual de sección notificaciones - **Descripción:** La sección de notificaciones debe mostrar alerta e iniciar activación si DDU no está configurado, y permitir acceso a pendientes de lectura si DDU está co
+- RN_011: usuario no queda sin orientación. - **Evidencia:** E10/S06:p.3:HU09. - **ID:** RN_011 - **Nombre:** Campos mínimos del listado de notificaciones - **Descripción:** El listado de notificaciones pendientes debe desplegar fecha de recepción, institución remitente y título de la notificación. - **Relación jerárquica:** FT_
+- RN_012: título visible. - **Evidencia:** E10/S06:p.3:HU10; E11/S06:p.4:HU11. - **ID:** RN_012 - **Nombre:** Detalle de notificación en plataforma de notificaciones - **Descripción:** Para leer el detalle, el usuario selecciona una notificación y CU lo deriva a la plataforma de notificaciones/CasillaÚnica. - **Relación jerárqui
+- RN_013: CasillaÚnica; detalle consultable. - **Evidencia:** E11/S06:p.4:HU11. - **ID:** RN_013 - **Nombre:** Estados del historial de autorizaciones - **Descripción:** El historial de autorizaciones de uso de datos sensibles debe contemplar solicitudes aprobadas, rechazadas, pendientes y revocadas. - **Relación jerárquica:** F
+- RN_014: el usuario. - **Evidencia:** E12/S06:p.5:HU13; E13/S06:p.6:HU15-HU16. - **ID:** RN_014 - **Nombre:** Datos de solicitudes pendientes - **Descripción:** Para solicitudes pendientes se debe mostrar fecha de solicitud, institución solicitante, procedimiento administrativo, listado de datos involucrados e instituciones pro
+- RN_015: ndiente visible. - **Evidencia:** E12/S06:p.5:HU13; E13/S06:p.6:HU15. - **ID:** RN_015 - **Nombre:** Datos de solicitudes aprobadas - **Descripción:** Para solicitudes aprobadas se debe mostrar fecha de solicitud, fecha de aprobación, institución solicitante, procedimiento administrativo, listado de datos involucrados 
+- RN_016: as visibles. - **Evidencia:** E12/S06:p.5:HU13; E13/S06:p.6-p.7:HU16. - **ID:** RN_016 - **Nombre:** Datos de solicitudes rechazadas - **Descripción:** Para solicitudes rechazadas se debe mostrar fecha de solicitud, fecha de rechazo, institución solicitante, procedimiento administrativo, listado de datos involucrados e
+- RN_017: isibles; estado rechazado visible. - **Evidencia:** E12/S06:p.5:HU13. - **ID:** RN_017 - **Nombre:** Datos de solicitudes revocadas - **Descripción:** Para solicitudes revocadas se debe mostrar fecha de solicitud, fecha de aprobación, fecha de revocación, institución solicitante, procedimiento administrativo, listado d
+- RN_018: ciones visibles. - **Evidencia:** E12/S06:p.5:HU13; E13/S06:p.7:HU16. - **ID:** RN_018 - **Nombre:** Campos del historial de datos compartidos - **Descripción:** El historial de datos sensibles compartidos debe presentarse como tabla con institución proveedora, institución solicitante/consumidora, fecha y hora, y proce
+- RN_019: utorizados; fecha y hora visibles. - **Evidencia:** E13/S06:p.6:HU14. - **ID:** RN_019 - **Nombre:** Acciones de aprobación y rechazo para pendientes - **Descripción:** Las solicitudes pendientes deben disponer acciones para aprobar y rechazar la autorización pendiente. - **Relación jerárquica:** FT_016; FUN_028-FUN_02
+- RN_020: ica sólo a la solicitud pendiente. - **Evidencia:** E13/S06:p.6:HU15. - **ID:** RN_020 - **Nombre:** Acción de revocación para autorizaciones vigentes - **Descripción:** Las autorizaciones vigentes/aprobadas deben disponer una acción para revocar una o varias autorizaciones. - **Relación jerárquica:** FT_017; FUN_030. 
+- RN_021: storial conserva trazabilidad. - **Evidencia:** E13/S06:p.6-p.7:HU16. - **ID:** RN_021 - **Nombre:** Datos compartidos deben ser previamente autorizados - **Descripción:** El historial de datos sensibles compartidos debe permitir verificar que los datos compartidos fueron previamente autorizados. - **Relación jerárquic
+- RN_022: ferencia funcional a autorización. - **Evidencia:** E13/S06:p.6:HU14. - **ID:** RN_022 - **Nombre:** Secciones privadas ampliadas del portal - **Descripción:** El portal debe soportar secciones privadas como configuración, segundos factores, historial de acciones, expedientes, poderes/representaciones, autorizaciones, 
+- RN_023: stados vacíos diseñados. - **Evidencia:** E05/S01:p.39; E04/S01:p.37. - **ID:** RN_023 - **Nombre:** Secciones públicas de ayuda e información - **Descripción:** El portal público debe contemplar centros de ayuda, emergencias con ClaveÚnica, preguntas frecuentes, contacto, transparencia, participación ciudadana e infor
+- RN_024: idos publicados; navegación coherente. - **Evidencia:** E05/S01:p.39. - **ID:** RN_024 - **Nombre:** Ayuda institucional pública y privada - **Descripción:** La solución debe soportar secciones públicas y privadas de ayuda para instituciones integradas a ClaveÚnica. - **Relación jerárquica:** FT_022; FUN_038. - **Actor
+- RN_025: entro de ayuda renovado. - **Evidencia:** E03/S01:p.36; E05/S01:p.39. - **ID:** RN_025 - **Nombre:** Gestión institucional de credenciales e integración - **Descripción:** Las instituciones integradas deben contar con funcionalidades para gestionar credenciales de acceso y consultar el estado de sus solicitudes de inte
+- RN_026: itucional controlado según definición. - **Evidencia:** E03/S01:p.36. - **ID:** RN_026 - **Nombre:** Requerimientos referenciales no exhaustivos - **Descripción:** Las historias del Anexo 7 son una primera versión y deben complementarse con el trabajo de la contratación; nuevos requerimientos pueden surgir de investiga
+- RN_027: contraparte. - **Evidencia:** E08/S06:p.1:introducción; E05/S01:p.39. - **ID:** RN_027 - **Nombre:** Diseño de casos de borde y alertas - **Descripción:** Además del flujo exitoso, se deben considerar y diseñar casos de borde y sistema de alertas para errores, estados vacíos, falta de información y errores al ingresar 

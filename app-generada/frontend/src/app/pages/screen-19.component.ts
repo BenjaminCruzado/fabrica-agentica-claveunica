@@ -2,11 +2,16 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { PortalApiService } from '../services/portal-api.service';
+import { FeatureApiService } from '../services/feature-api.service';
 
 @Component({selector:'app-screen-19', standalone:true, imports:[CommonModule,FormsModule], templateUrl:'./screen-19.component.html'})
 export class Screen19Component {
   api = inject(PortalApiService);
-  screen = {"actions":["Exportar historial","Ver detalle"],"fields":["Fecha","Accion","Actor"],"moduleName":"Autorizaciones","records":[["2026-07-01","revocar","ciudadano"],["2026-06-20","autorizar","ciudadano"]],"route":"/autorizaciones/consent-history","summary":"Historial de autorizaciones: implementa campos Fecha, Accion, Actor y acciones Exportar historial, Ver detalle.","title":"Historial de autorizaciones"};
+  featureApi = inject(FeatureApiService);
+  screen = {"accent":"#15803d","actions":["Exportar historial","Ver detalle"],"feature":"consents","fields":["Fecha","Accion","Actor"],"layout":"consent-history","moduleName":"Autorizaciones","route":"/autorizaciones/consent-history","summary":"Historial de autorizaciones: informacion actualizada desde la base local y acciones del flujo ciudadano.","title":"Historial de autorizaciones"};
   state = this.api.state;
-  run(action: string) { this.api.runAction(this.screen.route, action).subscribe(); }
+  form: Record<string, string> = Object.fromEntries(this.screen.fields.map((field: string) => [field, '']));
+  rows() { return this.api.rowsForFeature(this.screen.feature); }
+  statusMessage() { return this.api.statusMessageForFeature(this.screen.feature); }
+  run(action: string) { this.featureApi.runFeatureAction(this.screen.feature, action, this.screen.route, this.form).subscribe(() => this.api.refresh().subscribe()); }
 }

@@ -1,6 +1,6 @@
 {
   "work_order_id": "WO-CLAVEUNICA-RUBRICA-FINAL",
-  "objective": "Crear mediante fabrica agentica una aplicacion web ficticia basada en el archivo de especificacion funcional del profesor, formalizando primero todos los minimos de rubrica y validando cantidades antes de codificar.",
+  "objective": "Crear mediante fabrica agentica una aplicacion web local funcional basada en el archivo de especificacion funcional del profesor, formalizando primero el dominio, flujos, persistencia, UI diferenciada, API real y minimos de rubrica antes de codificar.",
   "work_type": "feature",
   "scope": {
     "include": [
@@ -12,7 +12,7 @@
       "pruebas",
       "trazabilidad",
       "evidencia",
-      "despliegue_ec2"
+      "ejecucion_local"
     ],
     "exclude": [
       "integraciones_reales_estado",
@@ -35,11 +35,18 @@
       "path": "../../PLAN_GENERAL_PROYECTO.md",
       "authorized": true,
       "trust": "trusted"
+    },
+    {
+      "source_id": "SRC-PRODUCT-GENERATION-BRIEF",
+      "type": "generation_policy",
+      "path": "product_generation_brief.md",
+      "authorized": true,
+      "trust": "trusted"
     }
   ],
   "constraints": {
     "no_web": true,
-    "dry_run": true,
+    "dry_run": false,
     "sandbox_required": true,
     "max_retries": 1,
     "risk": "high",
@@ -53,7 +60,18 @@
     "codigo_fuente",
     "pruebas",
     "trazabilidad",
-    "final-report.json"
+    "final-report.json",
+    "domain-blueprint.json",
+    "openapi.yaml",
+    "migraciones_flyway",
+    "pruebas_de_comportamiento",
+    "pruebas_integracion_backend",
+    "features_frontend_tipadas",
+    "requirements-model.json",
+    "product-generation-policy.json",
+    "taint-ledger.json",
+    "app-review-report.md",
+    "build-runtime-checks"
   ],
   "approval_required_for": [
     "write",

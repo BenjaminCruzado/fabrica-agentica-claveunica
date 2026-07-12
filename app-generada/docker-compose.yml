@@ -1,35 +1,56 @@
 services:
   postgres:
     image: postgres:16-alpine
-    container_name: claveunica_postgres
+    container_name: claveunica_local_postgres
     restart: unless-stopped
     environment:
       POSTGRES_DB: claveunica
       POSTGRES_USER: claveunica
       POSTGRES_PASSWORD: claveunica
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U claveunica -d claveunica"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
     volumes:
       - postgres_data:/var/lib/postgresql/data
-      - ./database/schema.sql:/docker-entrypoint-initdb.d/01_schema.sql:ro
-      - ./database/seed.sql:/docker-entrypoint-initdb.d/02_seed.sql:ro
+
   backend:
-    build: ./backend
-    container_name: claveunica_backend
+    build:
+      context: ./backend
+    container_name: claveunica_local_backend
     restart: unless-stopped
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/claveunica
       SPRING_DATASOURCE_USERNAME: claveunica
       SPRING_DATASOURCE_PASSWORD: claveunica
+      SPRING_PROFILES_ACTIVE: docker
     ports:
       - "8080:8080"
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:8080/api/v1/health >/dev/null || exit 1"]
+      interval: 20s
+      timeout: 5s
+      retries: 10
+
   frontend:
-    build: ./frontend
-    container_name: claveunica_frontend
+    build:
+      context: ./frontend
+    container_name: claveunica_local_frontend
     restart: unless-stopped
     depends_on:
-      - backend
+      backend:
+        condition: service_healthy
     ports:
       - "3000:80"
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1/ >/dev/null || exit 1"]
+      interval: 20s
+      timeout: 5s
+      retries: 10
+
 volumes:
   postgres_data:

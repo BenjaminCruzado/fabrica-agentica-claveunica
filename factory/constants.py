@@ -18,6 +18,9 @@ FINAL_STATUSES = ("complete", "needs_user_input", "not_answerable", "error")
 
 ROOT = Path(__file__).resolve().parents[1]
 DESIGN_DOCS = (
+    "project/input/product_generation_brief.md",
+    "project/context/product-generation-policy.md",
+    "project/context/requirements-clean.md",
     "01_Constitucion_y_Especificacion_Fabrica.md",
     "02_Arquitectura_Stack_y_Flujos_SDD.md",
     "03_Agentes_Skills_Herramientas_y_Permisos.md",
@@ -48,6 +51,7 @@ SDD_PHASES = (
     "tasks",
     "analyze",
     "implement",
+    "repair",
     "validate",
     "containerize",
     "publish",

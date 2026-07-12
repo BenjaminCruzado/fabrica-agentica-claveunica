@@ -1,4 +1,77 @@
 {
+  "blueprint": {
+    "anti_fake_gates": [
+      "Los endpoints deben consultar o mutar PostgreSQL.",
+      "Las pantallas no pueden compartir un unico HTML.",
+      "Las pruebas deben validar al menos un cambio persistente de negocio.",
+      "Las tablas de dominio no pueden ser solo code/name/status/metadata."
+    ],
+    "description": "App academica local con flujos, persistencia y estados visibles; no integraciones estatales reales.",
+    "quality_bar": "local_functional_app",
+    "workflows": [
+      {
+        "id": "WF_TRAMITE",
+        "name": "Iniciar y seguir tramite",
+        "tables": [
+          "citizens",
+          "services",
+          "procedures",
+          "procedure_steps",
+          "cases",
+          "audit_events"
+        ],
+        "visible_effects": [
+          "aumenta Tramites activos",
+          "aparece procedimiento nuevo",
+          "se registra auditoria"
+        ]
+      },
+      {
+        "id": "WF_NOTIFICACION",
+        "name": "Leer y acusar notificacion",
+        "tables": [
+          "notifications",
+          "notification_preferences",
+          "audit_events"
+        ],
+        "visible_effects": [
+          "bajan mensajes nuevos",
+          "read_at queda poblado",
+          "se registra acuse"
+        ]
+      },
+      {
+        "id": "WF_CONSENTIMIENTO",
+        "name": "Autorizar o revocar datos",
+        "tables": [
+          "consents",
+          "consent_requests",
+          "consent_history",
+          "audit_events"
+        ],
+        "visible_effects": [
+          "cambia estado del permiso",
+          "queda historial",
+          "se actualiza metrica"
+        ]
+      },
+      {
+        "id": "WF_DDU",
+        "name": "Actualizar domicilio digital",
+        "tables": [
+          "digital_addresses",
+          "address_evidence",
+          "address_history",
+          "audit_events"
+        ],
+        "visible_effects": [
+          "cambia domicilio vigente",
+          "queda historial",
+          "se muestra revision"
+        ]
+      }
+    ]
+  },
   "relationships": [
     "citizens 1-N procedures",
     "citizens 1-N notifications",

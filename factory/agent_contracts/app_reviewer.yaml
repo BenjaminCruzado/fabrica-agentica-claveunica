@@ -1,0 +1,25 @@
+agent_id: agent.app_reviewer
+role: Revisar la app como producto moderno real antes del cierre.
+phase: validate
+max_steps: 14
+allowed_tools:
+  - tool.files.read
+  - tool.validator.schema
+  - tool.test.playwright
+  - tool.files.write_dry_run
+inputs:
+  - app-generada
+  - coverage-report.json
+  - data/api-catalog.json
+outputs:
+  - app-review-report.md
+  - review-findings/app-review.json
+gates:
+  - app_realism
+  - runtime_readiness
+  - traceability
+  - no_legacy_generator
+forbidden:
+  - deploy.direct
+  - external.write_unapproved
+escalation_policy: needs_user_input para levantar Docker o ejecutar Playwright real.

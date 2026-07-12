@@ -1,23 +1,23 @@
 # Resumen validaciones
 
-IDs detectados para uso compacto de agentes.
+IDs y fragmentos semanticos detectados para uso compacto de agentes.
 
-- CH_001
-- CH_002
-- CH_003
-- CH_004
-- CH_005
-- CH_006
-- CH_007
-- CH_008
-- CH_009
-- CH_010
-- CH_011
-- CH_012
-- CH_013
-- CH_014
-- CH_015
-- CH_016
-- CH_017
-- CH_018
-- CH_019
+- CH_001: cripción de validaciones y chequeos con ID CH_X, clasificado por FT_X - **ID:** CH_001 - **Nombre:** Verificar disponibilidad de opciones públicas - **Descripción:** Comprobar que activar, autenticarse y recuperar estén visibles y accesibles en portal público. - **Relación jerárquica:** FT_001; RN_001. - **Actor/dispar
+- CH_002: a de prueba. - **Evidencia:** E08/S06:p.1:HU01; E07/S05:plan_pruebas. - **ID:** CH_002 - **Nombre:** Validar preguntas personales antes de cambio de contacto - **Descripción:** Comprobar que teléfono/correo no cambien sin responder una o más preguntas personales definidas. - **Relación jerárquica:** FT_002; RN_002. - *
+- CH_003: respuesta válida permite cambio. - **Evidencia:** E08/S06:p.1:HU02. - **ID:** CH_003 - **Nombre:** Verificar persistencia de preferencia 2FA - **Descripción:** Comprobar que la activación/desactivación o preferencia definida de segundo factor quede registrada y sea consultable posteriormente. - **Relación jerárquica:**
+- CH_004: rtamiento de login usa ese estado. - **Evidencia:** E08/S06:p.1:HU03. - **ID:** CH_004 - **Nombre:** Validar exigencia de segundo factor en login - **Descripción:** Comprobar que el login solicite segundo factor cada vez que el usuario tenga 2FA activo. - **Relación jerárquica:** FT_004; RN_003. - **Actor/disparador:**
+- CH_005: se supera; se accede si se supera. - **Evidencia:** E08/S06:p.1:HU03. - **ID:** CH_005 - **Nombre:** Verificar consulta de estado DDU - **Descripción:** Comprobar que, después del login o al entrar a notificaciones, el sistema identifique DDU configurado/no configurado. - **Relación jerárquica:** FT_006, FT_010; RN_005
+- CH_006: **Evidencia:** E09/S06:p.2:HU05-HU06; E10/S06:p.3:HU09; E14/S07:p.1. - **ID:** CH_006 - **Nombre:** Validar modal de DDU antes de pasarela - **Descripción:** Comprobar que el modal de continuar/cancelar aparezca antes de ingresar a la pasarela de configuración DDU. - **Relación jerárquica:** FT_006-FT_007; RN_006. - **
+- CH_007: r deriva; cancelar no deriva. - **Evidencia:** E09/S06:p.2:HU05-HU06. - **ID:** CH_007 - **Nombre:** Validar alerta DDU pendiente tras cancelar - **Descripción:** Comprobar que, al cancelar desde modal o conservar DDU sin configurar, el portal muestre alerta de configuración pendiente. - **Relación jerárquica:** FT_007
+- CH_008: videncia:** E09/S06:p.2:HU06; E10/S06:p.3:HU09; E11/S06:p.4-p.5:HU12. - **ID:** CH_008 - **Nombre:** Confirmar cancelación durante activación DDU - **Descripción:** Comprobar que al cancelar en la pasarela se solicite confirmación y se respete cancelar o continuar. - **Relación jerárquica:** FT_009; RN_009. - **Actor/d
+- CH_009: torna a CU con DDU sin configurar. - **Evidencia:** E10/S06:p.3:HU08. - **ID:** CH_009 - **Nombre:** Validar retorno desde pasarela DDU - **Descripción:** Comprobar que al finalizar DDU la pasarela muestre aviso de retorno y devuelva control a ClaveÚnica. - **Relación jerárquica:** FT_008; RN_008. - **Actor/disparador:
+- CH_010: lizado a configurado. - **Evidencia:** E09/S06:p.2:HU07; E14/S07:p.1. - **ID:** CH_010 - **Nombre:** Validar listado de notificaciones pendientes - **Descripción:** Comprobar que el listado muestre sólo pendientes de lectura con campos requeridos. - **Relación jerárquica:** FT_011; RN_011. - **Actor/disparador:** ACT_0
+- CH_011: visible; registros son pendientes. - **Evidencia:** E10/S06:p.3:HU10. - **ID:** CH_011 - **Nombre:** Validar derivación a detalle de notificación - **Descripción:** Comprobar que seleccionar una notificación derive a CasillaÚnica y muestre el detalle correspondiente. - **Relación jerárquica:** FT_012; RN_012. - **Actor
+- CH_012: llega a CasillaÚnica. - **Evidencia:** E11/S06:p.4:HU11; E14/S07:p.1. - **ID:** CH_012 - **Nombre:** Validar campos del historial de autorizaciones - **Descripción:** Comprobar que los campos mostrados varíen correctamente según estado pendiente, aprobada, rechazada o revocada. - **Relación jerárquica:** FT_014; RN_013
+- CH_013: cada RN_017. - **Evidencia:** E12/S06:p.5:HU13; E13/S06:p.6-p.7:HU16. - **ID:** CH_013 - **Nombre:** Validar acciones por estado de autorización - **Descripción:** Comprobar que aprobar/rechazar esté disponible para pendientes y revocar para vigentes/aprobadas. - **Relación jerárquica:** FT_016-FT_017; RN_019-RN_020. -
+- CH_014: ción actualiza historial. - **Evidencia:** E13/S06:p.6-p.7:HU15-HU16. - **ID:** CH_014 - **Nombre:** Validar tabla de datos sensibles compartidos - **Descripción:** Comprobar que la tabla de datos compartidos incluya columnas requeridas y registros previamente autorizados. - **Relación jerárquica:** FT_015; RN_018, RN_
+- CH_015: mostrados corresponden al usuario. - **Evidencia:** E13/S06:p.6:HU14. - **ID:** CH_015 - **Nombre:** Validar diseño de estados vacíos y errores - **Descripción:** Comprobar que cada flujo contemple estados vacíos, errores de sistema, falta de información y errores de ingreso/carga. - **Relación jerárquica:** FT_001-FT_
+- CH_016: nida; error de ingreso/carga definido. - **Evidencia:** E04/S01:p.37. - **ID:** CH_016 - **Nombre:** Validar accesibilidad de interfaces - **Descripción:** Comprobar consideraciones de accesibilidad como tamaño de tipografía, alineación de texto, texto alternativo, contraste, legibilidad y uso del sistema. - **Relación
+- CH_017: tradas. - **Evidencia:** E05/S01:p.38; E07/S05:aseguramiento_calidad. - **ID:** CH_017 - **Nombre:** Validar usabilidad con usuarios - **Descripción:** Comprobar que los prototipos sean navegables y estén preparados para testeos de usabilidad, generando informe de correcciones. - **Relación jerárquica:** FT_025; OT_004
+- CH_018: adas en prototipos. - **Evidencia:** E04/S01:p.37-p.38; E03/S01:p.36. - **ID:** CH_018 - **Nombre:** Validar pruebas y evidencia de aseguramiento de calidad - **Descripción:** Comprobar que exista plan de pruebas, evidencia de ejecución y cantidad/tipo de testeos de prototipo y accesibilidad. - **Relación jerárquica:**
+- CH_019: esibilidad incluidas. - **Evidencia:** E07/S05:aseguramiento_calidad. - **ID:** CH_019 - **Nombre:** Validar implementación priorizada - **Descripción:** Comprobar que las interfaces/prototipos definidos se implementen al menos en prioridades 1 y 2, con historias asociadas y pruebas. - **Relación jerárquica:** FT_026; 

@@ -1,0 +1,150 @@
+{
+  "database_requirements": [
+    "tablas normalizadas",
+    "claves primarias",
+    "claves foraneas",
+    "estados de negocio",
+    "fechas de creacion y actualizacion",
+    "migraciones versionadas",
+    "datos semilla realistas",
+    "relaciones entre entidades",
+    "prohibido usar datos hardcodeados como fuente principal"
+  ],
+  "docker_requirements": {
+    "optional_services": [
+      "redis",
+      "pgadmin",
+      "migration-service"
+    ],
+    "required_services": [
+      "frontend",
+      "backend",
+      "postgres"
+    ],
+    "single_command_local_run": true
+  },
+  "forbidden_frontend_content": [
+    "validaciones internas de la fabrica",
+    "trazabilidad tecnica",
+    "IDs de rubrica",
+    "checks internos",
+    "logs de agentes",
+    "ejecutado desde Angular",
+    "paneles de debug",
+    "actividad reciente artificial",
+    "texto generico de plantilla",
+    "pantallas que solo listan requerimientos"
+  ],
+  "hash": "sha256:1f06058578656192b0b6da520c732e59f6d0442910fd8cf1afc867fb12ae22db",
+  "real_action_policy": [
+    "cada boton importante debe cambiar estado visible",
+    "cada boton importante debe llamar backend",
+    "cada accion relevante debe leer o escribir PostgreSQL",
+    "cada accion relevante debe mostrar feedback",
+    "cada accion relevante debe manejar errores",
+    "prohibido registrar solo actividad sin efecto de dominio"
+  ],
+  "rejection_criteria": [
+    "parece plantilla generica",
+    "muestra validaciones internas al usuario",
+    "muestra trazabilidad tecnica en la UI",
+    "botones solo registran actividad",
+    "no existe base de datos real",
+    "no hay migraciones",
+    "no hay datos semilla",
+    "backend sin logica de dominio",
+    "frontend usa datos hardcodeados como fuente principal",
+    "docker no levanta",
+    "playwright no prueba flujos reales",
+    "no representa la especificacion oficial"
+  ],
+  "relationship_to_functional_spec": "supplements SRC-PROFESOR-MD without replacing it",
+  "required_backend_behaviors": [
+    "login ciudadano simulado",
+    "dashboard ciudadano",
+    "listar y ver tramites",
+    "iniciar tramite",
+    "actualizar datos personales y de contacto",
+    "configurar domicilio digital",
+    "listar y marcar notificaciones",
+    "listar y revocar autorizaciones",
+    "listar y cerrar sesiones activas",
+    "listar y desactivar dispositivos MFA"
+  ],
+  "required_domain_entities": [
+    "ciudadanos",
+    "perfil ciudadano",
+    "autenticacion simulada ClaveUnica",
+    "recuperacion de acceso",
+    "MFA y dispositivos",
+    "tramites",
+    "solicitudes de tramite",
+    "notificaciones",
+    "mensajes",
+    "domicilio digital unico",
+    "datos personales",
+    "datos de contacto",
+    "autorizaciones de uso de datos",
+    "sesiones activas",
+    "auditoria interna"
+  ],
+  "required_review_agents": [
+    "UX/UI Product Reviewer",
+    "Arquitecto de Software",
+    "QA E2E",
+    "Runtime/Docker",
+    "Product Owner funcional",
+    "Revisor de cumplimiento de requerimientos"
+  ],
+  "required_screens": [
+    "Login ClaveUnica simulado",
+    "Recuperacion de acceso",
+    "Dashboard ciudadano",
+    "Catalogo de tramites",
+    "Detalle de tramite",
+    "Inicio de tramite",
+    "Datos personales",
+    "Datos de contacto",
+    "Domicilio digital",
+    "Notificaciones",
+    "Detalle de notificacion",
+    "Autorizaciones de datos",
+    "Solicitud de autorizacion",
+    "Sesiones activas",
+    "Dispositivos y MFA",
+    "Preferencias de privacidad"
+  ],
+  "required_stack": {
+    "api": "REST JSON",
+    "backend": "Spring Boot",
+    "backend_tests": [
+      "JUnit",
+      "equivalent"
+    ],
+    "containers": "Docker Compose",
+    "database": "PostgreSQL",
+    "e2e": "Playwright",
+    "frontend": "Angular",
+    "migrations": [
+      "Flyway",
+      "Liquibase"
+    ]
+  },
+  "required_tests": [
+    "docker build correcto",
+    "docker compose up correcto",
+    "healthcheck backend",
+    "frontend accesible",
+    "login funcional",
+    "navegacion principal",
+    "botones con efecto real",
+    "persistencia en DB",
+    "endpoints principales",
+    "flujos criticos con Playwright"
+  ],
+  "role": "generation_contract",
+  "source": "C:\\Users\\Benjamin Cruzado\\Desktop\\Ultimo Semestre\\IA\\PROYECTO\\fabrica-final\\project\\input\\product_generation_brief.md",
+  "source_excerpt_chars": 7087,
+  "source_id": "SRC-PRODUCT-GENERATION-BRIEF",
+  "status": "complete"
+}

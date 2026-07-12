@@ -1,0 +1,7 @@
+{
+  "backend": "spring_boot_maven",
+  "backend_port": 8080,
+  "database": "postgres",
+  "frontend": "angular",
+  "frontend_port": 3000
+}

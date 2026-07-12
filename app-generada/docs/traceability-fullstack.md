@@ -1,3 +1,3 @@
 # Trazabilidad Full-Stack
 
-Cada pantalla del ledger se materializa como componente Angular, endpoint Spring y registro de modelo de datos. La evidencia academica queda separada en `data/implementation-ledger.json` y `docs/`.
+Cada flujo vincula requisito fuente, pantalla, accion, endpoint, tabla y test en artefactos internos como `data/traceability-matrix.json`. La UI no debe renderizar IDs `CU_`, `FUN_`, `RN_`, `CH_`, `REQ_` ni textos de trazabilidad; solo muestra experiencia de usuario normal.

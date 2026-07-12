@@ -1,25 +1,25 @@
 # Resumen casos_uso
 
-IDs detectados para uso compacto de agentes.
+IDs y fragmentos semanticos detectados para uso compacto de agentes.
 
-- CU_001
-- CU_002
-- CU_003
-- CU_004
-- CU_005
-- CU_006
-- CU_007
-- CU_008
-- CU_009
-- CU_010
-- CU_011
-- CU_012
-- CU_013
-- CU_014
-- CU_015
-- CU_016
-- CU_017
-- CU_018
-- CU_019
-- CU_020
-- CU_021
+- CU_001: eÚnica | Persona que accede al portal público, con o sin ClaveÚnica activada. | CU_001, CU_003, CU_020 | E08/S06:p.1:HU01-HU03; E05/S01:p.39 | | ACT_002 | Usuario con ClaveÚnica activada | Persona autenticada que puede administrar datos, sesión, 2FA, notificaciones y autorizaciones. | CU_002-CU_016, CU_017-CU_019 | E08
+- CU_002: da que puede administrar datos, sesión, 2FA, notificaciones y autorizaciones. | CU_002-CU_016, CU_017-CU_019 | E08/S06:p.1:HU02-HU04; E09-E13 | | ACT_003 | Usuario sin DDU configurado | Usuario autenticado cuyo Domicilio Digital Único aún no está configurado. | CU_005, CU_006, CU_008, CU_009, CU_012 | E09/S06:p.2:HU05-
+- CU_003: Persona que accede al portal público, con o sin ClaveÚnica activada. | CU_001, CU_003, CU_020 | E08/S06:p.1:HU01-HU03; E05/S01:p.39 | | ACT_002 | Usuario con ClaveÚnica activada | Persona autenticada que puede administrar datos, sesión, 2FA, notificaciones y autorizaciones. | CU_002-CU_016, CU_017-CU_019 | E08/S06:p.1:
+- CU_004: xige por esta regla. - **Evidencia:** E08/S06:p.1:HU03; E05/S01:p.39. - **ID:** CU_004 - **Nombre:** Gestionar sesión segura y multisesión - **Descripción:** Evaluar y definir el manejo de multisesiones para reducir el riesgo de secuestro o mal uso de sesión cuando existan dispositivos autenticados con la misma ClaveÚn
+- CU_005: o | Usuario autenticado cuyo Domicilio Digital Único aún no está configurado. | CU_005, CU_006, CU_008, CU_009, CU_012 | E09/S06:p.2:HU05-HU06; E10/S06:p.3:HU08-HU09; E11/S06:p.4:HU12; E14/S07:p.1 | | ACT_004 | Usuario con DDU configurado | Usuario autenticado que ya configuró DDU y puede visualizar notificaciones pend
+- CU_006: rio autenticado cuyo Domicilio Digital Único aún no está configurado. | CU_005, CU_006, CU_008, CU_009, CU_012 | E09/S06:p.2:HU05-HU06; E10/S06:p.3:HU08-HU09; E11/S06:p.4:HU12; E14/S07:p.1 | | ACT_004 | Usuario con DDU configurado | Usuario autenticado que ya configuró DDU y puede visualizar notificaciones pendientes. 
+- CU_007: utenticado que ya configuró DDU y puede visualizar notificaciones pendientes. | CU_007, CU_009-CU_011 | E09/S06:p.2:HU07; E10/S06:p.3:HU09-HU10; E11/S06:p.4:HU11; E14/S07:p.1 | | ACT_005 | Usuario con autorizaciones pendientes | Usuario que tiene solicitudes de autorización de uso de datos sensibles pendientes de decis
+- CU_008: nticado cuyo Domicilio Digital Único aún no está configurado. | CU_005, CU_006, CU_008, CU_009, CU_012 | E09/S06:p.2:HU05-HU06; E10/S06:p.3:HU08-HU09; E11/S06:p.4:HU12; E14/S07:p.1 | | ACT_004 | Usuario con DDU configurado | Usuario autenticado que ya configuró DDU y puede visualizar notificaciones pendientes. | CU_007
+- CU_009: cuyo Domicilio Digital Único aún no está configurado. | CU_005, CU_006, CU_008, CU_009, CU_012 | E09/S06:p.2:HU05-HU06; E10/S06:p.3:HU08-HU09; E11/S06:p.4:HU12; E14/S07:p.1 | | ACT_004 | Usuario con DDU configurado | Usuario autenticado que ya configuró DDU y puede visualizar notificaciones pendientes. | CU_007, CU_009
+- CU_010: endientes de lectura. - **Evidencia:** E10/S06:p.3:HU09; E14/S07:p.1. - **ID:** CU_010 - **Nombre:** Visualizar listado de notificaciones pendientes - **Descripción:** Mostrar al usuario con DDU configurado el listado de notificaciones pendientes de lectura dentro del portal ClaveÚnica. - **Relación jerárquica:** Raíz;
+- CU_011: ya configuró DDU y puede visualizar notificaciones pendientes. | CU_007, CU_009-CU_011 | E09/S06:p.2:HU07; E10/S06:p.3:HU09-HU10; E11/S06:p.4:HU11; E14/S07:p.1 | | ACT_005 | Usuario con autorizaciones pendientes | Usuario que tiene solicitudes de autorización de uso de datos sensibles pendientes de decisión. | CU_013, 
+- CU_012: icilio Digital Único aún no está configurado. | CU_005, CU_006, CU_008, CU_009, CU_012 | E09/S06:p.2:HU05-HU06; E10/S06:p.3:HU08-HU09; E11/S06:p.4:HU12; E14/S07:p.1 | | ACT_004 | Usuario con DDU configurado | Usuario autenticado que ya configuró DDU y puede visualizar notificaciones pendientes. | CU_007, CU_009-CU_011 
+- CU_013: solicitudes de autorización de uso de datos sensibles pendientes de decisión. | CU_013, CU_015 | E12/S06:p.5:HU13; E13/S06:p.6:HU15 | | ACT_006 | Usuario con autorizaciones vigentes | Usuario que tiene autorizaciones aprobadas/vigentes susceptibles de revocación. | CU_013, CU_016 | E12/S06:p.5:HU13; E13/S06:p.6-p.7:HU1
+- CU_014: al en un solo lugar. - **Evidencia:** E12/S06:p.5:HU13; E05/S01:p.39. - **ID:** CU_014 - **Nombre:** Visualizar historial de datos sensibles compartidos - **Descripción:** Mostrar una tabla con el historial de datos sensibles compartidos entre instituciones proveedoras y solicitantes, verificando que correspondan a dat
+- CU_015: des de autorización de uso de datos sensibles pendientes de decisión. | CU_013, CU_015 | E12/S06:p.5:HU13; E13/S06:p.6:HU15 | | ACT_006 | Usuario con autorizaciones vigentes | Usuario que tiene autorizaciones aprobadas/vigentes susceptibles de revocación. | CU_013, CU_016 | E12/S06:p.5:HU13; E13/S06:p.6-p.7:HU16 | | AC
+- CU_016: puede administrar datos, sesión, 2FA, notificaciones y autorizaciones. | CU_002-CU_016, CU_017-CU_019 | E08/S06:p.1:HU02-HU04; E09-E13 | | ACT_003 | Usuario sin DDU configurado | Usuario autenticado cuyo Domicilio Digital Único aún no está configurado. | CU_005, CU_006, CU_008, CU_009, CU_012 | E09/S06:p.2:HU05-HU06; E
+- CU_017: ministrar datos, sesión, 2FA, notificaciones y autorizaciones. | CU_002-CU_016, CU_017-CU_019 | E08/S06:p.1:HU02-HU04; E09-E13 | | ACT_003 | Usuario sin DDU configurado | Usuario autenticado cuyo Domicilio Digital Único aún no está configurado. | CU_005, CU_006, CU_008, CU_009, CU_012 | E09/S06:p.2:HU05-HU06; E10/S06:p
+- CU_018: efinidas por el alcance. - **Evidencia:** E05/S01:p.39; E02/S01:p.35. - **ID:** CU_018 - **Nombre:** Consultar vista de expedientes electrónicos - **Descripción:** Soportar acceso a una vista de expedientes electrónicos de la persona dentro de las secciones privadas del portal. - **Relación jerárquica:** Raíz; agrupa F
+- CU_019: ar datos, sesión, 2FA, notificaciones y autorizaciones. | CU_002-CU_016, CU_017-CU_019 | E08/S06:p.1:HU02-HU04; E09-E13 | | ACT_003 | Usuario sin DDU configurado | Usuario autenticado cuyo Domicilio Digital Único aún no está configurado. | CU_005, CU_006, CU_008, CU_009, CU_012 | E09/S06:p.2:HU05-HU06; E10/S06:p.3:HU08
+- CU_020: que accede al portal público, con o sin ClaveÚnica activada. | CU_001, CU_003, CU_020 | E08/S06:p.1:HU01-HU03; E05/S01:p.39 | | ACT_002 | Usuario con ClaveÚnica activada | Persona autenticada que puede administrar datos, sesión, 2FA, notificaciones y autorizaciones. | CU_002-CU_016, CU_017-CU_019 | E08/S06:p.1:HU02-HU0
+- CU_021: cional que requiere ayuda, credenciales y estado de integración a ClaveÚnica. | CU_021 | E03/S01:p.36; E05/S01:p.39 | | ACT_008 | Plataforma de Notificaciones/CasillaÚnica | Sistema externo funcional que configura DDU, mantiene notificaciones y muestra detalle al usuario. | CU_005-CU_012 | E09-E11; E14/S07:p.1 | | ACT_

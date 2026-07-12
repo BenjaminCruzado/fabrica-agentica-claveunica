@@ -10,7 +10,7 @@ Para esta entrega, ese archivo se considera valido y utilizable.
 
 ## Descripcion
 
-Construir una aplicacion web ficticia basada en un Portal Ciudadano ClaveUnica con:
+Construir una aplicacion web local funcional basada en un Portal Ciudadano ClaveUnica con:
 
 - portal publico;
 - autenticacion simulada;
@@ -25,6 +25,16 @@ Construir una aplicacion web ficticia basada en un Portal Ciudadano ClaveUnica c
 - expedientes;
 - ayuda publica e institucional;
 - auditoria.
+
+La aplicacion no debe depender de servicios estatales reales, pero si debe comportarse como una app real en local:
+
+- frontend con pantallas diferenciadas por tipo de flujo;
+- backend con endpoints que consulten o muten datos;
+- PostgreSQL con tablas de dominio, relaciones y semillas coherentes;
+- migraciones versionadas para crear y poblar la base local;
+- contrato OpenAPI derivado del mismo catalogo que usa la implementacion;
+- acciones visibles que actualicen metricas, listados o estados;
+- pruebas que validen comportamiento, no solo cantidad de archivos.
 
 ## Rol En La Fabrica
 
@@ -48,5 +58,14 @@ Este caso no se implementa manualmente de inmediato. Primero la fabrica debe:
 - 60 reglas de negocio;
 - 100 validaciones/CHECK;
 - pruebas automatizadas;
-- despliegue online en Linux/EC2;
+- pruebas de integracion backend contra PostgreSQL local o Testcontainers;
+- features frontend con modelos, servicios y componentes por dominio;
+- ejecucion local reproducible con Docker;
 - evidencia tecnica para video.
+
+## Gates De Realidad
+
+- No cuenta una pantalla si es clon visual de otra con solo texto cambiado.
+- No cuenta un endpoint si solo retorna `status: ok`.
+- No cuenta una tabla si solo existe para rellenar cantidad y no participa en ningun flujo.
+- Al menos los flujos de tramite, notificacion, consentimiento, domicilio, soporte y auditoria deben tener efecto persistente observable.

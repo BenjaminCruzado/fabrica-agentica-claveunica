@@ -61,6 +61,7 @@ WORK_ORDER_SCHEMA: dict[str, Any] = {
     "properties": {
         "work_order_id": {"type": "string"},
         "objective": {"type": "string"},
+        "operator_note": {"type": "string"},
         "work_type": {"type": "string", "enum": ["feature", "bugfix", "refactor", "migration", "doc", "test", "security", "performance", "incident", "factory_bootstrap"]},
         "scope": {
             "type": "object",
@@ -79,7 +80,7 @@ WORK_ORDER_SCHEMA: dict[str, Any] = {
                 "required": ["source_id", "type", "authorized", "trust"],
                 "properties": {
                     "source_id": {"type": "string"},
-                    "type": {"type": "string", "enum": ["brief", "repo", "doc", "ticket", "log", "db", "image", "memory", "other"]},
+                    "type": {"type": "string", "enum": ["brief", "generation_policy", "repo", "doc", "ticket", "log", "db", "image", "memory", "other"]},
                     "path": {"type": "string"},
                     "authorized": {"type": "boolean"},
                     "hash": {"type": "string"},
@@ -117,6 +118,7 @@ CYCLE_STATE_SCHEMA: dict[str, Any] = {
         "task_id": {"type": "string"},
         "phase": {"type": "string", "enum": list(SDD_PHASES)},
         "status": {"type": "string", "enum": list(FINAL_STATUSES)},
+        "execution_mode": {"type": "string", "enum": ["deterministic", "agentic", "codex_direct"]},
         "input_hash": {"type": "string"},
         "spec_hash": {"type": "string"},
         "policy_version": {"type": "string"},

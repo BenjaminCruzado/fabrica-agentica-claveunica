@@ -1,0 +1,56 @@
+{
+  "checks": [
+    {
+      "detail": "Python 3.14.1",
+      "id": "python",
+      "status": "complete"
+    },
+    {
+      "detail": "modulo pytest no instalado",
+      "id": "pytest",
+      "status": "warning"
+    },
+    {
+      "detail": "v24.15.0",
+      "id": "node",
+      "status": "complete"
+    },
+    {
+      "detail": "11.12.1",
+      "id": "npm",
+      "status": "complete"
+    },
+    {
+      "detail": "Docker version 29.2.0, build 0b9d198",
+      "id": "docker",
+      "status": "complete"
+    },
+    {
+      "detail": "Client:",
+      "id": "docker_info",
+      "status": "complete"
+    },
+    {
+      "detail": "openjdk 17.0.19 2026-04-21",
+      "id": "java",
+      "status": "complete"
+    },
+    {
+      "detail": "Apache Maven 3.9.15 (98b2cdbfdb5f1ac8781f537ea9acccaed7922349)",
+      "id": "maven",
+      "status": "complete"
+    },
+    {
+      "detail": "codex_direct activo: OpenAI API bloqueada intencionalmente",
+      "id": "model_provider",
+      "status": "complete"
+    },
+    {
+      "detail": "marcadores_de_app_vieja=0",
+      "id": "app_generada",
+      "status": "complete"
+    }
+  ],
+  "project_dir": "C:\\Users\\Benjamin Cruzado\\Desktop\\Ultimo Semestre\\IA\\PROYECTO\\fabrica-final\\project",
+  "status": "warning"
+}

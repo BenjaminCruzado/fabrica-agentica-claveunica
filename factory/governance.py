@@ -28,7 +28,7 @@ REQUIRED_FACTORY_DOCS = (
 
 
 def ensure_run_dirs(run_dir: Path) -> None:
-    for rel in ("evidence", "generated-docs", "reports", "logs"):
+    for rel in ("evidence", "generated-docs", "reports", "logs", "agent-contracts", "agent-sessions", "tool-results", "review-findings"):
         (run_dir / rel).mkdir(parents=True, exist_ok=True)
 
 
@@ -260,7 +260,7 @@ def write_security_delivery_reports(factory_root: Path, run_dir: Path) -> None:
         encoding="utf-8",
     )
     (run_dir / "rollback-plan.md").write_text(
-        "# Rollback Plan\n\n1. En EC2: `docker compose down` dentro de `/home/ubuntu/app/app-generada`.\n2. Volver al commit anterior en GitHub.\n3. Reejecutar deploy desde la fabrica.\n4. Si falla, mantener `allow_execute: false` y revisar `deployment-validation.json`.\n",
+        "# Rollback Plan\n\n1. En EC2: `docker compose -f docker-compose.prebuilt.yml down` dentro de `/home/ubuntu/app/app-generada`.\n2. Volver al commit o tag de imagen anterior en GitHub/GHCR.\n3. Reejecutar deploy con `deploy_strategy: prebuilt_images` para evitar build pesado en EC2.\n4. Si falla, mantener `allow_execute: false` y revisar `deployment-validation.json`.\n",
         encoding="utf-8",
     )
     (run_dir / "slo-policy.md").write_text("# SLO Policy\n\n- App publica responde en HTTP.\n- Deploy debe terminar sin errores de Docker Compose.\n- Logs y metricas deben quedar en la corrida.\n", encoding="utf-8")
@@ -292,7 +292,7 @@ def write_assumptions_register(run_dir: Path) -> None:
 | id | tipo | descripcion | estado |
 |---|---|---|---|
 | ASM-001 | fuente | El archivo `.md` entregado por el profesor se considera insumo valido y utilizable. | approved |
-| ASM-002 | alcance | La aplicacion es ficticia; integraciones estatales reales se simulan. | approved |
+| ASM-002 | alcance | La aplicacion es local funcional; integraciones estatales reales se reemplazan por servicios simulados y persistencia observable. | approved |
 | ASM-003 | rubrica | Elementos no presentes literalmente en el `.md` pueden derivarse como supuestos de implementacion o exigencias de rubrica. | approved |
 """
     (run_dir / "assumptions-register.md").write_text(text, encoding="utf-8")

@@ -1,256 +1,374 @@
 {
   "apiCatalog": {
-    "endpoint_count": 40,
+    "endpoint_count": 45,
     "endpoints": [
       {
-        "description": "Ingreso ClaveUnica",
+        "description": "Salud del backend",
         "method": "GET",
-        "path": "/api/v1/seguridad/p-01",
-        "screen": "P-01"
+        "mutates": false,
+        "path": "/api/v1/health",
+        "screen": "SYS",
+        "table": "none"
       },
       {
-        "description": "Ingreso ClaveUnica",
-        "method": "POST",
-        "path": "/api/v1/seguridad/p-01",
-        "screen": "P-01"
-      },
-      {
-        "description": "Recuperacion de acceso",
+        "description": "Metricas vivas del portal",
         "method": "GET",
-        "path": "/api/v1/seguridad/p-02",
-        "screen": "P-02"
+        "mutates": false,
+        "path": "/api/v1/dashboard",
+        "screen": "P-03",
+        "table": "procedures,notifications,consents,sessions"
       },
       {
-        "description": "Recuperacion de acceso",
-        "method": "POST",
-        "path": "/api/v1/seguridad/p-02",
-        "screen": "P-02"
-      },
-      {
-        "description": "Dashboard ciudadano",
+        "description": "Listar ciudadanos demo",
         "method": "GET",
-        "path": "/api/v1/portal/p-03",
-        "screen": "P-03"
+        "mutates": false,
+        "path": "/api/v1/citizens",
+        "screen": "P-06",
+        "table": "citizens"
       },
       {
-        "description": "Dashboard ciudadano",
-        "method": "POST",
-        "path": "/api/v1/portal/p-03",
-        "screen": "P-03"
+        "description": "Actualizar contacto ciudadano",
+        "method": "PATCH",
+        "mutates": true,
+        "path": "/api/v1/citizens/contact",
+        "screen": "P-07",
+        "table": "citizens,contact_channels,audit_events"
       },
       {
-        "description": "Catalogo de tramites",
+        "description": "Catalogo de servicios",
         "method": "GET",
-        "path": "/api/v1/portal/p-04",
-        "screen": "P-04"
+        "mutates": false,
+        "path": "/api/v1/services",
+        "screen": "P-04",
+        "table": "services,service_categories"
       },
       {
-        "description": "Catalogo de tramites",
+        "description": "Crear tramite",
         "method": "POST",
-        "path": "/api/v1/portal/p-04",
-        "screen": "P-04"
+        "mutates": true,
+        "path": "/api/v1/procedures",
+        "screen": "P-05",
+        "table": "procedures,procedure_steps,audit_events"
       },
       {
-        "description": "Detalle de tramite",
+        "description": "Listar tramites",
         "method": "GET",
-        "path": "/api/v1/portal/p-05",
-        "screen": "P-05"
+        "mutates": false,
+        "path": "/api/v1/procedures",
+        "screen": "P-20",
+        "table": "procedures"
       },
       {
-        "description": "Detalle de tramite",
-        "method": "POST",
-        "path": "/api/v1/portal/p-05",
-        "screen": "P-05"
+        "description": "Cambiar estado de tramite",
+        "method": "PATCH",
+        "mutates": true,
+        "path": "/api/v1/procedures/{id}/status",
+        "screen": "P-21",
+        "table": "procedures,case_events,audit_events"
       },
       {
-        "description": "Datos personales",
+        "description": "Listar notificaciones",
         "method": "GET",
-        "path": "/api/v1/perfil/p-06",
-        "screen": "P-06"
+        "mutates": false,
+        "path": "/api/v1/notifications",
+        "screen": "P-14",
+        "table": "notifications"
       },
       {
-        "description": "Datos personales",
+        "description": "Marcar notificacion leida",
+        "method": "PATCH",
+        "mutates": true,
+        "path": "/api/v1/notifications/{id}/read",
+        "screen": "P-15",
+        "table": "notifications,audit_events"
+      },
+      {
+        "description": "Marcar siguiente notificacion leida",
         "method": "POST",
-        "path": "/api/v1/perfil/p-06",
-        "screen": "P-06"
+        "mutates": true,
+        "path": "/api/v1/notifications/read-next",
+        "screen": "P-15",
+        "table": "notifications,audit_events"
       },
       {
-        "description": "Datos de contacto",
+        "description": "Guardar preferencias de aviso",
+        "method": "POST",
+        "mutates": true,
+        "path": "/api/v1/notifications/preferences",
+        "screen": "P-16",
+        "table": "notification_preferences,audit_events"
+      },
+      {
+        "description": "Listar sesiones",
         "method": "GET",
-        "path": "/api/v1/perfil/p-07",
-        "screen": "P-07"
+        "mutates": false,
+        "path": "/api/v1/sessions",
+        "screen": "P-09",
+        "table": "sessions,trusted_devices"
       },
       {
-        "description": "Datos de contacto",
+        "description": "Cerrar sesion",
+        "method": "PATCH",
+        "mutates": true,
+        "path": "/api/v1/sessions/{id}/close",
+        "screen": "P-09",
+        "table": "sessions,audit_events"
+      },
+      {
+        "description": "Cerrar sesion activa",
         "method": "POST",
-        "path": "/api/v1/perfil/p-07",
-        "screen": "P-07"
+        "mutates": true,
+        "path": "/api/v1/security/close-session",
+        "screen": "P-09",
+        "table": "sessions,audit_events"
       },
       {
-        "description": "Preferencias de privacidad",
+        "description": "Intento de ingreso local",
+        "method": "POST",
+        "mutates": true,
+        "path": "/api/v1/security/login-attempt",
+        "screen": "P-01",
+        "table": "sessions,audit_events"
+      },
+      {
+        "description": "Activar MFA",
+        "method": "POST",
+        "mutates": true,
+        "path": "/api/v1/mfa-methods",
+        "screen": "P-10",
+        "table": "mfa_methods,audit_events"
+      },
+      {
+        "description": "Domicilio vigente",
         "method": "GET",
-        "path": "/api/v1/perfil/p-08",
-        "screen": "P-08"
+        "mutates": false,
+        "path": "/api/v1/digital-addresses/current",
+        "screen": "P-11",
+        "table": "digital_addresses"
       },
       {
-        "description": "Preferencias de privacidad",
+        "description": "Actualizar domicilio",
         "method": "POST",
-        "path": "/api/v1/perfil/p-08",
-        "screen": "P-08"
+        "mutates": true,
+        "path": "/api/v1/digital-addresses",
+        "screen": "P-12",
+        "table": "digital_addresses,address_history,audit_events"
       },
       {
-        "description": "Sesiones activas",
+        "description": "Historial domicilio",
         "method": "GET",
-        "path": "/api/v1/seguridad/p-09",
-        "screen": "P-09"
+        "mutates": false,
+        "path": "/api/v1/digital-addresses/history",
+        "screen": "P-13",
+        "table": "address_history"
       },
       {
-        "description": "Sesiones activas",
-        "method": "POST",
-        "path": "/api/v1/seguridad/p-09",
-        "screen": "P-09"
-      },
-      {
-        "description": "Dispositivos y MFA",
+        "description": "Listar permisos",
         "method": "GET",
-        "path": "/api/v1/seguridad/p-10",
-        "screen": "P-10"
+        "mutates": false,
+        "path": "/api/v1/consents",
+        "screen": "P-17",
+        "table": "consents"
       },
       {
-        "description": "Dispositivos y MFA",
+        "description": "Solicitar autorizacion",
         "method": "POST",
-        "path": "/api/v1/seguridad/p-10",
-        "screen": "P-10"
+        "mutates": true,
+        "path": "/api/v1/consent-requests",
+        "screen": "P-18",
+        "table": "consent_requests,consent_history,audit_events"
       },
       {
-        "description": "Domicilio digital vigente",
+        "description": "Revocar permiso",
+        "method": "PATCH",
+        "mutates": true,
+        "path": "/api/v1/consents/{id}/revoke",
+        "screen": "P-17",
+        "table": "consents,consent_history,audit_events"
+      },
+      {
+        "description": "Revocar siguiente permiso vigente",
+        "method": "POST",
+        "mutates": true,
+        "path": "/api/v1/consents/revoke-next",
+        "screen": "P-17",
+        "table": "consents,consent_history,audit_events"
+      },
+      {
+        "description": "Historial permisos",
         "method": "GET",
-        "path": "/api/v1/ddu/p-11",
-        "screen": "P-11"
+        "mutates": false,
+        "path": "/api/v1/consents/history",
+        "screen": "P-19",
+        "table": "consent_history"
       },
       {
-        "description": "Domicilio digital vigente",
-        "method": "POST",
-        "path": "/api/v1/ddu/p-11",
-        "screen": "P-11"
-      },
-      {
-        "description": "Verificacion de domicilio",
+        "description": "Listar expedientes",
         "method": "GET",
-        "path": "/api/v1/ddu/p-12",
-        "screen": "P-12"
+        "mutates": false,
+        "path": "/api/v1/cases",
+        "screen": "P-20",
+        "table": "cases,case_events"
       },
       {
-        "description": "Verificacion de domicilio",
+        "description": "Comentar expediente",
         "method": "POST",
-        "path": "/api/v1/ddu/p-12",
-        "screen": "P-12"
+        "mutates": true,
+        "path": "/api/v1/cases/{id}/comments",
+        "screen": "P-21",
+        "table": "case_events,audit_events"
       },
       {
-        "description": "Historial de domicilio",
+        "description": "Comentar siguiente expediente",
+        "method": "POST",
+        "mutates": true,
+        "path": "/api/v1/cases/comment-next",
+        "screen": "P-21",
+        "table": "case_events,audit_events"
+      },
+      {
+        "description": "Adjuntar documento",
+        "method": "POST",
+        "mutates": true,
+        "path": "/api/v1/case-documents",
+        "screen": "P-21",
+        "table": "case_documents,case_events,audit_events"
+      },
+      {
+        "description": "Linea de tiempo",
         "method": "GET",
-        "path": "/api/v1/ddu/p-13",
-        "screen": "P-13"
+        "mutates": false,
+        "path": "/api/v1/cases/{id}/timeline",
+        "screen": "P-22",
+        "table": "case_events"
       },
       {
-        "description": "Historial de domicilio",
-        "method": "POST",
-        "path": "/api/v1/ddu/p-13",
-        "screen": "P-13"
-      },
-      {
-        "description": "Bandeja de notificaciones",
+        "description": "Preguntas frecuentes",
         "method": "GET",
-        "path": "/api/v1/notificaciones/p-14",
-        "screen": "P-14"
+        "mutates": false,
+        "path": "/api/v1/faq",
+        "screen": "P-24",
+        "table": "faq_entries"
       },
       {
-        "description": "Bandeja de notificaciones",
+        "description": "Crear ticket",
         "method": "POST",
-        "path": "/api/v1/notificaciones/p-14",
-        "screen": "P-14"
+        "mutates": true,
+        "path": "/api/v1/support-tickets",
+        "screen": "P-23",
+        "table": "support_tickets,support_messages,audit_events"
       },
       {
-        "description": "Detalle de mensaje",
+        "description": "Cerrar ticket",
+        "method": "PATCH",
+        "mutates": true,
+        "path": "/api/v1/support-tickets/{id}/close",
+        "screen": "P-25",
+        "table": "support_tickets,audit_events"
+      },
+      {
+        "description": "Bitacora",
         "method": "GET",
-        "path": "/api/v1/notificaciones/p-15",
-        "screen": "P-15"
+        "mutates": false,
+        "path": "/api/v1/audit-events",
+        "screen": "P-26",
+        "table": "audit_events"
       },
       {
-        "description": "Detalle de mensaje",
+        "description": "Generar exportacion",
         "method": "POST",
-        "path": "/api/v1/notificaciones/p-15",
-        "screen": "P-15"
+        "mutates": true,
+        "path": "/api/v1/audit-exports",
+        "screen": "P-28",
+        "table": "audit_exports,audit_events"
       },
       {
-        "description": "Preferencias de aviso",
+        "description": "Estado integraciones simuladas",
         "method": "GET",
-        "path": "/api/v1/notificaciones/p-16",
-        "screen": "P-16"
+        "mutates": false,
+        "path": "/api/v1/integration-status",
+        "screen": "P-29",
+        "table": "integration_status"
       },
       {
-        "description": "Preferencias de aviso",
-        "method": "POST",
-        "path": "/api/v1/notificaciones/p-16",
-        "screen": "P-16"
-      },
-      {
-        "description": "Permisos de datos",
+        "description": "Alertas seguridad",
         "method": "GET",
-        "path": "/api/v1/autorizaciones/p-17",
-        "screen": "P-17"
+        "mutates": false,
+        "path": "/api/v1/security-alerts",
+        "screen": "P-30",
+        "table": "security_alerts"
       },
       {
-        "description": "Permisos de datos",
-        "method": "POST",
-        "path": "/api/v1/autorizaciones/p-17",
-        "screen": "P-17"
-      },
-      {
-        "description": "Solicitud de autorizacion",
+        "description": "Reglas activas",
         "method": "GET",
-        "path": "/api/v1/autorizaciones/p-18",
-        "screen": "P-18"
+        "mutates": false,
+        "path": "/api/v1/business-rules",
+        "screen": "SYS",
+        "table": "business_rules"
       },
       {
-        "description": "Solicitud de autorizacion",
-        "method": "POST",
-        "path": "/api/v1/autorizaciones/p-18",
-        "screen": "P-18"
-      },
-      {
-        "description": "Historial de autorizaciones",
+        "description": "Validaciones activas",
         "method": "GET",
-        "path": "/api/v1/autorizaciones/p-19",
-        "screen": "P-19"
+        "mutates": false,
+        "path": "/api/v1/validation-rules",
+        "screen": "SYS",
+        "table": "validation_rules"
       },
       {
-        "description": "Historial de autorizaciones",
-        "method": "POST",
-        "path": "/api/v1/autorizaciones/p-19",
-        "screen": "P-19"
-      },
-      {
-        "description": "Mis expedientes",
+        "description": "Roles demo",
         "method": "GET",
-        "path": "/api/v1/expedientes/p-20",
-        "screen": "P-20"
+        "mutates": false,
+        "path": "/api/v1/roles",
+        "screen": "SYS",
+        "table": "roles,permissions,user_roles"
       },
       {
-        "description": "Mis expedientes",
+        "description": "Guardar favorito",
         "method": "POST",
-        "path": "/api/v1/expedientes/p-20",
-        "screen": "P-20"
+        "mutates": true,
+        "path": "/api/v1/favorites",
+        "screen": "P-04",
+        "table": "favorites,audit_events"
+      },
+      {
+        "description": "Scope de la app",
+        "method": "GET",
+        "mutates": false,
+        "path": "/api/v1/scope",
+        "screen": "SYS",
+        "table": "none"
+      },
+      {
+        "description": "Pantallas disponibles",
+        "method": "GET",
+        "mutates": false,
+        "path": "/api/v1/screens",
+        "screen": "SYS",
+        "table": "none"
+      },
+      {
+        "description": "Evento de workflow controlado",
+        "method": "POST",
+        "mutates": true,
+        "path": "/api/v1/workflow-events",
+        "screen": "SYS",
+        "table": "audit_events"
+      },
+      {
+        "description": "Estado agregado para Angular",
+        "method": "GET",
+        "mutates": false,
+        "path": "/api/v1/app-state",
+        "screen": "SYS",
+        "table": "domain aggregates"
       }
     ]
   },
-  "apiExamples": [
-    "/api/v1/health",
-    "/api/v1/scope",
-    "/api/v1/screens",
-    "/api/v1/notificaciones/recurso-06",
-    "/api/v1/autorizaciones/recurso-07"
-  ],
+  "correctionInput": {
+    "findings_count": 0,
+    "policy": "builder must address previous reviewer findings before close",
+    "source": "C:\\Users\\Benjamin Cruzado\\Desktop\\Ultimo Semestre\\IA\\PROYECTO\\fabrica-final\\project\\runs\\RUN-c5cae1e18061\\review-findings\\app-review.json"
+  },
   "counts": {
     "api_endpoints": 40,
     "business_rules": 60,
@@ -260,20 +378,236 @@
     "use_cases": 21,
     "validations_checks": 100
   },
-  "generatedBy": "fabrica-agentica",
+  "domainBlueprint": {
+    "anti_fake_gates": [
+      "Los endpoints deben consultar o mutar PostgreSQL.",
+      "Las pantallas no pueden compartir un unico HTML.",
+      "Las pruebas deben validar al menos un cambio persistente de negocio.",
+      "Las tablas de dominio no pueden ser solo code/name/status/metadata."
+    ],
+    "description": "App academica local con flujos, persistencia y estados visibles; no integraciones estatales reales.",
+    "quality_bar": "local_functional_app",
+    "workflows": [
+      {
+        "id": "WF_TRAMITE",
+        "name": "Iniciar y seguir tramite",
+        "tables": [
+          "citizens",
+          "services",
+          "procedures",
+          "procedure_steps",
+          "cases",
+          "audit_events"
+        ],
+        "visible_effects": [
+          "aumenta Tramites activos",
+          "aparece procedimiento nuevo",
+          "se registra auditoria"
+        ]
+      },
+      {
+        "id": "WF_NOTIFICACION",
+        "name": "Leer y acusar notificacion",
+        "tables": [
+          "notifications",
+          "notification_preferences",
+          "audit_events"
+        ],
+        "visible_effects": [
+          "bajan mensajes nuevos",
+          "read_at queda poblado",
+          "se registra acuse"
+        ]
+      },
+      {
+        "id": "WF_CONSENTIMIENTO",
+        "name": "Autorizar o revocar datos",
+        "tables": [
+          "consents",
+          "consent_requests",
+          "consent_history",
+          "audit_events"
+        ],
+        "visible_effects": [
+          "cambia estado del permiso",
+          "queda historial",
+          "se actualiza metrica"
+        ]
+      },
+      {
+        "id": "WF_DDU",
+        "name": "Actualizar domicilio digital",
+        "tables": [
+          "digital_addresses",
+          "address_evidence",
+          "address_history",
+          "audit_events"
+        ],
+        "visible_effects": [
+          "cambia domicilio vigente",
+          "queda historial",
+          "se muestra revision"
+        ]
+      }
+    ]
+  },
+  "generatedBy": "fabrica-agentica-local",
+  "generationPolicy": {
+    "database_requirements": [
+      "tablas normalizadas",
+      "claves primarias",
+      "claves foraneas",
+      "estados de negocio",
+      "fechas de creacion y actualizacion",
+      "migraciones versionadas",
+      "datos semilla realistas",
+      "relaciones entre entidades",
+      "prohibido usar datos hardcodeados como fuente principal"
+    ],
+    "docker_requirements": {
+      "optional_services": [
+        "redis",
+        "pgadmin",
+        "migration-service"
+      ],
+      "required_services": [
+        "frontend",
+        "backend",
+        "postgres"
+      ],
+      "single_command_local_run": true
+    },
+    "forbidden_frontend_content": [
+      "validaciones internas de la fabrica",
+      "trazabilidad tecnica",
+      "IDs de rubrica",
+      "checks internos",
+      "logs de agentes",
+      "ejecutado desde Angular",
+      "paneles de debug",
+      "actividad reciente artificial",
+      "texto generico de plantilla",
+      "pantallas que solo listan requerimientos"
+    ],
+    "hash": "sha256:1f06058578656192b0b6da520c732e59f6d0442910fd8cf1afc867fb12ae22db",
+    "real_action_policy": [
+      "cada boton importante debe cambiar estado visible",
+      "cada boton importante debe llamar backend",
+      "cada accion relevante debe leer o escribir PostgreSQL",
+      "cada accion relevante debe mostrar feedback",
+      "cada accion relevante debe manejar errores",
+      "prohibido registrar solo actividad sin efecto de dominio"
+    ],
+    "rejection_criteria": [
+      "parece plantilla generica",
+      "muestra validaciones internas al usuario",
+      "muestra trazabilidad tecnica en la UI",
+      "botones solo registran actividad",
+      "no existe base de datos real",
+      "no hay migraciones",
+      "no hay datos semilla",
+      "backend sin logica de dominio",
+      "frontend usa datos hardcodeados como fuente principal",
+      "docker no levanta",
+      "playwright no prueba flujos reales",
+      "no representa la especificacion oficial"
+    ],
+    "relationship_to_functional_spec": "supplements SRC-PROFESOR-MD without replacing it",
+    "required_backend_behaviors": [
+      "login ciudadano simulado",
+      "dashboard ciudadano",
+      "listar y ver tramites",
+      "iniciar tramite",
+      "actualizar datos personales y de contacto",
+      "configurar domicilio digital",
+      "listar y marcar notificaciones",
+      "listar y revocar autorizaciones",
+      "listar y cerrar sesiones activas",
+      "listar y desactivar dispositivos MFA"
+    ],
+    "required_domain_entities": [
+      "ciudadanos",
+      "perfil ciudadano",
+      "autenticacion simulada ClaveUnica",
+      "recuperacion de acceso",
+      "MFA y dispositivos",
+      "tramites",
+      "solicitudes de tramite",
+      "notificaciones",
+      "mensajes",
+      "domicilio digital unico",
+      "datos personales",
+      "datos de contacto",
+      "autorizaciones de uso de datos",
+      "sesiones activas",
+      "auditoria interna"
+    ],
+    "required_review_agents": [
+      "UX/UI Product Reviewer",
+      "Arquitecto de Software",
+      "QA E2E",
+      "Runtime/Docker",
+      "Product Owner funcional",
+      "Revisor de cumplimiento de requerimientos"
+    ],
+    "required_screens": [
+      "Login ClaveUnica simulado",
+      "Recuperacion de acceso",
+      "Dashboard ciudadano",
+      "Catalogo de tramites",
+      "Detalle de tramite",
+      "Inicio de tramite",
+      "Datos personales",
+      "Datos de contacto",
+      "Domicilio digital",
+      "Notificaciones",
+      "Detalle de notificacion",
+      "Autorizaciones de datos",
+      "Solicitud de autorizacion",
+      "Sesiones activas",
+      "Dispositivos y MFA",
+      "Preferencias de privacidad"
+    ],
+    "required_stack": {
+      "api": "REST JSON",
+      "backend": "Spring Boot",
+      "backend_tests": [
+        "JUnit",
+        "equivalent"
+      ],
+      "containers": "Docker Compose",
+      "database": "PostgreSQL",
+      "e2e": "Playwright",
+      "frontend": "Angular",
+      "migrations": [
+        "Flyway",
+        "Liquibase"
+      ]
+    },
+    "required_tests": [
+      "docker build correcto",
+      "docker compose up correcto",
+      "healthcheck backend",
+      "frontend accesible",
+      "login funcional",
+      "navegacion principal",
+      "botones con efecto real",
+      "persistencia en DB",
+      "endpoints principales",
+      "flujos criticos con Playwright"
+    ],
+    "role": "generation_contract",
+    "source": "C:\\Users\\Benjamin Cruzado\\Desktop\\Ultimo Semestre\\IA\\PROYECTO\\fabrica-final\\project\\input\\product_generation_brief.md",
+    "source_excerpt_chars": 7087,
+    "source_id": "SRC-PRODUCT-GENERATION-BRIEF",
+    "status": "complete"
+  },
   "implementationSummary": {
-    "endpoints": 40,
+    "endpoints": 45,
     "implementation_status": "implemented_pending_web_validation",
     "layouts": 30,
     "requirements": 90,
     "screens": 30
-  },
-  "mockUser": {
-    "claveUnica": "simulada",
-    "email": "benjamin@example.local",
-    "mfa": "activo",
-    "name": "Benjamin Cruzado",
-    "run": "12.345.678-9"
   },
   "modules": [
     {
@@ -323,29 +657,39 @@
     }
   ],
   "name": "Portal Ciudadano ClaveUnica",
-  "objective": "Aplicacion web ficticia basada en ClaveUnica, DDU, notificaciones y autorizaciones.",
+  "objective": "Aplicacion web local funcional basada en ClaveUnica, DDU, notificaciones y autorizaciones.",
+  "qualityModel": {
+    "backend": "Spring Boot REST con DTOs, servicio transaccional, validacion y persistencia PostgreSQL.",
+    "database": "PostgreSQL con Flyway, constraints, indices y seed de flujos observables.",
+    "frontend": "Angular standalone con features, modelos, servicios y componentes por dominio.",
+    "tests": "Smoke estructural, OpenAPI, migracion Flyway y prueba Testcontainers generada."
+  },
   "requirements": [
     {
       "id": "REQ_UI_001",
       "implementation_evidence": [
-        "public/app.js",
+        "frontend/src/app/pages",
         "data/implementation-ledger.json"
       ],
       "implementation_status": "implemented",
       "kind": "screen",
       "selector": "#screen-p-01",
-      "title": "Ingreso ClaveUnica"
+      "source_requirement_id": "CU_001",
+      "title": "Ingreso ClaveUnica",
+      "ui_visibility": "internal_only"
     },
     {
       "id": "REQ_FLOW_001",
       "implementation_evidence": [
-        "public/app.js",
+        "backend/src/main/java/cl/benjamin/claveunica/service/PortalWorkflowService.java",
         "tests/smoke.mjs"
       ],
       "implementation_status": "implemented",
       "kind": "flow",
       "selector": "#screen-p-01",
-      "title": "Ingresar, Recuperar acceso"
+      "source_requirement_id": "FT_001",
+      "title": "Ingresar, Recuperar acceso",
+      "ui_visibility": "internal_only"
     },
     {
       "id": "REQ_VAL_001",
@@ -355,29 +699,35 @@
       "implementation_status": "implemented",
       "kind": "validation",
       "selector": "#screen-p-01",
-      "title": "RUN, ClaveUnica, Codigo MFA"
+      "source_requirement_id": "CH_001",
+      "title": "RUN, ClaveUnica, Codigo MFA",
+      "ui_visibility": "internal_only"
     },
     {
       "id": "REQ_UI_002",
       "implementation_evidence": [
-        "public/app.js",
+        "frontend/src/app/pages",
         "data/implementation-ledger.json"
       ],
       "implementation_status": "implemented",
       "kind": "screen",
       "selector": "#screen-p-02",
-      "title": "Recuperacion de acceso"
+      "source_requirement_id": "CU_002",
+      "title": "Recuperacion de acceso",
+      "ui_visibility": "internal_only"
     },
     {
       "id": "REQ_FLOW_002",
       "implementation_evidence": [
-        "public/app.js",
+        "backend/src/main/java/cl/benjamin/claveunica/service/PortalWorkflowService.java",
         "tests/smoke.mjs"
       ],
       "implementation_status": "implemented",
       "kind": "flow",
       "selector": "#screen-p-02",
-      "title": "Enviar enlace, Validar identidad"
+      "source_requirement_id": "FT_002",
+      "title": "Enviar enlace, Validar identidad",
+      "ui_visibility": "internal_only"
     },
     {
       "id": "REQ_VAL_002",
@@ -387,29 +737,35 @@
       "implementation_status": "implemented",
       "kind": "validation",
       "selector": "#screen-p-02",
-      "title": "Correo, RUN, Canal"
+      "source_requirement_id": "CH_002",
+      "title": "Correo, RUN, Canal",
+      "ui_visibility": "internal_only"
     },
     {
       "id": "REQ_UI_003",
       "implementation_evidence": [
-        "public/app.js",
+        "frontend/src/app/pages",
         "data/implementation-ledger.json"
       ],
       "implementation_status": "implemented",
       "kind": "screen",
       "selector": "#screen-p-03",
-      "title": "Dashboard ciudadano"
+      "source_requirement_id": "CU_003",
+      "title": "Dashboard ciudadano",
+      "ui_visibility": "internal_only"
     },
     {
       "id": "REQ_FLOW_003",
       "implementation_evidence": [
-        "public/app.js",
+        "backend/src/main/java/cl/benjamin/claveunica/service/PortalWorkflowService.java",
         "tests/smoke.mjs"
       ],
       "implementation_status": "implemented",
       "kind": "flow",
       "selector": "#screen-p-03",
-      "title": "Abrir tramite, Ver avisos"
+      "source_requirement_id": "FT_003",
+      "title": "Abrir tramite, Ver avisos",
+      "ui_visibility": "internal_only"
     },
     {
       "id": "REQ_VAL_003",
@@ -419,29 +775,35 @@
       "implementation_status": "implemented",
       "kind": "validation",
       "selector": "#screen-p-03",
-      "title": "Tramites activos, Mensajes, Alertas"
+      "source_requirement_id": "CH_003",
+      "title": "Tramites activos, Mensajes, Alertas",
+      "ui_visibility": "internal_only"
     },
     {
       "id": "REQ_UI_004",
       "implementation_evidence": [
-        "public/app.js",
+        "frontend/src/app/pages",
         "data/implementation-ledger.json"
       ],
       "implementation_status": "implemented",
       "kind": "screen",
       "selector": "#screen-p-04",
-      "title": "Catalogo de tramites"
+      "source_requirement_id": "CU_004",
+      "title": "Catalogo de tramites",
+      "ui_visibility": "internal_only"
     },
     {
       "id": "REQ_FLOW_004",
       "implementation_evidence": [
-        "public/app.js",
+        "backend/src/main/java/cl/benjamin/claveunica/service/PortalWorkflowService.java",
         "tests/smoke.mjs"
       ],
       "implementation_status": "implemented",
       "kind": "flow",
       "selector": "#screen-p-04",
-      "title": "Buscar, Iniciar tramite, Guardar favorito"
+      "source_requirement_id": "FT_004",
+      "title": "Buscar, Iniciar tramite, Guardar favorito",
+      "ui_visibility": "internal_only"
     },
     {
       "id": "REQ_VAL_004",
@@ -451,29 +813,35 @@
       "implementation_status": "implemented",
       "kind": "validation",
       "selector": "#screen-p-04",
-      "title": "Categoria, Institucion, Disponibilidad"
+      "source_requirement_id": "CH_004",
+      "title": "Categoria, Institucion, Disponibilidad",
+      "ui_visibility": "internal_only"
     },
     {
       "id": "REQ_UI_005",
       "implementation_evidence": [
-        "public/app.js",
+        "frontend/src/app/pages",
         "data/implementation-ledger.json"
       ],
       "implementation_status": "implemented",
       "kind": "screen",
       "selector": "#screen-p-05",
-      "title": "Detalle de tramite"
+      "source_requirement_id": "CU_005",
+      "title": "Detalle de tramite",
+      "ui_visibility": "internal_only"
     },
     {
       "id": "REQ_FLOW_005",
       "implementation_evidence": [
-        "public/app.js",
+        "backend/src/main/java/cl/benjamin/claveunica/service/PortalWorkflowService.java",
         "tests/smoke.mjs"
       ],
       "implementation_status": "implemented",
       "kind": "flow",
       "selector": "#screen-p-05",
-      "title": "Continuar solicitud, Descargar requisitos"
+      "source_requirement_id": "FT_005",
+      "title": "Continuar solicitud, Descargar requisitos",
+      "ui_visibility": "internal_only"
     },
     {
       "id": "REQ_VAL_005",
@@ -483,29 +851,35 @@
       "implementation_status": "implemented",
       "kind": "validation",
       "selector": "#screen-p-05",
-      "title": "Requisitos, Costo, Tiempo estimado"
+      "source_requirement_id": "CH_005",
+      "title": "Requisitos, Costo, Tiempo estimado",
+      "ui_visibility": "internal_only"
     },
     {
       "id": "REQ_UI_006",
       "implementation_evidence": [
-        "public/app.js",
+        "frontend/src/app/pages",
         "data/implementation-ledger.json"
       ],
       "implementation_status": "implemented",
       "kind": "screen",
       "selector": "#screen-p-06",
-      "title": "Datos personales"
+      "source_requirement_id": "CU_006",
+      "title": "Datos personales",
+      "ui_visibility": "internal_only"
     },
     {
       "id": "REQ_FLOW_006",
       "implementation_evidence": [
-        "public/app.js",
+        "backend/src/main/java/cl/benjamin/claveunica/service/PortalWorkflowService.java",
         "tests/smoke.mjs"
       ],
       "implementation_status": "implemented",
       "kind": "flow",
       "selector": "#screen-p-06",
-      "title": "Actualizar datos, Solicitar correccion"
+      "source_requirement_id": "FT_006",
+      "title": "Actualizar datos, Solicitar correccion",
+      "ui_visibility": "internal_only"
     },
     {
       "id": "REQ_VAL_006",
@@ -515,29 +889,35 @@
       "implementation_status": "implemented",
       "kind": "validation",
       "selector": "#screen-p-06",
-      "title": "Nombre, RUN, Fecha nacimiento, Nacionalidad"
+      "source_requirement_id": "CH_006",
+      "title": "Nombre, RUN, Fecha nacimiento, Nacionalidad",
+      "ui_visibility": "internal_only"
     },
     {
       "id": "REQ_UI_007",
       "implementation_evidence": [
-        "public/app.js",
+        "frontend/src/app/pages",
         "data/implementation-ledger.json"
       ],
       "implementation_status": "implemented",
       "kind": "screen",
       "selector": "#screen-p-07",
-      "title": "Datos de contacto"
+      "source_requirement_id": "CU_007",
+      "title": "Datos de contacto",
+      "ui_visibility": "internal_only"
     },
     {
       "id": "REQ_FLOW_007",
       "implementation_evidence": [
-        "public/app.js",
+        "backend/src/main/java/cl/benjamin/claveunica/service/PortalWorkflowService.java",
         "tests/smoke.mjs"
       ],
       "implementation_status": "implemented",
       "kind": "flow",
       "selector": "#screen-p-07",
-      "title": "Verificar correo, Actualizar telefono"
+      "source_requirement_id": "FT_007",
+      "title": "Verificar correo, Actualizar telefono",
+      "ui_visibility": "internal_only"
     },
     {
       "id": "REQ_VAL_007",
@@ -547,29 +927,35 @@
       "implementation_status": "implemented",
       "kind": "validation",
       "selector": "#screen-p-07",
-      "title": "Correo, Telefono, Canal preferente"
+      "source_requirement_id": "CH_007",
+      "title": "Correo, Telefono, Canal preferente",
+      "ui_visibility": "internal_only"
     },
     {
       "id": "REQ_UI_008",
       "implementation_evidence": [
-        "public/app.js",
+        "frontend/src/app/pages",
         "data/implementation-ledger.json"
       ],
       "implementation_status": "implemented",
       "kind": "screen",
       "selector": "#screen-p-08",
-      "title": "Preferencias de privacidad"
+      "source_requirement_id": "CU_008",
+      "title": "Preferencias de privacidad",
+      "ui_visibility": "internal_only"
     },
     {
       "id": "REQ_FLOW_008",
       "implementation_evidence": [
-        "public/app.js",
+        "backend/src/main/java/cl/benjamin/claveunica/service/PortalWorkflowService.java",
         "tests/smoke.mjs"
       ],
       "implementation_status": "implemented",
       "kind": "flow",
       "selector": "#screen-p-08",
-      "title": "Guardar preferencias, Ver historial"
+      "source_requirement_id": "FT_008",
+      "title": "Guardar preferencias, Ver historial",
+      "ui_visibility": "internal_only"
     },
     {
       "id": "REQ_VAL_008",
@@ -579,29 +965,35 @@
       "implementation_status": "implemented",
       "kind": "validation",
       "selector": "#screen-p-08",
-      "title": "Uso de datos, Canales, Retencion"
+      "source_requirement_id": "CH_008",
+      "title": "Uso de datos, Canales, Retencion",
+      "ui_visibility": "internal_only"
     },
     {
       "id": "REQ_UI_009",
       "implementation_evidence": [
-        "public/app.js",
+        "frontend/src/app/pages",
         "data/implementation-ledger.json"
       ],
       "implementation_status": "implemented",
       "kind": "screen",
       "selector": "#screen-p-09",
-      "title": "Sesiones activas"
+      "source_requirement_id": "CU_009",
+      "title": "Sesiones activas",
+      "ui_visibility": "internal_only"
     },
     {
       "id": "REQ_FLOW_009",
       "implementation_evidence": [
-        "public/app.js",
+        "backend/src/main/java/cl/benjamin/claveunica/service/PortalWorkflowService.java",
         "tests/smoke.mjs"
       ],
       "implementation_status": "implemented",
       "kind": "flow",
       "selector": "#screen-p-09",
-      "title": "Cerrar sesion, Confiar dispositivo"
+      "source_requirement_id": "FT_009",
+      "title": "Cerrar sesion, Confiar dispositivo",
+      "ui_visibility": "internal_only"
     },
     {
       "id": "REQ_VAL_009",
@@ -611,29 +1003,35 @@
       "implementation_status": "implemented",
       "kind": "validation",
       "selector": "#screen-p-09",
-      "title": "Dispositivo, Ubicacion, Ultimo acceso"
+      "source_requirement_id": "CH_009",
+      "title": "Dispositivo, Ubicacion, Ultimo acceso",
+      "ui_visibility": "internal_only"
     },
     {
       "id": "REQ_UI_010",
       "implementation_evidence": [
-        "public/app.js",
+        "frontend/src/app/pages",
         "data/implementation-ledger.json"
       ],
       "implementation_status": "implemented",
       "kind": "screen",
       "selector": "#screen-p-10",
-      "title": "Dispositivos y MFA"
+      "source_requirement_id": "CU_010",
+      "title": "Dispositivos y MFA",
+      "ui_visibility": "internal_only"
     },
     {
       "id": "REQ_FLOW_010",
       "implementation_evidence": [
-        "public/app.js",
+        "backend/src/main/java/cl/benjamin/claveunica/service/PortalWorkflowService.java",
         "tests/smoke.mjs"
       ],
       "implementation_status": "implemented",
       "kind": "flow",
       "selector": "#screen-p-10",
-      "title": "Activar metodo, Regenerar respaldo"
+      "source_requirement_id": "FT_010",
+      "title": "Activar metodo, Regenerar respaldo",
+      "ui_visibility": "internal_only"
     },
     {
       "id": "REQ_VAL_010",
@@ -643,29 +1041,35 @@
       "implementation_status": "implemented",
       "kind": "validation",
       "selector": "#screen-p-10",
-      "title": "Metodo, Estado, Respaldo"
+      "source_requirement_id": "CH_010",
+      "title": "Metodo, Estado, Respaldo",
+      "ui_visibility": "internal_only"
     },
     {
       "id": "REQ_UI_011",
       "implementation_evidence": [
-        "public/app.js",
+        "frontend/src/app/pages",
         "data/implementation-ledger.json"
       ],
       "implementation_status": "implemented",
       "kind": "screen",
       "selector": "#screen-p-11",
-      "title": "Domicilio digital vigente"
+      "source_requirement_id": "CU_011",
+      "title": "Domicilio digital vigente",
+      "ui_visibility": "internal_only"
     },
     {
       "id": "REQ_FLOW_011",
       "implementation_evidence": [
-        "public/app.js",
+        "backend/src/main/java/cl/benjamin/claveunica/service/PortalWorkflowService.java",
         "tests/smoke.mjs"
       ],
       "implementation_status": "implemented",
       "kind": "flow",
       "selector": "#screen-p-11",
-      "title": "Editar domicilio, Verificar"
+      "source_requirement_id": "FT_011",
+      "title": "Editar domicilio, Verificar",
+      "ui_visibility": "internal_only"
     },
     {
       "id": "REQ_VAL_011",
@@ -675,29 +1079,35 @@
       "implementation_status": "implemented",
       "kind": "validation",
       "selector": "#screen-p-11",
-      "title": "Direccion, Comuna, Estado"
+      "source_requirement_id": "CH_011",
+      "title": "Direccion, Comuna, Estado",
+      "ui_visibility": "internal_only"
     },
     {
       "id": "REQ_UI_012",
       "implementation_evidence": [
-        "public/app.js",
+        "frontend/src/app/pages",
         "data/implementation-ledger.json"
       ],
       "implementation_status": "implemented",
       "kind": "screen",
       "selector": "#screen-p-12",
-      "title": "Verificacion de domicilio"
+      "source_requirement_id": "CU_012",
+      "title": "Verificacion de domicilio",
+      "ui_visibility": "internal_only"
     },
     {
       "id": "REQ_FLOW_012",
       "implementation_evidence": [
-        "public/app.js",
+        "backend/src/main/java/cl/benjamin/claveunica/service/PortalWorkflowService.java",
         "tests/smoke.mjs"
       ],
       "implementation_status": "implemented",
       "kind": "flow",
       "selector": "#screen-p-12",
-      "title": "Subir evidencia, Solicitar revision"
+      "source_requirement_id": "FT_012",
+      "title": "Subir evidencia, Solicitar revision",
+      "ui_visibility": "internal_only"
     },
     {
       "id": "REQ_VAL_012",
@@ -707,29 +1117,35 @@
       "implementation_status": "implemented",
       "kind": "validation",
       "selector": "#screen-p-12",
-      "title": "Evidencia, Institucion, Resultado"
+      "source_requirement_id": "CH_012",
+      "title": "Evidencia, Institucion, Resultado",
+      "ui_visibility": "internal_only"
     },
     {
       "id": "REQ_UI_013",
       "implementation_evidence": [
-        "public/app.js",
+        "frontend/src/app/pages",
         "data/implementation-ledger.json"
       ],
       "implementation_status": "implemented",
       "kind": "screen",
       "selector": "#screen-p-13",
-      "title": "Historial de domicilio"
+      "source_requirement_id": "CU_013",
+      "title": "Historial de domicilio",
+      "ui_visibility": "internal_only"
     },
     {
       "id": "REQ_FLOW_013",
       "implementation_evidence": [
-        "public/app.js",
+        "backend/src/main/java/cl/benjamin/claveunica/service/PortalWorkflowService.java",
         "tests/smoke.mjs"
       ],
       "implementation_status": "implemented",
       "kind": "flow",
       "selector": "#screen-p-13",
-      "title": "Comparar, Descargar historial"
+      "source_requirement_id": "FT_013",
+      "title": "Comparar, Descargar historial",
+      "ui_visibility": "internal_only"
     },
     {
       "id": "REQ_VAL_013",
@@ -739,29 +1155,35 @@
       "implementation_status": "implemented",
       "kind": "validation",
       "selector": "#screen-p-13",
-      "title": "Fecha, Direccion, Origen"
+      "source_requirement_id": "CH_013",
+      "title": "Fecha, Direccion, Origen",
+      "ui_visibility": "internal_only"
     },
     {
       "id": "REQ_UI_014",
       "implementation_evidence": [
-        "public/app.js",
+        "frontend/src/app/pages",
         "data/implementation-ledger.json"
       ],
       "implementation_status": "implemented",
       "kind": "screen",
       "selector": "#screen-p-14",
-      "title": "Bandeja de notificaciones"
+      "source_requirement_id": "CU_014",
+      "title": "Bandeja de notificaciones",
+      "ui_visibility": "internal_only"
     },
     {
       "id": "REQ_FLOW_014",
       "implementation_evidence": [
-        "public/app.js",
+        "backend/src/main/java/cl/benjamin/claveunica/service/PortalWorkflowService.java",
         "tests/smoke.mjs"
       ],
       "implementation_status": "implemented",
       "kind": "flow",
       "selector": "#screen-p-14",
-      "title": "Marcar leida, Responder"
+      "source_requirement_id": "FT_014",
+      "title": "Marcar leida, Responder",
+      "ui_visibility": "internal_only"
     },
     {
       "id": "REQ_VAL_014",
@@ -771,29 +1193,35 @@
       "implementation_status": "implemented",
       "kind": "validation",
       "selector": "#screen-p-14",
-      "title": "Asunto, Prioridad, Acuse"
+      "source_requirement_id": "CH_014",
+      "title": "Asunto, Prioridad, Acuse",
+      "ui_visibility": "internal_only"
     },
     {
       "id": "REQ_UI_015",
       "implementation_evidence": [
-        "public/app.js",
+        "frontend/src/app/pages",
         "data/implementation-ledger.json"
       ],
       "implementation_status": "implemented",
       "kind": "screen",
       "selector": "#screen-p-15",
-      "title": "Detalle de mensaje"
+      "source_requirement_id": "CU_015",
+      "title": "Detalle de mensaje",
+      "ui_visibility": "internal_only"
     },
     {
       "id": "REQ_FLOW_015",
       "implementation_evidence": [
-        "public/app.js",
+        "backend/src/main/java/cl/benjamin/claveunica/service/PortalWorkflowService.java",
         "tests/smoke.mjs"
       ],
       "implementation_status": "implemented",
       "kind": "flow",
       "selector": "#screen-p-15",
-      "title": "Descargar adjunto, Acusar recibo"
+      "source_requirement_id": "FT_015",
+      "title": "Descargar adjunto, Acusar recibo",
+      "ui_visibility": "internal_only"
     },
     {
       "id": "REQ_VAL_015",
@@ -803,29 +1231,35 @@
       "implementation_status": "implemented",
       "kind": "validation",
       "selector": "#screen-p-15",
-      "title": "Remitente, Folio, Adjuntos"
+      "source_requirement_id": "CH_015",
+      "title": "Remitente, Folio, Adjuntos",
+      "ui_visibility": "internal_only"
     },
     {
       "id": "REQ_UI_016",
       "implementation_evidence": [
-        "public/app.js",
+        "frontend/src/app/pages",
         "data/implementation-ledger.json"
       ],
       "implementation_status": "implemented",
       "kind": "screen",
       "selector": "#screen-p-16",
-      "title": "Preferencias de aviso"
+      "source_requirement_id": "CU_016",
+      "title": "Preferencias de aviso",
+      "ui_visibility": "internal_only"
     },
     {
       "id": "REQ_FLOW_016",
       "implementation_evidence": [
-        "public/app.js",
+        "backend/src/main/java/cl/benjamin/claveunica/service/PortalWorkflowService.java",
         "tests/smoke.mjs"
       ],
       "implementation_status": "implemented",
       "kind": "flow",
       "selector": "#screen-p-16",
-      "title": "Guardar canal, Probar envio"
+      "source_requirement_id": "FT_016",
+      "title": "Guardar canal, Probar envio",
+      "ui_visibility": "internal_only"
     },
     {
       "id": "REQ_VAL_016",
@@ -835,29 +1269,35 @@
       "implementation_status": "implemented",
       "kind": "validation",
       "selector": "#screen-p-16",
-      "title": "Canal, Horario, Prioridad"
+      "source_requirement_id": "CH_016",
+      "title": "Canal, Horario, Prioridad",
+      "ui_visibility": "internal_only"
     },
     {
       "id": "REQ_UI_017",
       "implementation_evidence": [
-        "public/app.js",
+        "frontend/src/app/pages",
         "data/implementation-ledger.json"
       ],
       "implementation_status": "implemented",
       "kind": "screen",
       "selector": "#screen-p-17",
-      "title": "Permisos de datos"
+      "source_requirement_id": "CU_017",
+      "title": "Permisos de datos",
+      "ui_visibility": "internal_only"
     },
     {
       "id": "REQ_FLOW_017",
       "implementation_evidence": [
-        "public/app.js",
+        "backend/src/main/java/cl/benjamin/claveunica/service/PortalWorkflowService.java",
         "tests/smoke.mjs"
       ],
       "implementation_status": "implemented",
       "kind": "flow",
       "selector": "#screen-p-17",
-      "title": "Revocar, Renovar"
+      "source_requirement_id": "FT_017",
+      "title": "Revocar, Renovar",
+      "ui_visibility": "internal_only"
     },
     {
       "id": "REQ_VAL_017",
@@ -867,29 +1307,35 @@
       "implementation_status": "implemented",
       "kind": "validation",
       "selector": "#screen-p-17",
-      "title": "Institucion, Dato, Vigencia"
+      "source_requirement_id": "CH_017",
+      "title": "Institucion, Dato, Vigencia",
+      "ui_visibility": "internal_only"
     },
     {
       "id": "REQ_UI_018",
       "implementation_evidence": [
-        "public/app.js",
+        "frontend/src/app/pages",
         "data/implementation-ledger.json"
       ],
       "implementation_status": "implemented",
       "kind": "screen",
       "selector": "#screen-p-18",
-      "title": "Solicitud de autorizacion"
+      "source_requirement_id": "CU_018",
+      "title": "Solicitud de autorizacion",
+      "ui_visibility": "internal_only"
     },
     {
       "id": "REQ_FLOW_018",
       "implementation_evidence": [
-        "public/app.js",
+        "backend/src/main/java/cl/benjamin/claveunica/service/PortalWorkflowService.java",
         "tests/smoke.mjs"
       ],
       "implementation_status": "implemented",
       "kind": "flow",
       "selector": "#screen-p-18",
-      "title": "Autorizar, Rechazar"
+      "source_requirement_id": "FT_018",
+      "title": "Autorizar, Rechazar",
+      "ui_visibility": "internal_only"
     },
     {
       "id": "REQ_VAL_018",
@@ -899,29 +1345,35 @@
       "implementation_status": "implemented",
       "kind": "validation",
       "selector": "#screen-p-18",
-      "title": "Solicitante, Finalidad, Duracion"
+      "source_requirement_id": "CH_018",
+      "title": "Solicitante, Finalidad, Duracion",
+      "ui_visibility": "internal_only"
     },
     {
       "id": "REQ_UI_019",
       "implementation_evidence": [
-        "public/app.js",
+        "frontend/src/app/pages",
         "data/implementation-ledger.json"
       ],
       "implementation_status": "implemented",
       "kind": "screen",
       "selector": "#screen-p-19",
-      "title": "Historial de autorizaciones"
+      "source_requirement_id": "CU_019",
+      "title": "Historial de autorizaciones",
+      "ui_visibility": "internal_only"
     },
     {
       "id": "REQ_FLOW_019",
       "implementation_evidence": [
-        "public/app.js",
+        "backend/src/main/java/cl/benjamin/claveunica/service/PortalWorkflowService.java",
         "tests/smoke.mjs"
       ],
       "implementation_status": "implemented",
       "kind": "flow",
       "selector": "#screen-p-19",
-      "title": "Exportar historial, Ver detalle"
+      "source_requirement_id": "FT_019",
+      "title": "Exportar historial, Ver detalle",
+      "ui_visibility": "internal_only"
     },
     {
       "id": "REQ_VAL_019",
@@ -931,29 +1383,35 @@
       "implementation_status": "implemented",
       "kind": "validation",
       "selector": "#screen-p-19",
-      "title": "Fecha, Accion, Actor"
+      "source_requirement_id": "CH_019",
+      "title": "Fecha, Accion, Actor",
+      "ui_visibility": "internal_only"
     },
     {
       "id": "REQ_UI_020",
       "implementation_evidence": [
-        "public/app.js",
+        "frontend/src/app/pages",
         "data/implementation-ledger.json"
       ],
       "implementation_status": "implemented",
       "kind": "screen",
       "selector": "#screen-p-20",
-      "title": "Mis expedientes"
+      "source_requirement_id": "CU_020",
+      "title": "Mis expedientes",
+      "ui_visibility": "internal_only"
     },
     {
       "id": "REQ_FLOW_020",
       "implementation_evidence": [
-        "public/app.js",
+        "backend/src/main/java/cl/benjamin/claveunica/service/PortalWorkflowService.java",
         "tests/smoke.mjs"
       ],
       "implementation_status": "implemented",
       "kind": "flow",
       "selector": "#screen-p-20",
-      "title": "Abrir expediente, Filtrar"
+      "source_requirement_id": "FT_020",
+      "title": "Abrir expediente, Filtrar",
+      "ui_visibility": "internal_only"
     },
     {
       "id": "REQ_VAL_020",
@@ -963,29 +1421,35 @@
       "implementation_status": "implemented",
       "kind": "validation",
       "selector": "#screen-p-20",
-      "title": "Folio, Estado, Responsable"
+      "source_requirement_id": "CH_001",
+      "title": "Folio, Estado, Responsable",
+      "ui_visibility": "internal_only"
     },
     {
       "id": "REQ_UI_021",
       "implementation_evidence": [
-        "public/app.js",
+        "frontend/src/app/pages",
         "data/implementation-ledger.json"
       ],
       "implementation_status": "implemented",
       "kind": "screen",
       "selector": "#screen-p-21",
-      "title": "Detalle de expediente"
+      "source_requirement_id": "CU_021",
+      "title": "Detalle de expediente",
+      "ui_visibility": "internal_only"
     },
     {
       "id": "REQ_FLOW_021",
       "implementation_evidence": [
-        "public/app.js",
+        "backend/src/main/java/cl/benjamin/claveunica/service/PortalWorkflowService.java",
         "tests/smoke.mjs"
       ],
       "implementation_status": "implemented",
       "kind": "flow",
       "selector": "#screen-p-21",
-      "title": "Adjuntar documento, Enviar comentario"
+      "source_requirement_id": "FT_021",
+      "title": "Adjuntar documento, Enviar comentario",
+      "ui_visibility": "internal_only"
     },
     {
       "id": "REQ_VAL_021",
@@ -995,29 +1459,35 @@
       "implementation_status": "implemented",
       "kind": "validation",
       "selector": "#screen-p-21",
-      "title": "Folio, Hito, Documento"
+      "source_requirement_id": "CH_002",
+      "title": "Folio, Hito, Documento",
+      "ui_visibility": "internal_only"
     },
     {
       "id": "REQ_UI_022",
       "implementation_evidence": [
-        "public/app.js",
+        "frontend/src/app/pages",
         "data/implementation-ledger.json"
       ],
       "implementation_status": "implemented",
       "kind": "screen",
       "selector": "#screen-p-22",
-      "title": "Linea de tiempo"
+      "source_requirement_id": "CU_001",
+      "title": "Linea de tiempo",
+      "ui_visibility": "internal_only"
     },
     {
       "id": "REQ_FLOW_022",
       "implementation_evidence": [
-        "public/app.js",
+        "backend/src/main/java/cl/benjamin/claveunica/service/PortalWorkflowService.java",
         "tests/smoke.mjs"
       ],
       "implementation_status": "implemented",
       "kind": "flow",
       "selector": "#screen-p-22",
-      "title": "Ver evidencia, Descargar bitacora"
+      "source_requirement_id": "FT_022",
+      "title": "Ver evidencia, Descargar bitacora",
+      "ui_visibility": "internal_only"
     },
     {
       "id": "REQ_VAL_022",
@@ -1027,29 +1497,35 @@
       "implementation_status": "implemented",
       "kind": "validation",
       "selector": "#screen-p-22",
-      "title": "Fecha, Evento, Resultado"
+      "source_requirement_id": "CH_003",
+      "title": "Fecha, Evento, Resultado",
+      "ui_visibility": "internal_only"
     },
     {
       "id": "REQ_UI_023",
       "implementation_evidence": [
-        "public/app.js",
+        "frontend/src/app/pages",
         "data/implementation-ledger.json"
       ],
       "implementation_status": "implemented",
       "kind": "screen",
       "selector": "#screen-p-23",
-      "title": "Centro de ayuda"
+      "source_requirement_id": "CU_002",
+      "title": "Centro de ayuda",
+      "ui_visibility": "internal_only"
     },
     {
       "id": "REQ_FLOW_023",
       "implementation_evidence": [
-        "public/app.js",
+        "backend/src/main/java/cl/benjamin/claveunica/service/PortalWorkflowService.java",
         "tests/smoke.mjs"
       ],
       "implementation_status": "implemented",
       "kind": "flow",
       "selector": "#screen-p-23",
-      "title": "Buscar ayuda, Crear ticket"
+      "source_requirement_id": "FT_023",
+      "title": "Buscar ayuda, Crear ticket",
+      "ui_visibility": "internal_only"
     },
     {
       "id": "REQ_VAL_023",
@@ -1059,29 +1535,35 @@
       "implementation_status": "implemented",
       "kind": "validation",
       "selector": "#screen-p-23",
-      "title": "Tema, Canal, SLA"
+      "source_requirement_id": "CH_004",
+      "title": "Tema, Canal, SLA",
+      "ui_visibility": "internal_only"
     },
     {
       "id": "REQ_UI_024",
       "implementation_evidence": [
-        "public/app.js",
+        "frontend/src/app/pages",
         "data/implementation-ledger.json"
       ],
       "implementation_status": "implemented",
       "kind": "screen",
       "selector": "#screen-p-24",
-      "title": "Preguntas frecuentes"
+      "source_requirement_id": "CU_003",
+      "title": "Preguntas frecuentes",
+      "ui_visibility": "internal_only"
     },
     {
       "id": "REQ_FLOW_024",
       "implementation_evidence": [
-        "public/app.js",
+        "backend/src/main/java/cl/benjamin/claveunica/service/PortalWorkflowService.java",
         "tests/smoke.mjs"
       ],
       "implementation_status": "implemented",
       "kind": "flow",
       "selector": "#screen-p-24",
-      "title": "Abrir respuesta, Valorar"
+      "source_requirement_id": "FT_024",
+      "title": "Abrir respuesta, Valorar",
+      "ui_visibility": "internal_only"
     },
     {
       "id": "REQ_VAL_024",
@@ -1091,29 +1573,35 @@
       "implementation_status": "implemented",
       "kind": "validation",
       "selector": "#screen-p-24",
-      "title": "Pregunta, Categoria, Popularidad"
+      "source_requirement_id": "CH_005",
+      "title": "Pregunta, Categoria, Popularidad",
+      "ui_visibility": "internal_only"
     },
     {
       "id": "REQ_UI_025",
       "implementation_evidence": [
-        "public/app.js",
+        "frontend/src/app/pages",
         "data/implementation-ledger.json"
       ],
       "implementation_status": "implemented",
       "kind": "screen",
       "selector": "#screen-p-25",
-      "title": "Ticket de soporte"
+      "source_requirement_id": "CU_004",
+      "title": "Ticket de soporte",
+      "ui_visibility": "internal_only"
     },
     {
       "id": "REQ_FLOW_025",
       "implementation_evidence": [
-        "public/app.js",
+        "backend/src/main/java/cl/benjamin/claveunica/service/PortalWorkflowService.java",
         "tests/smoke.mjs"
       ],
       "implementation_status": "implemented",
       "kind": "flow",
       "selector": "#screen-p-25",
-      "title": "Responder, Cerrar ticket"
+      "source_requirement_id": "FT_025",
+      "title": "Responder, Cerrar ticket",
+      "ui_visibility": "internal_only"
     },
     {
       "id": "REQ_VAL_025",
@@ -1123,29 +1611,35 @@
       "implementation_status": "implemented",
       "kind": "validation",
       "selector": "#screen-p-25",
-      "title": "Ticket, Estado, Ultima respuesta"
+      "source_requirement_id": "CH_006",
+      "title": "Ticket, Estado, Ultima respuesta",
+      "ui_visibility": "internal_only"
     },
     {
       "id": "REQ_UI_026",
       "implementation_evidence": [
-        "public/app.js",
+        "frontend/src/app/pages",
         "data/implementation-ledger.json"
       ],
       "implementation_status": "implemented",
       "kind": "screen",
       "selector": "#screen-p-26",
-      "title": "Bitacora de accesos"
+      "source_requirement_id": "CU_005",
+      "title": "Bitacora de accesos",
+      "ui_visibility": "internal_only"
     },
     {
       "id": "REQ_FLOW_026",
       "implementation_evidence": [
-        "public/app.js",
+        "backend/src/main/java/cl/benjamin/claveunica/service/PortalWorkflowService.java",
         "tests/smoke.mjs"
       ],
       "implementation_status": "implemented",
       "kind": "flow",
       "selector": "#screen-p-26",
-      "title": "Filtrar, Exportar"
+      "source_requirement_id": "FT_026",
+      "title": "Filtrar, Exportar",
+      "ui_visibility": "internal_only"
     },
     {
       "id": "REQ_VAL_026",
@@ -1155,29 +1649,35 @@
       "implementation_status": "implemented",
       "kind": "validation",
       "selector": "#screen-p-26",
-      "title": "Fecha, IP, Resultado"
+      "source_requirement_id": "CH_007",
+      "title": "Fecha, IP, Resultado",
+      "ui_visibility": "internal_only"
     },
     {
       "id": "REQ_UI_027",
       "implementation_evidence": [
-        "public/app.js",
+        "frontend/src/app/pages",
         "data/implementation-ledger.json"
       ],
       "implementation_status": "implemented",
       "kind": "screen",
       "selector": "#screen-p-27",
-      "title": "Cambios de datos"
+      "source_requirement_id": "CU_006",
+      "title": "Cambios de datos",
+      "ui_visibility": "internal_only"
     },
     {
       "id": "REQ_FLOW_027",
       "implementation_evidence": [
-        "public/app.js",
+        "backend/src/main/java/cl/benjamin/claveunica/service/PortalWorkflowService.java",
         "tests/smoke.mjs"
       ],
       "implementation_status": "implemented",
       "kind": "flow",
       "selector": "#screen-p-27",
-      "title": "Comparar cambio, Ver actor"
+      "source_requirement_id": "FT_001",
+      "title": "Comparar cambio, Ver actor",
+      "ui_visibility": "internal_only"
     },
     {
       "id": "REQ_VAL_027",
@@ -1187,29 +1687,35 @@
       "implementation_status": "implemented",
       "kind": "validation",
       "selector": "#screen-p-27",
-      "title": "Dato, Antes, Despues"
+      "source_requirement_id": "CH_008",
+      "title": "Dato, Antes, Despues",
+      "ui_visibility": "internal_only"
     },
     {
       "id": "REQ_UI_028",
       "implementation_evidence": [
-        "public/app.js",
+        "frontend/src/app/pages",
         "data/implementation-ledger.json"
       ],
       "implementation_status": "implemented",
       "kind": "screen",
       "selector": "#screen-p-28",
-      "title": "Exportacion de auditoria"
+      "source_requirement_id": "CU_007",
+      "title": "Exportacion de auditoria",
+      "ui_visibility": "internal_only"
     },
     {
       "id": "REQ_FLOW_028",
       "implementation_evidence": [
-        "public/app.js",
+        "backend/src/main/java/cl/benjamin/claveunica/service/PortalWorkflowService.java",
         "tests/smoke.mjs"
       ],
       "implementation_status": "implemented",
       "kind": "flow",
       "selector": "#screen-p-28",
-      "title": "Generar CSV, Generar PDF"
+      "source_requirement_id": "FT_002",
+      "title": "Generar CSV, Generar PDF",
+      "ui_visibility": "internal_only"
     },
     {
       "id": "REQ_VAL_028",
@@ -1219,29 +1725,35 @@
       "implementation_status": "implemented",
       "kind": "validation",
       "selector": "#screen-p-28",
-      "title": "Rango, Formato, Estado"
+      "source_requirement_id": "CH_009",
+      "title": "Rango, Formato, Estado",
+      "ui_visibility": "internal_only"
     },
     {
       "id": "REQ_UI_029",
       "implementation_evidence": [
-        "public/app.js",
+        "frontend/src/app/pages",
         "data/implementation-ledger.json"
       ],
       "implementation_status": "implemented",
       "kind": "screen",
       "selector": "#screen-p-29",
-      "title": "Estado de integraciones"
+      "source_requirement_id": "CU_008",
+      "title": "Estado de integraciones",
+      "ui_visibility": "internal_only"
     },
     {
       "id": "REQ_FLOW_029",
       "implementation_evidence": [
-        "public/app.js",
+        "backend/src/main/java/cl/benjamin/claveunica/service/PortalWorkflowService.java",
         "tests/smoke.mjs"
       ],
       "implementation_status": "implemented",
       "kind": "flow",
       "selector": "#screen-p-29",
-      "title": "Reintentar, Ver detalle"
+      "source_requirement_id": "FT_003",
+      "title": "Reintentar, Ver detalle",
+      "ui_visibility": "internal_only"
     },
     {
       "id": "REQ_VAL_029",
@@ -1251,29 +1763,35 @@
       "implementation_status": "implemented",
       "kind": "validation",
       "selector": "#screen-p-29",
-      "title": "Servicio, Estado, Latencia"
+      "source_requirement_id": "CH_010",
+      "title": "Servicio, Estado, Latencia",
+      "ui_visibility": "internal_only"
     },
     {
       "id": "REQ_UI_030",
       "implementation_evidence": [
-        "public/app.js",
+        "frontend/src/app/pages",
         "data/implementation-ledger.json"
       ],
       "implementation_status": "implemented",
       "kind": "screen",
       "selector": "#screen-p-30",
-      "title": "Panel de seguridad"
+      "source_requirement_id": "CU_009",
+      "title": "Panel de seguridad",
+      "ui_visibility": "internal_only"
     },
     {
       "id": "REQ_FLOW_030",
       "implementation_evidence": [
-        "public/app.js",
+        "backend/src/main/java/cl/benjamin/claveunica/service/PortalWorkflowService.java",
         "tests/smoke.mjs"
       ],
       "implementation_status": "implemented",
       "kind": "flow",
       "selector": "#screen-p-30",
-      "title": "Ver control, Descargar reporte"
+      "source_requirement_id": "FT_004",
+      "title": "Ver control, Descargar reporte",
+      "ui_visibility": "internal_only"
     },
     {
       "id": "REQ_VAL_030",
@@ -1283,10 +1801,1468 @@
       "implementation_status": "implemented",
       "kind": "validation",
       "selector": "#screen-p-30",
-      "title": "Control, Cobertura, Riesgo"
+      "source_requirement_id": "CH_011",
+      "title": "Control, Cobertura, Riesgo",
+      "ui_visibility": "internal_only"
     }
   ],
-  "runId": "RUN-d81669984b31",
+  "requirementsModel": {
+    "coverage_policy": {
+      "frontend_must_hide_internal_generation_artifacts": true,
+      "frontend_must_not_render_requirement_ids": true,
+      "product_generation_policy_required": true,
+      "product_generation_policy_source": "SRC-PRODUCT-GENERATION-BRIEF",
+      "required_chain": "requirement -> screen -> action -> endpoint -> table -> test",
+      "source_of_truth": "SRC-PROFESOR-MD",
+      "traceability_required": true,
+      "ui_visibility": "internal_only"
+    },
+    "domain_terms": {
+      "auditoria": false,
+      "autorizaciones": true,
+      "clave_unica": false,
+      "domicilio_digital": true,
+      "notificaciones": true
+    },
+    "generation_policy": {
+      "database_requirements": [
+        "tablas normalizadas",
+        "claves primarias",
+        "claves foraneas",
+        "estados de negocio",
+        "fechas de creacion y actualizacion",
+        "migraciones versionadas",
+        "datos semilla realistas",
+        "relaciones entre entidades",
+        "prohibido usar datos hardcodeados como fuente principal"
+      ],
+      "docker_requirements": {
+        "optional_services": [
+          "redis",
+          "pgadmin",
+          "migration-service"
+        ],
+        "required_services": [
+          "frontend",
+          "backend",
+          "postgres"
+        ],
+        "single_command_local_run": true
+      },
+      "forbidden_frontend_content": [
+        "validaciones internas de la fabrica",
+        "trazabilidad tecnica",
+        "IDs de rubrica",
+        "checks internos",
+        "logs de agentes",
+        "ejecutado desde Angular",
+        "paneles de debug",
+        "actividad reciente artificial",
+        "texto generico de plantilla",
+        "pantallas que solo listan requerimientos"
+      ],
+      "hash": "sha256:1f06058578656192b0b6da520c732e59f6d0442910fd8cf1afc867fb12ae22db",
+      "real_action_policy": [
+        "cada boton importante debe cambiar estado visible",
+        "cada boton importante debe llamar backend",
+        "cada accion relevante debe leer o escribir PostgreSQL",
+        "cada accion relevante debe mostrar feedback",
+        "cada accion relevante debe manejar errores",
+        "prohibido registrar solo actividad sin efecto de dominio"
+      ],
+      "rejection_criteria": [
+        "parece plantilla generica",
+        "muestra validaciones internas al usuario",
+        "muestra trazabilidad tecnica en la UI",
+        "botones solo registran actividad",
+        "no existe base de datos real",
+        "no hay migraciones",
+        "no hay datos semilla",
+        "backend sin logica de dominio",
+        "frontend usa datos hardcodeados como fuente principal",
+        "docker no levanta",
+        "playwright no prueba flujos reales",
+        "no representa la especificacion oficial"
+      ],
+      "relationship_to_functional_spec": "supplements SRC-PROFESOR-MD without replacing it",
+      "required_backend_behaviors": [
+        "login ciudadano simulado",
+        "dashboard ciudadano",
+        "listar y ver tramites",
+        "iniciar tramite",
+        "actualizar datos personales y de contacto",
+        "configurar domicilio digital",
+        "listar y marcar notificaciones",
+        "listar y revocar autorizaciones",
+        "listar y cerrar sesiones activas",
+        "listar y desactivar dispositivos MFA"
+      ],
+      "required_domain_entities": [
+        "ciudadanos",
+        "perfil ciudadano",
+        "autenticacion simulada ClaveUnica",
+        "recuperacion de acceso",
+        "MFA y dispositivos",
+        "tramites",
+        "solicitudes de tramite",
+        "notificaciones",
+        "mensajes",
+        "domicilio digital unico",
+        "datos personales",
+        "datos de contacto",
+        "autorizaciones de uso de datos",
+        "sesiones activas",
+        "auditoria interna"
+      ],
+      "required_review_agents": [
+        "UX/UI Product Reviewer",
+        "Arquitecto de Software",
+        "QA E2E",
+        "Runtime/Docker",
+        "Product Owner funcional",
+        "Revisor de cumplimiento de requerimientos"
+      ],
+      "required_screens": [
+        "Login ClaveUnica simulado",
+        "Recuperacion de acceso",
+        "Dashboard ciudadano",
+        "Catalogo de tramites",
+        "Detalle de tramite",
+        "Inicio de tramite",
+        "Datos personales",
+        "Datos de contacto",
+        "Domicilio digital",
+        "Notificaciones",
+        "Detalle de notificacion",
+        "Autorizaciones de datos",
+        "Solicitud de autorizacion",
+        "Sesiones activas",
+        "Dispositivos y MFA",
+        "Preferencias de privacidad"
+      ],
+      "required_stack": {
+        "api": "REST JSON",
+        "backend": "Spring Boot",
+        "backend_tests": [
+          "JUnit",
+          "equivalent"
+        ],
+        "containers": "Docker Compose",
+        "database": "PostgreSQL",
+        "e2e": "Playwright",
+        "frontend": "Angular",
+        "migrations": [
+          "Flyway",
+          "Liquibase"
+        ]
+      },
+      "required_tests": [
+        "docker build correcto",
+        "docker compose up correcto",
+        "healthcheck backend",
+        "frontend accesible",
+        "login funcional",
+        "navegacion principal",
+        "botones con efecto real",
+        "persistencia en DB",
+        "endpoints principales",
+        "flujos criticos con Playwright"
+      ],
+      "role": "generation_contract",
+      "source": "C:\\Users\\Benjamin Cruzado\\Desktop\\Ultimo Semestre\\IA\\PROYECTO\\fabrica-final\\project\\input\\product_generation_brief.md",
+      "source_excerpt_chars": 7087,
+      "source_id": "SRC-PRODUCT-GENERATION-BRIEF",
+      "status": "complete"
+    },
+    "noisy_snippets_detected": 27,
+    "quality_bar": "clean_requirements_context",
+    "requirements": [
+      {
+        "criticality": "critical",
+        "id": "CU_001",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "e\u00danica | Persona que accede al portal p\u00fablico, con o sin Clave\u00danica activada. | CU_001, CU_003, CU_020 | :HU01-HU03; ACT_002 | Usuario con Clave\u00danica activada | Persona autenticada que puede administrar datos, sesi\u00f3n, 2FA, notificaciones y autorizaciones. | CU",
+        "type": "use_case",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "CU_002",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "da que puede administrar datos, sesi\u00f3n, 2FA, notificaciones y autorizaciones. | CU_002-CU_016, CU_017-CU_019 | :HU02-HU04; E09-E13 ACT_003 | Usuario sin DDU configurado | Usuario autenticado cuyo Domicilio Digital \u00danico a\u00fan no est\u00e1 configurado. | CU_005, CU_00",
+        "type": "use_case",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "CU_003",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "Persona que accede al portal p\u00fablico, con o sin Clave\u00danica activada. | CU_001, CU_003, CU_020 | :HU01-HU03; ACT_002 | Usuario con Clave\u00danica activada | Persona autenticada que puede administrar datos, sesi\u00f3n, 2FA, notificaciones y autorizaciones. | CU_002-CU_0",
+        "type": "use_case",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "CU_004",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "xige por esta regla. - **Evidencia:** :HU03; . - **ID:** CU_004 - **Nombre:** Gestionar sesi\u00f3n segura y multisesi\u00f3n - **Descripci\u00f3n:** Evaluar y definir el manejo de multisesiones para reducir el riesgo de secuestro o mal uso de sesi\u00f3n cuando existan dispositi",
+        "type": "use_case",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "CU_005",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "o | Usuario autenticado cuyo Domicilio Digital \u00danico a\u00fan no est\u00e1 configurado. | CU_005, CU_006, CU_008, CU_009, CU_012 | :HU05-HU06; :HU08-HU09; :HU12; ACT_004 | Usuario con DDU configurado | Usuario autenticado que ya configur\u00f3 DDU y puede visualizar notifica",
+        "type": "use_case",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "CU_006",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "rio autenticado cuyo Domicilio Digital \u00danico a\u00fan no est\u00e1 configurado. | CU_005, CU_006, CU_008, CU_009, CU_012 | :HU05-HU06; :HU08-HU09; :HU12; ACT_004 | Usuario con DDU configurado | Usuario autenticado que ya configur\u00f3 DDU y puede visualizar notificaciones p",
+        "type": "use_case",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "CU_007",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "utenticado que ya configur\u00f3 DDU y puede visualizar notificaciones pendientes. | CU_007, CU_009-CU_011 | :HU07; :HU09-HU10; :HU11; ACT_005 | Usuario con autorizaciones pendientes | Usuario que tiene solicitudes de autorizaci\u00f3n de uso de datos sensibles pendient",
+        "type": "use_case",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "CU_008",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "nticado cuyo Domicilio Digital \u00danico a\u00fan no est\u00e1 configurado. | CU_005, CU_006, CU_008, CU_009, CU_012 | :HU05-HU06; :HU08-HU09; :HU12; ACT_004 | Usuario con DDU configurado | Usuario autenticado que ya configur\u00f3 DDU y puede visualizar notificaciones pendiente",
+        "type": "use_case",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "CU_009",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "cuyo Domicilio Digital \u00danico a\u00fan no est\u00e1 configurado. | CU_005, CU_006, CU_008, CU_009, CU_012 | :HU05-HU06; :HU08-HU09; :HU12; ACT_004 | Usuario con DDU configurado | Usuario autenticado que ya configur\u00f3 DDU y puede visualizar notificaciones pendientes. | CU_",
+        "type": "use_case",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "CU_010",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "endientes de lectura. - **Evidencia:** :HU09; . - **ID:** CU_010 - **Nombre:** Visualizar listado de notificaciones pendientes - **Descripci\u00f3n:** Mostrar al usuario con DDU configurado el listado de notificaciones pendientes de lectura dentro del portal Clave\u00da",
+        "type": "use_case",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "CU_011",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "ya configur\u00f3 DDU y puede visualizar notificaciones pendientes. | CU_007, CU_009-CU_011 | :HU07; :HU09-HU10; :HU11; ACT_005 | Usuario con autorizaciones pendientes | Usuario que tiene solicitudes de autorizaci\u00f3n de uso de datos sensibles pendientes de decisi\u00f3n.",
+        "type": "use_case",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "CU_012",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "icilio Digital \u00danico a\u00fan no est\u00e1 configurado. | CU_005, CU_006, CU_008, CU_009, CU_012 | :HU05-HU06; :HU08-HU09; :HU12; ACT_004 | Usuario con DDU configurado | Usuario autenticado que ya configur\u00f3 DDU y puede visualizar notificaciones pendientes. | CU_007, CU_",
+        "type": "use_case",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "CU_013",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "solicitudes de autorizaci\u00f3n de uso de datos sensibles pendientes de decisi\u00f3n. | CU_013, CU_015 | :HU13; :HU15 ACT_006 | Usuario con autorizaciones vigentes | Usuario que tiene autorizaciones aprobadas/vigentes susceptibles de revocaci\u00f3n. | CU_013, CU_016 | :HU",
+        "type": "use_case",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "CU_014",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "al en un solo lugar. - **Evidencia:** :HU13; . - **ID:** CU_014 - **Nombre:** Visualizar historial de datos sensibles compartidos - **Descripci\u00f3n:** Mostrar una tabla con el historial de datos sensibles compartidos entre instituciones proveedoras y solicitante",
+        "type": "use_case",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "CU_015",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "des de autorizaci\u00f3n de uso de datos sensibles pendientes de decisi\u00f3n. | CU_013, CU_015 | :HU13; :HU15 ACT_006 | Usuario con autorizaciones vigentes | Usuario que tiene autorizaciones aprobadas/vigentes susceptibles de revocaci\u00f3n. | CU_013, CU_016 | :HU13; :HU1",
+        "type": "use_case",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "CU_016",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "puede administrar datos, sesi\u00f3n, 2FA, notificaciones y autorizaciones. | CU_002-CU_016, CU_017-CU_019 | :HU02-HU04; E09-E13 ACT_003 | Usuario sin DDU configurado | Usuario autenticado cuyo Domicilio Digital \u00danico a\u00fan no est\u00e1 configurado. | CU_005, CU_006, CU_0",
+        "type": "use_case",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "CU_017",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "ministrar datos, sesi\u00f3n, 2FA, notificaciones y autorizaciones. | CU_002-CU_016, CU_017-CU_019 | :HU02-HU04; E09-E13 ACT_003 | Usuario sin DDU configurado | Usuario autenticado cuyo Domicilio Digital \u00danico a\u00fan no est\u00e1 configurado. | CU_005, CU_006, CU_008, CU_0",
+        "type": "use_case",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "CU_018",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "efinidas por el alcance. - **Evidencia:** ; . - **ID:** CU_018 - **Nombre:** Consultar vista de expedientes electr\u00f3nicos - **Descripci\u00f3n:** Soportar acceso a una vista de expedientes electr\u00f3nicos de la persona dentro de las secciones privadas del portal. - **R",
+        "type": "use_case",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "CU_019",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "ar datos, sesi\u00f3n, 2FA, notificaciones y autorizaciones. | CU_002-CU_016, CU_017-CU_019 | :HU02-HU04; E09-E13 ACT_003 | Usuario sin DDU configurado | Usuario autenticado cuyo Domicilio Digital \u00danico a\u00fan no est\u00e1 configurado. | CU_005, CU_006, CU_008, CU_009, CU_",
+        "type": "use_case",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "CU_020",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "que accede al portal p\u00fablico, con o sin Clave\u00danica activada. | CU_001, CU_003, CU_020 | :HU01-HU03; ACT_002 | Usuario con Clave\u00danica activada | Persona autenticada que puede administrar datos, sesi\u00f3n, 2FA, notificaciones y autorizaciones. | CU_002-CU_016, CU_0",
+        "type": "use_case",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "CU_021",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "cional que requiere ayuda, credenciales y estado de integraci\u00f3n a Clave\u00danica. | CU_021 | ; ACT_008 | Plataforma de Notificaciones/Casilla\u00danica | Sistema externo funcional que configura DDU, mantiene notificaciones y muestra detalle al usuario. | CU_005-CU_012 ",
+        "type": "use_case",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "FUN_001",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": ", m\u00e1s novedades e informaci\u00f3n de ayuda. - **Relaci\u00f3n jer\u00e1rquica:** Ra\u00edz; agrupa FUN_001-FUN_003. - **Actor/disparador:** ACT_001; disparador: ingreso al portal p\u00fablico. - **Precondiciones:** El portal p\u00fablico est\u00e1 disponible para consulta. - **Resultado espera",
+        "type": "feature",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "FUN_002",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "conducen al flujo correspondiente. - **Evidencia:** :HU01. - **ID:** FUN_002 - **Nombre:** Publicar novedades e informaci\u00f3n de ayuda - **Descripci\u00f3n:** Disponer contenidos de novedades e informaci\u00f3n de ayuda de manera oportuna en el portal p\u00fablico. - **Relaci\u00f3",
+        "type": "feature",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "FUN_003",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "vedades e informaci\u00f3n de ayuda. - **Relaci\u00f3n jer\u00e1rquica:** Ra\u00edz; agrupa FUN_001-FUN_003. - **Actor/disparador:** ACT_001; disparador: ingreso al portal p\u00fablico. - **Precondiciones:** El portal p\u00fablico est\u00e1 disponible para consulta. - **Resultado esperado:** El",
+        "type": "feature",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "FUN_004",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "una o m\u00e1s preguntas de \u00e1mbito personal. - **Relaci\u00f3n jer\u00e1rquica:** Ra\u00edz; agrupa FUN_004-FUN_005. - **Actor/disparador:** ACT_002; disparador: usuario intenta cambiar tel\u00e9fono o correo electr\u00f3nico en datos personales. - **Precondiciones:** Usuario autenticado c",
+        "type": "feature",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "FUN_005",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "s preguntas de \u00e1mbito personal. - **Relaci\u00f3n jer\u00e1rquica:** Ra\u00edz; agrupa FUN_004-FUN_005. - **Actor/disparador:** ACT_002; disparador: usuario intenta cambiar tel\u00e9fono o correo electr\u00f3nico en datos personales. - **Precondiciones:** Usuario autenticado con Clave",
+        "type": "feature",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "FUN_006",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "si\u00f3n y exigirlo cada vez que lo active. - **Relaci\u00f3n jer\u00e1rquica:** Ra\u00edz; agrupa FUN_006-FUN_007. - **Actor/disparador:** ACT_001, ACT_002; disparador: configuraci\u00f3n inicial de Clave\u00danica o administraci\u00f3n posterior de 2FA. - **Precondiciones:** Usuario en flujo",
+        "type": "feature",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "FUN_007",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "xigirlo cada vez que lo active. - **Relaci\u00f3n jer\u00e1rquica:** Ra\u00edz; agrupa FUN_006-FUN_007. - **Actor/disparador:** ACT_001, ACT_002; disparador: configuraci\u00f3n inicial de Clave\u00danica o administraci\u00f3n posterior de 2FA. - **Precondiciones:** Usuario en flujo de conf",
+        "type": "feature",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "FUN_008",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "s autenticados con la misma Clave\u00danica. - **Relaci\u00f3n jer\u00e1rquica:** Ra\u00edz; agrupa FUN_008-FUN_009. - **Actor/disparador:** ACT_002; disparador: usuario mantiene o inicia sesiones en uno o m\u00e1s dispositivos. - **Precondiciones:** Usuario autenticado con Clave\u00danica",
+        "type": "feature",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "FUN_009",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "icados con la misma Clave\u00danica. - **Relaci\u00f3n jer\u00e1rquica:** Ra\u00edz; agrupa FUN_008-FUN_009. - **Actor/disparador:** ACT_002; disparador: usuario mantiene o inicia sesiones en uno o m\u00e1s dispositivos. - **Precondiciones:** Usuario autenticado con Clave\u00danica activad",
+        "type": "feature",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "FUN_010",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "caciones, previa confirmaci\u00f3n en modal. - **Relaci\u00f3n jer\u00e1rquica:** Ra\u00edz; agrupa FUN_010-FUN_012. - **Actor/disparador:** ACT_003, ACT_008; disparador: login exitoso en Clave\u00danica sin DDU configurado. - **Precondiciones:** Usuario autenticado; el sistema puede ",
+        "type": "feature",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "FUN_011",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "**Evidencia:** :HU05-HU06; :HU09; . - **ID:** FUN_011 - **Nombre:** Desplegar modal de confirmaci\u00f3n para configuraci\u00f3n DDU - **Descripci\u00f3n:** Mostrar un modal antes de ingresar a la pasarela de configuraci\u00f3n, permitiendo continuar o cancelar. - **Relaci\u00f3n jer\u00e1",
+        "type": "feature",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "FUN_012",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": ", previa confirmaci\u00f3n en modal. - **Relaci\u00f3n jer\u00e1rquica:** Ra\u00edz; agrupa FUN_010-FUN_012. - **Actor/disparador:** ACT_003, ACT_008; disparador: login exitoso en Clave\u00danica sin DDU configurado. - **Precondiciones:** Usuario autenticado; el sistema puede determin",
+        "type": "feature",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "FUN_013",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "de Clave\u00danica con alerta de pendiente. - **Relaci\u00f3n jer\u00e1rquica:** Ra\u00edz; agrupa FUN_013-FUN_014. - **Actor/disparador:** ACT_003; disparador: usuario elige cancelar en modal de configuraci\u00f3n DDU posterior al login. - **Precondiciones:** Usuario autenticado; DDU",
+        "type": "feature",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "FUN_014",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "e\u00danica con alerta de pendiente. - **Relaci\u00f3n jer\u00e1rquica:** Ra\u00edz; agrupa FUN_013-FUN_014. - **Actor/disparador:** ACT_003; disparador: usuario elige cancelar en modal de configuraci\u00f3n DDU posterior al login. - **Precondiciones:** Usuario autenticado; DDU no con",
+        "type": "feature",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "FUN_015",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "etorne al portal inicial de Clave\u00danica. - **Relaci\u00f3n jer\u00e1rquica:** Ra\u00edz; agrupa FUN_015. - **Actor/disparador:** ACT_004, ACT_008; disparador: finalizaci\u00f3n de configuraci\u00f3n de DDU en pasarela. - **Precondiciones:** Usuario derivado desde CU complet\u00f3 activaci\u00f3n",
+        "type": "feature",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "FUN_016",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "tornar a Clave\u00danica sin configurar DDU. - **Relaci\u00f3n jer\u00e1rquica:** Ra\u00edz; agrupa FUN_016-FUN_018. - **Actor/disparador:** ACT_003, ACT_008; disparador: usuario cancela durante la activaci\u00f3n de DDU. - **Precondiciones:** Usuario se encuentra en proceso de activa",
+        "type": "feature",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "FUN_017",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "e ofrece continuar con el proceso. - **Evidencia:** :HU08. - **ID:** FUN_017 - **Nombre:** Confirmar cancelaci\u00f3n de activaci\u00f3n DDU - **Descripci\u00f3n:** Desplegar modal para confirmar cancelaci\u00f3n o continuar con la configuraci\u00f3n DDU. - **Relaci\u00f3n jer\u00e1rquica:** CU",
+        "type": "feature",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "FUN_018",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "Clave\u00danica sin configurar DDU. - **Relaci\u00f3n jer\u00e1rquica:** Ra\u00edz; agrupa FUN_016-FUN_018. - **Actor/disparador:** ACT_003, ACT_008; disparador: usuario cancela durante la activaci\u00f3n de DDU. - **Precondiciones:** Usuario se encuentra en proceso de activaci\u00f3n/conf",
+        "type": "feature",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "FUN_019",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "iento diferenciado seg\u00fan estado de DDU. - **Relaci\u00f3n jer\u00e1rquica:** Ra\u00edz; agrupa FUN_019-FUN_020. - **Actor/disparador:** ACT_003, ACT_004; disparador: usuario ingresa al portal privado/secci\u00f3n de notificaciones. - **Precondiciones:** Usuario autenticado; el si",
+        "type": "feature",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "FUN_020",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "ferenciado seg\u00fan estado de DDU. - **Relaci\u00f3n jer\u00e1rquica:** Ra\u00edz; agrupa FUN_019-FUN_020. - **Actor/disparador:** ACT_003, ACT_004; disparador: usuario ingresa al portal privado/secci\u00f3n de notificaciones. - **Precondiciones:** Usuario autenticado; el sistema pu",
+        "type": "feature",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "FUN_021",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "e lectura dentro del portal Clave\u00danica. - **Relaci\u00f3n jer\u00e1rquica:** Ra\u00edz; agrupa FUN_021. - **Actor/disparador:** ACT_004; disparador: usuario accede a secci\u00f3n de notificaciones con DDU configurado. - **Precondiciones:** Usuario autenticado; DDU configurado; ex",
+        "type": "feature",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "FUN_022",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "ado a Casilla\u00danica para ver el detalle. - **Relaci\u00f3n jer\u00e1rquica:** Ra\u00edz; agrupa FUN_022-FUN_023. - **Actor/disparador:** ACT_004, ACT_008; disparador: usuario selecciona una notificaci\u00f3n en el listado. - **Precondiciones:** Usuario autenticado; DDU configurado",
+        "type": "feature",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "FUN_023",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "silla\u00danica para ver el detalle. - **Relaci\u00f3n jer\u00e1rquica:** Ra\u00edz; agrupa FUN_022-FUN_023. - **Actor/disparador:** ACT_004, ACT_008; disparador: usuario selecciona una notificaci\u00f3n en el listado. - **Precondiciones:** Usuario autenticado; DDU configurado; listad",
+        "type": "feature",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "FUN_024",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "stra alerta de configuraci\u00f3n pendiente. - **Relaci\u00f3n jer\u00e1rquica:** Ra\u00edz; agrupa FUN_024. - **Actor/disparador:** ACT_003, ACT_008; disparador: usuario accede a la secci\u00f3n de notificaciones/DDU pendiente desde el portal. - **Precondiciones:** Usuario autenticad",
+        "type": "feature",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "FUN_025",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "as, rechazadas, pendientes y revocadas. - **Relaci\u00f3n jer\u00e1rquica:** Ra\u00edz; agrupa FUN_025-FUN_026. - **Actor/disparador:** ACT_002, ACT_005, ACT_006, ACT_009; disparador: usuario abre secci\u00f3n de gesti\u00f3n e historial de autorizaciones. - **Precondiciones:** Usuari",
+        "type": "feature",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "FUN_026",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "azadas, pendientes y revocadas. - **Relaci\u00f3n jer\u00e1rquica:** Ra\u00edz; agrupa FUN_025-FUN_026. - **Actor/disparador:** ACT_002, ACT_005, ACT_006, ACT_009; disparador: usuario abre secci\u00f3n de gesti\u00f3n e historial de autorizaciones. - **Precondiciones:** Usuario autent",
+        "type": "feature",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "FUN_027",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "pondan a datos previamente autorizados. - **Relaci\u00f3n jer\u00e1rquica:** Ra\u00edz; agrupa FUN_027. - **Actor/disparador:** ACT_002, ACT_009; disparador: usuario consulta historial de datos compartidos. - **Precondiciones:** Usuario autenticado; existen o pueden consulta",
+        "type": "feature",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "FUN_028",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "o desde el historial de autorizaciones. - **Relaci\u00f3n jer\u00e1rquica:** Ra\u00edz; agrupa FUN_028-FUN_029. - **Actor/disparador:** ACT_005, ACT_009; disparador: usuario revisa una autorizaci\u00f3n pendiente. - **Precondiciones:** Usuario autenticado; existe una autorizaci\u00f3n",
+        "type": "feature",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "FUN_029",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "el historial de autorizaciones. - **Relaci\u00f3n jer\u00e1rquica:** Ra\u00edz; agrupa FUN_028-FUN_029. - **Actor/disparador:** ACT_005, ACT_009; disparador: usuario revisa una autorizaci\u00f3n pendiente. - **Precondiciones:** Usuario autenticado; existe una autorizaci\u00f3n pendien",
+        "type": "feature",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "FUN_030",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "y revoque una o varias autorizaciones. - **Relaci\u00f3n jer\u00e1rquica:** Ra\u00edz; agrupa FUN_030. - **Actor/disparador:** ACT_006, ACT_009; disparador: usuario decide revocar autorizaci\u00f3n vigente/aprobada. - **Precondiciones:** Usuario autenticado; existe una autorizaci",
+        "type": "feature",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "FUN_031",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "formaci\u00f3n personal en poder del Estado. - **Relaci\u00f3n jer\u00e1rquica:** Ra\u00edz; agrupa FUN_031-FUN_033. - **Actor/disparador:** ACT_002; disparador: usuario ingresa a portal privado o secci\u00f3n personal. - **Precondiciones:** Usuario autenticado; secciones privadas hab",
+        "type": "feature",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "FUN_032",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "idaciones definidas. - **Evidencia:** ; :HU03. - **ID:** FUN_032 - **Nombre:** Mostrar historial de acciones - **Descripci\u00f3n:** Soportar una secci\u00f3n para que el usuario consulte historial de acciones asociado a Clave\u00danica. - **Relaci\u00f3n jer\u00e1rquica:** CU_017. - ",
+        "type": "feature",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "FUN_033",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "n personal en poder del Estado. - **Relaci\u00f3n jer\u00e1rquica:** Ra\u00edz; agrupa FUN_031-FUN_033. - **Actor/disparador:** ACT_002; disparador: usuario ingresa a portal privado o secci\u00f3n personal. - **Precondiciones:** Usuario autenticado; secciones privadas habilitadas",
+        "type": "feature",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "FUN_034",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "o de las secciones privadas del portal. - **Relaci\u00f3n jer\u00e1rquica:** Ra\u00edz; agrupa FUN_034. - **Actor/disparador:** ACT_002; disparador: usuario accede a secci\u00f3n de expedientes electr\u00f3nicos. - **Precondiciones:** Usuario autenticado; existen expedientes o una fue",
+        "type": "feature",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "FUN_035",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "deres y representaciones de la persona. - **Relaci\u00f3n jer\u00e1rquica:** Ra\u00edz; agrupa FUN_035. - **Actor/disparador:** ACT_002; disparador: usuario ingresa a secci\u00f3n de poderes y representaciones. - **Precondiciones:** Usuario autenticado; alcance funcional de poder",
+        "type": "feature",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "FUN_036",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "\u00f3n ciudadana e informaci\u00f3n de tr\u00e1mites. - **Relaci\u00f3n jer\u00e1rquica:** Ra\u00edz; agrupa FUN_036-FUN_037. - **Actor/disparador:** ACT_001; disparador: usuario consulta ayuda o informaci\u00f3n p\u00fablica. - **Precondiciones:** Portal p\u00fablico disponible; contenidos definidos y ",
+        "type": "feature",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "FUN_037",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "dana e informaci\u00f3n de tr\u00e1mites. - **Relaci\u00f3n jer\u00e1rquica:** Ra\u00edz; agrupa FUN_036-FUN_037. - **Actor/disparador:** ACT_001; disparador: usuario consulta ayuda o informaci\u00f3n p\u00fablica. - **Precondiciones:** Portal p\u00fablico disponible; contenidos definidos y publicad",
+        "type": "feature",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "FUN_038",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "y estado de solicitudes de integraci\u00f3n. - **Relaci\u00f3n jer\u00e1rquica:** Ra\u00edz; agrupa FUN_038-FUN_040. - **Actor/disparador:** ACT_007; disparador: funcionario de instituci\u00f3n integrada consulta ayuda o estado de integraci\u00f3n. - **Precondiciones:** Instituci\u00f3n integra",
+        "type": "feature",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "FUN_039",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "eva conforme al alcance. - **Evidencia:** ; . - **ID:** FUN_039 - **Nombre:** Gestionar credenciales de acceso institucional - **Descripci\u00f3n:** Permitir a funcionarios de instituciones integradas gestionar credenciales de acceso asociadas a Clave\u00danica. - **Rel",
+        "type": "feature",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "FUN_040",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "de solicitudes de integraci\u00f3n. - **Relaci\u00f3n jer\u00e1rquica:** Ra\u00edz; agrupa FUN_038-FUN_040. - **Actor/disparador:** ACT_007; disparador: funcionario de instituci\u00f3n integrada consulta ayuda o estado de integraci\u00f3n. - **Precondiciones:** Instituci\u00f3n integrada o en p",
+        "type": "feature",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "FT_001",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "flujos de trabajo o procedimientos con ID FT_X, clasificado por FUN_X - **ID:** FT_001 - **Nombre:** Navegaci\u00f3n p\u00fablica de activaci\u00f3n, autenticaci\u00f3n, recuperaci\u00f3n y ayuda - **Descripci\u00f3n:** El usuario entra al portal p\u00fablico, identifica las opciones principale",
+        "type": "flow",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "FT_002",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "iones. - **Evidencia:** :HU01; ; . - **ID:** FT_002 - **Nombre:** Cambio de tel\u00e9fono o correo con validaci\u00f3n personal - **Descripci\u00f3n:** El usuario solicita cambiar tel\u00e9fono/correo, el sistema presenta validaci\u00f3n personal y s\u00f3lo permite guardar el cambio tras ",
+        "type": "flow",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "FT_003",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "pera se permite continuar/guardar. - **Evidencia:** :HU02. - **ID:** FT_003 - **Nombre:** Configuraci\u00f3n de segundo factor - **Descripci\u00f3n:** Durante configuraci\u00f3n de Clave\u00danica o posteriormente, el usuario decide activar o no el segundo factor y el sistema reg",
+        "type": "flow",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "FT_004",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "estado activo/inactivo persistido. - **Evidencia:** :HU03. - **ID:** FT_004 - **Nombre:** Login con segundo factor activo - **Descripci\u00f3n:** Despu\u00e9s de validar la credencial principal, el sistema solicita el segundo factor si el usuario lo activ\u00f3 y completa el",
+        "type": "flow",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "FT_005",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "el flujo informa acci\u00f3n requerida. - **Evidencia:** :HU03. - **ID:** FT_005 - **Nombre:** Definici\u00f3n y aplicaci\u00f3n del manejo multisesi\u00f3n - **Descripci\u00f3n:** El proyecto eval\u00faa alternativas de manejo de sesiones concurrentes, define pol\u00edtica aprobada y el sistem",
+        "type": "flow",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "FT_006",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "n la definici\u00f3n. - **Evidencia:** :HU04; . - **ID:** FT_006 - **Nombre:** Derivaci\u00f3n a configuraci\u00f3n DDU despu\u00e9s de login - **Descripci\u00f3n:** Tras login, CU consulta estado DDU; si no est\u00e1 configurado muestra modal; si el usuario contin\u00faa lo deriva a la pasarel",
+        "type": "flow",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "FT_007",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "retorno considerado. - **Evidencia:** :HU05; . - **ID:** FT_007 - **Nombre:** Cancelaci\u00f3n de configuraci\u00f3n DDU desde modal de login - **Descripci\u00f3n:** El usuario cancela el modal de configuraci\u00f3n DDU; el sistema lo retorna/mantiene en CU y muestra alerta de co",
+        "type": "flow",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "FT_008",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "omicilio Digital indica pendiente. - **Evidencia:** :HU06. - **ID:** FT_008 - **Nombre:** Retorno a CU tras configuraci\u00f3n exitosa de DDU - **Descripci\u00f3n:** La pasarela de notificaciones finaliza configuraci\u00f3n DDU, muestra modal de retorno y devuelve el control",
+        "type": "flow",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "FT_009",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "ortamiento posterior. - **Evidencia:** :HU07; . - **ID:** FT_009 - **Nombre:** Cancelaci\u00f3n de activaci\u00f3n DDU durante la pasarela - **Descripci\u00f3n:** Durante activaci\u00f3n de DDU, el usuario cancela; el sistema confirma cancelar o continuar; si cancela retorna a CU",
+        "type": "flow",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "FT_010",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "DDU no se configura. - **Evidencia:** :HU08; . - **ID:** FT_010 - **Nombre:** Resoluci\u00f3n de secci\u00f3n de notificaciones seg\u00fan estado DDU - **Descripci\u00f3n:** Al abrir la secci\u00f3n de notificaciones, el sistema determina estado DDU y muestra alerta/activaci\u00f3n o lista",
+        "type": "flow",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "FT_011",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "nsistente con estado. - **Evidencia:** :HU09; . - **ID:** FT_011 - **Nombre:** Consulta de listado de notificaciones pendientes - **Descripci\u00f3n:** El usuario con DDU configurado abre la secci\u00f3n y visualiza notificaciones pendientes de lectura con los campos re",
+        "type": "flow",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "FT_012",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "o existen registros. - **Evidencia:** :HU10; . - **ID:** FT_012 - **Nombre:** Acceso al detalle de notificaci\u00f3n en Casilla\u00danica - **Descripci\u00f3n:** El usuario selecciona una notificaci\u00f3n en el listado; CU deriva a Casilla\u00danica para mostrar el detalle. - **Relac",
+        "type": "flow",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "FT_013",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "icaci\u00f3n seleccionada. - **Evidencia:** :HU11; . - **ID:** FT_013 - **Nombre:** Inicio de activaci\u00f3n DDU desde secci\u00f3n del portal - **Descripci\u00f3n:** El usuario sin DDU accede a la secci\u00f3n con alerta pendiente y el sistema inicia la pasarela de configuraci\u00f3n. - ",
+        "type": "flow",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "FT_014",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "sarela realizada. - **Evidencia:** :HU12; . - **ID:** FT_014 - **Nombre:** Consulta de historial de autorizaciones por estado - **Descripci\u00f3n:** El usuario abre gesti\u00f3n de autorizaciones; el sistema muestra autorizaciones en estados pendientes, aprobadas, rech",
+        "type": "flow",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "FT_015",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "ndo aplique. - **Evidencia:** :HU13; :HU16. - **ID:** FT_015 - **Nombre:** Consulta de historial de datos compartidos - **Descripci\u00f3n:** El usuario consulta una tabla de intercambios de datos sensibles autorizados entre instituciones proveedoras y solicitantes",
+        "type": "flow",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "FT_016",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "son datos previamente autorizados. - **Evidencia:** :HU14. - **ID:** FT_016 - **Nombre:** Decisi\u00f3n de autorizaci\u00f3n pendiente - **Descripci\u00f3n:** El usuario visualiza una solicitud pendiente y elige aprobar o rechazar mediante acciones disponibles. - **Relaci\u00f3n ",
+        "type": "flow",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "FT_017",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "entes; historial actualiza estado. - **Evidencia:** :HU15. - **ID:** FT_017 - **Nombre:** Revocaci\u00f3n de autorizaci\u00f3n vigente - **Descripci\u00f3n:** El usuario visualiza autorizaciones aprobadas/vigentes y revoca una o varias; el historial refleja la revocaci\u00f3n. - ",
+        "type": "flow",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "FT_018",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "de revocaci\u00f3n cuando aplique. - **Evidencia:** :HU16. - **ID:** FT_018 - **Nombre:** Consulta de secciones privadas personales - **Descripci\u00f3n:** El usuario autenticado accede a configuraci\u00f3n, historial de acciones e informaci\u00f3n personal consolidada por catego",
+        "type": "flow",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "FT_019",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "ac\u00edos/alertas dise\u00f1ados. - **Evidencia:** ; . - **ID:** FT_019 - **Nombre:** Consulta de expedientes electr\u00f3nicos - **Descripci\u00f3n:** El usuario ingresa a la vista de expedientes electr\u00f3nicos y consulta informaci\u00f3n disponible o estado vac\u00edo. - **Relaci\u00f3n jer\u00e1rq",
+        "type": "flow",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "FT_020",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "o si no hay expedientes. - **Evidencia:** ; . - **ID:** FT_020 - **Nombre:** Gesti\u00f3n de poderes y representaciones - **Descripci\u00f3n:** El usuario ingresa a la secci\u00f3n de poderes/representaciones y ejecuta flujos definidos durante el alcance. - **Relaci\u00f3n jer\u00e1rq",
+        "type": "flow",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "FT_021",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "s de borde considerados. - **Evidencia:** ; . - **ID:** FT_021 - **Nombre:** Consulta de ayuda p\u00fablica y contenidos informativos - **Descripci\u00f3n:** El usuario p\u00fablico accede a centros de ayuda, emergencias, preguntas frecuentes, contacto, transparencia, partic",
+        "type": "flow",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "FT_022",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "o de portal p\u00fablico. - **Evidencia:** ; :HU01. - **ID:** FT_022 - **Nombre:** Ayuda institucional y gesti\u00f3n de integraci\u00f3n - **Descripci\u00f3n:** El funcionario de instituci\u00f3n integrada accede a ayuda p\u00fablica/privada, gestiona credenciales y consulta estado de int",
+        "type": "flow",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "FT_023",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "de integraci\u00f3n visible. - **Evidencia:** ; . - **ID:** FT_023 - **Nombre:** Investigaci\u00f3n de usuarios y necesidades - **Descripci\u00f3n:** Definir metodolog\u00eda de investigaci\u00f3n para perfiles de usuario, m\u00e9tricas, necesidades, recopilaci\u00f3n y an\u00e1lisis cualitativo/cua",
+        "type": "flow",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "FT_024",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "ia cualitativa/cuantitativa analizada. - **Evidencia:** . - **ID:** FT_024 - **Nombre:** Ideaci\u00f3n, arquitectura de informaci\u00f3n y prototipos de baja fidelidad - **Descripci\u00f3n:** Estructurar flujos de usuario, mapas de navegaci\u00f3n y prototipos de baja fidelidad b",
+        "type": "flow",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "FT_025",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "bles; sesiones tempranas consideradas. - **Evidencia:** . - **ID:** FT_025 - **Nombre:** Prototipado de alta fidelidad y testeo con usuarios - **Descripci\u00f3n:** Crear prototipos de alta fidelidad con contenido real o cercano y ejecutar testeos para minimizar fr",
+        "type": "flow",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "FT_026",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "joras incorporadas. - **Evidencia:** ; . - **ID:** FT_026 - **Nombre:** Implementaci\u00f3n priorizada y pruebas de interfaces definidas - **Descripci\u00f3n:** Implementar prototipos de alta fidelidad priorizados, definiendo historias de usuario asociadas y pruebas de ",
+        "type": "flow",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "RN_001",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "8. Descripci\u00f3n de reglas de negocio con ID RN_X, clasificado por FT_X - **ID:** RN_001 - **Nombre:** Accesos obligatorios del portal p\u00fablico - **Descripci\u00f3n:** El portal p\u00fablico debe disponer claramente las opciones activar, autenticarse y recuperar. - **Relac",
+        "type": "business_rule",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "RN_002",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "son comprensibles para el usuario. - **Evidencia:** :HU01. - **ID:** RN_002 - **Nombre:** Bloqueo de cambio de tel\u00e9fono/correo sin validaci\u00f3n personal - **Descripci\u00f3n:** No se debe permitir cambiar tel\u00e9fono y/o correo electr\u00f3nico sin antes responder una o m\u00e1s ",
+        "type": "business_rule",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "RN_003",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "inuar; aplica a tel\u00e9fono y correo. - **Evidencia:** :HU02. - **ID:** RN_003 - **Nombre:** Segundo factor opcional y obligatorio si est\u00e1 activo - **Descripci\u00f3n:** El 2FA es opcional para el usuario, pero si lo activa ser\u00e1 obligatorio cada vez que use el login d",
+        "type": "business_rule",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "RN_004",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "egistro de estado activo/inactivo. - **Evidencia:** :HU03. - **ID:** RN_004 - **Nombre:** Evaluaci\u00f3n obligatoria de multisesi\u00f3n - **Descripci\u00f3n:** Debe evaluarse la mejor forma de manejar multisesiones y sus pros/contras para evitar posible mal uso de Clave\u00dani",
+        "type": "business_rule",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "RN_005",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "obado antes de implementaci\u00f3n. - **Evidencia:** :HU04. - **ID:** RN_005 - **Nombre:** Consulta de estado DDU despu\u00e9s de autenticaci\u00f3n - **Descripci\u00f3n:** El sistema Clave\u00danica debe identificar si el usuario autenticado tiene o no configurado su DDU. - **Relaci\u00f3",
+        "type": "business_rule",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "RN_006",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "**Evidencia:** :HU05-HU06; :HU09; . - **ID:** RN_006 - **Nombre:** Modal obligatorio antes de pasarela DDU desde login - **Descripci\u00f3n:** Antes de ingresar a la pasarela de configuraci\u00f3n DDU, el sistema debe desplegar un modal para confirmar continuar o cancel",
+        "type": "business_rule",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "RN_007",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "derivaci\u00f3n s\u00f3lo si contin\u00faa. - **Evidencia:** :HU05-HU06. - **ID:** RN_007 - **Nombre:** Cancelaci\u00f3n desde modal mantiene DDU pendiente - **Descripci\u00f3n:** Si el usuario cancela desde el modal, se retorna al portal CU y la secci\u00f3n Domicilio Digital aparece con ",
+        "type": "business_rule",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "RN_008",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "no a CU; alerta pendiente visible. - **Evidencia:** :HU06. - **ID:** RN_008 - **Nombre:** Retorno al portal invocador tras completar DDU - **Descripci\u00f3n:** Al finalizar la configuraci\u00f3n DDU en la Plataforma de Notificaciones, el sistema informa mediante modal ",
+        "type": "business_rule",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "RN_009",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "uede continuar en CU. - **Evidencia:** :HU07; . - **ID:** RN_009 - **Nombre:** Cancelaci\u00f3n durante activaci\u00f3n conserva DDU sin configurar - **Descripci\u00f3n:** Si el usuario confirma cancelaci\u00f3n durante la activaci\u00f3n DDU, el sistema retorna a Clave\u00danica y el usua",
+        "type": "business_rule",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "RN_010",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "o a CU; estado DDU sin configurar. - **Evidencia:** :HU08. - **ID:** RN_010 - **Nombre:** Comportamiento dual de secci\u00f3n notificaciones - **Descripci\u00f3n:** La secci\u00f3n de notificaciones debe mostrar alerta e iniciar activaci\u00f3n si DDU no est\u00e1 configurado, y permi",
+        "type": "business_rule",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "RN_011",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "usuario no queda sin orientaci\u00f3n. - **Evidencia:** :HU09. - **ID:** RN_011 - **Nombre:** Campos m\u00ednimos del listado de notificaciones - **Descripci\u00f3n:** El listado de notificaciones pendientes debe desplegar fecha de recepci\u00f3n, instituci\u00f3n remitente y t\u00edtulo d",
+        "type": "business_rule",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "RN_012",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "t\u00edtulo visible. - **Evidencia:** :HU10; :HU11. - **ID:** RN_012 - **Nombre:** Detalle de notificaci\u00f3n en plataforma de notificaciones - **Descripci\u00f3n:** Para leer el detalle, el usuario selecciona una notificaci\u00f3n y CU lo deriva a la plataforma de notificacion",
+        "type": "business_rule",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "RN_013",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "Casilla\u00danica; detalle consultable. - **Evidencia:** :HU11. - **ID:** RN_013 - **Nombre:** Estados del historial de autorizaciones - **Descripci\u00f3n:** El historial de autorizaciones de uso de datos sensibles debe contemplar solicitudes aprobadas, rechazadas, pen",
+        "type": "business_rule",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "RN_014",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "el usuario. - **Evidencia:** :HU13; :HU15-HU16. - **ID:** RN_014 - **Nombre:** Datos de solicitudes pendientes - **Descripci\u00f3n:** Para solicitudes pendientes se debe mostrar fecha de solicitud, instituci\u00f3n solicitante, procedimiento administrativo, listado de ",
+        "type": "business_rule",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "RN_015",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "ndiente visible. - **Evidencia:** :HU13; :HU15. - **ID:** RN_015 - **Nombre:** Datos de solicitudes aprobadas - **Descripci\u00f3n:** Para solicitudes aprobadas se debe mostrar fecha de solicitud, fecha de aprobaci\u00f3n, instituci\u00f3n solicitante, procedimiento administ",
+        "type": "business_rule",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "RN_016",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "as visibles. - **Evidencia:** :HU13; :HU16. - **ID:** RN_016 - **Nombre:** Datos de solicitudes rechazadas - **Descripci\u00f3n:** Para solicitudes rechazadas se debe mostrar fecha de solicitud, fecha de rechazo, instituci\u00f3n solicitante, procedimiento administrativ",
+        "type": "business_rule",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "RN_017",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "isibles; estado rechazado visible. - **Evidencia:** :HU13. - **ID:** RN_017 - **Nombre:** Datos de solicitudes revocadas - **Descripci\u00f3n:** Para solicitudes revocadas se debe mostrar fecha de solicitud, fecha de aprobaci\u00f3n, fecha de revocaci\u00f3n, instituci\u00f3n sol",
+        "type": "business_rule",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "RN_018",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "ciones visibles. - **Evidencia:** :HU13; :HU16. - **ID:** RN_018 - **Nombre:** Campos del historial de datos compartidos - **Descripci\u00f3n:** El historial de datos sensibles compartidos debe presentarse como tabla con instituci\u00f3n proveedora, instituci\u00f3n solicita",
+        "type": "business_rule",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "RN_019",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "utorizados; fecha y hora visibles. - **Evidencia:** :HU14. - **ID:** RN_019 - **Nombre:** Acciones de aprobaci\u00f3n y rechazo para pendientes - **Descripci\u00f3n:** Las solicitudes pendientes deben disponer acciones para aprobar y rechazar la autorizaci\u00f3n pendiente. ",
+        "type": "business_rule",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "RN_020",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "ica s\u00f3lo a la solicitud pendiente. - **Evidencia:** :HU15. - **ID:** RN_020 - **Nombre:** Acci\u00f3n de revocaci\u00f3n para autorizaciones vigentes - **Descripci\u00f3n:** Las autorizaciones vigentes/aprobadas deben disponer una acci\u00f3n para revocar una o varias autorizacio",
+        "type": "business_rule",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "RN_021",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "storial conserva trazabilidad. - **Evidencia:** :HU16. - **ID:** RN_021 - **Nombre:** Datos compartidos deben ser previamente autorizados - **Descripci\u00f3n:** El historial de datos sensibles compartidos debe permitir verificar que los datos compartidos fueron pr",
+        "type": "business_rule",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "RN_022",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "ferencia funcional a autorizaci\u00f3n. - **Evidencia:** :HU14. - **ID:** RN_022 - **Nombre:** Secciones privadas ampliadas del portal - **Descripci\u00f3n:** El portal debe soportar secciones privadas como configuraci\u00f3n, segundos factores, historial de acciones, expedi",
+        "type": "business_rule",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "RN_023",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "stados vac\u00edos dise\u00f1ados. - **Evidencia:** ; . - **ID:** RN_023 - **Nombre:** Secciones p\u00fablicas de ayuda e informaci\u00f3n - **Descripci\u00f3n:** El portal p\u00fablico debe contemplar centros de ayuda, emergencias con Clave\u00danica, preguntas frecuentes, contacto, transparen",
+        "type": "business_rule",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "RN_024",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "idos publicados; navegaci\u00f3n coherente. - **Evidencia:** . - **ID:** RN_024 - **Nombre:** Ayuda institucional p\u00fablica y privada - **Descripci\u00f3n:** La soluci\u00f3n debe soportar secciones p\u00fablicas y privadas de ayuda para instituciones integradas a Clave\u00danica. - **R",
+        "type": "business_rule",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "RN_025",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "entro de ayuda renovado. - **Evidencia:** ; . - **ID:** RN_025 - **Nombre:** Gesti\u00f3n institucional de credenciales e integraci\u00f3n - **Descripci\u00f3n:** Las instituciones integradas deben contar con funcionalidades para gestionar credenciales de acceso y consultar ",
+        "type": "business_rule",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "RN_026",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "itucional controlado seg\u00fan definici\u00f3n. - **Evidencia:** . - **ID:** RN_026 - **Nombre:** Requerimientos referenciales no exhaustivos - **Descripci\u00f3n:** Las historias del Anexo 7 son una primera versi\u00f3n y deben complementarse con el trabajo de la contrataci\u00f3n; ",
+        "type": "business_rule",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "RN_027",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "contraparte. - **Evidencia:** :introducci\u00f3n; . - **ID:** RN_027 - **Nombre:** Dise\u00f1o de casos de borde y alertas - **Descripci\u00f3n:** Adem\u00e1s del flujo exitoso, se deben considerar y dise\u00f1ar casos de borde y sistema de alertas para errores, estados vac\u00edos, falta ",
+        "type": "business_rule",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "CH_001",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "cripci\u00f3n de validaciones y chequeos con ID CH_X, clasificado por FT_X - **ID:** CH_001 - **Nombre:** Verificar disponibilidad de opciones p\u00fablicas - **Descripci\u00f3n:** Comprobar que activar, autenticarse y recuperar est\u00e9n visibles y accesibles en portal p\u00fablico.",
+        "type": "validation_check",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "CH_002",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "a de prueba. - **Evidencia:** :HU01; E07/S05:plan_pruebas. - **ID:** CH_002 - **Nombre:** Validar preguntas personales antes de cambio de contacto - **Descripci\u00f3n:** Comprobar que tel\u00e9fono/correo no cambien sin responder una o m\u00e1s preguntas personales definida",
+        "type": "validation_check",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "CH_003",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "respuesta v\u00e1lida permite cambio. - **Evidencia:** :HU02. - **ID:** CH_003 - **Nombre:** Verificar persistencia de preferencia 2FA - **Descripci\u00f3n:** Comprobar que la activaci\u00f3n/desactivaci\u00f3n o preferencia definida de segundo factor quede registrada y sea consu",
+        "type": "validation_check",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "CH_004",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "rtamiento de login usa ese estado. - **Evidencia:** :HU03. - **ID:** CH_004 - **Nombre:** Validar exigencia de segundo factor en login - **Descripci\u00f3n:** Comprobar que el login solicite segundo factor cada vez que el usuario tenga 2FA activo. - **Relaci\u00f3n jer\u00e1",
+        "type": "validation_check",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "CH_005",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "se supera; se accede si se supera. - **Evidencia:** :HU03. - **ID:** CH_005 - **Nombre:** Verificar consulta de estado DDU - **Descripci\u00f3n:** Comprobar que, despu\u00e9s del login o al entrar a notificaciones, el sistema identifique DDU configurado/no configurado. ",
+        "type": "validation_check",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "CH_006",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "**Evidencia:** :HU05-HU06; :HU09; . - **ID:** CH_006 - **Nombre:** Validar modal de DDU antes de pasarela - **Descripci\u00f3n:** Comprobar que el modal de continuar/cancelar aparezca antes de ingresar a la pasarela de configuraci\u00f3n DDU. - **Relaci\u00f3n jer\u00e1rquica:** ",
+        "type": "validation_check",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "CH_007",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "r deriva; cancelar no deriva. - **Evidencia:** :HU05-HU06. - **ID:** CH_007 - **Nombre:** Validar alerta DDU pendiente tras cancelar - **Descripci\u00f3n:** Comprobar que, al cancelar desde modal o conservar DDU sin configurar, el portal muestre alerta de configura",
+        "type": "validation_check",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "CH_008",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "videncia:** :HU06; :HU09; :HU12. - **ID:** CH_008 - **Nombre:** Confirmar cancelaci\u00f3n durante activaci\u00f3n DDU - **Descripci\u00f3n:** Comprobar que al cancelar en la pasarela se solicite confirmaci\u00f3n y se respete cancelar o continuar. - **Relaci\u00f3n jer\u00e1rquica:** FT_0",
+        "type": "validation_check",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "CH_009",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "torna a CU con DDU sin configurar. - **Evidencia:** :HU08. - **ID:** CH_009 - **Nombre:** Validar retorno desde pasarela DDU - **Descripci\u00f3n:** Comprobar que al finalizar DDU la pasarela muestre aviso de retorno y devuelva control a Clave\u00danica. - **Relaci\u00f3n je",
+        "type": "validation_check",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "CH_010",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "lizado a configurado. - **Evidencia:** :HU07; . - **ID:** CH_010 - **Nombre:** Validar listado de notificaciones pendientes - **Descripci\u00f3n:** Comprobar que el listado muestre s\u00f3lo pendientes de lectura con campos requeridos. - **Relaci\u00f3n jer\u00e1rquica:** FT_011;",
+        "type": "validation_check",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "CH_011",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "visible; registros son pendientes. - **Evidencia:** :HU10. - **ID:** CH_011 - **Nombre:** Validar derivaci\u00f3n a detalle de notificaci\u00f3n - **Descripci\u00f3n:** Comprobar que seleccionar una notificaci\u00f3n derive a Casilla\u00danica y muestre el detalle correspondiente. - *",
+        "type": "validation_check",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "CH_012",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "llega a Casilla\u00danica. - **Evidencia:** :HU11; . - **ID:** CH_012 - **Nombre:** Validar campos del historial de autorizaciones - **Descripci\u00f3n:** Comprobar que los campos mostrados var\u00eden correctamente seg\u00fan estado pendiente, aprobada, rechazada o revocada. - *",
+        "type": "validation_check",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "CH_013",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "cada RN_017. - **Evidencia:** :HU13; :HU16. - **ID:** CH_013 - **Nombre:** Validar acciones por estado de autorizaci\u00f3n - **Descripci\u00f3n:** Comprobar que aprobar/rechazar est\u00e9 disponible para pendientes y revocar para vigentes/aprobadas. - **Relaci\u00f3n jer\u00e1rquica:",
+        "type": "validation_check",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "CH_014",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "ci\u00f3n actualiza historial. - **Evidencia:** :HU15-HU16. - **ID:** CH_014 - **Nombre:** Validar tabla de datos sensibles compartidos - **Descripci\u00f3n:** Comprobar que la tabla de datos compartidos incluya columnas requeridas y registros previamente autorizados. -",
+        "type": "validation_check",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "CH_015",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "mostrados corresponden al usuario. - **Evidencia:** :HU14. - **ID:** CH_015 - **Nombre:** Validar dise\u00f1o de estados vac\u00edos y errores - **Descripci\u00f3n:** Comprobar que cada flujo contemple estados vac\u00edos, errores de sistema, falta de informaci\u00f3n y errores de ing",
+        "type": "validation_check",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "CH_016",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "nida; error de ingreso/carga definido. - **Evidencia:** . - **ID:** CH_016 - **Nombre:** Validar accesibilidad de interfaces - **Descripci\u00f3n:** Comprobar consideraciones de accesibilidad como tama\u00f1o de tipograf\u00eda, alineaci\u00f3n de texto, texto alternativo, contra",
+        "type": "validation_check",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "CH_017",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "tradas. - **Evidencia:** ; E07/S05:aseguramiento_calidad. - **ID:** CH_017 - **Nombre:** Validar usabilidad con usuarios - **Descripci\u00f3n:** Comprobar que los prototipos sean navegables y est\u00e9n preparados para testeos de usabilidad, generando informe de correcc",
+        "type": "validation_check",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "CH_018",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "adas en prototipos. - **Evidencia:** ; . - **ID:** CH_018 - **Nombre:** Validar pruebas y evidencia de aseguramiento de calidad - **Descripci\u00f3n:** Comprobar que exista plan de pruebas, evidencia de ejecuci\u00f3n y cantidad/tipo de testeos de prototipo y accesibili",
+        "type": "validation_check",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "critical",
+        "id": "CH_019",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "esibilidad incluidas. - **Evidencia:** E07/S05:aseguramiento_calidad. - **ID:** CH_019 - **Nombre:** Validar implementaci\u00f3n priorizada - **Descripci\u00f3n:** Comprobar que las interfaces/prototipos definidos se implementen al menos en prioridades 1 y 2, con histor",
+        "type": "validation_check",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "supporting",
+        "id": "EX_001",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "ci\u00f3n de restricciones y excepciones con ID EX_X, clasificado por FT_X - **ID:** EX_001 - **Nombre:** Cancelaci\u00f3n del modal DDU posterior al login - **Descripci\u00f3n:** Si el usuario decide no configurar DDU desde el modal posterior al login, no se deriva a la pas",
+        "type": "constraint",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "supporting",
+        "id": "EX_002",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "ura DDU; alerta pendiente visible. - **Evidencia:** :HU06. - **ID:** EX_002 - **Nombre:** Cancelaci\u00f3n durante activaci\u00f3n DDU - **Descripci\u00f3n:** Si el usuario cancela el proceso de activaci\u00f3n DDU durante la pasarela y confirma la cancelaci\u00f3n, retorna a CU sin c",
+        "type": "constraint",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "supporting",
+        "id": "EX_003",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "DU conserva estado no configurado. - **Evidencia:** :HU08. - **ID:** EX_003 - **Nombre:** Usuario con DDU no configurado no ve listado de notificaciones - **Descripci\u00f3n:** Cuando DDU no est\u00e1 configurado, la secci\u00f3n de notificaciones no muestra listado de pendi",
+        "type": "constraint",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "supporting",
+        "id": "EX_004",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "activaci\u00f3n. - **Evidencia:** :HU09; :HU12. - **ID:** EX_004 - **Nombre:** Usuario con DDU configurado accede a listado en vez de pasarela - **Descripci\u00f3n:** Cuando DDU ya est\u00e1 configurado, la secci\u00f3n de notificaciones permite acceder al listado de pendientes d",
+        "type": "constraint",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "supporting",
+        "id": "EX_005",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "eridos visibles. - **Evidencia:** :HU09-HU10; . - **ID:** EX_005 - **Nombre:** Segundo factor activo bloquea login si no se completa - **Descripci\u00f3n:** Si el usuario activ\u00f3 2FA, el login no debe completarse sin superar el segundo factor definido. - **Relaci\u00f3n ",
+        "type": "constraint",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "supporting",
+        "id": "EX_006",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "\u00f3n final s\u00f3lo con factor superado. - **Evidencia:** :HU03. - **ID:** EX_006 - **Nombre:** Estados vac\u00edos en secciones y listados - **Descripci\u00f3n:** Cuando no exista informaci\u00f3n para mostrar, los flujos deben contemplar estado vac\u00edo en lugar de fallar o present",
+        "type": "constraint",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "supporting",
+        "id": "EX_007",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "se orienta al usuario seg\u00fan secci\u00f3n. - **Evidencia:** . - **ID:** EX_007 - **Nombre:** Errores al ingresar o cargar informaci\u00f3n - **Descripci\u00f3n:** Cuando existan errores al ingresar o cargar informaci\u00f3n, el sistema debe considerar alertas o tratamiento de bord",
+        "type": "constraint",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "supporting",
+        "id": "EX_008",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "sistema evita estados inconsistentes. - **Evidencia:** . - **ID:** EX_008 - **Nombre:** Falta de informaci\u00f3n disponible - **Descripci\u00f3n:** Cuando falte informaci\u00f3n en una secci\u00f3n, debe existir tratamiento de borde definido para comunicar o resolver la ausencia",
+        "type": "constraint",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "supporting",
+        "id": "EX_009",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "ido; no se inventan datos en pantalla. - **Evidencia:** . - **ID:** EX_009 - **Nombre:** Mal uso o comportamiento an\u00f3malo de Clave\u00danica - **Descripci\u00f3n:** Los flujos deben estudiar y definir mecanismos de alerta de comportamiento de uso indebido o an\u00f3malo de C",
+        "type": "constraint",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "supporting",
+        "id": "EX_010",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "\u00f3n considerados. - **Evidencia:** ; :HU04. - **ID:** EX_010 - **Nombre:** Diferencia terminol\u00f3gica en revocaci\u00f3n - **Descripci\u00f3n:** El t\u00edtulo y cuerpo de la historia HU16 refieren autorizaciones vigentes/aprobadas, pero la \u00faltima frase menciona revocar una aut",
+        "type": "constraint",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "supporting",
+        "id": "ACT_001",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "il | Descripci\u00f3n | Casos de uso asociados | Evidencia ACT_001 | Usuario p\u00fablico del portal Clave\u00danica | Persona que accede al portal p\u00fablico, con o sin Clave\u00danica activada. | CU_001, CU_003, CU_020 | :HU01-HU03; ACT_002 | Usuario con Clave\u00danica activada | Pers",
+        "type": "actor",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "supporting",
+        "id": "ACT_002",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "ca activada. | CU_001, CU_003, CU_020 | :HU01-HU03; ACT_002 | Usuario con Clave\u00danica activada | Persona autenticada que puede administrar datos, sesi\u00f3n, 2FA, notificaciones y autorizaciones. | CU_002-CU_016, CU_017-CU_019 | :HU02-HU04; E09-E13 ACT_003 | Usuari",
+        "type": "actor",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "supporting",
+        "id": "ACT_003",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "rizaciones. | CU_002-CU_016, CU_017-CU_019 | :HU02-HU04; E09-E13 ACT_003 | Usuario sin DDU configurado | Usuario autenticado cuyo Domicilio Digital \u00danico a\u00fan no est\u00e1 configurado. | CU_005, CU_006, CU_008, CU_009, CU_012 | :HU05-HU06; :HU08-HU09; :HU12; ACT",
+        "type": "actor",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "supporting",
+        "id": "ACT_004",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "HU05-HU06; :HU08-HU09; :HU12; ACT_004 | Usuario con DDU configurado | Usuario autenticado que ya configur\u00f3 DDU y puede visualizar notificaciones pendientes. | CU_007, CU_009-CU_011 | :HU07; :HU09-HU10; :HU11; ACT_005 | Us",
+        "type": "actor",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "supporting",
+        "id": "ACT_005",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "11 | :HU07; :HU09-HU10; :HU11; ACT_005 | Usuario con autorizaciones pendientes | Usuario que tiene solicitudes de autorizaci\u00f3n de uso de datos sensibles pendientes de decisi\u00f3n. | CU_013, CU_015 | :HU13; :HU15 ACT_006 | Usuario con autorizaciones",
+        "type": "actor",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "supporting",
+        "id": "ACT_006",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "ndientes de decisi\u00f3n. | CU_013, CU_015 | :HU13; :HU15 ACT_006 | Usuario con autorizaciones vigentes | Usuario que tiene autorizaciones aprobadas/vigentes susceptibles de revocaci\u00f3n. | CU_013, CU_016 | :HU13; :HU16 ACT_007 | Funcionario de instituci\u00f3n integrada",
+        "type": "actor",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "supporting",
+        "id": "ACT_007",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "es de revocaci\u00f3n. | CU_013, CU_016 | :HU13; :HU16 ACT_007 | Funcionario de instituci\u00f3n integrada | Usuario institucional que requiere ayuda, credenciales y estado de integraci\u00f3n a Clave\u00danica. | CU_021 | ; ACT_008 | Plataforma de Notificaciones/Casilla\u00danica | S",
+        "type": "actor",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "supporting",
+        "id": "ACT_008",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "y estado de integraci\u00f3n a Clave\u00danica. | CU_021 | ; ACT_008 | Plataforma de Notificaciones/Casilla\u00danica | Sistema externo funcional que configura DDU, mantiene notificaciones y muestra detalle al usuario. | CU_005-CU_012 | E09-E11; ACT_009 | Autorizador Ciudada",
+        "type": "actor",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "supporting",
+        "id": "ACT_009",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "ciones y muestra detalle al usuario. | CU_005-CU_012 | E09-E11; ACT_009 | Autorizador Ciudadano | Componente/servicio funcional asociado a solicitudes, historial, aprobaci\u00f3n, rechazo y revocaci\u00f3n de uso de datos sensibles. | CU_013-CU_016 | ; E12-E13 ACT_010 |",
+        "type": "actor",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "supporting",
+        "id": "ACT_010",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "vocaci\u00f3n de uso de datos sensibles. | CU_013-CU_016 | ; E12-E13 ACT_010 | Portal Clave\u00danica | Sistema invocador que autentica, consulta estados, muestra secciones y deriva/recibe retorno de plataformas relacionadas. | CU_001-CU_021 | E01-E05; E08-E14 | ## 5. D",
+        "type": "actor",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "supporting",
+        "id": "OBJ_001",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "p.2; ; ; . ## 3. Objetivos espec\u00edficos - **OBJ_001:** Enriquecer la experiencia de uso mediante una nueva versi\u00f3n del portal con interfaz m\u00e1s intuitiva y segura. Evidencia: . - **OBJ_002:** Centralizar informaci\u00f3n de las personas para facilitar acceso y gesti\u00f3",
+        "type": "objective",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "supporting",
+        "id": "OBJ_002",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "\u00f3n del portal con interfaz m\u00e1s intuitiva y segura. Evidencia: . - **OBJ_002:** Centralizar informaci\u00f3n de las personas para facilitar acceso y gesti\u00f3n de informaci\u00f3n relacionada con el Estado. Evidencia: ; . - **OBJ_003:** Agregar factores de seguridad en fluj",
+        "type": "objective",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "supporting",
+        "id": "OBJ_003",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "formaci\u00f3n relacionada con el Estado. Evidencia: ; . - **OBJ_003:** Agregar factores de seguridad en flujos cr\u00edticos como login, recuperaci\u00f3n y cambio de datos de contacto. Evidencia: ; ; :HU02-HU03. - **OBJ_004:** Facilitar acceso a notificaciones electr\u00f3nicas",
+        "type": "objective",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "supporting",
+        "id": "OBJ_004",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "de contacto. Evidencia: ; ; :HU02-HU03. - **OBJ_004:** Facilitar acceso a notificaciones electr\u00f3nicas de procedimientos administrativos mediante DDU y Plataforma de Notificaciones. Evidencia: ; E10-E11; . - **OBJ_005:** Facilitar control y visibilidad de autor",
+        "type": "objective",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "supporting",
+        "id": "OBJ_005",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "Plataforma de Notificaciones. Evidencia: ; E10-E11; . - **OBJ_005:** Facilitar control y visibilidad de autorizaciones de uso de datos sensibles entre instituciones p\u00fablicas. Evidencia: ; E12-E13. - **OBJ_006:** Fortalecer ayuda p\u00fablica y ayuda a instituciones",
+        "type": "objective",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "supporting",
+        "id": "OBJ_006",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "s sensibles entre instituciones p\u00fablicas. Evidencia: ; E12-E13. - **OBJ_006:** Fortalecer ayuda p\u00fablica y ayuda a instituciones integradas, incluyendo credenciales y estado de integraciones. Evidencia: ; . - **OBJ_007:** Definir flujos, prototipos, pruebas y p",
+        "type": "objective",
+        "ui_visibility": "internal_only"
+      },
+      {
+        "criticality": "supporting",
+        "id": "OBJ_007",
+        "source_id": "SRC-PROFESOR-MD",
+        "summary": "denciales y estado de integraciones. Evidencia: ; . - **OBJ_007:** Definir flujos, prototipos, pruebas y prioridades de implementaci\u00f3n para las interfaces resultantes. Evidencia: ; ; E07/S05. ## 4. Perfiles de usuarios -> actores de casos de uso | actor_id | P",
+        "type": "objective",
+        "ui_visibility": "internal_only"
+      }
+    ],
+    "requirements_count": 160,
+    "source": "project/context/requirements-model.json",
+    "status": "complete"
+  },
+  "runId": "RUN-c5cae1e18061",
   "screens": [
     {
       "accent": "#1d4ed8",
@@ -1324,6 +3300,11 @@
       ],
       "route": "/seguridad/auth-login",
       "selector": "#screen-p-01",
+      "sourceRequirements": {
+        "flow": "FT_001",
+        "screen": "CU_001",
+        "validation": "CH_001"
+      },
       "states": [
         "cargando",
         "listo",
@@ -1331,7 +3312,7 @@
         "bloqueado",
         "completado"
       ],
-      "summary": "Ingreso ClaveUnica: implementa campos RUN, ClaveUnica, Codigo MFA y acciones Ingresar, Recuperar acceso.",
+      "summary": "Ingreso ClaveUnica: informacion actualizada desde la base local y acciones del flujo ciudadano.",
       "title": "Ingreso ClaveUnica"
     },
     {
@@ -1370,6 +3351,11 @@
       ],
       "route": "/seguridad/auth-recovery",
       "selector": "#screen-p-02",
+      "sourceRequirements": {
+        "flow": "FT_002",
+        "screen": "CU_002",
+        "validation": "CH_002"
+      },
       "states": [
         "cargando",
         "listo",
@@ -1377,7 +3363,7 @@
         "bloqueado",
         "completado"
       ],
-      "summary": "Recuperacion de acceso: implementa campos Correo, RUN, Canal y acciones Enviar enlace, Validar identidad.",
+      "summary": "Recuperacion de acceso: informacion actualizada desde la base local y acciones del flujo ciudadano.",
       "title": "Recuperacion de acceso"
     },
     {
@@ -1421,6 +3407,11 @@
       ],
       "route": "/portal/dashboard",
       "selector": "#screen-p-03",
+      "sourceRequirements": {
+        "flow": "FT_003",
+        "screen": "CU_003",
+        "validation": "CH_003"
+      },
       "states": [
         "cargando",
         "listo",
@@ -1428,7 +3419,7 @@
         "bloqueado",
         "completado"
       ],
-      "summary": "Dashboard ciudadano: implementa campos Tramites activos, Mensajes, Alertas y acciones Abrir tramite, Ver avisos.",
+      "summary": "Dashboard ciudadano: informacion actualizada desde la base local y acciones del flujo ciudadano.",
       "title": "Dashboard ciudadano"
     },
     {
@@ -1473,6 +3464,11 @@
       ],
       "route": "/portal/catalog",
       "selector": "#screen-p-04",
+      "sourceRequirements": {
+        "flow": "FT_004",
+        "screen": "CU_004",
+        "validation": "CH_004"
+      },
       "states": [
         "cargando",
         "listo",
@@ -1480,7 +3476,7 @@
         "bloqueado",
         "completado"
       ],
-      "summary": "Catalogo de tramites: implementa campos Categoria, Institucion, Disponibilidad y acciones Buscar, Iniciar tramite, Guardar favorito.",
+      "summary": "Catalogo de tramites: informacion actualizada desde la base local y acciones del flujo ciudadano.",
       "title": "Catalogo de tramites"
     },
     {
@@ -1519,6 +3515,11 @@
       ],
       "route": "/portal/service-detail",
       "selector": "#screen-p-05",
+      "sourceRequirements": {
+        "flow": "FT_005",
+        "screen": "CU_005",
+        "validation": "CH_005"
+      },
       "states": [
         "cargando",
         "listo",
@@ -1526,7 +3527,7 @@
         "bloqueado",
         "completado"
       ],
-      "summary": "Detalle de tramite: implementa campos Requisitos, Costo, Tiempo estimado y acciones Continuar solicitud, Descargar requisitos.",
+      "summary": "Detalle de tramite: informacion actualizada desde la base local y acciones del flujo ciudadano.",
       "title": "Detalle de tramite"
     },
     {
@@ -1566,6 +3567,11 @@
       ],
       "route": "/perfil/profile",
       "selector": "#screen-p-06",
+      "sourceRequirements": {
+        "flow": "FT_006",
+        "screen": "CU_006",
+        "validation": "CH_006"
+      },
       "states": [
         "cargando",
         "listo",
@@ -1573,7 +3579,7 @@
         "bloqueado",
         "completado"
       ],
-      "summary": "Datos personales: implementa campos Nombre, RUN, Fecha nacimiento, Nacionalidad y acciones Actualizar datos, Solicitar correccion.",
+      "summary": "Datos personales: informacion actualizada desde la base local y acciones del flujo ciudadano.",
       "title": "Datos personales"
     },
     {
@@ -1612,6 +3618,11 @@
       ],
       "route": "/perfil/contact",
       "selector": "#screen-p-07",
+      "sourceRequirements": {
+        "flow": "FT_007",
+        "screen": "CU_007",
+        "validation": "CH_007"
+      },
       "states": [
         "cargando",
         "listo",
@@ -1619,7 +3630,7 @@
         "bloqueado",
         "completado"
       ],
-      "summary": "Datos de contacto: implementa campos Correo, Telefono, Canal preferente y acciones Verificar correo, Actualizar telefono.",
+      "summary": "Datos de contacto: informacion actualizada desde la base local y acciones del flujo ciudadano.",
       "title": "Datos de contacto"
     },
     {
@@ -1658,6 +3669,11 @@
       ],
       "route": "/perfil/privacy",
       "selector": "#screen-p-08",
+      "sourceRequirements": {
+        "flow": "FT_008",
+        "screen": "CU_008",
+        "validation": "CH_008"
+      },
       "states": [
         "cargando",
         "listo",
@@ -1665,7 +3681,7 @@
         "bloqueado",
         "completado"
       ],
-      "summary": "Preferencias de privacidad: implementa campos Uso de datos, Canales, Retencion y acciones Guardar preferencias, Ver historial.",
+      "summary": "Preferencias de privacidad: informacion actualizada desde la base local y acciones del flujo ciudadano.",
       "title": "Preferencias de privacidad"
     },
     {
@@ -1704,6 +3720,11 @@
       ],
       "route": "/seguridad/sessions",
       "selector": "#screen-p-09",
+      "sourceRequirements": {
+        "flow": "FT_009",
+        "screen": "CU_009",
+        "validation": "CH_009"
+      },
       "states": [
         "cargando",
         "listo",
@@ -1711,7 +3732,7 @@
         "bloqueado",
         "completado"
       ],
-      "summary": "Sesiones activas: implementa campos Dispositivo, Ubicacion, Ultimo acceso y acciones Cerrar sesion, Confiar dispositivo.",
+      "summary": "Sesiones activas: informacion actualizada desde la base local y acciones del flujo ciudadano.",
       "title": "Sesiones activas"
     },
     {
@@ -1750,6 +3771,11 @@
       ],
       "route": "/seguridad/mfa",
       "selector": "#screen-p-10",
+      "sourceRequirements": {
+        "flow": "FT_010",
+        "screen": "CU_010",
+        "validation": "CH_010"
+      },
       "states": [
         "cargando",
         "listo",
@@ -1757,7 +3783,7 @@
         "bloqueado",
         "completado"
       ],
-      "summary": "Dispositivos y MFA: implementa campos Metodo, Estado, Respaldo y acciones Activar metodo, Regenerar respaldo.",
+      "summary": "Dispositivos y MFA: informacion actualizada desde la base local y acciones del flujo ciudadano.",
       "title": "Dispositivos y MFA"
     },
     {
@@ -1796,6 +3822,11 @@
       ],
       "route": "/ddu/address-current",
       "selector": "#screen-p-11",
+      "sourceRequirements": {
+        "flow": "FT_011",
+        "screen": "CU_011",
+        "validation": "CH_011"
+      },
       "states": [
         "cargando",
         "listo",
@@ -1803,7 +3834,7 @@
         "bloqueado",
         "completado"
       ],
-      "summary": "Domicilio digital vigente: implementa campos Direccion, Comuna, Estado y acciones Editar domicilio, Verificar.",
+      "summary": "Domicilio digital vigente: informacion actualizada desde la base local y acciones del flujo ciudadano.",
       "title": "Domicilio digital vigente"
     },
     {
@@ -1842,6 +3873,11 @@
       ],
       "route": "/ddu/address-verify",
       "selector": "#screen-p-12",
+      "sourceRequirements": {
+        "flow": "FT_012",
+        "screen": "CU_012",
+        "validation": "CH_012"
+      },
       "states": [
         "cargando",
         "listo",
@@ -1849,7 +3885,7 @@
         "bloqueado",
         "completado"
       ],
-      "summary": "Verificacion de domicilio: implementa campos Evidencia, Institucion, Resultado y acciones Subir evidencia, Solicitar revision.",
+      "summary": "Verificacion de domicilio: informacion actualizada desde la base local y acciones del flujo ciudadano.",
       "title": "Verificacion de domicilio"
     },
     {
@@ -1888,6 +3924,11 @@
       ],
       "route": "/ddu/address-history",
       "selector": "#screen-p-13",
+      "sourceRequirements": {
+        "flow": "FT_013",
+        "screen": "CU_013",
+        "validation": "CH_013"
+      },
       "states": [
         "cargando",
         "listo",
@@ -1895,7 +3936,7 @@
         "bloqueado",
         "completado"
       ],
-      "summary": "Historial de domicilio: implementa campos Fecha, Direccion, Origen y acciones Comparar, Descargar historial.",
+      "summary": "Historial de domicilio: informacion actualizada desde la base local y acciones del flujo ciudadano.",
       "title": "Historial de domicilio"
     },
     {
@@ -1934,6 +3975,11 @@
       ],
       "route": "/notificaciones/inbox",
       "selector": "#screen-p-14",
+      "sourceRequirements": {
+        "flow": "FT_014",
+        "screen": "CU_014",
+        "validation": "CH_014"
+      },
       "states": [
         "cargando",
         "listo",
@@ -1941,7 +3987,7 @@
         "bloqueado",
         "completado"
       ],
-      "summary": "Bandeja de notificaciones: implementa campos Asunto, Prioridad, Acuse y acciones Marcar leida, Responder.",
+      "summary": "Bandeja de notificaciones: informacion actualizada desde la base local y acciones del flujo ciudadano.",
       "title": "Bandeja de notificaciones"
     },
     {
@@ -1980,6 +4026,11 @@
       ],
       "route": "/notificaciones/message-detail",
       "selector": "#screen-p-15",
+      "sourceRequirements": {
+        "flow": "FT_015",
+        "screen": "CU_015",
+        "validation": "CH_015"
+      },
       "states": [
         "cargando",
         "listo",
@@ -1987,7 +4038,7 @@
         "bloqueado",
         "completado"
       ],
-      "summary": "Detalle de mensaje: implementa campos Remitente, Folio, Adjuntos y acciones Descargar adjunto, Acusar recibo.",
+      "summary": "Detalle de mensaje: informacion actualizada desde la base local y acciones del flujo ciudadano.",
       "title": "Detalle de mensaje"
     },
     {
@@ -2026,6 +4077,11 @@
       ],
       "route": "/notificaciones/notification-settings",
       "selector": "#screen-p-16",
+      "sourceRequirements": {
+        "flow": "FT_016",
+        "screen": "CU_016",
+        "validation": "CH_016"
+      },
       "states": [
         "cargando",
         "listo",
@@ -2033,7 +4089,7 @@
         "bloqueado",
         "completado"
       ],
-      "summary": "Preferencias de aviso: implementa campos Canal, Horario, Prioridad y acciones Guardar canal, Probar envio.",
+      "summary": "Preferencias de aviso: informacion actualizada desde la base local y acciones del flujo ciudadano.",
       "title": "Preferencias de aviso"
     },
     {
@@ -2072,6 +4128,11 @@
       ],
       "route": "/autorizaciones/consent-list",
       "selector": "#screen-p-17",
+      "sourceRequirements": {
+        "flow": "FT_017",
+        "screen": "CU_017",
+        "validation": "CH_017"
+      },
       "states": [
         "cargando",
         "listo",
@@ -2079,7 +4140,7 @@
         "bloqueado",
         "completado"
       ],
-      "summary": "Permisos de datos: implementa campos Institucion, Dato, Vigencia y acciones Revocar, Renovar.",
+      "summary": "Permisos de datos: informacion actualizada desde la base local y acciones del flujo ciudadano.",
       "title": "Permisos de datos"
     },
     {
@@ -2118,6 +4179,11 @@
       ],
       "route": "/autorizaciones/consent-request",
       "selector": "#screen-p-18",
+      "sourceRequirements": {
+        "flow": "FT_018",
+        "screen": "CU_018",
+        "validation": "CH_018"
+      },
       "states": [
         "cargando",
         "listo",
@@ -2125,7 +4191,7 @@
         "bloqueado",
         "completado"
       ],
-      "summary": "Solicitud de autorizacion: implementa campos Solicitante, Finalidad, Duracion y acciones Autorizar, Rechazar.",
+      "summary": "Solicitud de autorizacion: informacion actualizada desde la base local y acciones del flujo ciudadano.",
       "title": "Solicitud de autorizacion"
     },
     {
@@ -2164,6 +4230,11 @@
       ],
       "route": "/autorizaciones/consent-history",
       "selector": "#screen-p-19",
+      "sourceRequirements": {
+        "flow": "FT_019",
+        "screen": "CU_019",
+        "validation": "CH_019"
+      },
       "states": [
         "cargando",
         "listo",
@@ -2171,7 +4242,7 @@
         "bloqueado",
         "completado"
       ],
-      "summary": "Historial de autorizaciones: implementa campos Fecha, Accion, Actor y acciones Exportar historial, Ver detalle.",
+      "summary": "Historial de autorizaciones: informacion actualizada desde la base local y acciones del flujo ciudadano.",
       "title": "Historial de autorizaciones"
     },
     {
@@ -2210,6 +4281,11 @@
       ],
       "route": "/expedientes/case-board",
       "selector": "#screen-p-20",
+      "sourceRequirements": {
+        "flow": "FT_020",
+        "screen": "CU_020",
+        "validation": "CH_001"
+      },
       "states": [
         "cargando",
         "listo",
@@ -2217,7 +4293,7 @@
         "bloqueado",
         "completado"
       ],
-      "summary": "Mis expedientes: implementa campos Folio, Estado, Responsable y acciones Abrir expediente, Filtrar.",
+      "summary": "Mis expedientes: informacion actualizada desde la base local y acciones del flujo ciudadano.",
       "title": "Mis expedientes"
     },
     {
@@ -2256,6 +4332,11 @@
       ],
       "route": "/expedientes/case-detail",
       "selector": "#screen-p-21",
+      "sourceRequirements": {
+        "flow": "FT_021",
+        "screen": "CU_021",
+        "validation": "CH_002"
+      },
       "states": [
         "cargando",
         "listo",
@@ -2263,7 +4344,7 @@
         "bloqueado",
         "completado"
       ],
-      "summary": "Detalle de expediente: implementa campos Folio, Hito, Documento y acciones Adjuntar documento, Enviar comentario.",
+      "summary": "Detalle de expediente: informacion actualizada desde la base local y acciones del flujo ciudadano.",
       "title": "Detalle de expediente"
     },
     {
@@ -2302,6 +4383,11 @@
       ],
       "route": "/expedientes/case-timeline",
       "selector": "#screen-p-22",
+      "sourceRequirements": {
+        "flow": "FT_022",
+        "screen": "CU_001",
+        "validation": "CH_003"
+      },
       "states": [
         "cargando",
         "listo",
@@ -2309,7 +4395,7 @@
         "bloqueado",
         "completado"
       ],
-      "summary": "Linea de tiempo: implementa campos Fecha, Evento, Resultado y acciones Ver evidencia, Descargar bitacora.",
+      "summary": "Linea de tiempo: informacion actualizada desde la base local y acciones del flujo ciudadano.",
       "title": "Linea de tiempo"
     },
     {
@@ -2348,6 +4434,11 @@
       ],
       "route": "/ayuda/support-home",
       "selector": "#screen-p-23",
+      "sourceRequirements": {
+        "flow": "FT_023",
+        "screen": "CU_002",
+        "validation": "CH_004"
+      },
       "states": [
         "cargando",
         "listo",
@@ -2355,7 +4446,7 @@
         "bloqueado",
         "completado"
       ],
-      "summary": "Centro de ayuda: implementa campos Tema, Canal, SLA y acciones Buscar ayuda, Crear ticket.",
+      "summary": "Centro de ayuda: informacion actualizada desde la base local y acciones del flujo ciudadano.",
       "title": "Centro de ayuda"
     },
     {
@@ -2394,6 +4485,11 @@
       ],
       "route": "/ayuda/faq",
       "selector": "#screen-p-24",
+      "sourceRequirements": {
+        "flow": "FT_024",
+        "screen": "CU_003",
+        "validation": "CH_005"
+      },
       "states": [
         "cargando",
         "listo",
@@ -2401,7 +4497,7 @@
         "bloqueado",
         "completado"
       ],
-      "summary": "Preguntas frecuentes: implementa campos Pregunta, Categoria, Popularidad y acciones Abrir respuesta, Valorar.",
+      "summary": "Preguntas frecuentes: informacion actualizada desde la base local y acciones del flujo ciudadano.",
       "title": "Preguntas frecuentes"
     },
     {
@@ -2440,6 +4536,11 @@
       ],
       "route": "/ayuda/ticket-detail",
       "selector": "#screen-p-25",
+      "sourceRequirements": {
+        "flow": "FT_025",
+        "screen": "CU_004",
+        "validation": "CH_006"
+      },
       "states": [
         "cargando",
         "listo",
@@ -2447,7 +4548,7 @@
         "bloqueado",
         "completado"
       ],
-      "summary": "Ticket de soporte: implementa campos Ticket, Estado, Ultima respuesta y acciones Responder, Cerrar ticket.",
+      "summary": "Ticket de soporte: informacion actualizada desde la base local y acciones del flujo ciudadano.",
       "title": "Ticket de soporte"
     },
     {
@@ -2486,6 +4587,11 @@
       ],
       "route": "/auditoria/access-log",
       "selector": "#screen-p-26",
+      "sourceRequirements": {
+        "flow": "FT_026",
+        "screen": "CU_005",
+        "validation": "CH_007"
+      },
       "states": [
         "cargando",
         "listo",
@@ -2493,7 +4599,7 @@
         "bloqueado",
         "completado"
       ],
-      "summary": "Bitacora de accesos: implementa campos Fecha, IP, Resultado y acciones Filtrar, Exportar.",
+      "summary": "Bitacora de accesos: informacion actualizada desde la base local y acciones del flujo ciudadano.",
       "title": "Bitacora de accesos"
     },
     {
@@ -2532,6 +4638,11 @@
       ],
       "route": "/auditoria/data-changes",
       "selector": "#screen-p-27",
+      "sourceRequirements": {
+        "flow": "FT_001",
+        "screen": "CU_006",
+        "validation": "CH_008"
+      },
       "states": [
         "cargando",
         "listo",
@@ -2539,7 +4650,7 @@
         "bloqueado",
         "completado"
       ],
-      "summary": "Cambios de datos: implementa campos Dato, Antes, Despues y acciones Comparar cambio, Ver actor.",
+      "summary": "Cambios de datos: informacion actualizada desde la base local y acciones del flujo ciudadano.",
       "title": "Cambios de datos"
     },
     {
@@ -2578,6 +4689,11 @@
       ],
       "route": "/auditoria/audit-export",
       "selector": "#screen-p-28",
+      "sourceRequirements": {
+        "flow": "FT_002",
+        "screen": "CU_007",
+        "validation": "CH_009"
+      },
       "states": [
         "cargando",
         "listo",
@@ -2585,7 +4701,7 @@
         "bloqueado",
         "completado"
       ],
-      "summary": "Exportacion de auditoria: implementa campos Rango, Formato, Estado y acciones Generar CSV, Generar PDF.",
+      "summary": "Exportacion de auditoria: informacion actualizada desde la base local y acciones del flujo ciudadano.",
       "title": "Exportacion de auditoria"
     },
     {
@@ -2624,6 +4740,11 @@
       ],
       "route": "/portal/integration-status",
       "selector": "#screen-p-29",
+      "sourceRequirements": {
+        "flow": "FT_003",
+        "screen": "CU_008",
+        "validation": "CH_010"
+      },
       "states": [
         "cargando",
         "listo",
@@ -2631,7 +4752,7 @@
         "bloqueado",
         "completado"
       ],
-      "summary": "Estado de integraciones: implementa campos Servicio, Estado, Latencia y acciones Reintentar, Ver detalle.",
+      "summary": "Estado de integraciones: informacion actualizada desde la base local y acciones del flujo ciudadano.",
       "title": "Estado de integraciones"
     },
     {
@@ -2670,6 +4791,11 @@
       ],
       "route": "/auditoria/compliance",
       "selector": "#screen-p-30",
+      "sourceRequirements": {
+        "flow": "FT_004",
+        "screen": "CU_009",
+        "validation": "CH_011"
+      },
       "states": [
         "cargando",
         "listo",
@@ -2677,7 +4803,7 @@
         "bloqueado",
         "completado"
       ],
-      "summary": "Panel de seguridad: implementa campos Control, Cobertura, Riesgo y acciones Ver control, Descargar reporte.",
+      "summary": "Panel de seguridad: informacion actualizada desde la base local y acciones del flujo ciudadano.",
       "title": "Panel de seguridad"
     }
   ],
@@ -3068,5 +5194,847 @@
         ]
       ]
     }
-  }
+  },
+  "traceabilityMatrix": [
+    {
+      "action": "Ingresar",
+      "endpoint": {
+        "method": "POST",
+        "mutates": true,
+        "path": "/api/v1/security/login-attempt"
+      },
+      "id": "TRZ_APP_001",
+      "internal_requirement_ids": [
+        "REQ_UI_001",
+        "REQ_FLOW_001",
+        "REQ_VAL_001"
+      ],
+      "screen": {
+        "code": "P-01",
+        "component": "frontend/src/app/pages/screen-01.component.ts",
+        "route": "/seguridad/auth-login",
+        "title": "Ingreso ClaveUnica"
+      },
+      "source_requirement_id": "FT_001",
+      "table": "sessions",
+      "tests": [
+        "tests/smoke.mjs",
+        "tests/e2e.spec.ts",
+        "backend/src/test/java/cl/benjamin/claveunica/PortalWorkflowServiceTest.java"
+      ],
+      "ui_visibility": "internal_only"
+    },
+    {
+      "action": "Enviar enlace",
+      "endpoint": {
+        "method": "GET",
+        "mutates": false,
+        "path": "/api/v1/dashboard"
+      },
+      "id": "TRZ_APP_002",
+      "internal_requirement_ids": [
+        "REQ_UI_002",
+        "REQ_FLOW_002",
+        "REQ_VAL_002"
+      ],
+      "screen": {
+        "code": "P-02",
+        "component": "frontend/src/app/pages/screen-02.component.ts",
+        "route": "/seguridad/auth-recovery",
+        "title": "Recuperacion de acceso"
+      },
+      "source_requirement_id": "FT_002",
+      "table": "procedures",
+      "tests": [
+        "tests/smoke.mjs",
+        "tests/e2e.spec.ts",
+        "backend/src/test/java/cl/benjamin/claveunica/PortalWorkflowServiceTest.java"
+      ],
+      "ui_visibility": "internal_only"
+    },
+    {
+      "action": "Abrir tramite",
+      "endpoint": {
+        "method": "GET",
+        "mutates": false,
+        "path": "/api/v1/dashboard"
+      },
+      "id": "TRZ_APP_003",
+      "internal_requirement_ids": [
+        "REQ_UI_003",
+        "REQ_FLOW_003",
+        "REQ_VAL_003"
+      ],
+      "screen": {
+        "code": "P-03",
+        "component": "frontend/src/app/pages/screen-03.component.ts",
+        "route": "/portal/dashboard",
+        "title": "Dashboard ciudadano"
+      },
+      "source_requirement_id": "FT_003",
+      "table": "procedures",
+      "tests": [
+        "tests/smoke.mjs",
+        "tests/e2e.spec.ts",
+        "backend/src/test/java/cl/benjamin/claveunica/PortalWorkflowServiceTest.java"
+      ],
+      "ui_visibility": "internal_only"
+    },
+    {
+      "action": "Buscar",
+      "endpoint": {
+        "method": "POST",
+        "mutates": true,
+        "path": "/api/v1/favorites"
+      },
+      "id": "TRZ_APP_004",
+      "internal_requirement_ids": [
+        "REQ_UI_004",
+        "REQ_FLOW_004",
+        "REQ_VAL_004"
+      ],
+      "screen": {
+        "code": "P-04",
+        "component": "frontend/src/app/pages/screen-04.component.ts",
+        "route": "/portal/catalog",
+        "title": "Catalogo de tramites"
+      },
+      "source_requirement_id": "FT_004",
+      "table": "favorites",
+      "tests": [
+        "tests/smoke.mjs",
+        "tests/e2e.spec.ts",
+        "backend/src/test/java/cl/benjamin/claveunica/PortalWorkflowServiceTest.java"
+      ],
+      "ui_visibility": "internal_only"
+    },
+    {
+      "action": "Continuar solicitud",
+      "endpoint": {
+        "method": "POST",
+        "mutates": true,
+        "path": "/api/v1/procedures"
+      },
+      "id": "TRZ_APP_005",
+      "internal_requirement_ids": [
+        "REQ_UI_005",
+        "REQ_FLOW_005",
+        "REQ_VAL_005"
+      ],
+      "screen": {
+        "code": "P-05",
+        "component": "frontend/src/app/pages/screen-05.component.ts",
+        "route": "/portal/service-detail",
+        "title": "Detalle de tramite"
+      },
+      "source_requirement_id": "FT_005",
+      "table": "procedures",
+      "tests": [
+        "tests/smoke.mjs",
+        "tests/e2e.spec.ts",
+        "backend/src/test/java/cl/benjamin/claveunica/PortalWorkflowServiceTest.java"
+      ],
+      "ui_visibility": "internal_only"
+    },
+    {
+      "action": "Actualizar datos",
+      "endpoint": {
+        "method": "GET",
+        "mutates": false,
+        "path": "/api/v1/citizens"
+      },
+      "id": "TRZ_APP_006",
+      "internal_requirement_ids": [
+        "REQ_UI_006",
+        "REQ_FLOW_006",
+        "REQ_VAL_006"
+      ],
+      "screen": {
+        "code": "P-06",
+        "component": "frontend/src/app/pages/screen-06.component.ts",
+        "route": "/perfil/profile",
+        "title": "Datos personales"
+      },
+      "source_requirement_id": "FT_006",
+      "table": "citizens",
+      "tests": [
+        "tests/smoke.mjs",
+        "tests/e2e.spec.ts",
+        "backend/src/test/java/cl/benjamin/claveunica/PortalWorkflowServiceTest.java"
+      ],
+      "ui_visibility": "internal_only"
+    },
+    {
+      "action": "Verificar correo",
+      "endpoint": {
+        "method": "PATCH",
+        "mutates": true,
+        "path": "/api/v1/citizens/contact"
+      },
+      "id": "TRZ_APP_007",
+      "internal_requirement_ids": [
+        "REQ_UI_007",
+        "REQ_FLOW_007",
+        "REQ_VAL_007"
+      ],
+      "screen": {
+        "code": "P-07",
+        "component": "frontend/src/app/pages/screen-07.component.ts",
+        "route": "/perfil/contact",
+        "title": "Datos de contacto"
+      },
+      "source_requirement_id": "FT_007",
+      "table": "citizens",
+      "tests": [
+        "tests/smoke.mjs",
+        "tests/e2e.spec.ts",
+        "backend/src/test/java/cl/benjamin/claveunica/PortalWorkflowServiceTest.java"
+      ],
+      "ui_visibility": "internal_only"
+    },
+    {
+      "action": "Guardar preferencias",
+      "endpoint": {
+        "method": "PATCH",
+        "mutates": true,
+        "path": "/api/v1/procedures/{id}/status"
+      },
+      "id": "TRZ_APP_008",
+      "internal_requirement_ids": [
+        "REQ_UI_008",
+        "REQ_FLOW_008",
+        "REQ_VAL_008"
+      ],
+      "screen": {
+        "code": "P-08",
+        "component": "frontend/src/app/pages/screen-08.component.ts",
+        "route": "/perfil/privacy",
+        "title": "Preferencias de privacidad"
+      },
+      "source_requirement_id": "FT_008",
+      "table": "procedures",
+      "tests": [
+        "tests/smoke.mjs",
+        "tests/e2e.spec.ts",
+        "backend/src/test/java/cl/benjamin/claveunica/PortalWorkflowServiceTest.java"
+      ],
+      "ui_visibility": "internal_only"
+    },
+    {
+      "action": "Cerrar sesion",
+      "endpoint": {
+        "method": "PATCH",
+        "mutates": true,
+        "path": "/api/v1/sessions/{id}/close"
+      },
+      "id": "TRZ_APP_009",
+      "internal_requirement_ids": [
+        "REQ_UI_009",
+        "REQ_FLOW_009",
+        "REQ_VAL_009"
+      ],
+      "screen": {
+        "code": "P-09",
+        "component": "frontend/src/app/pages/screen-09.component.ts",
+        "route": "/seguridad/sessions",
+        "title": "Sesiones activas"
+      },
+      "source_requirement_id": "FT_009",
+      "table": "sessions",
+      "tests": [
+        "tests/smoke.mjs",
+        "tests/e2e.spec.ts",
+        "backend/src/test/java/cl/benjamin/claveunica/PortalWorkflowServiceTest.java"
+      ],
+      "ui_visibility": "internal_only"
+    },
+    {
+      "action": "Activar metodo",
+      "endpoint": {
+        "method": "POST",
+        "mutates": true,
+        "path": "/api/v1/mfa-methods"
+      },
+      "id": "TRZ_APP_010",
+      "internal_requirement_ids": [
+        "REQ_UI_010",
+        "REQ_FLOW_010",
+        "REQ_VAL_010"
+      ],
+      "screen": {
+        "code": "P-10",
+        "component": "frontend/src/app/pages/screen-10.component.ts",
+        "route": "/seguridad/mfa",
+        "title": "Dispositivos y MFA"
+      },
+      "source_requirement_id": "FT_010",
+      "table": "mfa_methods",
+      "tests": [
+        "tests/smoke.mjs",
+        "tests/e2e.spec.ts",
+        "backend/src/test/java/cl/benjamin/claveunica/PortalWorkflowServiceTest.java"
+      ],
+      "ui_visibility": "internal_only"
+    },
+    {
+      "action": "Editar domicilio",
+      "endpoint": {
+        "method": "GET",
+        "mutates": false,
+        "path": "/api/v1/digital-addresses/current"
+      },
+      "id": "TRZ_APP_011",
+      "internal_requirement_ids": [
+        "REQ_UI_011",
+        "REQ_FLOW_011",
+        "REQ_VAL_011"
+      ],
+      "screen": {
+        "code": "P-11",
+        "component": "frontend/src/app/pages/screen-11.component.ts",
+        "route": "/ddu/address-current",
+        "title": "Domicilio digital vigente"
+      },
+      "source_requirement_id": "FT_011",
+      "table": "digital_addresses",
+      "tests": [
+        "tests/smoke.mjs",
+        "tests/e2e.spec.ts",
+        "backend/src/test/java/cl/benjamin/claveunica/PortalWorkflowServiceTest.java"
+      ],
+      "ui_visibility": "internal_only"
+    },
+    {
+      "action": "Subir evidencia",
+      "endpoint": {
+        "method": "POST",
+        "mutates": true,
+        "path": "/api/v1/digital-addresses"
+      },
+      "id": "TRZ_APP_012",
+      "internal_requirement_ids": [
+        "REQ_UI_012",
+        "REQ_FLOW_012",
+        "REQ_VAL_012"
+      ],
+      "screen": {
+        "code": "P-12",
+        "component": "frontend/src/app/pages/screen-12.component.ts",
+        "route": "/ddu/address-verify",
+        "title": "Verificacion de domicilio"
+      },
+      "source_requirement_id": "FT_012",
+      "table": "digital_addresses",
+      "tests": [
+        "tests/smoke.mjs",
+        "tests/e2e.spec.ts",
+        "backend/src/test/java/cl/benjamin/claveunica/PortalWorkflowServiceTest.java"
+      ],
+      "ui_visibility": "internal_only"
+    },
+    {
+      "action": "Comparar",
+      "endpoint": {
+        "method": "GET",
+        "mutates": false,
+        "path": "/api/v1/digital-addresses/history"
+      },
+      "id": "TRZ_APP_013",
+      "internal_requirement_ids": [
+        "REQ_UI_013",
+        "REQ_FLOW_013",
+        "REQ_VAL_013"
+      ],
+      "screen": {
+        "code": "P-13",
+        "component": "frontend/src/app/pages/screen-13.component.ts",
+        "route": "/ddu/address-history",
+        "title": "Historial de domicilio"
+      },
+      "source_requirement_id": "FT_013",
+      "table": "address_history",
+      "tests": [
+        "tests/smoke.mjs",
+        "tests/e2e.spec.ts",
+        "backend/src/test/java/cl/benjamin/claveunica/PortalWorkflowServiceTest.java"
+      ],
+      "ui_visibility": "internal_only"
+    },
+    {
+      "action": "Marcar leida",
+      "endpoint": {
+        "method": "GET",
+        "mutates": false,
+        "path": "/api/v1/notifications"
+      },
+      "id": "TRZ_APP_014",
+      "internal_requirement_ids": [
+        "REQ_UI_014",
+        "REQ_FLOW_014",
+        "REQ_VAL_014"
+      ],
+      "screen": {
+        "code": "P-14",
+        "component": "frontend/src/app/pages/screen-14.component.ts",
+        "route": "/notificaciones/inbox",
+        "title": "Bandeja de notificaciones"
+      },
+      "source_requirement_id": "FT_014",
+      "table": "notifications",
+      "tests": [
+        "tests/smoke.mjs",
+        "tests/e2e.spec.ts",
+        "backend/src/test/java/cl/benjamin/claveunica/PortalWorkflowServiceTest.java"
+      ],
+      "ui_visibility": "internal_only"
+    },
+    {
+      "action": "Descargar adjunto",
+      "endpoint": {
+        "method": "PATCH",
+        "mutates": true,
+        "path": "/api/v1/notifications/{id}/read"
+      },
+      "id": "TRZ_APP_015",
+      "internal_requirement_ids": [
+        "REQ_UI_015",
+        "REQ_FLOW_015",
+        "REQ_VAL_015"
+      ],
+      "screen": {
+        "code": "P-15",
+        "component": "frontend/src/app/pages/screen-15.component.ts",
+        "route": "/notificaciones/message-detail",
+        "title": "Detalle de mensaje"
+      },
+      "source_requirement_id": "FT_015",
+      "table": "notifications",
+      "tests": [
+        "tests/smoke.mjs",
+        "tests/e2e.spec.ts",
+        "backend/src/test/java/cl/benjamin/claveunica/PortalWorkflowServiceTest.java"
+      ],
+      "ui_visibility": "internal_only"
+    },
+    {
+      "action": "Guardar canal",
+      "endpoint": {
+        "method": "POST",
+        "mutates": true,
+        "path": "/api/v1/notifications/preferences"
+      },
+      "id": "TRZ_APP_016",
+      "internal_requirement_ids": [
+        "REQ_UI_016",
+        "REQ_FLOW_016",
+        "REQ_VAL_016"
+      ],
+      "screen": {
+        "code": "P-16",
+        "component": "frontend/src/app/pages/screen-16.component.ts",
+        "route": "/notificaciones/notification-settings",
+        "title": "Preferencias de aviso"
+      },
+      "source_requirement_id": "FT_016",
+      "table": "notification_preferences",
+      "tests": [
+        "tests/smoke.mjs",
+        "tests/e2e.spec.ts",
+        "backend/src/test/java/cl/benjamin/claveunica/PortalWorkflowServiceTest.java"
+      ],
+      "ui_visibility": "internal_only"
+    },
+    {
+      "action": "Revocar",
+      "endpoint": {
+        "method": "PATCH",
+        "mutates": true,
+        "path": "/api/v1/consents/{id}/revoke"
+      },
+      "id": "TRZ_APP_017",
+      "internal_requirement_ids": [
+        "REQ_UI_017",
+        "REQ_FLOW_017",
+        "REQ_VAL_017"
+      ],
+      "screen": {
+        "code": "P-17",
+        "component": "frontend/src/app/pages/screen-17.component.ts",
+        "route": "/autorizaciones/consent-list",
+        "title": "Permisos de datos"
+      },
+      "source_requirement_id": "FT_017",
+      "table": "consents",
+      "tests": [
+        "tests/smoke.mjs",
+        "tests/e2e.spec.ts",
+        "backend/src/test/java/cl/benjamin/claveunica/PortalWorkflowServiceTest.java"
+      ],
+      "ui_visibility": "internal_only"
+    },
+    {
+      "action": "Autorizar",
+      "endpoint": {
+        "method": "POST",
+        "mutates": true,
+        "path": "/api/v1/consent-requests"
+      },
+      "id": "TRZ_APP_018",
+      "internal_requirement_ids": [
+        "REQ_UI_018",
+        "REQ_FLOW_018",
+        "REQ_VAL_018"
+      ],
+      "screen": {
+        "code": "P-18",
+        "component": "frontend/src/app/pages/screen-18.component.ts",
+        "route": "/autorizaciones/consent-request",
+        "title": "Solicitud de autorizacion"
+      },
+      "source_requirement_id": "FT_018",
+      "table": "consent_requests",
+      "tests": [
+        "tests/smoke.mjs",
+        "tests/e2e.spec.ts",
+        "backend/src/test/java/cl/benjamin/claveunica/PortalWorkflowServiceTest.java"
+      ],
+      "ui_visibility": "internal_only"
+    },
+    {
+      "action": "Exportar historial",
+      "endpoint": {
+        "method": "GET",
+        "mutates": false,
+        "path": "/api/v1/consents/history"
+      },
+      "id": "TRZ_APP_019",
+      "internal_requirement_ids": [
+        "REQ_UI_019",
+        "REQ_FLOW_019",
+        "REQ_VAL_019"
+      ],
+      "screen": {
+        "code": "P-19",
+        "component": "frontend/src/app/pages/screen-19.component.ts",
+        "route": "/autorizaciones/consent-history",
+        "title": "Historial de autorizaciones"
+      },
+      "source_requirement_id": "FT_019",
+      "table": "consent_history",
+      "tests": [
+        "tests/smoke.mjs",
+        "tests/e2e.spec.ts",
+        "backend/src/test/java/cl/benjamin/claveunica/PortalWorkflowServiceTest.java"
+      ],
+      "ui_visibility": "internal_only"
+    },
+    {
+      "action": "Abrir expediente",
+      "endpoint": {
+        "method": "GET",
+        "mutates": false,
+        "path": "/api/v1/procedures"
+      },
+      "id": "TRZ_APP_020",
+      "internal_requirement_ids": [
+        "REQ_UI_020",
+        "REQ_FLOW_020",
+        "REQ_VAL_020"
+      ],
+      "screen": {
+        "code": "P-20",
+        "component": "frontend/src/app/pages/screen-20.component.ts",
+        "route": "/expedientes/case-board",
+        "title": "Mis expedientes"
+      },
+      "source_requirement_id": "FT_020",
+      "table": "procedures",
+      "tests": [
+        "tests/smoke.mjs",
+        "tests/e2e.spec.ts",
+        "backend/src/test/java/cl/benjamin/claveunica/PortalWorkflowServiceTest.java"
+      ],
+      "ui_visibility": "internal_only"
+    },
+    {
+      "action": "Adjuntar documento",
+      "endpoint": {
+        "method": "PATCH",
+        "mutates": true,
+        "path": "/api/v1/procedures/{id}/status"
+      },
+      "id": "TRZ_APP_021",
+      "internal_requirement_ids": [
+        "REQ_UI_021",
+        "REQ_FLOW_021",
+        "REQ_VAL_021"
+      ],
+      "screen": {
+        "code": "P-21",
+        "component": "frontend/src/app/pages/screen-21.component.ts",
+        "route": "/expedientes/case-detail",
+        "title": "Detalle de expediente"
+      },
+      "source_requirement_id": "FT_021",
+      "table": "procedures",
+      "tests": [
+        "tests/smoke.mjs",
+        "tests/e2e.spec.ts",
+        "backend/src/test/java/cl/benjamin/claveunica/PortalWorkflowServiceTest.java"
+      ],
+      "ui_visibility": "internal_only"
+    },
+    {
+      "action": "Ver evidencia",
+      "endpoint": {
+        "method": "GET",
+        "mutates": false,
+        "path": "/api/v1/cases/{id}/timeline"
+      },
+      "id": "TRZ_APP_022",
+      "internal_requirement_ids": [
+        "REQ_UI_022",
+        "REQ_FLOW_022",
+        "REQ_VAL_022"
+      ],
+      "screen": {
+        "code": "P-22",
+        "component": "frontend/src/app/pages/screen-22.component.ts",
+        "route": "/expedientes/case-timeline",
+        "title": "Linea de tiempo"
+      },
+      "source_requirement_id": "FT_022",
+      "table": "case_events",
+      "tests": [
+        "tests/smoke.mjs",
+        "tests/e2e.spec.ts",
+        "backend/src/test/java/cl/benjamin/claveunica/PortalWorkflowServiceTest.java"
+      ],
+      "ui_visibility": "internal_only"
+    },
+    {
+      "action": "Buscar ayuda",
+      "endpoint": {
+        "method": "POST",
+        "mutates": true,
+        "path": "/api/v1/support-tickets"
+      },
+      "id": "TRZ_APP_023",
+      "internal_requirement_ids": [
+        "REQ_UI_023",
+        "REQ_FLOW_023",
+        "REQ_VAL_023"
+      ],
+      "screen": {
+        "code": "P-23",
+        "component": "frontend/src/app/pages/screen-23.component.ts",
+        "route": "/ayuda/support-home",
+        "title": "Centro de ayuda"
+      },
+      "source_requirement_id": "FT_023",
+      "table": "support_tickets",
+      "tests": [
+        "tests/smoke.mjs",
+        "tests/e2e.spec.ts",
+        "backend/src/test/java/cl/benjamin/claveunica/PortalWorkflowServiceTest.java"
+      ],
+      "ui_visibility": "internal_only"
+    },
+    {
+      "action": "Abrir respuesta",
+      "endpoint": {
+        "method": "GET",
+        "mutates": false,
+        "path": "/api/v1/faq"
+      },
+      "id": "TRZ_APP_024",
+      "internal_requirement_ids": [
+        "REQ_UI_024",
+        "REQ_FLOW_024",
+        "REQ_VAL_024"
+      ],
+      "screen": {
+        "code": "P-24",
+        "component": "frontend/src/app/pages/screen-24.component.ts",
+        "route": "/ayuda/faq",
+        "title": "Preguntas frecuentes"
+      },
+      "source_requirement_id": "FT_024",
+      "table": "faq_entries",
+      "tests": [
+        "tests/smoke.mjs",
+        "tests/e2e.spec.ts",
+        "backend/src/test/java/cl/benjamin/claveunica/PortalWorkflowServiceTest.java"
+      ],
+      "ui_visibility": "internal_only"
+    },
+    {
+      "action": "Responder",
+      "endpoint": {
+        "method": "PATCH",
+        "mutates": true,
+        "path": "/api/v1/support-tickets/{id}/close"
+      },
+      "id": "TRZ_APP_025",
+      "internal_requirement_ids": [
+        "REQ_UI_025",
+        "REQ_FLOW_025",
+        "REQ_VAL_025"
+      ],
+      "screen": {
+        "code": "P-25",
+        "component": "frontend/src/app/pages/screen-25.component.ts",
+        "route": "/ayuda/ticket-detail",
+        "title": "Ticket de soporte"
+      },
+      "source_requirement_id": "FT_025",
+      "table": "support_tickets",
+      "tests": [
+        "tests/smoke.mjs",
+        "tests/e2e.spec.ts",
+        "backend/src/test/java/cl/benjamin/claveunica/PortalWorkflowServiceTest.java"
+      ],
+      "ui_visibility": "internal_only"
+    },
+    {
+      "action": "Filtrar",
+      "endpoint": {
+        "method": "GET",
+        "mutates": false,
+        "path": "/api/v1/audit-events"
+      },
+      "id": "TRZ_APP_026",
+      "internal_requirement_ids": [
+        "REQ_UI_026",
+        "REQ_FLOW_026",
+        "REQ_VAL_026"
+      ],
+      "screen": {
+        "code": "P-26",
+        "component": "frontend/src/app/pages/screen-26.component.ts",
+        "route": "/auditoria/access-log",
+        "title": "Bitacora de accesos"
+      },
+      "source_requirement_id": "FT_026",
+      "table": "audit_events",
+      "tests": [
+        "tests/smoke.mjs",
+        "tests/e2e.spec.ts",
+        "backend/src/test/java/cl/benjamin/claveunica/PortalWorkflowServiceTest.java"
+      ],
+      "ui_visibility": "internal_only"
+    },
+    {
+      "action": "Comparar cambio",
+      "endpoint": {
+        "method": "POST",
+        "mutates": true,
+        "path": "/api/v1/cases/{id}/comments"
+      },
+      "id": "TRZ_APP_027",
+      "internal_requirement_ids": [
+        "REQ_UI_027",
+        "REQ_FLOW_027",
+        "REQ_VAL_027"
+      ],
+      "screen": {
+        "code": "P-27",
+        "component": "frontend/src/app/pages/screen-27.component.ts",
+        "route": "/auditoria/data-changes",
+        "title": "Cambios de datos"
+      },
+      "source_requirement_id": "FT_001",
+      "table": "case_events",
+      "tests": [
+        "tests/smoke.mjs",
+        "tests/e2e.spec.ts",
+        "backend/src/test/java/cl/benjamin/claveunica/PortalWorkflowServiceTest.java"
+      ],
+      "ui_visibility": "internal_only"
+    },
+    {
+      "action": "Generar CSV",
+      "endpoint": {
+        "method": "POST",
+        "mutates": true,
+        "path": "/api/v1/audit-exports"
+      },
+      "id": "TRZ_APP_028",
+      "internal_requirement_ids": [
+        "REQ_UI_028",
+        "REQ_FLOW_028",
+        "REQ_VAL_028"
+      ],
+      "screen": {
+        "code": "P-28",
+        "component": "frontend/src/app/pages/screen-28.component.ts",
+        "route": "/auditoria/audit-export",
+        "title": "Exportacion de auditoria"
+      },
+      "source_requirement_id": "FT_002",
+      "table": "audit_exports",
+      "tests": [
+        "tests/smoke.mjs",
+        "tests/e2e.spec.ts",
+        "backend/src/test/java/cl/benjamin/claveunica/PortalWorkflowServiceTest.java"
+      ],
+      "ui_visibility": "internal_only"
+    },
+    {
+      "action": "Reintentar",
+      "endpoint": {
+        "method": "GET",
+        "mutates": false,
+        "path": "/api/v1/integration-status"
+      },
+      "id": "TRZ_APP_029",
+      "internal_requirement_ids": [
+        "REQ_UI_029",
+        "REQ_FLOW_029",
+        "REQ_VAL_029"
+      ],
+      "screen": {
+        "code": "P-29",
+        "component": "frontend/src/app/pages/screen-29.component.ts",
+        "route": "/portal/integration-status",
+        "title": "Estado de integraciones"
+      },
+      "source_requirement_id": "FT_003",
+      "table": "integration_status",
+      "tests": [
+        "tests/smoke.mjs",
+        "tests/e2e.spec.ts",
+        "backend/src/test/java/cl/benjamin/claveunica/PortalWorkflowServiceTest.java"
+      ],
+      "ui_visibility": "internal_only"
+    },
+    {
+      "action": "Ver control",
+      "endpoint": {
+        "method": "GET",
+        "mutates": false,
+        "path": "/api/v1/security-alerts"
+      },
+      "id": "TRZ_APP_030",
+      "internal_requirement_ids": [
+        "REQ_UI_030",
+        "REQ_FLOW_030",
+        "REQ_VAL_030"
+      ],
+      "screen": {
+        "code": "P-30",
+        "component": "frontend/src/app/pages/screen-30.component.ts",
+        "route": "/auditoria/compliance",
+        "title": "Panel de seguridad"
+      },
+      "source_requirement_id": "FT_004",
+      "table": "security_alerts",
+      "tests": [
+        "tests/smoke.mjs",
+        "tests/e2e.spec.ts",
+        "backend/src/test/java/cl/benjamin/claveunica/PortalWorkflowServiceTest.java"
+      ],
+      "ui_visibility": "internal_only"
+    }
+  ]
 }

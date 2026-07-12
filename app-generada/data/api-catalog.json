@@ -1,245 +1,365 @@
 {
-  "endpoint_count": 40,
+  "endpoint_count": 45,
   "endpoints": [
     {
-      "description": "Ingreso ClaveUnica",
+      "description": "Salud del backend",
       "method": "GET",
-      "path": "/api/v1/seguridad/p-01",
-      "screen": "P-01"
+      "mutates": false,
+      "path": "/api/v1/health",
+      "screen": "SYS",
+      "table": "none"
     },
     {
-      "description": "Ingreso ClaveUnica",
-      "method": "POST",
-      "path": "/api/v1/seguridad/p-01",
-      "screen": "P-01"
-    },
-    {
-      "description": "Recuperacion de acceso",
+      "description": "Metricas vivas del portal",
       "method": "GET",
-      "path": "/api/v1/seguridad/p-02",
-      "screen": "P-02"
+      "mutates": false,
+      "path": "/api/v1/dashboard",
+      "screen": "P-03",
+      "table": "procedures,notifications,consents,sessions"
     },
     {
-      "description": "Recuperacion de acceso",
-      "method": "POST",
-      "path": "/api/v1/seguridad/p-02",
-      "screen": "P-02"
-    },
-    {
-      "description": "Dashboard ciudadano",
+      "description": "Listar ciudadanos demo",
       "method": "GET",
-      "path": "/api/v1/portal/p-03",
-      "screen": "P-03"
+      "mutates": false,
+      "path": "/api/v1/citizens",
+      "screen": "P-06",
+      "table": "citizens"
     },
     {
-      "description": "Dashboard ciudadano",
-      "method": "POST",
-      "path": "/api/v1/portal/p-03",
-      "screen": "P-03"
+      "description": "Actualizar contacto ciudadano",
+      "method": "PATCH",
+      "mutates": true,
+      "path": "/api/v1/citizens/contact",
+      "screen": "P-07",
+      "table": "citizens,contact_channels,audit_events"
     },
     {
-      "description": "Catalogo de tramites",
+      "description": "Catalogo de servicios",
       "method": "GET",
-      "path": "/api/v1/portal/p-04",
-      "screen": "P-04"
+      "mutates": false,
+      "path": "/api/v1/services",
+      "screen": "P-04",
+      "table": "services,service_categories"
     },
     {
-      "description": "Catalogo de tramites",
+      "description": "Crear tramite",
       "method": "POST",
-      "path": "/api/v1/portal/p-04",
-      "screen": "P-04"
+      "mutates": true,
+      "path": "/api/v1/procedures",
+      "screen": "P-05",
+      "table": "procedures,procedure_steps,audit_events"
     },
     {
-      "description": "Detalle de tramite",
+      "description": "Listar tramites",
       "method": "GET",
-      "path": "/api/v1/portal/p-05",
-      "screen": "P-05"
+      "mutates": false,
+      "path": "/api/v1/procedures",
+      "screen": "P-20",
+      "table": "procedures"
     },
     {
-      "description": "Detalle de tramite",
-      "method": "POST",
-      "path": "/api/v1/portal/p-05",
-      "screen": "P-05"
+      "description": "Cambiar estado de tramite",
+      "method": "PATCH",
+      "mutates": true,
+      "path": "/api/v1/procedures/{id}/status",
+      "screen": "P-21",
+      "table": "procedures,case_events,audit_events"
     },
     {
-      "description": "Datos personales",
+      "description": "Listar notificaciones",
       "method": "GET",
-      "path": "/api/v1/perfil/p-06",
-      "screen": "P-06"
+      "mutates": false,
+      "path": "/api/v1/notifications",
+      "screen": "P-14",
+      "table": "notifications"
     },
     {
-      "description": "Datos personales",
+      "description": "Marcar notificacion leida",
+      "method": "PATCH",
+      "mutates": true,
+      "path": "/api/v1/notifications/{id}/read",
+      "screen": "P-15",
+      "table": "notifications,audit_events"
+    },
+    {
+      "description": "Marcar siguiente notificacion leida",
       "method": "POST",
-      "path": "/api/v1/perfil/p-06",
-      "screen": "P-06"
+      "mutates": true,
+      "path": "/api/v1/notifications/read-next",
+      "screen": "P-15",
+      "table": "notifications,audit_events"
     },
     {
-      "description": "Datos de contacto",
+      "description": "Guardar preferencias de aviso",
+      "method": "POST",
+      "mutates": true,
+      "path": "/api/v1/notifications/preferences",
+      "screen": "P-16",
+      "table": "notification_preferences,audit_events"
+    },
+    {
+      "description": "Listar sesiones",
       "method": "GET",
-      "path": "/api/v1/perfil/p-07",
-      "screen": "P-07"
+      "mutates": false,
+      "path": "/api/v1/sessions",
+      "screen": "P-09",
+      "table": "sessions,trusted_devices"
     },
     {
-      "description": "Datos de contacto",
+      "description": "Cerrar sesion",
+      "method": "PATCH",
+      "mutates": true,
+      "path": "/api/v1/sessions/{id}/close",
+      "screen": "P-09",
+      "table": "sessions,audit_events"
+    },
+    {
+      "description": "Cerrar sesion activa",
       "method": "POST",
-      "path": "/api/v1/perfil/p-07",
-      "screen": "P-07"
+      "mutates": true,
+      "path": "/api/v1/security/close-session",
+      "screen": "P-09",
+      "table": "sessions,audit_events"
     },
     {
-      "description": "Preferencias de privacidad",
+      "description": "Intento de ingreso local",
+      "method": "POST",
+      "mutates": true,
+      "path": "/api/v1/security/login-attempt",
+      "screen": "P-01",
+      "table": "sessions,audit_events"
+    },
+    {
+      "description": "Activar MFA",
+      "method": "POST",
+      "mutates": true,
+      "path": "/api/v1/mfa-methods",
+      "screen": "P-10",
+      "table": "mfa_methods,audit_events"
+    },
+    {
+      "description": "Domicilio vigente",
       "method": "GET",
-      "path": "/api/v1/perfil/p-08",
-      "screen": "P-08"
+      "mutates": false,
+      "path": "/api/v1/digital-addresses/current",
+      "screen": "P-11",
+      "table": "digital_addresses"
     },
     {
-      "description": "Preferencias de privacidad",
+      "description": "Actualizar domicilio",
       "method": "POST",
-      "path": "/api/v1/perfil/p-08",
-      "screen": "P-08"
+      "mutates": true,
+      "path": "/api/v1/digital-addresses",
+      "screen": "P-12",
+      "table": "digital_addresses,address_history,audit_events"
     },
     {
-      "description": "Sesiones activas",
+      "description": "Historial domicilio",
       "method": "GET",
-      "path": "/api/v1/seguridad/p-09",
-      "screen": "P-09"
+      "mutates": false,
+      "path": "/api/v1/digital-addresses/history",
+      "screen": "P-13",
+      "table": "address_history"
     },
     {
-      "description": "Sesiones activas",
-      "method": "POST",
-      "path": "/api/v1/seguridad/p-09",
-      "screen": "P-09"
-    },
-    {
-      "description": "Dispositivos y MFA",
+      "description": "Listar permisos",
       "method": "GET",
-      "path": "/api/v1/seguridad/p-10",
-      "screen": "P-10"
+      "mutates": false,
+      "path": "/api/v1/consents",
+      "screen": "P-17",
+      "table": "consents"
     },
     {
-      "description": "Dispositivos y MFA",
+      "description": "Solicitar autorizacion",
       "method": "POST",
-      "path": "/api/v1/seguridad/p-10",
-      "screen": "P-10"
+      "mutates": true,
+      "path": "/api/v1/consent-requests",
+      "screen": "P-18",
+      "table": "consent_requests,consent_history,audit_events"
     },
     {
-      "description": "Domicilio digital vigente",
+      "description": "Revocar permiso",
+      "method": "PATCH",
+      "mutates": true,
+      "path": "/api/v1/consents/{id}/revoke",
+      "screen": "P-17",
+      "table": "consents,consent_history,audit_events"
+    },
+    {
+      "description": "Revocar siguiente permiso vigente",
+      "method": "POST",
+      "mutates": true,
+      "path": "/api/v1/consents/revoke-next",
+      "screen": "P-17",
+      "table": "consents,consent_history,audit_events"
+    },
+    {
+      "description": "Historial permisos",
       "method": "GET",
-      "path": "/api/v1/ddu/p-11",
-      "screen": "P-11"
+      "mutates": false,
+      "path": "/api/v1/consents/history",
+      "screen": "P-19",
+      "table": "consent_history"
     },
     {
-      "description": "Domicilio digital vigente",
-      "method": "POST",
-      "path": "/api/v1/ddu/p-11",
-      "screen": "P-11"
-    },
-    {
-      "description": "Verificacion de domicilio",
+      "description": "Listar expedientes",
       "method": "GET",
-      "path": "/api/v1/ddu/p-12",
-      "screen": "P-12"
+      "mutates": false,
+      "path": "/api/v1/cases",
+      "screen": "P-20",
+      "table": "cases,case_events"
     },
     {
-      "description": "Verificacion de domicilio",
+      "description": "Comentar expediente",
       "method": "POST",
-      "path": "/api/v1/ddu/p-12",
-      "screen": "P-12"
+      "mutates": true,
+      "path": "/api/v1/cases/{id}/comments",
+      "screen": "P-21",
+      "table": "case_events,audit_events"
     },
     {
-      "description": "Historial de domicilio",
+      "description": "Comentar siguiente expediente",
+      "method": "POST",
+      "mutates": true,
+      "path": "/api/v1/cases/comment-next",
+      "screen": "P-21",
+      "table": "case_events,audit_events"
+    },
+    {
+      "description": "Adjuntar documento",
+      "method": "POST",
+      "mutates": true,
+      "path": "/api/v1/case-documents",
+      "screen": "P-21",
+      "table": "case_documents,case_events,audit_events"
+    },
+    {
+      "description": "Linea de tiempo",
       "method": "GET",
-      "path": "/api/v1/ddu/p-13",
-      "screen": "P-13"
+      "mutates": false,
+      "path": "/api/v1/cases/{id}/timeline",
+      "screen": "P-22",
+      "table": "case_events"
     },
     {
-      "description": "Historial de domicilio",
-      "method": "POST",
-      "path": "/api/v1/ddu/p-13",
-      "screen": "P-13"
-    },
-    {
-      "description": "Bandeja de notificaciones",
+      "description": "Preguntas frecuentes",
       "method": "GET",
-      "path": "/api/v1/notificaciones/p-14",
-      "screen": "P-14"
+      "mutates": false,
+      "path": "/api/v1/faq",
+      "screen": "P-24",
+      "table": "faq_entries"
     },
     {
-      "description": "Bandeja de notificaciones",
+      "description": "Crear ticket",
       "method": "POST",
-      "path": "/api/v1/notificaciones/p-14",
-      "screen": "P-14"
+      "mutates": true,
+      "path": "/api/v1/support-tickets",
+      "screen": "P-23",
+      "table": "support_tickets,support_messages,audit_events"
     },
     {
-      "description": "Detalle de mensaje",
+      "description": "Cerrar ticket",
+      "method": "PATCH",
+      "mutates": true,
+      "path": "/api/v1/support-tickets/{id}/close",
+      "screen": "P-25",
+      "table": "support_tickets,audit_events"
+    },
+    {
+      "description": "Bitacora",
       "method": "GET",
-      "path": "/api/v1/notificaciones/p-15",
-      "screen": "P-15"
+      "mutates": false,
+      "path": "/api/v1/audit-events",
+      "screen": "P-26",
+      "table": "audit_events"
     },
     {
-      "description": "Detalle de mensaje",
+      "description": "Generar exportacion",
       "method": "POST",
-      "path": "/api/v1/notificaciones/p-15",
-      "screen": "P-15"
+      "mutates": true,
+      "path": "/api/v1/audit-exports",
+      "screen": "P-28",
+      "table": "audit_exports,audit_events"
     },
     {
-      "description": "Preferencias de aviso",
+      "description": "Estado integraciones simuladas",
       "method": "GET",
-      "path": "/api/v1/notificaciones/p-16",
-      "screen": "P-16"
+      "mutates": false,
+      "path": "/api/v1/integration-status",
+      "screen": "P-29",
+      "table": "integration_status"
     },
     {
-      "description": "Preferencias de aviso",
-      "method": "POST",
-      "path": "/api/v1/notificaciones/p-16",
-      "screen": "P-16"
-    },
-    {
-      "description": "Permisos de datos",
+      "description": "Alertas seguridad",
       "method": "GET",
-      "path": "/api/v1/autorizaciones/p-17",
-      "screen": "P-17"
+      "mutates": false,
+      "path": "/api/v1/security-alerts",
+      "screen": "P-30",
+      "table": "security_alerts"
     },
     {
-      "description": "Permisos de datos",
-      "method": "POST",
-      "path": "/api/v1/autorizaciones/p-17",
-      "screen": "P-17"
-    },
-    {
-      "description": "Solicitud de autorizacion",
+      "description": "Reglas activas",
       "method": "GET",
-      "path": "/api/v1/autorizaciones/p-18",
-      "screen": "P-18"
+      "mutates": false,
+      "path": "/api/v1/business-rules",
+      "screen": "SYS",
+      "table": "business_rules"
     },
     {
-      "description": "Solicitud de autorizacion",
-      "method": "POST",
-      "path": "/api/v1/autorizaciones/p-18",
-      "screen": "P-18"
-    },
-    {
-      "description": "Historial de autorizaciones",
+      "description": "Validaciones activas",
       "method": "GET",
-      "path": "/api/v1/autorizaciones/p-19",
-      "screen": "P-19"
+      "mutates": false,
+      "path": "/api/v1/validation-rules",
+      "screen": "SYS",
+      "table": "validation_rules"
     },
     {
-      "description": "Historial de autorizaciones",
-      "method": "POST",
-      "path": "/api/v1/autorizaciones/p-19",
-      "screen": "P-19"
-    },
-    {
-      "description": "Mis expedientes",
+      "description": "Roles demo",
       "method": "GET",
-      "path": "/api/v1/expedientes/p-20",
-      "screen": "P-20"
+      "mutates": false,
+      "path": "/api/v1/roles",
+      "screen": "SYS",
+      "table": "roles,permissions,user_roles"
     },
     {
-      "description": "Mis expedientes",
+      "description": "Guardar favorito",
       "method": "POST",
-      "path": "/api/v1/expedientes/p-20",
-      "screen": "P-20"
+      "mutates": true,
+      "path": "/api/v1/favorites",
+      "screen": "P-04",
+      "table": "favorites,audit_events"
+    },
+    {
+      "description": "Scope de la app",
+      "method": "GET",
+      "mutates": false,
+      "path": "/api/v1/scope",
+      "screen": "SYS",
+      "table": "none"
+    },
+    {
+      "description": "Pantallas disponibles",
+      "method": "GET",
+      "mutates": false,
+      "path": "/api/v1/screens",
+      "screen": "SYS",
+      "table": "none"
+    },
+    {
+      "description": "Evento de workflow controlado",
+      "method": "POST",
+      "mutates": true,
+      "path": "/api/v1/workflow-events",
+      "screen": "SYS",
+      "table": "audit_events"
+    },
+    {
+      "description": "Estado agregado para Angular",
+      "method": "GET",
+      "mutates": false,
+      "path": "/api/v1/app-state",
+      "screen": "SYS",
+      "table": "domain aggregates"
     }
   ]
 }

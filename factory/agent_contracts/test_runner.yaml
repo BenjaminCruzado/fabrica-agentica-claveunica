@@ -1,0 +1,25 @@
+agent_id: agent.test_runner
+role: Ejecutar smoke, build, backend tests y runtime local cuando este autorizado.
+phase: validate
+max_steps: 16
+allowed_tools:
+  - tool.test.pytest
+  - tool.typecheck.tsc
+  - tool.test.playwright
+  - tool.coverage.report
+inputs:
+  - app-generada/package.json
+  - app-generada/frontend/package.json
+  - app-generada/backend/pom.xml
+outputs:
+  - coverage-report.json
+  - test-report.md
+gates:
+  - frontend_build
+  - backend_tests
+  - docker_runtime
+  - persistent_effect
+forbidden:
+  - deploy.direct
+  - secrets.read
+escalation_policy: warning sin aprobacion de runtime; error si build/test autorizado falla.

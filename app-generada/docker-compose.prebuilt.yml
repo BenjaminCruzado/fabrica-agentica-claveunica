@@ -1,0 +1,33 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: claveunica_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: claveunica
+      POSTGRES_USER: claveunica
+      POSTGRES_PASSWORD: claveunica
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+  backend:
+    image: ${BACKEND_IMAGE:-ghcr.io/usuario/portal-claveunica-backend:latest}
+    container_name: claveunica_backend
+    restart: unless-stopped
+    depends_on:
+      - postgres
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/claveunica
+      SPRING_DATASOURCE_USERNAME: claveunica
+      SPRING_DATASOURCE_PASSWORD: claveunica
+    ports:
+      - "8080:8080"
+  frontend:
+    image: ${FRONTEND_IMAGE:-ghcr.io/usuario/portal-claveunica-frontend:latest}
+    container_name: claveunica_frontend
+    restart: unless-stopped
+    depends_on:
+      - backend
+    ports:
+      - "3000:80"
+volumes:
+  postgres_data:

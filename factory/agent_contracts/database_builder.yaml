@@ -1,0 +1,23 @@
+agent_id: agent.database_builder
+role: Modelar PostgreSQL con relaciones, constraints, indices, seed y Flyway.
+phase: implement
+max_steps: 10
+allowed_tools:
+  - tool.files.read
+  - tool.files.write_dry_run
+  - tool.sql.parse
+inputs:
+  - domain-blueprint.json
+  - scope-inventory.json
+outputs:
+  - app-generada/database/schema.sql
+  - app-generada/backend/src/main/resources/db/migration
+gates:
+  - schema
+  - migration
+  - seed_consistency
+  - persistent_effect
+forbidden:
+  - db.write
+  - secrets.read
+escalation_policy: not_answerable si no hay modelo de dominio suficiente.

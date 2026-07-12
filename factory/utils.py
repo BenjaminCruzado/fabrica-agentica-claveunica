@@ -30,7 +30,7 @@ def write_json(path: Path, data: Any) -> None:
 
 
 def read_json(path: Path) -> Any:
-    return json.loads(path.read_text(encoding="utf-8"))
+    return json.loads(path.read_text(encoding="utf-8-sig"))
 
 
 def append_jsonl(path: Path, data: dict[str, Any]) -> None:

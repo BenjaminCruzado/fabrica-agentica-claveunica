@@ -1,44 +1,44 @@
 # Resumen funcionalidades
 
-IDs detectados para uso compacto de agentes.
+IDs y fragmentos semanticos detectados para uso compacto de agentes.
 
-- FUN_001
-- FUN_002
-- FUN_003
-- FUN_004
-- FUN_005
-- FUN_006
-- FUN_007
-- FUN_008
-- FUN_009
-- FUN_010
-- FUN_011
-- FUN_012
-- FUN_013
-- FUN_014
-- FUN_015
-- FUN_016
-- FUN_017
-- FUN_018
-- FUN_019
-- FUN_020
-- FUN_021
-- FUN_022
-- FUN_023
-- FUN_024
-- FUN_025
-- FUN_026
-- FUN_027
-- FUN_028
-- FUN_029
-- FUN_030
-- FUN_031
-- FUN_032
-- FUN_033
-- FUN_034
-- FUN_035
-- FUN_036
-- FUN_037
-- FUN_038
-- FUN_039
-- FUN_040
+- FUN_001: , más novedades e información de ayuda. - **Relación jerárquica:** Raíz; agrupa FUN_001-FUN_003. - **Actor/disparador:** ACT_001; disparador: ingreso al portal público. - **Precondiciones:** El portal público está disponible para consulta. - **Resultado esperado:** El usuario visualiza accesos y contenidos públicos de 
+- FUN_002: conducen al flujo correspondiente. - **Evidencia:** E08/S06:p.1:HU01. - **ID:** FUN_002 - **Nombre:** Publicar novedades e información de ayuda - **Descripción:** Disponer contenidos de novedades e información de ayuda de manera oportuna en el portal público. - **Relación jerárquica:** CU_001, CU_020. - **Actor/dispara
+- FUN_003: vedades e información de ayuda. - **Relación jerárquica:** Raíz; agrupa FUN_001-FUN_003. - **Actor/disparador:** ACT_001; disparador: ingreso al portal público. - **Precondiciones:** El portal público está disponible para consulta. - **Resultado esperado:** El usuario visualiza accesos y contenidos públicos de forma cl
+- FUN_004: una o más preguntas de ámbito personal. - **Relación jerárquica:** Raíz; agrupa FUN_004-FUN_005. - **Actor/disparador:** ACT_002; disparador: usuario intenta cambiar teléfono o correo electrónico en datos personales. - **Precondiciones:** Usuario autenticado con ClaveÚnica activada; sección de datos personales disponib
+- FUN_005: s preguntas de ámbito personal. - **Relación jerárquica:** Raíz; agrupa FUN_004-FUN_005. - **Actor/disparador:** ACT_002; disparador: usuario intenta cambiar teléfono o correo electrónico en datos personales. - **Precondiciones:** Usuario autenticado con ClaveÚnica activada; sección de datos personales disponible. - **
+- FUN_006: sión y exigirlo cada vez que lo active. - **Relación jerárquica:** Raíz; agrupa FUN_006-FUN_007. - **Actor/disparador:** ACT_001, ACT_002; disparador: configuración inicial de ClaveÚnica o administración posterior de 2FA. - **Precondiciones:** Usuario en flujo de configuración o administración de ClaveÚnica; mecanismo 
+- FUN_007: xigirlo cada vez que lo active. - **Relación jerárquica:** Raíz; agrupa FUN_006-FUN_007. - **Actor/disparador:** ACT_001, ACT_002; disparador: configuración inicial de ClaveÚnica o administración posterior de 2FA. - **Precondiciones:** Usuario en flujo de configuración o administración de ClaveÚnica; mecanismo de 2FA d
+- FUN_008: s autenticados con la misma ClaveÚnica. - **Relación jerárquica:** Raíz; agrupa FUN_008-FUN_009. - **Actor/disparador:** ACT_002; disparador: usuario mantiene o inicia sesiones en uno o más dispositivos. - **Precondiciones:** Usuario autenticado con ClaveÚnica activada; existe política de multisesión definida durante e
+- FUN_009: icados con la misma ClaveÚnica. - **Relación jerárquica:** Raíz; agrupa FUN_008-FUN_009. - **Actor/disparador:** ACT_002; disparador: usuario mantiene o inicia sesiones en uno o más dispositivos. - **Precondiciones:** Usuario autenticado con ClaveÚnica activada; existe política de multisesión definida durante el proyec
+- FUN_010: caciones, previa confirmación en modal. - **Relación jerárquica:** Raíz; agrupa FUN_010-FUN_012. - **Actor/disparador:** ACT_003, ACT_008; disparador: login exitoso en ClaveÚnica sin DDU configurado. - **Precondiciones:** Usuario autenticado; el sistema puede determinar estado de DDU; DDU no configurado. - **Resultado 
+- FUN_011: **Evidencia:** E09/S06:p.2:HU05-HU06; E10/S06:p.3:HU09; E14/S07:p.1. - **ID:** FUN_011 - **Nombre:** Desplegar modal de confirmación para configuración DDU - **Descripción:** Mostrar un modal antes de ingresar a la pasarela de configuración, permitiendo continuar o cancelar. - **Relación jerárquica:** CU_005, CU_006. -
+- FUN_012: , previa confirmación en modal. - **Relación jerárquica:** Raíz; agrupa FUN_010-FUN_012. - **Actor/disparador:** ACT_003, ACT_008; disparador: login exitoso en ClaveÚnica sin DDU configurado. - **Precondiciones:** Usuario autenticado; el sistema puede determinar estado de DDU; DDU no configurado. - **Resultado esperado
+- FUN_013: de ClaveÚnica con alerta de pendiente. - **Relación jerárquica:** Raíz; agrupa FUN_013-FUN_014. - **Actor/disparador:** ACT_003; disparador: usuario elige cancelar en modal de configuración DDU posterior al login. - **Precondiciones:** Usuario autenticado; DDU no configurado; modal de confirmación desplegado. - **Resul
+- FUN_014: eÚnica con alerta de pendiente. - **Relación jerárquica:** Raíz; agrupa FUN_013-FUN_014. - **Actor/disparador:** ACT_003; disparador: usuario elige cancelar en modal de configuración DDU posterior al login. - **Precondiciones:** Usuario autenticado; DDU no configurado; modal de confirmación desplegado. - **Resultado es
+- FUN_015: etorne al portal inicial de ClaveÚnica. - **Relación jerárquica:** Raíz; agrupa FUN_015. - **Actor/disparador:** ACT_004, ACT_008; disparador: finalización de configuración de DDU en pasarela. - **Precondiciones:** Usuario derivado desde CU completó activación/configuración de DDU. - **Resultado esperado:** La platafor
+- FUN_016: tornar a ClaveÚnica sin configurar DDU. - **Relación jerárquica:** Raíz; agrupa FUN_016-FUN_018. - **Actor/disparador:** ACT_003, ACT_008; disparador: usuario cancela durante la activación de DDU. - **Precondiciones:** Usuario se encuentra en proceso de activación/configuración de DDU. - **Resultado esperado:** El usua
+- FUN_017: e ofrece continuar con el proceso. - **Evidencia:** E10/S06:p.3:HU08. - **ID:** FUN_017 - **Nombre:** Confirmar cancelación de activación DDU - **Descripción:** Desplegar modal para confirmar cancelación o continuar con la configuración DDU. - **Relación jerárquica:** CU_008. - **Actor/disparador:** ACT_003; disparador
+- FUN_018: ClaveÚnica sin configurar DDU. - **Relación jerárquica:** Raíz; agrupa FUN_016-FUN_018. - **Actor/disparador:** ACT_003, ACT_008; disparador: usuario cancela durante la activación de DDU. - **Precondiciones:** Usuario se encuentra en proceso de activación/configuración de DDU. - **Resultado esperado:** El usuario retor
+- FUN_019: iento diferenciado según estado de DDU. - **Relación jerárquica:** Raíz; agrupa FUN_019-FUN_020. - **Actor/disparador:** ACT_003, ACT_004; disparador: usuario ingresa al portal privado/sección de notificaciones. - **Precondiciones:** Usuario autenticado; el sistema puede determinar estado de DDU. - **Resultado esperado
+- FUN_020: ferenciado según estado de DDU. - **Relación jerárquica:** Raíz; agrupa FUN_019-FUN_020. - **Actor/disparador:** ACT_003, ACT_004; disparador: usuario ingresa al portal privado/sección de notificaciones. - **Precondiciones:** Usuario autenticado; el sistema puede determinar estado de DDU. - **Resultado esperado:** El u
+- FUN_021: e lectura dentro del portal ClaveÚnica. - **Relación jerárquica:** Raíz; agrupa FUN_021. - **Actor/disparador:** ACT_004; disparador: usuario accede a sección de notificaciones con DDU configurado. - **Precondiciones:** Usuario autenticado; DDU configurado; existen o pueden consultarse notificaciones pendientes. - **Re
+- FUN_022: ado a CasillaÚnica para ver el detalle. - **Relación jerárquica:** Raíz; agrupa FUN_022-FUN_023. - **Actor/disparador:** ACT_004, ACT_008; disparador: usuario selecciona una notificación en el listado. - **Precondiciones:** Usuario autenticado; DDU configurado; listado de notificaciones pendientes visible. - **Resultad
+- FUN_023: sillaÚnica para ver el detalle. - **Relación jerárquica:** Raíz; agrupa FUN_022-FUN_023. - **Actor/disparador:** ACT_004, ACT_008; disparador: usuario selecciona una notificación en el listado. - **Precondiciones:** Usuario autenticado; DDU configurado; listado de notificaciones pendientes visible. - **Resultado espera
+- FUN_024: stra alerta de configuración pendiente. - **Relación jerárquica:** Raíz; agrupa FUN_024. - **Actor/disparador:** ACT_003, ACT_008; disparador: usuario accede a la sección de notificaciones/DDU pendiente desde el portal. - **Precondiciones:** Usuario autenticado; DDU no configurado; sección con alerta pendiente disponib
+- FUN_025: as, rechazadas, pendientes y revocadas. - **Relación jerárquica:** Raíz; agrupa FUN_025-FUN_026. - **Actor/disparador:** ACT_002, ACT_005, ACT_006, ACT_009; disparador: usuario abre sección de gestión e historial de autorizaciones. - **Precondiciones:** Usuario autenticado; existen o pueden consultarse solicitudes de a
+- FUN_026: azadas, pendientes y revocadas. - **Relación jerárquica:** Raíz; agrupa FUN_025-FUN_026. - **Actor/disparador:** ACT_002, ACT_005, ACT_006, ACT_009; disparador: usuario abre sección de gestión e historial de autorizaciones. - **Precondiciones:** Usuario autenticado; existen o pueden consultarse solicitudes de autorizac
+- FUN_027: pondan a datos previamente autorizados. - **Relación jerárquica:** Raíz; agrupa FUN_027. - **Actor/disparador:** ACT_002, ACT_009; disparador: usuario consulta historial de datos compartidos. - **Precondiciones:** Usuario autenticado; existen o pueden consultarse registros de datos compartidos. - **Resultado esperado:*
+- FUN_028: o desde el historial de autorizaciones. - **Relación jerárquica:** Raíz; agrupa FUN_028-FUN_029. - **Actor/disparador:** ACT_005, ACT_009; disparador: usuario revisa una autorización pendiente. - **Precondiciones:** Usuario autenticado; existe una autorización pendiente de aprobación; la solicitud muestra los datos req
+- FUN_029: el historial de autorizaciones. - **Relación jerárquica:** Raíz; agrupa FUN_028-FUN_029. - **Actor/disparador:** ACT_005, ACT_009; disparador: usuario revisa una autorización pendiente. - **Precondiciones:** Usuario autenticado; existe una autorización pendiente de aprobación; la solicitud muestra los datos requeridos.
+- FUN_030: y revoque una o varias autorizaciones. - **Relación jerárquica:** Raíz; agrupa FUN_030. - **Actor/disparador:** ACT_006, ACT_009; disparador: usuario decide revocar autorización vigente/aprobada. - **Precondiciones:** Usuario autenticado; existe una autorización aprobada/vigente susceptible de revocación. - **Resultado
+- FUN_031: formación personal en poder del Estado. - **Relación jerárquica:** Raíz; agrupa FUN_031-FUN_033. - **Actor/disparador:** ACT_002; disparador: usuario ingresa a portal privado o sección personal. - **Precondiciones:** Usuario autenticado; secciones privadas habilitadas según alcance definido. - **Resultado esperado:** E
+- FUN_032: idaciones definidas. - **Evidencia:** E05/S01:p.39; E08/S06:p.1:HU03. - **ID:** FUN_032 - **Nombre:** Mostrar historial de acciones - **Descripción:** Soportar una sección para que el usuario consulte historial de acciones asociado a ClaveÚnica. - **Relación jerárquica:** CU_017. - **Actor/disparador:** ACT_002; dispar
+- FUN_033: n personal en poder del Estado. - **Relación jerárquica:** Raíz; agrupa FUN_031-FUN_033. - **Actor/disparador:** ACT_002; disparador: usuario ingresa a portal privado o sección personal. - **Precondiciones:** Usuario autenticado; secciones privadas habilitadas según alcance definido. - **Resultado esperado:** El usuari
+- FUN_034: o de las secciones privadas del portal. - **Relación jerárquica:** Raíz; agrupa FUN_034. - **Actor/disparador:** ACT_002; disparador: usuario accede a sección de expedientes electrónicos. - **Precondiciones:** Usuario autenticado; existen expedientes o una fuente definida para su visualización. - **Resultado esperado:*
+- FUN_035: deres y representaciones de la persona. - **Relación jerárquica:** Raíz; agrupa FUN_035. - **Actor/disparador:** ACT_002; disparador: usuario ingresa a sección de poderes y representaciones. - **Precondiciones:** Usuario autenticado; alcance funcional de poderes y representaciones definido durante el proyecto. - **Resu
+- FUN_036: ón ciudadana e información de trámites. - **Relación jerárquica:** Raíz; agrupa FUN_036-FUN_037. - **Actor/disparador:** ACT_001; disparador: usuario consulta ayuda o información pública. - **Precondiciones:** Portal público disponible; contenidos definidos y publicados. - **Resultado esperado:** El usuario encuentra a
+- FUN_037: dana e información de trámites. - **Relación jerárquica:** Raíz; agrupa FUN_036-FUN_037. - **Actor/disparador:** ACT_001; disparador: usuario consulta ayuda o información pública. - **Precondiciones:** Portal público disponible; contenidos definidos y publicados. - **Resultado esperado:** El usuario encuentra ayuda púb
+- FUN_038: y estado de solicitudes de integración. - **Relación jerárquica:** Raíz; agrupa FUN_038-FUN_040. - **Actor/disparador:** ACT_007; disparador: funcionario de institución integrada consulta ayuda o estado de integración. - **Precondiciones:** Institución integrada o en proceso de integración; usuario institucional con ac
+- FUN_039: eva conforme al alcance. - **Evidencia:** E03/S01:p.36; E05/S01:p.39. - **ID:** FUN_039 - **Nombre:** Gestionar credenciales de acceso institucional - **Descripción:** Permitir a funcionarios de instituciones integradas gestionar credenciales de acceso asociadas a ClaveÚnica. - **Relación jerárquica:** CU_021. - **Acto
+- FUN_040: de solicitudes de integración. - **Relación jerárquica:** Raíz; agrupa FUN_038-FUN_040. - **Actor/disparador:** ACT_007; disparador: funcionario de institución integrada consulta ayuda o estado de integración. - **Precondiciones:** Institución integrada o en proceso de integración; usuario institucional con acceso segú

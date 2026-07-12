@@ -1,2 +1,9 @@
-<section class="card"><p>{{screen.moduleName}}</p><h1>{{screen.title}}</h1><p>{{screen.summary}}</p><button *ngFor="let action of screen.actions" (click)="run(action)">{{action}}</button></section>
-<section class="card"><h2>Datos</h2><table><thead><tr><th *ngFor="let field of screen.fields">{{field}}</th></tr></thead><tbody><tr *ngFor="let row of screen.records"><td>{{row[0]}}</td><td>{{row[1]}}</td><td>{{row[2]}}</td></tr></tbody></table></section>
+<section class="card screen-header layout-address-history" data-screen="13" style="--accent:#b45309">
+  <p>Domicilio Digital Unico</p>
+  <h1>Historial de domicilio</h1>
+  <p>Historial de domicilio: informacion actualizada desde la base local y acciones del flujo ciudadano.</p>
+  <div class="action-row"><button *ngFor="let action of screen.actions" (click)="run(action)">{{action}}</button></div>
+</section>
+<section class="card kanban">
+  <article *ngFor="let row of rows()"><strong>{{row[0]}}</strong><span>{{row[1]}}</span><small>{{row[2]}}</small></article>
+</section>

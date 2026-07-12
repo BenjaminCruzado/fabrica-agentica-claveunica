@@ -1,0 +1,842 @@
+[
+  {
+    "action": "Ingresar",
+    "endpoint": {
+      "method": "POST",
+      "mutates": true,
+      "path": "/api/v1/security/login-attempt"
+    },
+    "id": "TRZ_APP_001",
+    "internal_requirement_ids": [
+      "REQ_UI_001",
+      "REQ_FLOW_001",
+      "REQ_VAL_001"
+    ],
+    "screen": {
+      "code": "P-01",
+      "component": "frontend/src/app/pages/screen-01.component.ts",
+      "route": "/seguridad/auth-login",
+      "title": "Ingreso ClaveUnica"
+    },
+    "source_requirement_id": "FT_001",
+    "table": "sessions",
+    "tests": [
+      "tests/smoke.mjs",
+      "tests/e2e.spec.ts",
+      "backend/src/test/java/cl/benjamin/claveunica/PortalWorkflowServiceTest.java"
+    ],
+    "ui_visibility": "internal_only"
+  },
+  {
+    "action": "Enviar enlace",
+    "endpoint": {
+      "method": "GET",
+      "mutates": false,
+      "path": "/api/v1/dashboard"
+    },
+    "id": "TRZ_APP_002",
+    "internal_requirement_ids": [
+      "REQ_UI_002",
+      "REQ_FLOW_002",
+      "REQ_VAL_002"
+    ],
+    "screen": {
+      "code": "P-02",
+      "component": "frontend/src/app/pages/screen-02.component.ts",
+      "route": "/seguridad/auth-recovery",
+      "title": "Recuperacion de acceso"
+    },
+    "source_requirement_id": "FT_002",
+    "table": "procedures",
+    "tests": [
+      "tests/smoke.mjs",
+      "tests/e2e.spec.ts",
+      "backend/src/test/java/cl/benjamin/claveunica/PortalWorkflowServiceTest.java"
+    ],
+    "ui_visibility": "internal_only"
+  },
+  {
+    "action": "Abrir tramite",
+    "endpoint": {
+      "method": "GET",
+      "mutates": false,
+      "path": "/api/v1/dashboard"
+    },
+    "id": "TRZ_APP_003",
+    "internal_requirement_ids": [
+      "REQ_UI_003",
+      "REQ_FLOW_003",
+      "REQ_VAL_003"
+    ],
+    "screen": {
+      "code": "P-03",
+      "component": "frontend/src/app/pages/screen-03.component.ts",
+      "route": "/portal/dashboard",
+      "title": "Dashboard ciudadano"
+    },
+    "source_requirement_id": "FT_003",
+    "table": "procedures",
+    "tests": [
+      "tests/smoke.mjs",
+      "tests/e2e.spec.ts",
+      "backend/src/test/java/cl/benjamin/claveunica/PortalWorkflowServiceTest.java"
+    ],
+    "ui_visibility": "internal_only"
+  },
+  {
+    "action": "Buscar",
+    "endpoint": {
+      "method": "POST",
+      "mutates": true,
+      "path": "/api/v1/favorites"
+    },
+    "id": "TRZ_APP_004",
+    "internal_requirement_ids": [
+      "REQ_UI_004",
+      "REQ_FLOW_004",
+      "REQ_VAL_004"
+    ],
+    "screen": {
+      "code": "P-04",
+      "component": "frontend/src/app/pages/screen-04.component.ts",
+      "route": "/portal/catalog",
+      "title": "Catalogo de tramites"
+    },
+    "source_requirement_id": "FT_004",
+    "table": "favorites",
+    "tests": [
+      "tests/smoke.mjs",
+      "tests/e2e.spec.ts",
+      "backend/src/test/java/cl/benjamin/claveunica/PortalWorkflowServiceTest.java"
+    ],
+    "ui_visibility": "internal_only"
+  },
+  {
+    "action": "Continuar solicitud",
+    "endpoint": {
+      "method": "POST",
+      "mutates": true,
+      "path": "/api/v1/procedures"
+    },
+    "id": "TRZ_APP_005",
+    "internal_requirement_ids": [
+      "REQ_UI_005",
+      "REQ_FLOW_005",
+      "REQ_VAL_005"
+    ],
+    "screen": {
+      "code": "P-05",
+      "component": "frontend/src/app/pages/screen-05.component.ts",
+      "route": "/portal/service-detail",
+      "title": "Detalle de tramite"
+    },
+    "source_requirement_id": "FT_005",
+    "table": "procedures",
+    "tests": [
+      "tests/smoke.mjs",
+      "tests/e2e.spec.ts",
+      "backend/src/test/java/cl/benjamin/claveunica/PortalWorkflowServiceTest.java"
+    ],
+    "ui_visibility": "internal_only"
+  },
+  {
+    "action": "Actualizar datos",
+    "endpoint": {
+      "method": "GET",
+      "mutates": false,
+      "path": "/api/v1/citizens"
+    },
+    "id": "TRZ_APP_006",
+    "internal_requirement_ids": [
+      "REQ_UI_006",
+      "REQ_FLOW_006",
+      "REQ_VAL_006"
+    ],
+    "screen": {
+      "code": "P-06",
+      "component": "frontend/src/app/pages/screen-06.component.ts",
+      "route": "/perfil/profile",
+      "title": "Datos personales"
+    },
+    "source_requirement_id": "FT_006",
+    "table": "citizens",
+    "tests": [
+      "tests/smoke.mjs",
+      "tests/e2e.spec.ts",
+      "backend/src/test/java/cl/benjamin/claveunica/PortalWorkflowServiceTest.java"
+    ],
+    "ui_visibility": "internal_only"
+  },
+  {
+    "action": "Verificar correo",
+    "endpoint": {
+      "method": "PATCH",
+      "mutates": true,
+      "path": "/api/v1/citizens/contact"
+    },
+    "id": "TRZ_APP_007",
+    "internal_requirement_ids": [
+      "REQ_UI_007",
+      "REQ_FLOW_007",
+      "REQ_VAL_007"
+    ],
+    "screen": {
+      "code": "P-07",
+      "component": "frontend/src/app/pages/screen-07.component.ts",
+      "route": "/perfil/contact",
+      "title": "Datos de contacto"
+    },
+    "source_requirement_id": "FT_007",
+    "table": "citizens",
+    "tests": [
+      "tests/smoke.mjs",
+      "tests/e2e.spec.ts",
+      "backend/src/test/java/cl/benjamin/claveunica/PortalWorkflowServiceTest.java"
+    ],
+    "ui_visibility": "internal_only"
+  },
+  {
+    "action": "Guardar preferencias",
+    "endpoint": {
+      "method": "PATCH",
+      "mutates": true,
+      "path": "/api/v1/procedures/{id}/status"
+    },
+    "id": "TRZ_APP_008",
+    "internal_requirement_ids": [
+      "REQ_UI_008",
+      "REQ_FLOW_008",
+      "REQ_VAL_008"
+    ],
+    "screen": {
+      "code": "P-08",
+      "component": "frontend/src/app/pages/screen-08.component.ts",
+      "route": "/perfil/privacy",
+      "title": "Preferencias de privacidad"
+    },
+    "source_requirement_id": "FT_008",
+    "table": "procedures",
+    "tests": [
+      "tests/smoke.mjs",
+      "tests/e2e.spec.ts",
+      "backend/src/test/java/cl/benjamin/claveunica/PortalWorkflowServiceTest.java"
+    ],
+    "ui_visibility": "internal_only"
+  },
+  {
+    "action": "Cerrar sesion",
+    "endpoint": {
+      "method": "PATCH",
+      "mutates": true,
+      "path": "/api/v1/sessions/{id}/close"
+    },
+    "id": "TRZ_APP_009",
+    "internal_requirement_ids": [
+      "REQ_UI_009",
+      "REQ_FLOW_009",
+      "REQ_VAL_009"
+    ],
+    "screen": {
+      "code": "P-09",
+      "component": "frontend/src/app/pages/screen-09.component.ts",
+      "route": "/seguridad/sessions",
+      "title": "Sesiones activas"
+    },
+    "source_requirement_id": "FT_009",
+    "table": "sessions",
+    "tests": [
+      "tests/smoke.mjs",
+      "tests/e2e.spec.ts",
+      "backend/src/test/java/cl/benjamin/claveunica/PortalWorkflowServiceTest.java"
+    ],
+    "ui_visibility": "internal_only"
+  },
+  {
+    "action": "Activar metodo",
+    "endpoint": {
+      "method": "POST",
+      "mutates": true,
+      "path": "/api/v1/mfa-methods"
+    },
+    "id": "TRZ_APP_010",
+    "internal_requirement_ids": [
+      "REQ_UI_010",
+      "REQ_FLOW_010",
+      "REQ_VAL_010"
+    ],
+    "screen": {
+      "code": "P-10",
+      "component": "frontend/src/app/pages/screen-10.component.ts",
+      "route": "/seguridad/mfa",
+      "title": "Dispositivos y MFA"
+    },
+    "source_requirement_id": "FT_010",
+    "table": "mfa_methods",
+    "tests": [
+      "tests/smoke.mjs",
+      "tests/e2e.spec.ts",
+      "backend/src/test/java/cl/benjamin/claveunica/PortalWorkflowServiceTest.java"
+    ],
+    "ui_visibility": "internal_only"
+  },
+  {
+    "action": "Editar domicilio",
+    "endpoint": {
+      "method": "GET",
+      "mutates": false,
+      "path": "/api/v1/digital-addresses/current"
+    },
+    "id": "TRZ_APP_011",
+    "internal_requirement_ids": [
+      "REQ_UI_011",
+      "REQ_FLOW_011",
+      "REQ_VAL_011"
+    ],
+    "screen": {
+      "code": "P-11",
+      "component": "frontend/src/app/pages/screen-11.component.ts",
+      "route": "/ddu/address-current",
+      "title": "Domicilio digital vigente"
+    },
+    "source_requirement_id": "FT_011",
+    "table": "digital_addresses",
+    "tests": [
+      "tests/smoke.mjs",
+      "tests/e2e.spec.ts",
+      "backend/src/test/java/cl/benjamin/claveunica/PortalWorkflowServiceTest.java"
+    ],
+    "ui_visibility": "internal_only"
+  },
+  {
+    "action": "Subir evidencia",
+    "endpoint": {
+      "method": "POST",
+      "mutates": true,
+      "path": "/api/v1/digital-addresses"
+    },
+    "id": "TRZ_APP_012",
+    "internal_requirement_ids": [
+      "REQ_UI_012",
+      "REQ_FLOW_012",
+      "REQ_VAL_012"
+    ],
+    "screen": {
+      "code": "P-12",
+      "component": "frontend/src/app/pages/screen-12.component.ts",
+      "route": "/ddu/address-verify",
+      "title": "Verificacion de domicilio"
+    },
+    "source_requirement_id": "FT_012",
+    "table": "digital_addresses",
+    "tests": [
+      "tests/smoke.mjs",
+      "tests/e2e.spec.ts",
+      "backend/src/test/java/cl/benjamin/claveunica/PortalWorkflowServiceTest.java"
+    ],
+    "ui_visibility": "internal_only"
+  },
+  {
+    "action": "Comparar",
+    "endpoint": {
+      "method": "GET",
+      "mutates": false,
+      "path": "/api/v1/digital-addresses/history"
+    },
+    "id": "TRZ_APP_013",
+    "internal_requirement_ids": [
+      "REQ_UI_013",
+      "REQ_FLOW_013",
+      "REQ_VAL_013"
+    ],
+    "screen": {
+      "code": "P-13",
+      "component": "frontend/src/app/pages/screen-13.component.ts",
+      "route": "/ddu/address-history",
+      "title": "Historial de domicilio"
+    },
+    "source_requirement_id": "FT_013",
+    "table": "address_history",
+    "tests": [
+      "tests/smoke.mjs",
+      "tests/e2e.spec.ts",
+      "backend/src/test/java/cl/benjamin/claveunica/PortalWorkflowServiceTest.java"
+    ],
+    "ui_visibility": "internal_only"
+  },
+  {
+    "action": "Marcar leida",
+    "endpoint": {
+      "method": "GET",
+      "mutates": false,
+      "path": "/api/v1/notifications"
+    },
+    "id": "TRZ_APP_014",
+    "internal_requirement_ids": [
+      "REQ_UI_014",
+      "REQ_FLOW_014",
+      "REQ_VAL_014"
+    ],
+    "screen": {
+      "code": "P-14",
+      "component": "frontend/src/app/pages/screen-14.component.ts",
+      "route": "/notificaciones/inbox",
+      "title": "Bandeja de notificaciones"
+    },
+    "source_requirement_id": "FT_014",
+    "table": "notifications",
+    "tests": [
+      "tests/smoke.mjs",
+      "tests/e2e.spec.ts",
+      "backend/src/test/java/cl/benjamin/claveunica/PortalWorkflowServiceTest.java"
+    ],
+    "ui_visibility": "internal_only"
+  },
+  {
+    "action": "Descargar adjunto",
+    "endpoint": {
+      "method": "PATCH",
+      "mutates": true,
+      "path": "/api/v1/notifications/{id}/read"
+    },
+    "id": "TRZ_APP_015",
+    "internal_requirement_ids": [
+      "REQ_UI_015",
+      "REQ_FLOW_015",
+      "REQ_VAL_015"
+    ],
+    "screen": {
+      "code": "P-15",
+      "component": "frontend/src/app/pages/screen-15.component.ts",
+      "route": "/notificaciones/message-detail",
+      "title": "Detalle de mensaje"
+    },
+    "source_requirement_id": "FT_015",
+    "table": "notifications",
+    "tests": [
+      "tests/smoke.mjs",
+      "tests/e2e.spec.ts",
+      "backend/src/test/java/cl/benjamin/claveunica/PortalWorkflowServiceTest.java"
+    ],
+    "ui_visibility": "internal_only"
+  },
+  {
+    "action": "Guardar canal",
+    "endpoint": {
+      "method": "POST",
+      "mutates": true,
+      "path": "/api/v1/notifications/preferences"
+    },
+    "id": "TRZ_APP_016",
+    "internal_requirement_ids": [
+      "REQ_UI_016",
+      "REQ_FLOW_016",
+      "REQ_VAL_016"
+    ],
+    "screen": {
+      "code": "P-16",
+      "component": "frontend/src/app/pages/screen-16.component.ts",
+      "route": "/notificaciones/notification-settings",
+      "title": "Preferencias de aviso"
+    },
+    "source_requirement_id": "FT_016",
+    "table": "notification_preferences",
+    "tests": [
+      "tests/smoke.mjs",
+      "tests/e2e.spec.ts",
+      "backend/src/test/java/cl/benjamin/claveunica/PortalWorkflowServiceTest.java"
+    ],
+    "ui_visibility": "internal_only"
+  },
+  {
+    "action": "Revocar",
+    "endpoint": {
+      "method": "PATCH",
+      "mutates": true,
+      "path": "/api/v1/consents/{id}/revoke"
+    },
+    "id": "TRZ_APP_017",
+    "internal_requirement_ids": [
+      "REQ_UI_017",
+      "REQ_FLOW_017",
+      "REQ_VAL_017"
+    ],
+    "screen": {
+      "code": "P-17",
+      "component": "frontend/src/app/pages/screen-17.component.ts",
+      "route": "/autorizaciones/consent-list",
+      "title": "Permisos de datos"
+    },
+    "source_requirement_id": "FT_017",
+    "table": "consents",
+    "tests": [
+      "tests/smoke.mjs",
+      "tests/e2e.spec.ts",
+      "backend/src/test/java/cl/benjamin/claveunica/PortalWorkflowServiceTest.java"
+    ],
+    "ui_visibility": "internal_only"
+  },
+  {
+    "action": "Autorizar",
+    "endpoint": {
+      "method": "POST",
+      "mutates": true,
+      "path": "/api/v1/consent-requests"
+    },
+    "id": "TRZ_APP_018",
+    "internal_requirement_ids": [
+      "REQ_UI_018",
+      "REQ_FLOW_018",
+      "REQ_VAL_018"
+    ],
+    "screen": {
+      "code": "P-18",
+      "component": "frontend/src/app/pages/screen-18.component.ts",
+      "route": "/autorizaciones/consent-request",
+      "title": "Solicitud de autorizacion"
+    },
+    "source_requirement_id": "FT_018",
+    "table": "consent_requests",
+    "tests": [
+      "tests/smoke.mjs",
+      "tests/e2e.spec.ts",
+      "backend/src/test/java/cl/benjamin/claveunica/PortalWorkflowServiceTest.java"
+    ],
+    "ui_visibility": "internal_only"
+  },
+  {
+    "action": "Exportar historial",
+    "endpoint": {
+      "method": "GET",
+      "mutates": false,
+      "path": "/api/v1/consents/history"
+    },
+    "id": "TRZ_APP_019",
+    "internal_requirement_ids": [
+      "REQ_UI_019",
+      "REQ_FLOW_019",
+      "REQ_VAL_019"
+    ],
+    "screen": {
+      "code": "P-19",
+      "component": "frontend/src/app/pages/screen-19.component.ts",
+      "route": "/autorizaciones/consent-history",
+      "title": "Historial de autorizaciones"
+    },
+    "source_requirement_id": "FT_019",
+    "table": "consent_history",
+    "tests": [
+      "tests/smoke.mjs",
+      "tests/e2e.spec.ts",
+      "backend/src/test/java/cl/benjamin/claveunica/PortalWorkflowServiceTest.java"
+    ],
+    "ui_visibility": "internal_only"
+  },
+  {
+    "action": "Abrir expediente",
+    "endpoint": {
+      "method": "GET",
+      "mutates": false,
+      "path": "/api/v1/procedures"
+    },
+    "id": "TRZ_APP_020",
+    "internal_requirement_ids": [
+      "REQ_UI_020",
+      "REQ_FLOW_020",
+      "REQ_VAL_020"
+    ],
+    "screen": {
+      "code": "P-20",
+      "component": "frontend/src/app/pages/screen-20.component.ts",
+      "route": "/expedientes/case-board",
+      "title": "Mis expedientes"
+    },
+    "source_requirement_id": "FT_020",
+    "table": "procedures",
+    "tests": [
+      "tests/smoke.mjs",
+      "tests/e2e.spec.ts",
+      "backend/src/test/java/cl/benjamin/claveunica/PortalWorkflowServiceTest.java"
+    ],
+    "ui_visibility": "internal_only"
+  },
+  {
+    "action": "Adjuntar documento",
+    "endpoint": {
+      "method": "PATCH",
+      "mutates": true,
+      "path": "/api/v1/procedures/{id}/status"
+    },
+    "id": "TRZ_APP_021",
+    "internal_requirement_ids": [
+      "REQ_UI_021",
+      "REQ_FLOW_021",
+      "REQ_VAL_021"
+    ],
+    "screen": {
+      "code": "P-21",
+      "component": "frontend/src/app/pages/screen-21.component.ts",
+      "route": "/expedientes/case-detail",
+      "title": "Detalle de expediente"
+    },
+    "source_requirement_id": "FT_021",
+    "table": "procedures",
+    "tests": [
+      "tests/smoke.mjs",
+      "tests/e2e.spec.ts",
+      "backend/src/test/java/cl/benjamin/claveunica/PortalWorkflowServiceTest.java"
+    ],
+    "ui_visibility": "internal_only"
+  },
+  {
+    "action": "Ver evidencia",
+    "endpoint": {
+      "method": "GET",
+      "mutates": false,
+      "path": "/api/v1/cases/{id}/timeline"
+    },
+    "id": "TRZ_APP_022",
+    "internal_requirement_ids": [
+      "REQ_UI_022",
+      "REQ_FLOW_022",
+      "REQ_VAL_022"
+    ],
+    "screen": {
+      "code": "P-22",
+      "component": "frontend/src/app/pages/screen-22.component.ts",
+      "route": "/expedientes/case-timeline",
+      "title": "Linea de tiempo"
+    },
+    "source_requirement_id": "FT_022",
+    "table": "case_events",
+    "tests": [
+      "tests/smoke.mjs",
+      "tests/e2e.spec.ts",
+      "backend/src/test/java/cl/benjamin/claveunica/PortalWorkflowServiceTest.java"
+    ],
+    "ui_visibility": "internal_only"
+  },
+  {
+    "action": "Buscar ayuda",
+    "endpoint": {
+      "method": "POST",
+      "mutates": true,
+      "path": "/api/v1/support-tickets"
+    },
+    "id": "TRZ_APP_023",
+    "internal_requirement_ids": [
+      "REQ_UI_023",
+      "REQ_FLOW_023",
+      "REQ_VAL_023"
+    ],
+    "screen": {
+      "code": "P-23",
+      "component": "frontend/src/app/pages/screen-23.component.ts",
+      "route": "/ayuda/support-home",
+      "title": "Centro de ayuda"
+    },
+    "source_requirement_id": "FT_023",
+    "table": "support_tickets",
+    "tests": [
+      "tests/smoke.mjs",
+      "tests/e2e.spec.ts",
+      "backend/src/test/java/cl/benjamin/claveunica/PortalWorkflowServiceTest.java"
+    ],
+    "ui_visibility": "internal_only"
+  },
+  {
+    "action": "Abrir respuesta",
+    "endpoint": {
+      "method": "GET",
+      "mutates": false,
+      "path": "/api/v1/faq"
+    },
+    "id": "TRZ_APP_024",
+    "internal_requirement_ids": [
+      "REQ_UI_024",
+      "REQ_FLOW_024",
+      "REQ_VAL_024"
+    ],
+    "screen": {
+      "code": "P-24",
+      "component": "frontend/src/app/pages/screen-24.component.ts",
+      "route": "/ayuda/faq",
+      "title": "Preguntas frecuentes"
+    },
+    "source_requirement_id": "FT_024",
+    "table": "faq_entries",
+    "tests": [
+      "tests/smoke.mjs",
+      "tests/e2e.spec.ts",
+      "backend/src/test/java/cl/benjamin/claveunica/PortalWorkflowServiceTest.java"
+    ],
+    "ui_visibility": "internal_only"
+  },
+  {
+    "action": "Responder",
+    "endpoint": {
+      "method": "PATCH",
+      "mutates": true,
+      "path": "/api/v1/support-tickets/{id}/close"
+    },
+    "id": "TRZ_APP_025",
+    "internal_requirement_ids": [
+      "REQ_UI_025",
+      "REQ_FLOW_025",
+      "REQ_VAL_025"
+    ],
+    "screen": {
+      "code": "P-25",
+      "component": "frontend/src/app/pages/screen-25.component.ts",
+      "route": "/ayuda/ticket-detail",
+      "title": "Ticket de soporte"
+    },
+    "source_requirement_id": "FT_025",
+    "table": "support_tickets",
+    "tests": [
+      "tests/smoke.mjs",
+      "tests/e2e.spec.ts",
+      "backend/src/test/java/cl/benjamin/claveunica/PortalWorkflowServiceTest.java"
+    ],
+    "ui_visibility": "internal_only"
+  },
+  {
+    "action": "Filtrar",
+    "endpoint": {
+      "method": "GET",
+      "mutates": false,
+      "path": "/api/v1/audit-events"
+    },
+    "id": "TRZ_APP_026",
+    "internal_requirement_ids": [
+      "REQ_UI_026",
+      "REQ_FLOW_026",
+      "REQ_VAL_026"
+    ],
+    "screen": {
+      "code": "P-26",
+      "component": "frontend/src/app/pages/screen-26.component.ts",
+      "route": "/auditoria/access-log",
+      "title": "Bitacora de accesos"
+    },
+    "source_requirement_id": "FT_026",
+    "table": "audit_events",
+    "tests": [
+      "tests/smoke.mjs",
+      "tests/e2e.spec.ts",
+      "backend/src/test/java/cl/benjamin/claveunica/PortalWorkflowServiceTest.java"
+    ],
+    "ui_visibility": "internal_only"
+  },
+  {
+    "action": "Comparar cambio",
+    "endpoint": {
+      "method": "POST",
+      "mutates": true,
+      "path": "/api/v1/cases/{id}/comments"
+    },
+    "id": "TRZ_APP_027",
+    "internal_requirement_ids": [
+      "REQ_UI_027",
+      "REQ_FLOW_027",
+      "REQ_VAL_027"
+    ],
+    "screen": {
+      "code": "P-27",
+      "component": "frontend/src/app/pages/screen-27.component.ts",
+      "route": "/auditoria/data-changes",
+      "title": "Cambios de datos"
+    },
+    "source_requirement_id": "FT_001",
+    "table": "case_events",
+    "tests": [
+      "tests/smoke.mjs",
+      "tests/e2e.spec.ts",
+      "backend/src/test/java/cl/benjamin/claveunica/PortalWorkflowServiceTest.java"
+    ],
+    "ui_visibility": "internal_only"
+  },
+  {
+    "action": "Generar CSV",
+    "endpoint": {
+      "method": "POST",
+      "mutates": true,
+      "path": "/api/v1/audit-exports"
+    },
+    "id": "TRZ_APP_028",
+    "internal_requirement_ids": [
+      "REQ_UI_028",
+      "REQ_FLOW_028",
+      "REQ_VAL_028"
+    ],
+    "screen": {
+      "code": "P-28",
+      "component": "frontend/src/app/pages/screen-28.component.ts",
+      "route": "/auditoria/audit-export",
+      "title": "Exportacion de auditoria"
+    },
+    "source_requirement_id": "FT_002",
+    "table": "audit_exports",
+    "tests": [
+      "tests/smoke.mjs",
+      "tests/e2e.spec.ts",
+      "backend/src/test/java/cl/benjamin/claveunica/PortalWorkflowServiceTest.java"
+    ],
+    "ui_visibility": "internal_only"
+  },
+  {
+    "action": "Reintentar",
+    "endpoint": {
+      "method": "GET",
+      "mutates": false,
+      "path": "/api/v1/integration-status"
+    },
+    "id": "TRZ_APP_029",
+    "internal_requirement_ids": [
+      "REQ_UI_029",
+      "REQ_FLOW_029",
+      "REQ_VAL_029"
+    ],
+    "screen": {
+      "code": "P-29",
+      "component": "frontend/src/app/pages/screen-29.component.ts",
+      "route": "/portal/integration-status",
+      "title": "Estado de integraciones"
+    },
+    "source_requirement_id": "FT_003",
+    "table": "integration_status",
+    "tests": [
+      "tests/smoke.mjs",
+      "tests/e2e.spec.ts",
+      "backend/src/test/java/cl/benjamin/claveunica/PortalWorkflowServiceTest.java"
+    ],
+    "ui_visibility": "internal_only"
+  },
+  {
+    "action": "Ver control",
+    "endpoint": {
+      "method": "GET",
+      "mutates": false,
+      "path": "/api/v1/security-alerts"
+    },
+    "id": "TRZ_APP_030",
+    "internal_requirement_ids": [
+      "REQ_UI_030",
+      "REQ_FLOW_030",
+      "REQ_VAL_030"
+    ],
+    "screen": {
+      "code": "P-30",
+      "component": "frontend/src/app/pages/screen-30.component.ts",
+      "route": "/auditoria/compliance",
+      "title": "Panel de seguridad"
+    },
+    "source_requirement_id": "FT_004",
+    "table": "security_alerts",
+    "tests": [
+      "tests/smoke.mjs",
+      "tests/e2e.spec.ts",
+      "backend/src/test/java/cl/benjamin/claveunica/PortalWorkflowServiceTest.java"
+    ],
+    "ui_visibility": "internal_only"
+  }
+]

@@ -4,6 +4,7 @@ import time
 from pathlib import Path
 from typing import Any
 
+from .agent_runtime import AgentRuntime
 from .agents import AGENT_FUNCTIONS, output_hash
 from .context import ContextManager
 from .memory import MemoryGate
@@ -31,6 +32,7 @@ class HarnessRunner:
         self.memory = MemoryGate(factory_root, project_dir)
         self.validators = ValidatorChain()
         self.obs = Observability(run_dir)
+        self.runtime = AgentRuntime(run_dir=run_dir, workspace=factory_root, tools=self.tools, policy=self.policy, observability=self.obs)
 
     def _agent(self, agent_id: str) -> AgentSpec:
         try:
@@ -56,32 +58,8 @@ class HarnessRunner:
 
         self.memory.read_report(self.run_dir)
         context_pack = self.context.write_context_pack(self.run_dir, state.get("task_id", "") + " " + state.get("phase", ""))
-        for tool_id in agent.allowed_tools:
-            decision = self.policy.check_tool(agent, tool_id, state["approval"])
-            self.obs.tool_event(
-                tool_id,
-                {
-                    "run_id": state["run_id"],
-                    "cycle_id": state["cycle_id"],
-                    "tool_id": tool_id,
-                    "caller_agent_id": agent_id,
-                    "operation": "policy_check",
-                    "status": "success" if decision.status == "complete" else "blocked",
-                    "input_hash": state["input_hash"],
-                    "output_hash": sha256_text(stable_json(decision.__dict__)),
-                    "latency_ms": 0,
-                    "cache_hit": False,
-                    "side_effects": self.tools[tool_id].side_effects,
-                    "sandbox": self.tools[tool_id].sandbox_required,
-                    "source_ids": [],
-                    "error_code": None if decision.status == "complete" else decision.code,
-                },
-            )
-            if decision.status not in {"complete", "needs_user_input"}:
-                return self._blocked_result(agent, state, decision.status, decision.code, decision.message)
-
         fn = AGENT_FUNCTIONS[agent_id]
-        output = fn(agent, state, self.run_dir, context_pack)
+        output = self.runtime.run(agent=agent, state=state, context_pack=context_pack, fn=fn)
         elapsed_ms = int((time.perf_counter() - started) * 1000)
         state["budget"]["tool_calls"] += min(len(agent.allowed_tools), state["budget"]["max_tool_calls"])
         state["budget"]["used_input_tokens"] += max(1, len(stable_json(state)) // 4)
