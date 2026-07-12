@@ -15,7 +15,7 @@ permissions:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_PREFIX: ${{ github.repository_owner }}/portal-claveunica
+  IMAGE_PREFIX: benjamincruzado/portal-claveunica
 
 jobs:
   build-images:
